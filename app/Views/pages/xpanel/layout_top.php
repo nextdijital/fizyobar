@@ -119,8 +119,8 @@
                 <a href="<?= url('/') ?>" target="_blank" style="font-size: var(--font-xs); color: #a1a1aa; letter-spacing: 0.05em;">
                     Siteyi Gör &rarr;
                 </a>
-                <a href="<?= url('/logout') ?>" class="btn btn-outline btn-xs" style="border-color: #444; color: #fff;">
-                    Çıkış
+                <a href="<?= url('/xpanel/logout') ?>" class="btn btn-outline btn-xs" style="border-color: #444; color: #fff;">
+                    Çıkış Yap
                 </a>
             </div>
         </div>

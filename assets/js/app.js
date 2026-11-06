@@ -37,14 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 150);
     });
 
-    // Sayfa kaydırma efekti (Sticky & Frosted Glass Header)
+    // Sayfa kaydırma efekti (Sticky & Solid Header)
     const header = document.getElementById('siteHeader');
     if (header) {
         const checkScroll = function() {
-            if (window.scrollY > 30) {
+            if (window.scrollY > 40) {
                 header.classList.add('scrolled');
+                header.classList.add('scrolled-solid');
             } else {
                 header.classList.remove('scrolled');
+                header.classList.remove('scrolled-solid');
             }
         };
         window.addEventListener('scroll', checkScroll, { passive: true });
@@ -76,70 +78,98 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==============================================================================
-    // BAR SYSTEM METODOLOJİ DÖNGÜSÜ (SCROLL DRIVEN DIAGRAM FLOW)
+    // 3 ADIMDA BAŞLA - STICKY ORGANİK AKIŞ & SCROLL ÇİZİMİ
     // ==============================================================================
+    const stickyWrap = document.getElementById('flowStickyWrap');
     const flowSection = document.getElementById('metodoloji-akisi');
-    const flowVectorStage = document.getElementById('flowVectorStage') || document.getElementById('flowStageWrapper');
-    const flowProgressLine = document.getElementById('flowSvgProgressLine');
-    const flowProgressBar = document.getElementById('flowProgressBar');
-    const flowSummaries = document.querySelectorAll('.flow-summary-col');
-    const flowSvgNodes = document.querySelectorAll('.flow-svg-node');
+    const animatedLine = document.getElementById('organicAnimatedLine');
+    const organicNodes = document.querySelectorAll('.organic-node');
+    const flowCtaGroup = document.getElementById('flowCtaGroup');
 
-    if (flowSection && (flowVectorStage || flowProgressBar)) {
-        const updateFlowProgress = function() {
-            const rect = flowSection.getBoundingClientRect();
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            
-            // Bölüm ekranda görünür olduğunda ilerleme oranı hesapla
-            const startY = rect.top - windowHeight * 0.65;
-            const totalDistance = rect.height * 0.85;
-            
+    if (flowSection && animatedLine) {
+        let pathLength = 0;
+        try {
+            pathLength = animatedLine.getTotalLength();
+        } catch (e) {
+            pathLength = 1800;
+        }
+
+        // Başlangıçta çizgiyi gizle (stroke-dasharray ve stroke-dashoffset)
+        animatedLine.style.strokeDasharray = pathLength + ' ' + pathLength;
+        animatedLine.style.strokeDashoffset = pathLength;
+
+        let ticking = false;
+
+        function updateScrollLine() {
             let progress = 0;
-            if (startY < 0) {
-                progress = Math.min(1, Math.max(0, -startY / totalDistance));
-            }
 
-            // 1. Yatay SVG Çizgi İlerlemesi (X1 = 40'tan X2 = 960'a kadar)
-            if (flowProgressLine) {
-                const currentX2 = 40 + (progress * (960 - 40));
-                flowProgressLine.setAttribute('x2', currentX2.toFixed(1));
-            }
-            if (flowProgressBar) {
-                flowProgressBar.style.width = (progress * 100) + '%';
-            }
+            if (stickyWrap && window.innerWidth > 820) {
+                const wrapRect = stickyWrap.getBoundingClientRect();
+                const headerHeight = 88;
+                const totalScroll = stickyWrap.offsetHeight - (window.innerHeight - headerHeight);
+                const currentScroll = headerHeight - wrapRect.top;
 
-            // 2. Aşamalı Yay ve Özet Aktivasyonu
-            if (flowVectorStage) {
-                if (progress >= 0.35) {
-                    flowVectorStage.classList.add('step-2-active');
-                    flowSummaries[1]?.classList.add('is-active');
-                } else {
-                    flowVectorStage.classList.remove('step-2-active');
-                    flowSummaries[1]?.classList.remove('is-active');
+                if (totalScroll > 0) {
+                    // Kullanıcı %85 kaydırdığında çizgi %100 tamamlansın,
+                    // böylece sonunu (DÖNÜŞÜM noktasını) sayfa devam etmeden önce rahatça görsün!
+                    const rawRatio = Math.min(1, Math.max(0, currentScroll / totalScroll));
+                    progress = Math.min(1, rawRatio / 0.85);
                 }
-
-                if (progress >= 0.70) {
-                    flowVectorStage.classList.add('step-3-active');
-                    flowSummaries[2]?.classList.add('is-active');
-                } else {
-                    flowVectorStage.classList.remove('step-3-active');
-                    flowSummaries[2]?.classList.remove('is-active');
-                }
-            }
-        };
-
-        window.addEventListener('scroll', updateFlowProgress, { passive: true });
-        updateFlowProgress();
-
-        // Düğümlere tıklayarak ilgili aşamaya yumuşak kaydırma
-        flowSvgNodes.forEach((node, index) => {
-            node.addEventListener('click', function() {
-                const targetRatio = (index === 0) ? 0.15 : (index === 1 ? 0.45 : 0.78);
+            } else {
+                // Mobil veya dar ekran modunda yumuşak görünüm
                 const rect = flowSection.getBoundingClientRect();
-                const targetScrollY = window.scrollY + rect.top - (window.innerHeight * 0.65) + (rect.height * 0.85 * targetRatio);
-                window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+                const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+                const startOffset = windowHeight * 0.85;
+                const scrollDistance = rect.height * 0.85;
+                const currentY = startOffset - rect.top;
+                if (currentY > 0) {
+                    progress = Math.min(1, Math.max(0, currentY / scrollDistance));
+                }
+            }
+
+            // Çizgiyi kaydırma oranına göre çiz
+            const newOffset = pathLength * (1 - progress);
+            animatedLine.style.strokeDashoffset = newOffset;
+
+            // Düğümleri (Nodes) çizgi onlara ulaştıkça aktif et
+            organicNodes.forEach(node => {
+                const threshold = parseFloat(node.getAttribute('data-threshold') || '0.2');
+                if (progress >= threshold) {
+                    node.classList.add('is-active');
+                } else {
+                    node.classList.remove('is-active');
+                }
             });
-        });
+
+            // Sona ulaşıldığında sağdaki Programa Katıl butonunu aktifleştir / parlat
+            if (flowCtaGroup) {
+                if (progress >= 0.85) {
+                    flowCtaGroup.classList.add('is-active');
+                } else {
+                    flowCtaGroup.classList.remove('is-active');
+                }
+            }
+
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(updateScrollLine);
+                ticking = true;
+            }
+        }, { passive: true });
+
+        window.addEventListener('resize', function() {
+            try {
+                pathLength = animatedLine.getTotalLength();
+                animatedLine.style.strokeDasharray = pathLength + ' ' + pathLength;
+            } catch (e) {}
+            updateScrollLine();
+        }, { passive: true });
+
+        // İlk yüklemede çalıştır
+        updateScrollLine();
     }
 
     // ==============================================================================

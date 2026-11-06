@@ -140,9 +140,10 @@ class Router
             exit;
         }
 
-        // POST isteklerinde otomatik CSRF doğrulaması
+        // POST isteklerinde otomatik CSRF doğrulaması (Genel arama/danışma API'leri hariç)
         if ($method === 'POST') {
-            if (!Csrf::validate()) {
+            $csrfExempt = ['/api/ai-chat'];
+            if (!in_array($normalizedPath, $csrfExempt, true) && !Csrf::validate()) {
                 http_response_code(403);
                 if ($firstSegment === 'api') {
                     header('Content-Type: application/json; charset=utf-8');

@@ -17,6 +17,10 @@ return [
     ],
 
     'nav' => [
+        'studio' => 'Studio',
+        'recipes' => 'Tarifler',
+        'guides' => 'Rehberler',
+        'plans' => 'Beslenme Planları',
         'metod' => 'Metod',
         'metod_sub' => 'BAR System',
         'programs' => 'Programlar',
@@ -171,17 +175,23 @@ return [
         'always_active' => 'Her Zaman Aktif',
     ],
 
+    'common' => [
+        'legal_links' => 'YASAL BİLGİLENDİRME & POLİTİKALAR',
+        'site_title' => 'FİZYOBAR | Wellness Experiences by Betina Tansuğ',
+    ],
+
     'legal' => [
+        'badge' => 'YASAL BİLGİLENDİRME & POLİTİKALAR',
         'privacy_title' => 'Gizlilik Politikası',
-        'privacy_desc' => 'Kişisel verilerin korunması prensipleri.',
+        'privacy_desc' => 'Kişisel verilerin korunması ve gizlilik prensipleri.',
         'terms_title' => 'Kullanım Koşulları',
-        'terms_desc' => 'Platform kullanım kuralları.',
+        'terms_desc' => 'Platform kullanım ve üyelik şartları.',
         'cookies_title' => 'Çerez Politikası',
-        'cookies_desc' => 'Çerez türleri ve yönetim kılavuzu.',
+        'cookies_desc' => 'Çerez türleri ve tercih yönetimi.',
         'kvkk_title' => 'KVKK Aydınlatma Metni',
-        'kvkk_desc' => '6698 Sayılı Kanun aydınlatma metni.',
+        'kvkk_desc' => '6698 Sayılı Kanun kapsamında kişisel verilerin korunması.',
         'refund_title' => 'İptal ve İade Koşulları',
-        'refund_desc' => 'Dijital program iptal prosedürleri.',
+        'refund_desc' => 'Online kamp ve dijital program iptal prosedürleri.',
         'last_updated' => 'Son Güncelleme: 05 Kasım 2026',
     ],
 

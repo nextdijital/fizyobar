@@ -5,7 +5,7 @@ declare(strict_types=1);
 <div class="legal-page">
     <div class="container legal-container">
         <header class="legal-header">
-            <span class="legal-badge"><?= __('common.legal_links') ?></span>
+            <span class="legal-badge"><?= __('legal.badge') ?></span>
             <h1 class="legal-title"><?= __('legal.cookies_title') ?></h1>
             <p class="legal-date"><?= __('legal.last_updated') ?></p>
         </header>
@@ -13,8 +13,16 @@ declare(strict_types=1);
         <article class="legal-body">
             <div class="legal-alert-box">
                 <p><strong>Çerez Tercihlerinizi İstediğiniz Zaman Değiştirebilirsiniz:</strong></p>
-                <button type="button" id="inPageManageCookies" class="btn btn-primary btn-sm">
-                    🍪 <?= __('cookie.customize') ?>
+                <button type="button" id="inPageManageCookies" class="btn-cookie-manage">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;">
+                        <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"></path>
+                        <path d="M8.5 8.5v.01"></path>
+                        <path d="M16 15.5v.01"></path>
+                        <path d="M12 12v.01"></path>
+                        <path d="M11 17v.01"></path>
+                        <path d="M7 13v.01"></path>
+                    </svg>
+                    <?= __('cookie.customize') ?>
                 </button>
             </div>
 

@@ -30,15 +30,16 @@
                     </div>
                 </div>
 
-                <!-- Kolon 2: Programlar & Deneyimler -->
+                <!-- Kolon 2: Studio & Programlar -->
                 <div class="footer-menu-col">
-                    <h5 class="footer-col-title">PROGRAMLAR</h5>
+                    <h5 class="footer-col-title">STUDIO &amp; PROGRAMLAR</h5>
                     <ul class="footer-col-links">
-                        <li><a href="<?= url('/metod') ?>">BAR System Metodolojisi</a></li>
-                        <li><a href="<?= url('/programs') ?>">4 Haftalık Detox & Yoga Kampı</a></li>
-                        <li><a href="<?= url('/events') ?>">Platform & SUP Yoga</a></li>
-                        <li><a href="<?= url('/events') ?>">Outdoor Community Yoga</a></li>
-                        <li><a href="<?= url('/programs') ?>">Birebir Longevity Seansları</a></li>
+                        <li><a href="<?= url('/studio') ?>">Fizyobar Studio</a></li>
+                        <li><a href="<?= url('/programs') ?>">Dönüşüm Programları</a></li>
+                        <li><a href="<?= url('/plans') ?>">Beslenme Planları</a></li>
+                        <li><a href="<?= url('/guides') ?>">Wellness Rehberleri</a></li>
+                        <li><a href="<?= url('/recipes') ?>">Fonksiyonel Tarifler</a></li>
+                        <li><a href="<?= url('/events') ?>">Platform &amp; SUP Yoga</a></li>
                     </ul>
                 </div>
 
@@ -46,7 +47,7 @@
                 <div class="footer-menu-col">
                     <h5 class="footer-col-title">KURUMSAL & YASAL</h5>
                     <ul class="footer-col-links">
-                        <li><a href="<?= url('/metod') ?>">Betina Tansuğ Kimdir?</a></li>
+                        <li><a href="<?= url('/corporate') ?>">Betina Tansuğ Kimdir?</a></li>
                         <li><a href="<?= url('/corporate') ?>">Kurumsal Wellbeing Çözümleri</a></li>
                         <li><a href="<?= url('/corporate') ?>">Şirket Longevity Atölyeleri</a></li>
                         <li><a href="<?= url('/privacy') ?>"><?= __('legal.privacy_title') ?></a></li>
@@ -95,6 +96,9 @@
         </div>
     </footer>
 
+    <!-- Yapay Zeka AI Asistan Bileşeni (Uçan Balon & Chat Drawer) -->
+    <?php require __DIR__ . '/../partials/ai-chat.php'; ?>
+
     <!-- Çerez Yönetim Bileşeni -->
     <?php require __DIR__ . '/cookie-banner.php'; ?>
 
@@ -107,6 +111,7 @@
         };
     </script>
     <script src="<?= asset('assets/js/cookie-consent.js') ?>" defer></script>
+    <script src="<?= asset('assets/js/ai-chat.js') ?>" defer></script>
     <script src="<?= asset('assets/js/app.js') ?>" defer></script>
 </body>
 </html>

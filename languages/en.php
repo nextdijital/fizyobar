@@ -17,6 +17,10 @@ return [
     ],
 
     'nav' => [
+        'studio' => 'Studio',
+        'recipes' => 'Recipes',
+        'guides' => 'Guides',
+        'plans' => 'Nutrition Plans',
         'metod' => 'Method',
         'metod_sub' => 'BAR System & Longevity Science',
         'programs' => 'Programs',
@@ -171,7 +175,13 @@ return [
         'always_active' => 'Always Active',
     ],
 
+    'common' => [
+        'legal_links' => 'LEGAL DISCLOSURE & POLICIES',
+        'site_title' => 'FİZYOBAR | Wellness Experiences by Betina Tansuğ',
+    ],
+
     'legal' => [
+        'badge' => 'LEGAL DISCLOSURE & POLICIES',
         'privacy_title' => 'Privacy Policy',
         'privacy_desc' => 'Principles governing user data protection and processing at Fizyobar.',
         'terms_title' => 'Terms of Service',

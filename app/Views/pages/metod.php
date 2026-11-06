@@ -81,7 +81,7 @@ declare(strict_types=1);
 <section class="method-science-section">
     <div class="container">
         <div class="method-science-box">
-            <div class="science-header">
+            <div class="science-header text-center" style="text-align: center; margin-bottom: 2.5rem;">
                 <span class="section-kicker">NEDEN BAR SYSTEM?</span>
                 <h2 class="section-heading-lg" style="margin-bottom: 1.5rem;">Klasik Spor Salonu Yaklaşımından Farkımız</h2>
             </div>

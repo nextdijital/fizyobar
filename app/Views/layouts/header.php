@@ -21,10 +21,10 @@
     <meta property="og:description" content="<?= e($metaDescription ?? __('brand.positioning')) ?>">
     <meta property="og:locale" content="<?= $isTr ? 'tr_TR' : 'en_US' ?>">
 
-    <!-- Google Fonts: Plus Jakarta Sans & Cormorant Garamond -->
+    <!-- Google Fonts: Barlow Condensed & Cormorant Garamond -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600;1,700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
 
     <!-- CSS Stilleri (Cache-busting ile) -->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
@@ -41,62 +41,75 @@
         </div>
     </div>
 
+<?php
+$cleanUri = trim($currentUri ?? '', '/');
+$isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
+$isDarkPage = str_contains($cleanUri, 'blog') || str_contains($cleanUri, 'articles') || str_contains($cleanUri, 'makaleler');
+?>
     <!-- Gezinme Çubuğu (Editorial Mimarisi: Sol Menü • Orta Logo • Sağ Aksiyon) -->
-    <header class="site-header" id="siteHeader">
+    <header class="site-header <?= $isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : '') ?>" id="siteHeader">
         <div class="header-container">
-            <!-- 1. Sol Menü (Kenara Yaslı Gezinme) -->
+            <!-- 1. Sol Menü (Betella Mimarisi: STUDIO • PROGRAMLAR • ETKİNLİKLER • KURUMSAL) -->
             <nav class="header-nav-left" id="navMenu">
                 <ul class="nav-list">
+                    <!-- STUDIO Dropdown (Referans Birebir) -->
                     <li class="nav-item-dropdown">
-                        <a href="<?= url('/metod') ?>" class="nav-link <?= str_contains($currentUri, '/metod') ? 'active' : '' ?>">
-                            <?= __('nav.metod') ?> <span class="nav-chevron">▾</span>
+                        <a href="<?= url('/studio') ?>" class="nav-link <?= (str_contains($currentUri, '/studio') || str_contains($currentUri, '/recipes') || str_contains($currentUri, '/guides') || str_contains($currentUri, '/plans') || str_contains($currentUri, '/articles') || str_contains($currentUri, '/makaleler') || str_contains($currentUri, '/blog')) ? 'active' : '' ?>">
+                            STUDIO <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="<?= url('/metod') ?>" class="dropdown-link">BAR System Nedir?</a>
-                            <a href="<?= url('/metod') ?>#biomechanic" class="dropdown-link">Biyomekanik & Denge</a>
-                            <a href="<?= url('/metod') ?>#nervous-system" class="dropdown-link">Sinir Sistemi Regülasyonu</a>
-                            <a href="<?= url('/metod') ?>#longevity" class="dropdown-link">Sürdürülebilir Longevity</a>
+                            <a href="<?= url('/studio') ?>" class="dropdown-link">Studio Ana Sayfa <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/plans') ?>" class="dropdown-link">Beslenme Planları <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/guides') ?>" class="dropdown-link">Rehberler <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/recipes') ?>" class="dropdown-link">Tarifler <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/makaleler') ?>" class="dropdown-link">Makaleler <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/blog') ?>" class="dropdown-link">Blog <span class="dropdown-chevron">▸</span></a>
                         </div>
                     </li>
 
+                    <!-- PROGRAMLAR Dropdown -->
                     <li class="nav-item-dropdown">
                         <a href="<?= url('/programs') ?>" class="nav-link <?= str_contains($currentUri, '/programs') ? 'active' : '' ?>">
-                            <?= __('nav.programs') ?> <span class="nav-chevron">▾</span>
+                            PROGRAMLAR <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="<?= url('/programs') ?>#featured-program" class="dropdown-link">4 Haftalık Online Detox & Yoga</a>
-                            <a href="<?= url('/programs') ?>" class="dropdown-link">Warrior Yoga Serisi</a>
-                            <a href="<?= url('/programs') ?>" class="dropdown-link">Mobilite & Esneklik</a>
-                            <a href="<?= url('/programs') ?>" class="dropdown-link dropdown-link-all">Tüm Programları Keşfet &rarr;</a>
+                            <a href="<?= url('/programs') ?>" class="dropdown-link">Tüm Programlar <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/programs') ?>" class="dropdown-link">4 Haftalık Online Detox Kampı <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/programs') ?>" class="dropdown-link">Warrior Yoga Serisi <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/events') ?>" class="dropdown-link">Platform &amp; SUP Yoga <span class="dropdown-chevron">▸</span></a>
                         </div>
                     </li>
 
+                    <!-- ETKİNLİKLER Dropdown -->
                     <li class="nav-item-dropdown">
-                        <a href="<?= url('/events') ?>" class="nav-link <?= str_contains($currentUri, '/events') ? 'active' : '' ?>">
-                            <?= __('nav.events') ?> <span class="nav-chevron">▾</span>
+                        <a href="<?= url('/events') ?>" class="nav-link <?= (str_contains($currentUri, '/events') || str_contains($currentUri, '/duyurular') || str_contains($currentUri, '/haberler') || str_contains($currentUri, '/announcements') || str_contains($currentUri, '/news')) ? 'active' : '' ?>">
+                            ETKİNLİKLER <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="<?= url('/events') ?>" class="dropdown-link">Platform & SUP Yoga</a>
-                            <a href="<?= url('/events') ?>" class="dropdown-link">Outdoor Topluluk Seansları</a>
-                            <a href="<?= url('/events') ?>" class="dropdown-link">Özel Workshoplar</a>
+                            <a href="<?= url('/events') ?>" class="dropdown-link">Etkinlikler <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/duyurular') ?>" class="dropdown-link">Duyurular <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/haberler') ?>" class="dropdown-link">Haberler <span class="dropdown-chevron">▸</span></a>
                         </div>
                     </li>
 
-                    <li>
-                        <a href="<?= url('/corporate') ?>" class="nav-link <?= str_contains($currentUri, '/corporate') ? 'active' : '' ?>">
-                            <?= __('nav.corporate') ?>
+                    <!-- KURUMSAL Dropdown -->
+                    <li class="nav-item-dropdown">
+                        <a href="<?= url('/corporate') ?>" class="nav-link <?= (str_contains($currentUri, '/corporate') || str_contains($currentUri, '/betina-tansug') || str_contains($currentUri, '/about') || str_contains($currentUri, '/hakkimizda')) ? 'active' : '' ?>">
+                            KURUMSAL <span class="nav-chevron">▸</span>
                         </a>
+                        <div class="dropdown-menu">
+                            <a href="<?= url('/corporate') ?>" class="dropdown-link">Kurumsal Wellbeing Çözümleri <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/betina-tansug') ?>" class="dropdown-link">Betina Tansuğ &amp; Fizyobar <span class="dropdown-chevron">▸</span></a>
+                        </div>
                     </li>
                 </ul>
             </nav>
 
-            <!-- 2. Orta Logo (Tam Sayfa Ortasında) -->
+            <!-- 2. Orta Logo (Barlow Condensed Tipografik Marka Mimarisi) -->
             <div class="header-center-logo">
-                <a href="<?= url('/') ?>" class="brand-logo-link" aria-label="Fizyobar Ana Sayfa">
-                    <picture>
-                        <source srcset="<?= asset('assets/images/logo.webp') ?>" type="image/webp">
-                        <img src="<?= asset('assets/images/logo.png') ?>" alt="FİZYOBAR" class="header-logo-img">
-                    </picture>
+                <a href="<?= url('/') ?>" class="brand-logo-link brand-logo-type" aria-label="FİZYOBAR Ana Sayfa">
+                    <span class="logo-text-main">FİZYOBAR</span>
+                    <span class="logo-text-sub">BODY • ADAPT • REFRAME</span>
                 </a>
             </div>
 

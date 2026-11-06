@@ -74,19 +74,38 @@ use App\Controllers\MetodController;
 use App\Controllers\ProgramController;
 use App\Controllers\EventController;
 use App\Controllers\CorporateController;
+use App\Controllers\StudioController;
 use App\Controllers\LegalController;
 use App\Controllers\CookieController;
 use App\Controllers\AuthController;
 use App\Controllers\StudentController;
 use App\Controllers\CheckoutController;
 use App\Controllers\XpanelController;
+use App\Controllers\AiChatController;
 
 // --- Ön Yüz (Frontend Sayfaları) ---
 Router::get('/', [HomeController::class, 'index']);
+Router::get('/studio', [StudioController::class, 'index']);
+Router::get('/recipes', [StudioController::class, 'recipes']);
+Router::get('/tarifler', [StudioController::class, 'recipes']);
+Router::get('/guides', [StudioController::class, 'guides']);
+Router::get('/rehberler', [StudioController::class, 'guides']);
+Router::get('/plans', [StudioController::class, 'plans']);
+Router::get('/beslenme-planlari', [StudioController::class, 'plans']);
+Router::get('/articles', [StudioController::class, 'articles']);
+Router::get('/makaleler', [StudioController::class, 'articles']);
+Router::get('/blog', [StudioController::class, 'blog']);
 Router::get('/metod', [MetodController::class, 'index']);
 Router::get('/programs', [ProgramController::class, 'index']);
 Router::get('/events', [EventController::class, 'index']);
+Router::get('/duyurular', [EventController::class, 'announcements']);
+Router::get('/announcements', [EventController::class, 'announcements']);
+Router::get('/haberler', [EventController::class, 'news']);
+Router::get('/news', [EventController::class, 'news']);
 Router::get('/corporate', [CorporateController::class, 'index']);
+Router::get('/betina-tansug', [CorporateController::class, 'about']);
+Router::get('/about', [CorporateController::class, 'about']);
+Router::get('/hakkimizda', [CorporateController::class, 'about']);
 Router::post('/corporate/submit', [CorporateController::class, 'submit']);
 
 // Yasal & Gizlilik Politikaları (Bilingual /tr/... ve /en/...)
@@ -117,7 +136,14 @@ Router::get('/checkout/success/{id}', [CheckoutController::class, 'success']);
 // --- Çerez Tercihleri AJAX API Rotası ---
 Router::post('/api/cookie-preferences', [CookieController::class, 'savePreferences']);
 
-// --- XPANEL YÖNETİM MERKEZİ (Admin Panel) ---
+// --- Yapay Zeka AI Chat Asistanı API Rotası ---
+Router::post('/api/ai-chat', [AiChatController::class, 'chat']);
+Router::get('/api/ai-chat', [AiChatController::class, 'chat']);
+
+// --- XPANEL YÖNETİM MERKEZİ (Ayrı & Güvenli Admin Girişi) ---
+Router::get('/xpanel/login', [XpanelController::class, 'login']);
+Router::post('/xpanel/login/process', [XpanelController::class, 'loginProcess']);
+Router::get('/xpanel/logout', [XpanelController::class, 'logout']);
 Router::get('/xpanel', [XpanelController::class, 'index']);
 Router::get('/xpanel/settings', [XpanelController::class, 'settings']);
 Router::post('/xpanel/settings/save', [XpanelController::class, 'updateSettings']);

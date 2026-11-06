@@ -2,47 +2,47 @@
 declare(strict_types=1);
 ?>
 
-<div class="page-hero">
-    <div class="container">
-        <span class="badge-pill section-badge">ÖĞRENCİ VE ÜYE GİRİŞİ</span>
-        <h1 class="section-title" style="font-size: var(--font-h1);">Hesabınıza Giriş Yapın</h1>
-        <p class="section-subtitle">Eğitimlerinize, video derslerinize ve kazanılan rozetlerinize ulaşın.</p>
-    </div>
-</div>
+<div class="auth-page-wrapper">
+    <div class="container auth-container">
+        <div class="auth-card">
+            <!-- Üst Başlık & Kicker (Ortalanmış, Şık Tipografi) -->
+            <div class="auth-header">
+                <span class="auth-badge-kicker">ÖĞRENCİ VE ÜYE GİRİŞİ</span>
+                <h1 class="auth-main-title">Hesabınıza Giriş Yapın</h1>
+                <p class="auth-lead-subtitle">Eğitimlerinize, video kütüphanenize ve seanslarınıza erişin.</p>
+            </div>
 
-<section style="padding: var(--space-xl) 0;">
-    <div class="container" style="max-width: 520px;">
-        <div class="form-luxury">
             <?php if (!empty($error)): ?>
-                <div style="background-color: #fee2e2; border: 1px solid #fca5a5; color: #991b1b; padding: 0.85rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; font-size: var(--font-sm);">
+                <div class="auth-alert-error">
                     <?= e($error) ?>
                 </div>
             <?php endif; ?>
 
-            <form action="<?= url('/login/process') ?>" method="POST">
+            <form action="<?= url('/login/process') ?>" method="POST" class="auth-form">
                 <?= csrf_field() ?>
 
-                <div class="form-group">
-                    <label class="form-label" for="email">E-Posta Adresi</label>
-                    <input type="email" id="email" name="email" class="form-input" required placeholder="ornek@fizyobar.com">
+                <div class="auth-form-group">
+                    <label class="auth-form-label" for="email">E-POSTA ADRESİ</label>
+                    <input type="email" id="email" name="email" class="auth-form-input" required autocomplete="email">
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="password">Şifre</label>
-                    <input type="password" id="password" name="password" class="form-input" required placeholder="••••••••">
+                <div class="auth-form-group">
+                    <div class="auth-label-row">
+                        <label class="auth-form-label" for="password">ŞİFRE</label>
+                    </div>
+                    <input type="password" id="password" name="password" class="auth-form-input" required autocomplete="current-password">
                 </div>
 
-                <div style="margin-top: 1.5rem;">
-                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
-                        GİRİŞ YAP &rarr;
-                    </button>
-                </div>
+                <button type="submit" class="btn-pill-solid auth-submit-btn">
+                    GİRİŞ YAP &rarr;
+                </button>
 
-                <div style="text-align: center; margin-top: 1.25rem; font-size: var(--font-sm); color: var(--text-muted);">
-                    Henüz üye değil misiniz? <a href="<?= url('/register') ?>" style="color: var(--primary); text-decoration: underline;">Hemen Kayıt Olun</a>
+                <div class="auth-footer-nav">
+                    <span>Henüz üye değil misiniz?</span>
+                    <a href="<?= url('/register') ?>" class="auth-link-bold">Hemen Kayıt Olun</a>
                 </div>
             </form>
         </div>
     </div>
-</section>
+</div>
 

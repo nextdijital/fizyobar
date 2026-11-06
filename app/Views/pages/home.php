@@ -53,13 +53,13 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 3. Bölüm I: YAKLAŞIMIMIZ (ABOUT - 2 Kolonlu Mimari Grid) -->
+<!-- 3. Bölüm I: YAKLAŞIMIMIZ (ABOUT - 2 Kolonlu Mimari Grid: Başlık Solda, Yazı Sağda) -->
 <section class="editorial-about-section" id="metod">
     <div class="container">
         <div class="editorial-about-grid">
-            <!-- Sol Kolon: Sadece Başlık -->
+            <!-- Sol Kolon: Başlık -->
             <div class="about-title-col">
-                <h2 class="about-headline">Klasik Derslerin Ötesinde:</h2>
+                <h2 class="about-headline">KLASİK DERSLERİN ÖTESİNDE:</h2>
             </div>
             
             <!-- Sağ Kolon: Açıklayıcı ve Sade Metinler -->
@@ -75,257 +75,310 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 4. BAR System 3 Adımlı Kayıt & Katılım Süreci (Scroll Akışı & Dönüşüm Mimarisi) -->
-<section class="methodology-flow-section" id="metodoloji-akisi">
-    <div class="container flow-header-container">
-        <div class="section-title-wrap text-center">
-            <span class="section-kicker">KAYIT & KATILIM SÜRECİ</span>
-            <h2 class="section-heading-lg">3 Adımda Başla</h2>
-            <p class="section-lead-muted">
-                Fizyobar ile iyi yaşam ve kalıcı dönüşüm yolculuğunuza adım atın.
+<!-- 4. BAR System 3 Adımlı Kayıt & Katılım Süreci (Sticky Pinned Organik Akış & Scroll Çizim Animasyonu) -->
+<div class="methodology-flow-sticky-wrap" id="flowStickyWrap">
+    <section class="methodology-flow-section" id="metodoloji-akisi">
+        <div class="container flow-header-wrap text-center">
+            <h2 class="section-heading-lg" style="letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.4rem;">3 ADIMDA BAŞLA</h2>
+            <p class="section-lead-muted" style="margin: 0;">
+                Fizyobar ile iyi yaşam ve kalıcı dönüşüm yolculuğunuz.
             </p>
         </div>
-    </div>
 
-    <div class="container flow-diagram-container">
-        <!-- Vektörel Mimari Diyagram (Yükseltilmiş Daireler, Bordo Kanatlar & Saran Yaylar) -->
-        <div class="flow-vector-stage" id="flowVectorStage">
-            <svg class="flow-interactive-svg" viewBox="0 0 1000 330" preserveAspectRatio="xMidYMid meet" aria-label="Fizyobar Metodoloji ve Kayıt Akışı">
-                <defs>
-                    <!-- Referans Tasarım İnce Açılı Ok Ucu -->
-                    <marker id="flowArrowRefTop" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="#391214" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </marker>
+        <div class="organic-flow-stage-container">
+            <div class="organic-flow-canvas-wrap">
+                <svg class="organic-flow-svg" id="organicFlowSvg" viewBox="0 0 1360 460" preserveAspectRatio="xMidYMid meet" aria-label="Fizyobar 3 Adımda Başla Yolculuğu">
+                    <defs>
+                        <!-- İnce Bordo Parıltı Gölgesi -->
+                        <filter id="organicGlow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#391214" flood-opacity="0.22"/>
+                        </filter>
+                        <filter id="nodeHalo" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+                        </filter>
+                    </defs>
 
-                    <!-- Üst Kanat İpeksi Bordo Gradyan -->
-                    <linearGradient id="flowWingGradTop" x1="330" y1="25" x2="330" y2="160" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#391214" stop-opacity="0.26"/>
-                        <stop offset="50%" stop-color="#391214" stop-opacity="0.10"/>
-                        <stop offset="100%" stop-color="#391214" stop-opacity="0.0"/>
-                    </linearGradient>
+                    <!-- 1. Arka Plan Kılavuz Çizgisi (Faint Reference Line) -->
+                    <path class="organic-track-line"
+                          d="M 80 130 C 115 160, 145 205, 180 230 C 220 250, 270 210, 275 150 C 280 95, 235 95, 235 155 C 235 220, 300 300, 420 320 C 510 335, 590 280, 640 250 C 690 220, 735 300, 735 365 C 735 425, 675 425, 675 355 C 675 270, 740 215, 830 200 C 895 190, 945 250, 985 265 C 1005 270, 1020 260, 1030 260"/>
 
-                    <!-- Alt Kanat İpeksi Bordo Gradyan -->
-                    <linearGradient id="flowWingGradBottom" x1="670" y1="295" x2="670" y2="160" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#391214" stop-opacity="0.26"/>
-                        <stop offset="50%" stop-color="#391214" stop-opacity="0.10"/>
-                        <stop offset="100%" stop-color="#391214" stop-opacity="0.0"/>
-                    </linearGradient>
+                    <!-- 2. Sayfayı Kaydırdıkça Akışla Çizilen Canlı Bordo Çizgi -->
+                    <path class="organic-animated-line" id="organicAnimatedLine"
+                          d="M 80 130 C 115 160, 145 205, 180 230 C 220 250, 270 210, 275 150 C 280 95, 235 95, 235 155 C 235 220, 300 300, 420 320 C 510 335, 590 280, 640 250 C 690 220, 735 300, 735 365 C 735 425, 675 425, 675 355 C 675 270, 740 215, 830 200 C 895 190, 945 250, 985 265 C 1005 270, 1020 260, 1030 260"
+                          filter="url(#organicGlow)"/>
 
-                    <!-- Daire Gölgeleri -->
-                    <filter id="flowBordoCircleShadow" x="-30%" y="-30%" width="160%" height="160%">
-                        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#391214" flood-opacity="0.28"/>
-                    </filter>
-                    <filter id="flowOutlineCircleShadow" x="-30%" y="-30%" width="160%" height="160%">
-                        <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#000000" flood-opacity="0.05"/>
-                    </filter>
-                </defs>
+                    <!-- 3. Başlangıç Dairesi (Konsantrik Çift Halka) -->
+                    <g class="organic-node start-node is-active" id="organicNodeStart" data-threshold="0.05">
+                        <circle cx="80" cy="130" r="16" fill="none" stroke="#d5d5d5" stroke-width="2"/>
+                        <circle cx="80" cy="130" r="9" fill="#ffffff" stroke="#391214" stroke-width="2"/>
+                        <circle cx="80" cy="130" r="4" fill="#391214"/>
+                        <text x="80" y="96" text-anchor="middle" class="organic-node-kicker">BAŞLANGIÇ</text>
+                    </g>
 
-                <!-- 1. Bordo Gölgeli Kanatlar (Silikli Shaded Wings) -->
-                <path class="flow-svg-wing flow-wing-top" d="M 120 200 C 95 160, 95 115, 122 88 C 150 60, 230 25, 330 25 C 430 25, 490 60, 522 96 A 68 68 0 0 0 432 160 L 218 160 A 58 58 0 0 1 120 200 Z" fill="url(#flowWingGradTop)"/>
-                <path class="flow-svg-wing flow-wing-bottom" d="M 455 210 C 475 234, 525 234, 550 215 C 585 265, 625 295, 670 295 C 750 295, 810 260, 862 214 A 58 58 0 0 1 782 160 L 568 160 A 68 68 0 0 1 455 210 Z" fill="url(#flowWingGradBottom)"/>
+                    <!-- 4. Adım 01 (Kayıt & Beden Analizi) -->
+                    <g class="organic-node" id="organicNode1" data-threshold="0.18">
+                        <circle class="node-halo" cx="180" cy="230" r="14" fill="none" stroke="#391214" stroke-width="1.5"/>
+                        <circle class="node-dot" cx="180" cy="230" r="6" fill="#ffffff" stroke="#391214" stroke-width="3" filter="url(#nodeHalo)"/>
+                        <text x="180" y="276" text-anchor="middle" class="organic-node-num">01</text>
+                        <text x="180" y="300" text-anchor="middle" class="organic-node-title">Kayıt &amp; Beden Analizi</text>
+                        <text x="180" y="320" text-anchor="middle" class="organic-node-desc">Profil &amp; Postür Haritası</text>
+                    </g>
 
-                <!-- 2. Daireleri Saran Üst ve Alt Yaylar (Wrapping Arcs with Arrows) -->
-                <path class="flow-svg-arc flow-arc-top" d="M 120 200 C 95 160, 95 115, 122 88 C 150 60, 230 25, 330 25 C 430 25, 490 60, 522 96" fill="none" stroke="#391214" stroke-width="2.2" marker-end="url(#flowArrowRefTop)"/>
-                <path class="flow-svg-arc flow-arc-bottom" d="M 455 210 C 475 234, 525 234, 550 215 C 585 265, 625 295, 670 295 C 750 295, 810 260, 862 214" fill="none" stroke="#391214" stroke-width="2.2" marker-end="url(#flowArrowRefTop)"/>
+                    <!-- 5. Adım 02 (Canlı Seanslar & BAR System) -->
+                    <g class="organic-node is-highlight" id="organicNode2" data-threshold="0.46">
+                        <circle class="node-halo" cx="420" cy="320" r="16" fill="none" stroke="#391214" stroke-width="1.5"/>
+                        <circle class="node-dot" cx="420" cy="320" r="7" fill="#391214" stroke="#ffffff" stroke-width="2.5" filter="url(#nodeHalo)"/>
+                        <text x="455" y="354" text-anchor="start" class="organic-node-num">02</text>
+                        <text x="455" y="378" text-anchor="start" class="organic-node-title">Canlı Seanslar &amp; BAR System</text>
+                        <text x="455" y="398" text-anchor="start" class="organic-node-desc">Diyafram, Vagus &amp; Mobilite Akışları</text>
+                    </g>
 
-                <!-- 3. Yatay Merkez Ekseni (Yükseltilmiş Y = 160) -->
-                <line x1="40" y1="160" x2="960" y2="160" stroke="#e8e8e8" stroke-width="2"/>
-                <line id="flowSvgProgressLine" x1="40" y1="160" x2="40" y2="160" stroke="#391214" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- 6. Adım 03 (Sürdürülebilir Longevity) -->
+                    <g class="organic-node" id="organicNode3" data-threshold="0.72">
+                        <circle class="node-halo" cx="830" cy="200" r="14" fill="none" stroke="#391214" stroke-width="1.5"/>
+                        <circle class="node-dot" cx="830" cy="200" r="6" fill="#ffffff" stroke="#391214" stroke-width="3" filter="url(#nodeHalo)"/>
+                        <text x="830" y="136" text-anchor="middle" class="organic-node-num">03</text>
+                        <text x="830" y="160" text-anchor="middle" class="organic-node-title">Sürdürülebilir Longevity</text>
+                        <text x="830" y="180" text-anchor="middle" class="organic-node-desc">Kalıcı İyi Yaşam &amp; Hücresel Canlılık</text>
+                    </g>
 
-                <!-- 4. Referans Metin Etiketleri -->
-                <!-- Üst Zirve Başlığı -->
-                <text x="330" y="16" text-anchor="middle" class="flow-svg-apex">KAYIT &amp; ANALİZ</text>
-                <!-- Daire 1 ve Daire 2 Arası -->
-                <text x="330" y="132" text-anchor="middle" class="flow-svg-mid-top">Storytelling</text>
-                <text x="330" y="190" text-anchor="middle" class="flow-svg-mid-bottom">Beden Haritası</text>
+                    <!-- 7. Bitiş / Hedef Dairesi -->
+                    <g class="organic-node end-node" id="organicNodeEnd" data-threshold="0.88">
+                        <circle cx="1030" cy="260" r="15" fill="none" stroke="#d5d5d5" stroke-width="2"/>
+                        <circle cx="1030" cy="260" r="8" fill="#ffffff" stroke="#391214" stroke-width="2"/>
+                        <circle cx="1030" cy="260" r="4" fill="#391214"/>
+                        <text x="1030" y="232" text-anchor="middle" class="organic-node-kicker">DÖNÜŞÜM</text>
+                    </g>
 
-                <!-- Daire 2 ve Daire 3 Arası -->
-                <text x="670" y="132" text-anchor="middle" class="flow-svg-mid-top">Diyafram &amp; Vagus</text>
-                <text x="670" y="190" text-anchor="middle" class="flow-svg-mid-bottom">Hücresel Longevity</text>
-                <!-- Alt Çukur Başlığı -->
-                <text x="670" y="322" text-anchor="middle" class="flow-svg-apex">DÖNÜŞÜM &amp; DEĞER</text>
+                    <!-- 8. Sağ Boşluktaki Programa Katıl Butonu (Rotanın Hedef Noktası) -->
+                    <a href="<?= url('/programs') ?>" class="organic-svg-cta-link" id="flowCtaLink" target="_self" aria-label="Programa Katıl">
+                        <g class="flow-cta-group" id="flowCtaGroup">
+                            <!-- Bağlantı Yönlendirme Çizgisi -->
+                            <line x1="1045" y1="260" x2="1078" y2="260" stroke="#391214" stroke-width="2" stroke-dasharray="4,3" class="cta-connector-line"/>
+                            <polygon points="1077,256 1084,260 1077,264" fill="#391214" class="cta-connector-arrow"/>
 
-                <!-- 5. Yükseltilmiş İstasyon Daireleri -->
-                <!-- Daire 1: Hesap & Profil -->
-                <g class="flow-svg-node" id="svgNode1" data-step="1">
-                    <circle cx="160" cy="160" r="58" fill="#ffffff" stroke="#1a1a1a" stroke-width="2" filter="url(#flowOutlineCircleShadow)" class="flow-node-c1"/>
-                    <text x="160" y="142" text-anchor="middle" class="flow-svg-num">01</text>
-                    <text x="160" y="162" text-anchor="middle" class="flow-svg-title">Hesap &amp; Profil</text>
-                    <text x="160" y="178" text-anchor="middle" class="flow-svg-sub">Kayıt Adımı</text>
-                </g>
+                            <!-- Üst Etiket -->
+                            <text class="flow-cta-kicker" x="1205" y="218" text-anchor="middle">HAZIR MISIN?</text>
 
-                <!-- Daire 2: Canlı Seans & Eğitim (Merkez Bordo Daire) -->
-                <g class="flow-svg-node is-center-bordo" id="svgNode2" data-step="2">
-                    <circle cx="500" cy="160" r="68" fill="#391214" stroke="#ffffff" stroke-width="3" filter="url(#flowBordoCircleShadow)" class="flow-node-c2"/>
-                    <text x="500" y="128" text-anchor="middle" class="flow-svg-bordo-num">02</text>
-                    <text x="500" y="146" text-anchor="middle" class="flow-svg-bordo-title">Canlı Seans &amp; Eğitim</text>
-                    <line x1="460" y1="156" x2="540" y2="156" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
-                    <text x="500" y="174" text-anchor="middle" class="flow-svg-bordo-sub">BAR SYSTEM</text>
-                </g>
+                            <!-- Buton Gövdesi (Pill Bordo Buton) -->
+                            <rect class="flow-cta-btn-bg" x="1085" y="234" width="240" height="52" rx="26" fill="#391214" filter="url(#organicGlow)"/>
 
-                <!-- Daire 3: Dönüşüm & Rutin -->
-                <g class="flow-svg-node" id="svgNode3" data-step="3">
-                    <circle cx="840" cy="160" r="58" fill="#ffffff" stroke="#1a1a1a" stroke-width="2" filter="url(#flowOutlineCircleShadow)" class="flow-node-c3"/>
-                    <text x="840" y="142" text-anchor="middle" class="flow-svg-num">03</text>
-                    <text x="840" y="162" text-anchor="middle" class="flow-svg-title">Dönüşüm &amp; Rutin</text>
-                    <text x="840" y="178" text-anchor="middle" class="flow-svg-sub">Kalıcı Yaşam</text>
-                </g>
-            </svg>
-        </div>
+                            <!-- Buton İçi Yazı ve İkon -->
+                            <text class="flow-cta-btn-text" x="1195" y="266" text-anchor="middle">PROGRAMA KATIL</text>
+                            <path class="flow-cta-btn-arrow" d="M 1272 260 L 1284 260 M 1279 255 L 1284 260 L 1279 265" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 
-        <!-- 6. Dairelerin Altındaki 3'lü Genel Dönüşüm Özeti (Kutular Kaldırıldı, Sade & Ferah) -->
-        <div class="flow-summary-grid">
-            <div class="flow-summary-col" id="flowSummary1">
-                <h4 class="flow-summary-title">01 / Kayıt &amp; Beden Analizi</h4>
-                <p class="flow-summary-desc">Platformda profilini oluştur; başlangıç eklem mobilitesi ve postür analizini tamamlayarak hedefini belirle.</p>
-            </div>
-            <div class="flow-summary-col" id="flowSummary2">
-                <h4 class="flow-summary-title title-bordo">02 / Canlı Seanslar &amp; Rehberlik</h4>
-                <p class="flow-summary-desc">Fizyoterapist rehberliğinde diyafram nefesi, vagus regülasyonu ve eklem açıcı akışlarla sempatik stresi kır.</p>
-            </div>
-            <div class="flow-summary-col" id="flowSummary3">
-                <h4 class="flow-summary-title">03 / Sürdürülebilir Longevity</h4>
-                <p class="flow-summary-desc">Kazanılan hareket disiplini ve hücresel canlılıkla, ömür boyu ağrısız ve yüksek enerjili bir yaşam rutini kur.</p>
+                            <!-- Alt Güven Rozeti -->
+                            <text class="flow-cta-sub" x="1205" y="308" text-anchor="middle">Tüm Programları İncele &rarr;</text>
+                        </g>
+                    </a>
+                </svg>
+
+                <!-- Mobil Cihazlar İçin Alt Buton -->
+                <div class="flow-mobile-cta text-center">
+                    <a href="<?= url('/programs') ?>" class="btn-pill-solid">
+                        PROGRAMA KATIL &rarr;
+                    </a>
+                </div>
+                </svg>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
-<!-- 5. Bölüm II: ÖNE ÇIKAN DİJİTAL PROGRAM (SCHEDULE & OFFERINGS) -->
+<!-- 5. Bölüm III: ÖNE ÇIKAN DİJİTAL PROGRAM (SİNEMATİK KAMP VİDEOSU & KOMPAKT DİKDÖRTGEN MİMARİ) -->
 <section class="featured-offer-section" id="featured-program">
     <div class="container">
-        <div class="offer-split-frame">
-            <!-- Sol: İkonik Bordo Vurgu Kartı -->
-            <div class="offer-left-accent">
-                <div class="offer-badge-box">EN ÇOK TERCİH EDİLEN PROGRAM</div>
-                
-                <div class="offer-main-title-wrap">
-                    <div class="offer-duration-num">4 HAFTA</div>
-                    <div class="offer-format-label">Online Canlı Yoga & Metabolik Detox Kampı</div>
-                </div>
-
-                <div class="offer-price-block">
-                    <span class="price-prefix">Toplam Yatırım</span>
-                    <div class="price-amount">₺4.500</div>
-                    <span class="price-subtext">Kayıt Seanslar + Birebir Eğitmen Rehberliği</span>
-                </div>
-
-                <div class="offer-cta-box">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-pill-solid" style="display: block; text-align: center;">
-                        KAMPA HEMEN KATIL &rarr;
-                    </a>
-                </div>
+        <!-- Sinematik Dikdörtgen Kart (Kompakt, Sayfaya Tam Oturan Yapı) -->
+        <div class="camp-cinema-card">
+            <!-- A. Üst Video Alanı (Genişletilmiş Sinematik Kamp Akışı) -->
+            <div class="camp-video-viewport" title="Videoyu Oynat / Durdur">
+                <video id="campHeroVideo" class="camp-video-element" autoplay loop muted playsinline preload="auto">
+                    <source src="<?= asset('assets/videos/hero.webm') ?>" type="video/webm">
+                    <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
+                </video>
+                <div class="camp-video-overlay"></div>
             </div>
 
-            <!-- Sağ: Mimari Çizgili Müfredat & Liste Yapısı (Schedule List) -->
-            <div class="offer-right-schedule">
-                <div class="schedule-header">
-                    <span class="section-kicker">MÜFREDAT & KAPSAM</span>
-                    <h3 class="schedule-title">Programda Seni Neler Bekliyor?</h3>
+            <!-- B. İçe Doğru Oyulmuş Kavisli Geçiş ve Ortadaki Bağımsız Yuvarlak Buton -->
+            <div class="camp-scoop-transition">
+                <div class="scoop-shoulder scoop-left"></div>
+                <div class="scoop-notch-wrap">
+                    <svg class="scoop-notch-svg" viewBox="0 0 240 76" preserveAspectRatio="none">
+                        <path d="M 0,0 L 20,0 C 45,0 72,12 80,30 C 80,52 98,70 120,70 C 142,70 160,52 160,30 C 168,12 195,0 220,0 L 240,0 L 240,76 L 0,76 Z" fill="#ffffff"/>
+                    </svg>
+                    <!-- Ortadaki Yuvarlak Play Butonu (Aşağıya Değmeyen, Temiz Havada Duran Tasarım) -->
+                    <button type="button" class="camp-play-center-btn" id="campPlayBtn" aria-label="Kamp Videosunu Oynat/Durdur" title="Videoyu Duraklat">
+                        <svg class="play-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="#111111">
+                            <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                            <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+                        </svg>
+                    </button>
                 </div>
+                <div class="scoop-shoulder scoop-right"></div>
+            </div>
 
-                <div class="schedule-list">
-                    <div class="schedule-row">
-                        <span class="schedule-num">01 /</span>
-                        <div class="schedule-info">
-                            <strong>Haftalık Canlı Seanslar</strong>
-                            <p>Fizyoterapist gözetiminde canlı yoga, mobilite ve postür düzeltici akışlar.</p>
+            <!-- C. Alt Beyaz İçerik Alanı (Sadeleştirilmiş, Kompakt İki Kolon) -->
+            <div class="camp-bottom-content">
+                <div class="camp-content-grid">
+                    <!-- Sol Kolon: Başlık, Madde İmleri ve Hızlı Aksiyon -->
+                    <div class="camp-col-left">
+                        <span class="camp-kicker-tag">MÜFREDAT &amp; KAPSAM</span>
+                        <h3 class="camp-main-heading">PROGRAMDA SENİ NELER BEKLİYOR?</h3>
+                        
+                        <!-- Sadeleştirilmiş Tireli Liste -->
+                        <ul class="camp-dashed-list">
+                            <li><span class="dash">—</span> Haftada 3 Canlı Yoga Seansı &amp; Postür Düzeltmeleri</li>
+                            <li><span class="dash">—</span> Fizyoterapist ile Günlük Birebir WhatsApp Takibi</li>
+                            <li><span class="dash">—</span> Rafine Şekersiz Glisemik Beslenme &amp; GLP-1 Yönetimi</li>
+                        </ul>
+
+                        <div class="camp-action-row">
+                            <div class="camp-price-chip">
+                                <span class="chip-label">Toplam Yatırım</span>
+                                <span class="chip-val">₺4.500</span>
+                            </div>
+                            <a href="<?= url('/checkout/1') ?>" class="btn-camp-primary">
+                                KAMPA KATIL &rarr;
+                            </a>
+                            <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba,%204%20Haftal%C4%B1k%20Online%20Detox%20kamp%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." 
+                               target="_blank" rel="noopener noreferrer" 
+                               class="btn-camp-wa-link">
+                                WhatsApp Danış &rarr;
+                            </a>
                         </div>
                     </div>
 
-                    <div class="schedule-row">
-                        <span class="schedule-num">02 /</span>
-                        <div class="schedule-info">
-                            <strong>Birebir WhatsApp Takibi</strong>
-                            <p>Her gün kişisel alışkanlık kontrolü, soru-cevap ve sürekli eğitmen motivasyonu.</p>
+                    <!-- Sağ Kolon: Kısa Açıklama ve 2 Kompakt Önizleme Kartı -->
+                    <div class="camp-col-right">
+                        <p class="camp-editorial-paragraph">
+                            Fizyoterapist gözetiminde bedeni biyomekanik ve metabolik açıdan sıfırlayan kanıta dayalı bütünsel yaşam rutini.
+                        </p>
+
+                        <div class="camp-preview-cards-row">
+                            <!-- Kart 1: Canlı Seanslar -->
+                            <div class="camp-mini-feature-card">
+                                <div class="mini-card-top">
+                                    <span class="mini-card-index">01 / SEANSLAR</span>
+                                    <h4 class="mini-card-title">16+ Canlı Seans</h4>
+                                    <p class="mini-card-desc">Omurga mobilizasyonu ve postür akışları.</p>
+                                </div>
+                                <div class="mini-card-bottom">
+                                    <span class="mini-card-badge">CANLI YOGA</span>
+                                </div>
+                            </div>
+
+                            <!-- Kart 2: Birebir Takip -->
+                            <div class="camp-mini-feature-card">
+                                <div class="mini-card-top">
+                                    <span class="mini-card-index">02 / TAKİP</span>
+                                    <h4 class="mini-card-title">Birebir Takip</h4>
+                                    <p class="mini-card-desc">Günlük WhatsApp kontrolü ve tokluk yönetimi.</p>
+                                </div>
+                                <div class="mini-card-bottom">
+                                    <span class="mini-card-badge">DETOX &amp; VAGUS</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="schedule-row">
-                        <span class="schedule-num">03 /</span>
-                        <div class="schedule-info">
-                            <strong>Sabah Rutinleri & Challenge'lar</strong>
-                            <p>Güne zinde başlamanı sağlayan mikro hareket serileri ve farkındalık görevleri.</p>
-                        </div>
-                    </div>
-
-                    <div class="schedule-row">
-                        <span class="schedule-num">04 /</span>
-                        <div class="schedule-info">
-                            <strong>Glisemik Dengeli Beslenme Rehberi</strong>
-                            <p>Rafine şekersiz, kan şekerini sabitleyen lezzetli tarifler ve öğün planlaması.</p>
-                        </div>
-                    </div>
-
-                    <div class="schedule-row">
-                        <span class="schedule-num">05 /</span>
-                        <div class="schedule-info">
-                            <strong>GLP-1 & Tokluk Yönetimi</strong>
-                            <p>Açlık ve tatlı krizlerini biyolojik olarak yönetme stratejileri.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="schedule-bottom-action">
-                    <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba,%204%20Haftal%C4%B1k%20Online%20Detox%20kamp%C4%B1%20hakk%C4%B1nda%20dan%C4%B1%C5%9Fmak%20istiyorum." 
-                       target="_blank" rel="noopener noreferrer" 
-                       class="btn-schedule-wa">
-                        WHATSAPP İLE SORU SOR &rarr;
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 6. Bölüm IV: İMZA STÜDYO KONSEPTLERİ (3'lü Kart Izgarası) -->
-<section class="editorial-concepts-section">
-    <div class="container">
-        <div class="section-title-wrap">
-            <span class="section-kicker">02 / DENEYİMLER</span>
-            <h2 class="section-heading-lg">İmza Wellness Konseptleri</h2>
-            <p class="section-lead-muted">Stüdyoda, açık havada ve su üzerinde özgün pratikler.</p>
-        </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('campHeroVideo');
+    const playBtn = document.getElementById('campPlayBtn');
+    const viewport = document.querySelector('.camp-video-viewport');
+    
+    function setBtnIcon(isPlaying) {
+        if (!playBtn) return;
+        if (isPlaying) {
+            playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#111111"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>';
+            playBtn.setAttribute('title', 'Videoyu Duraklat');
+        } else {
+            playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="#111111" style="margin-left: 2px;"><polygon points="6 4 20 12 6 20 6 4"></polygon></svg>';
+            playBtn.setAttribute('title', 'Videoyu Oynat');
+        }
+    }
 
-        <div class="concepts-grid-3">
-            <!-- 1. Warrior Yoga -->
-            <article class="concept-editorial-card">
-                <span class="concept-index">01 / DİNAMİK AKIŞ</span>
-                <h3 class="concept-title">Warrior Yoga</h3>
-                <p class="concept-description">
-                    Güç ve dayanıklılık odaklı yüksek tempolu grup seansı. Kalori harcatırken eklemleri anatomik olarak korur.
-                </p>
-                <div class="concept-action">
-                    <a href="<?= url('/programs') ?>" class="btn-pill-outline-dark">PROGRAMI İNCELE &rarr;</a>
-                </div>
-            </article>
+    if (video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
 
-            <!-- 2. Platform & SUP Yoga -->
-            <article class="concept-editorial-card">
-                <span class="concept-index">02 / SU ÜZERİNDE DENGE</span>
-                <h3 class="concept-title">Platform & SUP Yoga</h3>
-                <p class="concept-description">
-                    Adana gölü üzerinde suyla bütünleşen, derin merkez (core) gücünü ve zihinsel odaklanmayı zirveye taşıyan seanslar.
-                </p>
-                <div class="concept-action">
-                    <a href="<?= url('/events') ?>" class="btn-pill-outline-dark">ETKİNLİKLER &rarr;</a>
-                </div>
-            </article>
+        const safePlay = function() {
+            video.muted = true;
+            const p = video.play();
+            if (p !== undefined) {
+                p.then(function() {
+                    setBtnIcon(true);
+                }).catch(function() {
+                    setBtnIcon(false);
+                });
+            }
+        };
 
-            <!-- 3. Outdoor Community Yoga -->
-            <article class="concept-editorial-card">
-                <span class="concept-index">03 / AÇIK HAVA TOPLULUĞU</span>
-                <h3 class="concept-title">Outdoor Community Yoga</h3>
-                <p class="concept-description">
-                    Parklarda, marinalarda ve tarihi dokularda yüzlerce katılımcıyla buluşan sosyal ve birleştirici iyi yaşam buluşmaları.
-                </p>
-                <div class="concept-action">
-                    <a href="<?= url('/events') ?>" class="btn-pill-outline-dark">TOPLULUĞA KATIL &rarr;</a>
-                </div>
-            </article>
-        </div>
-    </div>
-</section>
+        // Sayfa yüklenince hemen yükle ve oynat
+        try { video.load(); } catch(e) {}
+        safePlay();
+
+        // Kart ekrana girdiğinde oynatmayı tetikle
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && video.paused) {
+                        safePlay();
+                    }
+                });
+            }, { threshold: 0.15 });
+            io.observe(video);
+        }
+
+        // Kullanıcı sayfayla ilk etkileşime girdiğinde garantile
+        const triggerOnInteract = function() {
+            if (video.paused) {
+                safePlay();
+            }
+        };
+        document.addEventListener('scroll', triggerOnInteract, { once: true, passive: true });
+        document.addEventListener('click', triggerOnInteract, { once: true });
+        document.addEventListener('touchstart', triggerOnInteract, { once: true });
+
+        // Video ve buton tıklamaları
+        function togglePlayState(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            if (video.paused) {
+                video.muted = true;
+                video.play().then(function() {
+                    setBtnIcon(true);
+                }).catch(function() {
+                    setBtnIcon(false);
+                });
+            } else {
+                video.pause();
+                setBtnIcon(false);
+            }
+        }
+
+        if (playBtn) {
+            playBtn.addEventListener('click', togglePlayState);
+        }
+        if (viewport) {
+            viewport.style.cursor = 'pointer';
+            viewport.addEventListener('click', togglePlayState);
+        }
+
+        video.addEventListener('play', function() { setBtnIcon(true); });
+        video.addEventListener('pause', function() { setBtnIcon(false); });
+        video.addEventListener('playing', function() { setBtnIcon(true); });
+    }
+});
+</script>
 
 <!-- 6. Bölüm V: GERÇEK DÖNÜŞÜMLER (3D DÖNEN BEFORE / AFTER SİLİNDİRİK KARTLAR) -->
 <section class="transformation-3d-section" id="donusum">
@@ -444,68 +497,129 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 8. Bölüm VI: EĞİTMENLE TANIŞIN (MEET YOUR MENTOR) -->
-<section class="editorial-mentor-section">
-    <div class="container">
-        <div class="mentor-frame-grid">
-            <!-- Sol: İkonik Portre / Monogram Çerçeve -->
-            <div class="mentor-portrait-col">
-                <div class="mentor-avatar-box">
-                    <span class="mentor-initials">BT</span>
-                </div>
-                <div class="mentor-meta">
-                    <h3 class="mentor-name">Betina Tansuğ</h3>
-                    <p class="mentor-role">Fizyoterapist & Yoga Eğitmeni</p>
-                </div>
-            </div>
-
-            <!-- Sağ: Felsefe & Öz Biyografi -->
-            <div class="mentor-bio-col">
-                <span class="section-kicker">KURUCU & EĞİTMEN</span>
-                <h2 class="mentor-quote">
-                    "Hareketi yalnızca fiziksel bir pratik değil, beden ve zihin arasında kurulan <em>en güçlü iletişim</em> olarak görüyorum."
-                </h2>
-                <p class="mentor-text">
-                    Amacım; insan anatomisini merkeze alan bilimsel fizyoterapi yaklaşımlarını yoga disipliniyle harmanlayarak, iyi yaşamı herkes için sürdürülebilir, güvenli ve keyifli bir günlük rutine dönüştürmektir.
-                </p>
-
-                <div class="mentor-credentials-list">
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>Fizyoterapi ve Rehabilitasyon Bilimsel Temeli</span>
-                    </div>
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>Uluslararası Sertifikalı Yoga & Longevity Eğitmeni</span>
-                    </div>
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>17+ Tamamlanan Kamp & 100+ Başarılı Katılımcı Deneyimi</span>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem;">
-                    <a href="<?= url('/metod') ?>" class="btn-pill-solid-dark">
-                        METODU VE ALTYAPIYI İNCELE &rarr;
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- 8. Bölüm VI: KATILIMCI YORUMU (EDITORIAL TESTIMONIAL) -->
+<!-- 8. Bölüm VI: KATILIMCI YORUMLARI (EDITORIAL TESTIMONIAL SLIDER) -->
 <section class="editorial-testimonial-section">
     <div class="container">
-        <div class="testimonial-editorial-box">
+        <div class="testimonial-editorial-box" id="testimonialBox">
             <div class="stars-row">★★★★★</div>
-            <blockquote class="testimonial-blockquote">
-                "Bu kampın bana en güzel hissettirdiği şey her sabah yeni bir challenge ile uyanmaktı. 
-                Gün içinde kendim için yaptığım küçük şeyler bile motivasyonumu artırdı. 
-                Hem yeni tarifler keşfettim hem de sağlıklı beslenmenin aslında zor olmadığını gördüm. 
-                En güzeli de hiçbir baskı hissetmeden sürecin içinde kalabilmekti..."
-            </blockquote>
-            <cite class="testimonial-author-cite">— Online Kamp Katılımcısı • 4 Haftalık Dönem</cite>
+            
+            <div class="testimonial-slider-viewport">
+                <!-- Yorum 1 -->
+                <div class="testimonial-slide active" data-index="0">
+                    <blockquote class="testimonial-blockquote">
+                        "Bu kampın bana en güzel hissettirdiği şey her sabah yeni bir challenge ile uyanmaktı. 
+                        Gün içinde kendim için yaptığım küçük şeyler bile motivasyonumu artırdı. 
+                        Hem yeni tarifler keşfettim hem de sağlıklı beslenmenin aslında zor olmadığını gördüm. 
+                        En güzeli de hiçbir baskı hissetmeden sürecin içinde kalabilmekti..."
+                    </blockquote>
+                    <cite class="testimonial-author-cite">— Online Kamp Katılımcısı • 4 Haftalık Dönem</cite>
+                </div>
+
+                <!-- Yorum 2 -->
+                <div class="testimonial-slide" data-index="1">
+                    <blockquote class="testimonial-blockquote">
+                        "Masa başı çalışmanın getirdiği kronik boyun ve sırt ağrılarım vardı. 
+                        Fizyoterapist bakış açısıyla hazırlanan seanslar sayesinde bedenimdeki gerginliğin çözüldüğünü 
+                        ve postürümün belirgin şekilde dikleştiğini hissettim. Artık güne çok daha enerjik başlıyorum."
+                    </blockquote>
+                    <cite class="testimonial-author-cite">— Ece K. • Online Studio &amp; Yoga Üyesi</cite>
+                </div>
+
+                <!-- Yorum 3 -->
+                <div class="testimonial-slide" data-index="2">
+                    <blockquote class="testimonial-blockquote">
+                        "Beslenme rehberi ve glisemik denge yaklaşımı sayesinde aç kalmadan ve tatlı krizleri yaşamadan 
+                        yeme alışkanlığımı dönüştürdüm. Betina Hanım'ın günlük birebir takibi motivasyonumu her an 
+                        yüksek tuttu. Hayatıma kattığım en değerli alışkanlık oldu."
+                    </blockquote>
+                    <cite class="testimonial-author-cite">— Merve D. • Metabolik Detox Katılımcısı</cite>
+                </div>
+
+                <!-- Yorum 4 -->
+                <div class="testimonial-slide" data-index="3">
+                    <blockquote class="testimonial-blockquote">
+                        "Yalnızca bir egzersiz programı değil; nefes, beden biyomekaniği ve zihinsel sakinliği 
+                        bir arada sunan bütünsel bir yaşam disiplini. Her seans sonrasında hem zihnen hafifliyorum 
+                        hem de omurgamın uzadığını hissediyorum."
+                    </blockquote>
+                    <cite class="testimonial-author-cite">— Selin T. • Longevity &amp; BAR System Katılımcısı</cite>
+                </div>
+            </div>
+
+            <!-- Yumuşak Geçiş Butonları (Soft Dots) -->
+            <div class="testimonial-soft-controls" id="testimonialDots" aria-label="Yorum Gezinimi">
+                <button type="button" class="testimonial-soft-dot active" data-slide="0" aria-label="1. Yorum"></button>
+                <button type="button" class="testimonial-soft-dot" data-slide="1" aria-label="2. Yorum"></button>
+                <button type="button" class="testimonial-soft-dot" data-slide="2" aria-label="3. Yorum"></button>
+                <button type="button" class="testimonial-soft-dot" data-slide="3" aria-label="4. Yorum"></button>
+            </div>
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const box = document.getElementById('testimonialBox');
+    if (!box) return;
+
+    const slides = box.querySelectorAll('.testimonial-slide');
+    const dots = box.querySelectorAll('.testimonial-soft-dot');
+    if (slides.length <= 1) return;
+
+    let currentIndex = 0;
+    let autoInterval = null;
+    let isTransitioning = false;
+
+    function goToSlide(newIndex) {
+        if (newIndex === currentIndex || isTransitioning) return;
+        isTransitioning = true;
+
+        dots[currentIndex]?.classList.remove('active');
+        dots[newIndex]?.classList.add('active');
+
+        slides[currentIndex]?.classList.remove('active');
+        slides[newIndex]?.classList.add('active');
+
+        currentIndex = newIndex;
+
+        setTimeout(function() {
+            isTransitioning = false;
+        }, 400);
+    }
+
+    function nextSlide() {
+        const next = (currentIndex + 1) % slides.length;
+        goToSlide(next);
+    }
+
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoInterval = setInterval(nextSlide, 5500);
+    }
+
+    function stopAutoPlay() {
+        if (autoInterval) {
+            clearInterval(autoInterval);
+            autoInterval = null;
+        }
+    }
+
+    // Dot tıklamaları
+    dots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+            const target = parseInt(this.getAttribute('data-slide'), 10);
+            if (!isNaN(target)) {
+                goToSlide(target);
+                startAutoPlay();
+            }
+        });
+    });
+
+    // Mouse kutunun üzerine geldiğinde geçişi duraklat, ayrılınca devam ettir
+    box.addEventListener('mouseenter', stopAutoPlay);
+    box.addEventListener('mouseleave', startAutoPlay);
+
+    // Otomatik döngüyü başlat
+    startAutoPlay();
+});
+</script>

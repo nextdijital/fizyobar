@@ -9,10 +9,7 @@ class MetodController extends Controller
 {
     public function index(): void
     {
-        $this->render('pages/metod', [
-            'metaTitle' => Language::get('metod_page.meta_title'),
-            'metaDescription' => Language::get('metod_page.meta_description'),
-        ]);
+        $this->redirect(url('/studio'));
     }
 }
 

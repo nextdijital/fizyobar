@@ -48,12 +48,12 @@ class AuthController extends Controller
             $this->redirect(url('/login'));
         }
 
-        Auth::login((int)$user['id']);
-
         if ($user['role'] === 'admin') {
-            $this->redirect(url('/xpanel'));
+            Session::setFlash('login_error', 'Yönetici hesabı güvenlik nedeniyle bu alandan giriş yapamaz. Lütfen xpanel yönetim merkezini kullanınız.');
+            $this->redirect(url('/login'));
         }
 
+        Auth::login((int)$user['id']);
         $this->redirect(url('/dashboard'));
     }
 

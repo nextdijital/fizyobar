@@ -20,6 +20,14 @@ class CorporateController extends Controller
         ]);
     }
 
+    public function about(): void
+    {
+        $this->render('pages/about', [
+            'metaTitle' => 'Betina Tansuğ & Fizyobar | Kurumsal Profil & Biyografi',
+            'metaDescription' => 'Fizyoterapist & Yoga Eğitmeni Betina Tansuğ ve Fizyobar bütünsel sağlık, klinik anatomi ve longevity disiplini.',
+        ]);
+    }
+
     public function submit(): void
     {
         $name = Security::escape($this->input('name'));

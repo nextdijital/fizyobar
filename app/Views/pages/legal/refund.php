@@ -5,7 +5,7 @@ declare(strict_types=1);
 <div class="legal-page">
     <div class="container legal-container">
         <header class="legal-header">
-            <span class="legal-badge"><?= __('common.legal_links') ?></span>
+            <span class="legal-badge"><?= __('legal.badge') ?></span>
             <h1 class="legal-title"><?= __('legal.refund_title') ?></h1>
             <p class="legal-date"><?= __('legal.last_updated') ?></p>
         </header>
