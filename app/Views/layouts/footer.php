@@ -1,6 +1,14 @@
     </main>
     <!-- Ana İçerik Sonu -->
 
+    <?php 
+    $uriPath = trim($currentUri ?? '', '/');
+    $hideFooter = ($hideFooter ?? false) 
+        || str_ends_with($uriPath, 'login') 
+        || str_ends_with($uriPath, 'register');
+    ?>
+
+    <?php if (!$hideFooter): ?>
     <!-- Global Footer (Brutalist Editorial & Yan Yana Menü Sütunları) -->
     <footer class="site-footer">
         <div class="footer-editorial-container">
@@ -95,6 +103,7 @@
             </div>
         </div>
     </footer>
+    <?php endif; ?>
 
     <!-- Yapay Zeka AI Asistan Bileşeni (Uçan Balon & Chat Drawer) -->
     <?php require __DIR__ . '/../partials/ai-chat.php'; ?>

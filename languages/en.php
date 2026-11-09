@@ -29,7 +29,7 @@ return [
         'events_sub' => 'Outdoor, Platform Yoga & Workshops',
         'corporate' => 'Corporate / B2B',
         'corporate_sub' => 'Brand Experiences & Partnerships',
-        'cta_action' => 'Join Camp / WhatsApp Inquiry',
+        'cta_action' => 'Join Camp',
     ],
 
     'home' => [
@@ -72,7 +72,7 @@ return [
         'f_item4' => 'Refined Sugar-Free & Glycemic-Balanced Nutrition Guide and Recipes',
         'f_item5' => 'Techniques for Managing Cravings & Hunger (GLP-1 Satiety Balance)',
         'f_item6' => 'Direct Q&A & Sustainable Habit Coaching',
-        'featured_btn' => 'Join Camp Now / Inquire via WhatsApp',
+        'featured_btn' => 'Join Camp Now',
 
         // 5. Testimonial
         'testimonials_title' => 'What Our Participants Say',

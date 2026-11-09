@@ -83,22 +83,22 @@ class StudentController extends Controller
         $lessonsByDay = [];
         $workoutIndex = 1;
 
-        foreach ($lessons as &$lesson) {
+        foreach ($lessons as $i => &$lesson) {
             $lesson['workout_number'] = sprintf('%02d', $workoutIndex++);
             $isComp = (bool)$lesson['is_completed'];
             if ($isComp) {
                 $completedCount++;
             }
 
-            // Kilit kontrolü: Günlük drip sistemi
+            // Kilit kontrolü: Günlük drip sistemi VEYA önceki dersi bitirme
             $dayNum = (int)($lesson['day_number'] ?? 1);
-            $isLocked = !$unlockAll && ($dayNum > $currentProgramDay);
-            $lesson['is_locked'] = $isLocked;
-            $lesson['days_left'] = max(0, $dayNum - $currentProgramDay);
-            
-            // Planlanan açılış tarihi
-            $scheduledTime = strtotime("+".($dayNum - 1)." days", $startTime);
+            $scheduledTime = strtotime("+".max(0, $dayNum - 1)." days", $startTime);
             $lesson['unlock_date'] = date('d.m.Y', $scheduledTime);
+            $lesson['days_left'] = max(0, $dayNum - $currentProgramDay);
+
+            $prevCompleted = ($i === 0) || !empty($lessons[$i - 1]['is_completed']);
+            $calendarUnlocked = ($dayNum <= $currentProgramDay);
+            $lesson['is_locked'] = !$unlockAll && !$calendarUnlocked && !$prevCompleted;
 
             $lessonsByDay[$dayNum] = $lesson;
         }
@@ -275,8 +275,13 @@ class StudentController extends Controller
         foreach ($lessons as $i => &$les) {
             $les['workout_number'] = sprintf('%02d', $i + 1);
             $dayNum = (int)($les['day_number'] ?? 1);
-            $les['is_locked'] = !$unlockAll && ($dayNum > $currentProgramDay);
+            $scheduledTime = strtotime("+".max(0, $dayNum - 1)." days", $startTime);
+            $les['unlock_date'] = date('d.m.Y', $scheduledTime);
             $les['days_left'] = max(0, $dayNum - $currentProgramDay);
+
+            $prevCompleted = ($i === 0) || !empty($lessons[$i - 1]['is_completed']);
+            $calendarUnlocked = ($dayNum <= $currentProgramDay);
+            $les['is_locked'] = !$unlockAll && !$calendarUnlocked && !$prevCompleted;
 
             if ($les['id'] === $lessonId) {
                 $currentLesson = $les;

@@ -36,10 +36,7 @@ $isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'f
 $isDarkPage = ($isDarkPage ?? false)
     || str_contains($cleanUri, 'blog')
     || str_contains($cleanUri, 'articles')
-    || str_contains($cleanUri, 'makaleler')
-    || str_contains($cleanUri, 'movement-space')
-    || str_contains($cleanUri, 'course')
-    || str_contains($cleanUri, 'lesson');
+    || str_contains($cleanUri, 'makaleler');
 ?>
 <body>
     <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #391214 - Kenarlara Yaslı) -->
@@ -107,6 +104,13 @@ $isDarkPage = ($isDarkPage ?? false)
                             <a href="<?= url('/corporate') ?>" class="dropdown-link">Kurumsal Wellbeing Çözümleri <span class="dropdown-chevron">▸</span></a>
                             <a href="<?= url('/betina-tansug') ?>" class="dropdown-link">Betina Tansuğ &amp; Fizyobar <span class="dropdown-chevron">▸</span></a>
                         </div>
+                    </li>
+
+                    <!-- Mobil Menü Aksiyon Butonu -->
+                    <li class="nav-item-mobile-cta">
+                        <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="mobile-menu-cta-btn">
+                            <?= __('nav.cta_action') ?> &rarr;
+                        </a>
                     </li>
                 </ul>
             </nav>

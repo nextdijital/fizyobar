@@ -516,7 +516,7 @@ declare(strict_types=1);
                             <input type="tel" id="phone" name="phone" class="auth-form-input" value="<?= e($user['phone'] ?? '') ?>">
                         </div>
 
-                        <button type="submit" class="btn-pill-solid" style="background: #ffffff; color: #0e0e0f; margin-top: 1rem;">
+                        <button type="submit" class="btn-pill-solid" style="background: #391214; color: #ffffff; margin-top: 1rem;">
                             BİLGİLERİ GÜNCELLE &rarr;
                         </button>
                     </form>
@@ -543,15 +543,15 @@ declare(strict_types=1);
                             <input type="password" id="new_password_confirm" name="new_password_confirm" class="auth-form-input" required autocomplete="new-password">
                         </div>
 
-                        <button type="submit" class="btn-pill-solid" style="background: #fca5a5; color: #0e0e0f; margin-top: 1rem;">
+                        <button type="submit" class="btn-pill-solid" style="background: #391214; color: #ffffff; margin-top: 1rem;">
                             ŞİFREYİ GÜNCELLE &rarr;
                         </button>
                     </form>
                 </div>
             </div>
 
-            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: right;">
-                <a href="<?= url('/logout') ?>" class="btn-workout-action" style="display: inline-block; width: auto; background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3);">
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e4e4e7; text-align: right;">
+                <a href="<?= url('/logout') ?>" class="btn-workout-action" style="display: inline-block; width: auto; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca;">
                     Güvenli Çıkış Yap &rarr;
                 </a>
             </div>

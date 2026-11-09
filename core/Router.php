@@ -142,7 +142,7 @@ class Router
 
         // POST isteklerinde otomatik CSRF doğrulaması (Genel arama/danışma API'leri hariç)
         if ($method === 'POST') {
-            $csrfExempt = ['/api/ai-chat'];
+            $csrfExempt = ['/api/ai-chat', '/api/lesson/complete', '/api/movement/toggle-mode'];
             if (!in_array($normalizedPath, $csrfExempt, true) && !Csrf::validate()) {
                 http_response_code(403);
                 if ($firstSegment === 'api') {

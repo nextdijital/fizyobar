@@ -29,7 +29,7 @@ return [
         'events_sub' => 'Stüdyo & Açık Hava',
         'corporate' => 'Kurumsal',
         'corporate_sub' => 'İş Birlikleri',
-        'cta_action' => 'Kampa Katıl / WhatsApp',
+        'cta_action' => 'Kampa Katıl',
     ],
 
     'home' => [
@@ -72,7 +72,7 @@ return [
         'f_item4' => 'Rafine Şekersiz & Glisemik Dengeli Beslenme Rehberi',
         'f_item5' => 'Tatlı ve Açlık Krizlerini Yönetme Pratikleri',
         'f_item6' => 'Soru-Cevap & Bireysel Alışkanlık Koçluğu',
-        'featured_btn' => 'Kampa Hemen Katıl (WhatsApp)',
+        'featured_btn' => 'Kampa Hemen Katıl',
 
         // 5. Testimonial
         'testimonials_title' => 'Katılımcı Yorumu',

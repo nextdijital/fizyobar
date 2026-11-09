@@ -53,9 +53,49 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 3. Bölüm I: YAKLAŞIMIMIZ (ABOUT - 2 Kolonlu Mimari Grid: Başlık Solda, Yazı Sağda) -->
+<!-- 3. Bölüm I: YAKLAŞIMIMIZ (ABOUT - 2 Kolonlu Mimari Grid & Kenarlardan Çizgisel Organik Akış) -->
 <section class="editorial-about-section" id="metod">
-    <div class="container">
+    <!-- Sol Kenar Çizgisel Organik Akış (3 Adımda Başla Tarzı) -->
+    <div class="about-line-art-wrap about-lines-left" aria-hidden="true">
+        <svg class="about-svg-lines" viewBox="0 0 240 360" fill="none" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="aboutGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#C6B39A"/>
+                    <stop offset="55%" stop-color="#8D3A3C"/>
+                    <stop offset="100%" stop-color="#3B1319"/>
+                </linearGradient>
+            </defs>
+            <!-- Silik Kılavuz Çizgisi -->
+            <path class="about-track-path" d="M -10 30 C 90 60, 180 110, 150 190 C 120 270, 30 290, 80 370" stroke="#ede7df" stroke-width="2" stroke-linecap="round"/>
+            <!-- Scroll ile Çizilen Canlı Çizgi -->
+            <path class="about-draw-path" id="aboutDrawPathLeft" d="M -10 30 C 90 60, 180 110, 150 190 C 120 270, 30 290, 80 370" stroke="url(#aboutGradLeft)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Estetik Node / Halka -->
+            <circle cx="150" cy="190" r="11" fill="#ffffff" stroke="#C6B39A" stroke-width="1.5"/>
+            <circle cx="150" cy="190" r="4.5" fill="#8D3A3C"/>
+        </svg>
+    </div>
+
+    <!-- Sağ Kenar Çizgisel Organik Akış -->
+    <div class="about-line-art-wrap about-lines-right" aria-hidden="true">
+        <svg class="about-svg-lines" viewBox="0 0 240 360" fill="none" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="aboutGradRight" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#8D3A3C"/>
+                    <stop offset="50%" stop-color="#C6B39A"/>
+                    <stop offset="100%" stop-color="#7B694E"/>
+                </linearGradient>
+            </defs>
+            <!-- Silik Kılavuz Çizgisi -->
+            <path class="about-track-path" d="M 250 40 C 160 80, 70 140, 100 220 C 125 285, 210 310, 170 370" stroke="#ede7df" stroke-width="2" stroke-linecap="round"/>
+            <!-- Scroll ile Çizilen Canlı Çizgi -->
+            <path class="about-draw-path" id="aboutDrawPathRight" d="M 250 40 C 160 80, 70 140, 100 220 C 125 285, 210 310, 170 370" stroke="url(#aboutGradRight)" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Estetik Node / Halka -->
+            <circle cx="100" cy="220" r="11" fill="#ffffff" stroke="#8D3A3C" stroke-width="1.5"/>
+            <circle cx="100" cy="220" r="4.5" fill="#C6B39A"/>
+        </svg>
+    </div>
+
+    <div class="container editorial-about-inner">
         <div class="editorial-about-grid">
             <!-- Sol Kolon: Başlık -->
             <div class="about-title-col">
@@ -380,120 +420,130 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- 6. Bölüm V: GERÇEK DÖNÜŞÜMLER (3D DÖNEN BEFORE / AFTER SİLİNDİRİK KARTLAR) -->
-<section class="transformation-3d-section" id="donusum">
+<!-- 6. Bölüm V: GERÇEK DÖNÜŞÜMLER (YATAY KAYDIRMALI & SİSLİ BEFORE / AFTER SLIDER) -->
+<section class="transformation-horizontal-section" id="donusum">
     <div class="container">
-        <div class="section-title-wrap">
+        <div class="section-title-wrap text-center">
             <span class="section-kicker">GERÇEK DENEYİMLER</span>
             <h2 class="section-heading-lg">Dönüşüm Hikayeleri</h2>
-            <p class="section-lead-muted">Kartları sürükleyerek 3D olarak döndürün, öncesi ve sonrasını görmek için kartlara tıklayın.</p>
+            <p class="section-lead-muted">Kartları kaydırarak danışanlarımızın dönüşümünü keşfedin, öncesi ve sonrasını görmek için karta tıklayın.</p>
         </div>
     </div>
 
-    <div class="carousel-3d-wrapper" id="carousel3dWrapper">
-        <div class="carousel-3d-scene">
-            <div class="carousel-3d-ring" id="carousel3dRing">
-                <!-- Kart 1 -->
-                <div class="carousel-3d-card" data-index="0" style="--card-index: 0;">
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-before">ÖNCESİ</span>
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-after">SONRASI</span>
-                        </div>
+    <div class="transformation-slider-viewport" id="transSliderViewport">
+        <!-- Kenar Sis Degrade Efektleri (Editorial Fog Overlays) -->
+        <div class="trans-edge-fog edge-left" aria-hidden="true"></div>
+        <div class="trans-edge-fog edge-right" aria-hidden="true"></div>
+
+        <div class="transformation-track" id="transTrack">
+            <!-- Kart 1 -->
+            <div class="trans-card is-active" data-index="0">
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-before">ÖNCESİ</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Kart 2 -->
-                <div class="carousel-3d-card" data-index="1" style="--card-index: 1;">
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-before">ÖNCESİ</span>
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-after">SONRASI</span>
-                        </div>
+            <!-- Kart 2 -->
+            <div class="trans-card" data-index="1">
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-before">ÖNCESİ</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Kart 3 -->
-                <div class="carousel-3d-card" data-index="2" style="--card-index: 2;">
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-before">ÖNCESİ</span>
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-after">SONRASI</span>
-                        </div>
+            <!-- Kart 3 -->
+            <div class="trans-card" data-index="2">
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-before">ÖNCESİ</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Kart 4 -->
-                <div class="carousel-3d-card" data-index="3" style="--card-index: 3;">
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-before">ÖNCESİ</span>
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-after">SONRASI</span>
-                        </div>
+            <!-- Kart 4 -->
+            <div class="trans-card" data-index="3">
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-before">ÖNCESİ</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Kart 5 -->
-                <div class="carousel-3d-card" data-index="4" style="--card-index: 4;">
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-before">ÖNCESİ</span>
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-after">SONRASI</span>
-                        </div>
+            <!-- Kart 5 -->
+            <div class="trans-card" data-index="4">
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-before">ÖNCESİ</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Kart 6 -->
-                <div class="carousel-3d-card" data-index="5" style="--card-index: 5;">
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-before">ÖNCESİ</span>
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                            <span class="card-status-badge badge-after">SONRASI</span>
-                        </div>
+            <!-- Kart 6 -->
+            <div class="trans-card" data-index="5">
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-before">ÖNCESİ</span>
+                    </div>
+                    <div class="card-face card-back">
+                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- 3D Carousel Kontrolleri (Oklar) -->
-        <div class="carousel-3d-controls">
-            <button type="button" class="carousel-control-btn btn-prev" id="carouselPrevBtn" aria-label="Önceki">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-            </button>
-            <button type="button" class="carousel-control-btn btn-next" id="carouselNextBtn" aria-label="Sonraki">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-            </button>
+    <!-- Yatay Slider Kontrolleri (Oklar ve Dot Göstergeleri) -->
+    <div class="trans-controls-wrap">
+        <button type="button" class="trans-nav-btn btn-prev" id="transPrevBtn" aria-label="Önceki Kart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </button>
+        <div class="trans-dots" id="transDots">
+            <button type="button" class="trans-dot active" data-index="0" aria-label="1. Kart"></button>
+            <button type="button" class="trans-dot" data-index="1" aria-label="2. Kart"></button>
+            <button type="button" class="trans-dot" data-index="2" aria-label="3. Kart"></button>
+            <button type="button" class="trans-dot" data-index="3" aria-label="4. Kart"></button>
+            <button type="button" class="trans-dot" data-index="4" aria-label="5. Kart"></button>
+            <button type="button" class="trans-dot" data-index="5" aria-label="6. Kart"></button>
         </div>
+        <button type="button" class="trans-nav-btn btn-next" id="transNextBtn" aria-label="Sonraki Kart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </button>
     </div>
 </section>
 
@@ -558,68 +608,73 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const box = document.getElementById('testimonialBox');
-    if (!box) return;
+(function() {
+    function initTestimonialSlider() {
+        const box = document.getElementById('testimonialBox');
+        if (!box) return;
 
-    const slides = box.querySelectorAll('.testimonial-slide');
-    const dots = box.querySelectorAll('.testimonial-soft-dot');
-    if (slides.length <= 1) return;
+        const slides = Array.from(box.querySelectorAll('.testimonial-slide'));
+        const dots = Array.from(box.querySelectorAll('.testimonial-soft-dot'));
+        if (slides.length <= 1) return;
 
-    let currentIndex = 0;
-    let autoInterval = null;
-    let isTransitioning = false;
+        let currentIndex = 0;
+        let timer = null;
+        const INTERVAL_MS = 2500; // Sürekli ve akıcı değişim için 2.5 saniye
 
-    function goToSlide(newIndex) {
-        if (newIndex === currentIndex || isTransitioning) return;
-        isTransitioning = true;
+        function showSlide(index) {
+            currentIndex = ((index % slides.length) + slides.length) % slides.length;
 
-        dots[currentIndex]?.classList.remove('active');
-        dots[newIndex]?.classList.add('active');
+            for (let i = 0; i < slides.length; i++) {
+                if (i === currentIndex) {
+                    slides[i].classList.add('active');
+                } else {
+                    slides[i].classList.remove('active');
+                }
+            }
 
-        slides[currentIndex]?.classList.remove('active');
-        slides[newIndex]?.classList.add('active');
-
-        currentIndex = newIndex;
-
-        setTimeout(function() {
-            isTransitioning = false;
-        }, 400);
-    }
-
-    function nextSlide() {
-        const next = (currentIndex + 1) % slides.length;
-        goToSlide(next);
-    }
-
-    function startAutoPlay() {
-        stopAutoPlay();
-        autoInterval = setInterval(nextSlide, 5500);
-    }
-
-    function stopAutoPlay() {
-        if (autoInterval) {
-            clearInterval(autoInterval);
-            autoInterval = null;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === currentIndex) {
+                    dots[i].classList.add('active');
+                } else {
+                    dots[i].classList.remove('active');
+                }
+            }
         }
-    }
 
-    // Dot tıklamaları
-    dots.forEach(function(dot) {
-        dot.addEventListener('click', function() {
-            const target = parseInt(this.getAttribute('data-slide'), 10);
-            if (!isNaN(target)) {
-                goToSlide(target);
-                startAutoPlay();
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function startAutoLoop() {
+            if (timer) clearInterval(timer);
+            timer = setInterval(nextSlide, INTERVAL_MS);
+        }
+
+        // Dot tıklamaları
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', function(e) {
+                e.preventDefault();
+                showSlide(i);
+                startAutoLoop();
+            });
+        });
+
+        // Pencere / sekme aktif olduğunda daima canlı tut
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                startAutoLoop();
             }
         });
-    });
 
-    // Mouse kutunun üzerine geldiğinde geçişi duraklat, ayrılınca devam ettir
-    box.addEventListener('mouseenter', stopAutoPlay);
-    box.addEventListener('mouseleave', startAutoPlay);
+        // Kesintisiz döngüyü hemen başlat
+        showSlide(0);
+        startAutoLoop();
+    }
 
-    // Otomatik döngüyü başlat
-    startAutoPlay();
-});
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTestimonialSlider);
+    } else {
+        initTestimonialSlider();
+    }
+})();
 </script>

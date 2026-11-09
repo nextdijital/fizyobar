@@ -173,110 +173,220 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==============================================================================
-    // 3D DÖNEN BEFORE / AFTER SİLİNDİRİK CAROUSEL (DÖNDÜRME VE KART ÇEVİRME)
+    // GERÇEK DÖNÜŞÜMLER: YATAY KAYDIRMALI & SONSUZ DÖNGÜLÜ (INFINITE) BEFORE/AFTER SLIDER
     // ==============================================================================
-    const carouselScene = document.querySelector('.carousel-3d-scene');
-    const ring = document.getElementById('carousel3dRing');
-    const cards = document.querySelectorAll('.carousel-3d-card');
-    const prevBtn = document.getElementById('carouselPrevBtn');
-    const nextBtn = document.getElementById('carouselNextBtn');
+    const transViewport = document.getElementById('transSliderViewport');
+    const transTrack = document.getElementById('transTrack');
+    const transPrevBtn = document.getElementById('transPrevBtn');
+    const transNextBtn = document.getElementById('transNextBtn');
+    const transDots = document.querySelectorAll('.trans-dot');
 
-    if (ring && cards.length > 0) {
-        let currentAngle = 0;
-        let targetAngle = 0;
-        let isPointerDown = false;
-        let startX = 0;
-        let startAngle = 0;
-        let hasMoved = false;
-        let moveDistance = 0;
-        const cardAngleStep = 60; // 360 / 6 kart
+    if (transViewport && transTrack) {
+        const originalCards = Array.from(transTrack.querySelectorAll('.trans-card'));
+        const totalOriginal = originalCards.length;
 
-        // Yumuşak İnterpolasyon Döngüsü (Smooth animation loop)
-        function updateCarousel() {
-            const diff = targetAngle - currentAngle;
-            if (Math.abs(diff) > 0.05) {
-                currentAngle += diff * 0.12;
-            } else {
-                currentAngle = targetAngle;
-            }
-            ring.style.transform = `rotateY(${currentAngle}deg)`;
-            requestAnimationFrame(updateCarousel);
-        }
-        requestAnimationFrame(updateCarousel);
-
-        // Pointer / Touch / Mouse Başlangıcı
-        function handlePointerDown(e) {
-            isPointerDown = true;
-            hasMoved = false;
-            moveDistance = 0;
-            startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-            startAngle = targetAngle;
-            ring.style.cursor = 'grabbing';
-        }
-
-        // Pointer / Touch / Mouse Hareketi (Sürükleme)
-        function handlePointerMove(e) {
-            if (!isPointerDown) return;
-            const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-            const deltaX = currentX - startX;
-            moveDistance = Math.abs(deltaX);
-
-            if (moveDistance > 6) {
-                hasMoved = true;
-            }
-
-            // Açı hassasiyeti (drag sensitivity)
-            targetAngle = startAngle + (deltaX * 0.35);
-        }
-
-        // Pointer / Touch / Mouse Bitişi
-        function handlePointerUp() {
-            if (!isPointerDown) return;
-            isPointerDown = false;
-            ring.style.cursor = 'grab';
-
-            // Eğer sürükleme yapıldıysa en yakın 60 dereceye yuvarla (Snap)
-            if (hasMoved) {
-                targetAngle = Math.round(targetAngle / cardAngleStep) * cardAngleStep;
-            }
-        }
-
-        if (carouselScene) {
-            // Fare etkileşimleri
-            carouselScene.addEventListener('mousedown', handlePointerDown);
-            window.addEventListener('mousemove', handlePointerMove);
-            window.addEventListener('mouseup', handlePointerUp);
-
-            // Dokunmatik (Mobil) etkileşimleri
-            carouselScene.addEventListener('touchstart', handlePointerDown, { passive: true });
-            window.addEventListener('touchmove', handlePointerMove, { passive: true });
-            window.addEventListener('touchend', handlePointerUp);
-        }
-
-        // Kart Tıklama: Eğer sürüklenmediyse (sadece tıklandıysa) kartı 3D olarak Before/After çevir
-        cards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Eğer kullanıcı kartı sürüklediyse çevirme
-                if (hasMoved && moveDistance > 8) return;
-
-                // Tıklanan kartı çevir (Before <-> After flip)
-                this.classList.toggle('is-flipped');
+        if (totalOriginal > 0) {
+            // Sol ve sağ tarafın ASLA boş kalmaması için başa ve sona tam set klonlar ekliyoruz
+            // Set 1 (Clone Before), Set 2 (Orijinal), Set 3 (Clone After)
+            const clonesBefore = originalCards.map(c => {
+                const clone = c.cloneNode(true);
+                clone.classList.remove('is-active', 'is-flipped');
+                clone.setAttribute('data-clone', 'before');
+                return clone;
             });
-        });
 
-        // Butonlarla Döndürme
-        if (prevBtn) {
-            prevBtn.addEventListener('click', function() {
-                targetAngle += cardAngleStep;
-                targetAngle = Math.round(targetAngle / cardAngleStep) * cardAngleStep;
+            const clonesAfter = originalCards.map(c => {
+                const clone = c.cloneNode(true);
+                clone.classList.remove('is-active', 'is-flipped');
+                clone.setAttribute('data-clone', 'after');
+                return clone;
             });
-        }
 
-        if (nextBtn) {
-            nextBtn.addEventListener('click', function() {
-                targetAngle -= cardAngleStep;
-                targetAngle = Math.round(targetAngle / cardAngleStep) * cardAngleStep;
+            // Track içine yerleştir
+            clonesBefore.forEach(clone => transTrack.insertBefore(clone, originalCards[0]));
+            clonesAfter.forEach(clone => transTrack.appendChild(clone));
+
+            // Artık tüm kartlar (toplam 3 * totalOriginal = 18 kart)
+            let allCards = Array.from(transTrack.querySelectorAll('.trans-card'));
+
+            // Başlangıç indeksi: Ortadaki setin ilk kartı (indeks 6 = Kart 0)
+            let currentIndex = totalOriginal;
+            let isDragging = false;
+            let startX = 0;
+            let currentTranslate = 0;
+            let prevTranslate = 0;
+            let dragDistance = 0;
+
+            function updateSliderPosition(animate = true) {
+                if (allCards.length === 0) return;
+
+                const viewportWidth = transViewport.offsetWidth;
+                const targetCard = allCards[currentIndex];
+                if (!targetCard) return;
+
+                const cardWidth = targetCard.offsetWidth;
+                const cardOffsetLeft = targetCard.offsetLeft;
+
+                // Aktif kartı viewport'un tam merkezine oturtan X ofseti
+                const targetX = (viewportWidth / 2) - (cardWidth / 2) - cardOffsetLeft;
+
+                currentTranslate = targetX;
+                prevTranslate = targetX;
+
+                if (animate) {
+                    transTrack.style.transition = 'transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                } else {
+                    transTrack.style.transition = 'none';
+                }
+                transTrack.style.transform = `translateX(${targetX}px)`;
+
+                // Netlik ve sis sınıflarını güncelle
+                allCards.forEach((card, idx) => {
+                    if (idx === currentIndex) {
+                        card.classList.add('is-active');
+                    } else {
+                        card.classList.remove('is-active');
+                    }
+                });
+
+                // Dot göstergelerini güncelle (0..5 modunda)
+                const realIndex = ((currentIndex % totalOriginal) + totalOriginal) % totalOriginal;
+                transDots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === realIndex);
+                });
+            }
+
+            // Sonsuz döngü wrap-around denetimi (seamless loop)
+            function checkLoopBounds() {
+                if (currentIndex < totalOriginal) {
+                    currentIndex += totalOriginal;
+                    updateSliderPosition(false);
+                } else if (currentIndex >= totalOriginal * 2) {
+                    currentIndex -= totalOriginal;
+                    updateSliderPosition(false);
+                }
+            }
+
+            transTrack.addEventListener('transitionend', function(e) {
+                if (e.target === transTrack) {
+                    checkLoopBounds();
+                }
             });
+
+            function goToCard(index, animate = true) {
+                currentIndex = index;
+                updateSliderPosition(animate);
+            }
+
+            // Butonlar
+            if (transPrevBtn) {
+                transPrevBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goToCard(currentIndex - 1, true);
+                });
+            }
+
+            if (transNextBtn) {
+                transNextBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goToCard(currentIndex + 1, true);
+                });
+            }
+
+            // Dot tıklamaları (orta sete doğrudan yönlendirme)
+            transDots.forEach(function(dot) {
+                dot.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetIdx = parseInt(this.getAttribute('data-index'), 10);
+                    if (!isNaN(targetIdx)) {
+                        goToCard(totalOriginal + targetIdx, true);
+                    }
+                });
+            });
+
+            // Kart tıklamaları:
+            // - Ortadaki aktif karta tıklanırsa -> Before / After çevir (flip)
+            // - Yanlardaki sisli karta tıklanırsa -> o kartı merkeze getir ve netleştir
+            allCards.forEach(function(card, idx) {
+                card.addEventListener('click', function() {
+                    if (dragDistance > 10) return;
+                    if (idx !== currentIndex) {
+                        goToCard(idx, true);
+                    } else {
+                        this.classList.toggle('is-flipped');
+                    }
+                });
+            });
+
+            // Sürükleme (Drag & Swipe)
+            function getPointerX(e) {
+                return e.type.includes('mouse') ? e.pageX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+            }
+
+            function onDragStart(e) {
+                isDragging = true;
+                dragDistance = 0;
+                startX = getPointerX(e);
+                transTrack.style.transition = 'none';
+                transTrack.style.cursor = 'grabbing';
+            }
+
+            function onDragMove(e) {
+                if (!isDragging) return;
+                const currentX = getPointerX(e);
+                const deltaX = currentX - startX;
+                dragDistance = Math.abs(deltaX);
+                transTrack.style.transform = `translateX(${prevTranslate + deltaX}px)`;
+            }
+
+            function onDragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                transTrack.style.cursor = 'grab';
+
+                if (dragDistance > 40) {
+                    const matrix = window.getComputedStyle(transTrack).transform;
+                    let actualX = prevTranslate;
+                    if (matrix && matrix !== 'none') {
+                        const parts = matrix.split(',');
+                        actualX = parseFloat(parts[4]) || prevTranslate;
+                    }
+                    const movedAmount = actualX - prevTranslate;
+
+                    if (movedAmount < -40) {
+                        currentIndex += 1;
+                    } else if (movedAmount > 40) {
+                        currentIndex -= 1;
+                    }
+                }
+
+                updateSliderPosition(true);
+            }
+
+            transViewport.addEventListener('mousedown', onDragStart);
+            window.addEventListener('mousemove', onDragMove);
+            window.addEventListener('mouseup', onDragEnd);
+
+            transViewport.addEventListener('touchstart', onDragStart, { passive: true });
+            window.addEventListener('touchmove', onDragMove, { passive: true });
+            window.addEventListener('touchend', onDragEnd);
+
+            // Resize durumunda tam ortalamayı koru
+            let resizeTimer = null;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    updateSliderPosition(false);
+                }, 80);
+            });
+
+            // İlk açılışta pozisyonla (Sol taraf dolu, sağ taraf dolu, ortadaki net)
+            requestAnimationFrame(function() {
+                updateSliderPosition(false);
+            });
+            setTimeout(function() {
+                updateSliderPosition(false);
+            }, 100);
         }
     }
 
@@ -304,6 +414,62 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         });
+    }
+
+    // ==============================================================================
+    // KLASİK DERSLERİN ÖTESİNDE: ÇİZGİSEL AKIŞ & SCROLL ÇİZİM ANİMASYONU
+    // (3 Adımda Başla Tarzı - Camel Coat, Rubine & Tamarind Çizgisel Detaylar)
+    // ==============================================================================
+    const aboutSection = document.getElementById('metod');
+    const pathLeft = document.getElementById('aboutDrawPathLeft');
+    const pathRight = document.getElementById('aboutDrawPathRight');
+
+    if (aboutSection && (pathLeft || pathRight)) {
+        let leftLength = pathLeft ? pathLeft.getTotalLength() : 0;
+        let rightLength = pathRight ? pathRight.getTotalLength() : 0;
+
+        if (pathLeft) {
+            pathLeft.style.strokeDasharray = `${leftLength} ${leftLength}`;
+            pathLeft.style.strokeDashoffset = `${leftLength}`;
+        }
+
+        if (pathRight) {
+            pathRight.style.strokeDasharray = `${rightLength} ${rightLength}`;
+            pathRight.style.strokeDashoffset = `${rightLength}`;
+        }
+
+        function updateAboutLines() {
+            const rect = aboutSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+
+            // Bölüm görünürlüğüne göre 0..1 arası ilerleme (progress)
+            const startY = windowHeight * 0.95;
+            const endY = windowHeight * 0.15;
+            const currentY = rect.top;
+
+            let progress = (startY - currentY) / (startY - endY);
+            progress = Math.max(0, Math.min(1, progress));
+
+            if (pathLeft) {
+                const drawOffsetLeft = leftLength * (1 - progress);
+                pathLeft.style.strokeDashoffset = `${drawOffsetLeft}`;
+            }
+
+            if (pathRight) {
+                const drawOffsetRight = rightLength * (1 - progress);
+                pathRight.style.strokeDashoffset = `${drawOffsetRight}`;
+            }
+        }
+
+        window.addEventListener('scroll', updateAboutLines, { passive: true });
+        window.addEventListener('resize', function() {
+            if (pathLeft) leftLength = pathLeft.getTotalLength();
+            if (pathRight) rightLength = pathRight.getTotalLength();
+            updateAboutLines();
+        });
+
+        // İlk yükleme
+        requestAnimationFrame(updateAboutLines);
     }
 });
 

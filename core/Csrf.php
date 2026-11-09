@@ -51,6 +51,16 @@ class Csrf
                 ?? $_SERVER['HTTP_X_CSRF_TOKEN']
                 ?? $_SERVER['HTTP_X_XSRF_TOKEN']
                 ?? null;
+
+            if ($submittedToken === null) {
+                $raw = @file_get_contents('php://input');
+                if ($raw) {
+                    $json = @json_decode($raw, true);
+                    if (is_array($json) && !empty($json['_csrf_token'])) {
+                        $submittedToken = $json['_csrf_token'];
+                    }
+                }
+            }
         }
 
         if (!is_string($submittedToken)) {

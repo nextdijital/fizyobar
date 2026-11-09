@@ -2,115 +2,157 @@
 declare(strict_types=1);
 ?>
 
-<!-- 1. Hero / Karşılama Alanı -->
-<section class="page-editorial-hero">
-    <div class="container text-center">
-        <span class="section-kicker">KURUCU PROFİLİ &amp; KURUMSAL</span>
-        <h1 class="page-editorial-title">Betina Tansuğ &amp; Fizyobar</h1>
-        <p class="page-editorial-lead">
-            Klinik fizyoterapi bilimi ile yoga ve longevity disiplinini birleştiren, kanıta dayalı bütüncül yaşam platformu.
-        </p>
-    </div>
-</section>
+<!-- WE/AR© REFERANS BİREBİR EDİTORYAL SPLIT-PANEL VİTRİNİ -->
+<section class="betina-showcase-section">
+    <div class="betina-showcase-shell">
+        
+        <!-- 1. SOL KART (FOTOĞRAF 1) -->
+        <div class="showcase-card showcase-card-1">
+            <!-- Sol Ortadaki Yatay Beyaz Vurgu Bloğu -->
+            <div class="showcase-accent-block" aria-hidden="true"></div>
 
-<!-- 2. Betina Tansuğ Profil & Biyografi Bölümü -->
-<section class="editorial-mentor-section" style="padding: clamp(3.5rem, 5vw, 5rem) 0;">
-    <div class="container">
-        <div class="mentor-frame-grid">
-            <!-- Sol: İkonik Monogram & Eğitmen Bilgisi -->
-            <div class="mentor-portrait-col">
-                <div class="mentor-avatar-box">
-                    <span class="mentor-initials">BT</span>
-                </div>
-                <div class="mentor-meta">
-                    <h2 class="mentor-name">Betina Tansuğ</h2>
-                    <p class="mentor-role">Fizyoterapist &amp; Yoga Eğitmeni</p>
-                    <span class="event-badge badge-bordo" style="margin-top: 0.5rem; display: inline-block;">FİZYOBAR KURUCUSU</span>
-                </div>
+            <!-- Fotoğraf Katmanı (Hover ile Renklenir) -->
+            <div class="showcase-img-wrap">
+                <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" 
+                     alt="Betina Tansuğ - Biyomekanik &amp; Yoga Pratiği" 
+                     class="showcase-img" 
+                     loading="eager">
             </div>
 
-            <!-- Sağ: Felsefe & Öz Biyografi -->
-            <div class="mentor-bio-col">
-                <span class="section-kicker">KURUCU VİZYONU</span>
-                <h3 class="mentor-quote">
-                    "Hareketi yalnızca fiziksel bir pratik değil, beden ve zihin arasında kurulan <em>en güçlü iletişim</em> olarak görüyorum."
-                </h3>
-                <p class="mentor-text">
-                    Fizyoterapi ve rehabilitasyon lisans eğitimimin ardından, klinik anatomi prensiplerini yoga ve fonksiyonel hareket disiplinleriyle bir araya getirdim. Amacım; insan anatomisini merkeze alan bilimsel yaklaşımları, iyi yaşamı herkes için sürdürülebilir, güvenli ve keyifli bir günlük rutine dönüştürmektir.
+            <!-- Üst Kontroller: Sol Yuvarlak Buton & Sağda YENİ -->
+            <div class="card-top-controls">
+                <a href="<?= url('/') ?>" class="card-back-circle" title="Ana Sayfaya Dön" aria-label="Geri Dön">
+                    &larr;
+                </a>
+                <span class="card-top-badge">YENİ</span>
+            </div>
+
+            <!-- Alt Editoryal Bilgi & Beyaz Buton (Yumuşak Oval Hatlar) -->
+            <div class="card-bottom-info">
+                <span class="card-code">SERİ #028</span>
+                <p class="card-caption">
+                    KLİNİK ANATOMİ VE BİYOMEKANİK TEMELİNDE BEDENİNİZLE YENİDEN BAĞ KURUN.
                 </p>
-                <p class="mentor-text">
-                    Bugüne kadar gerçekleştirdiğimiz 17+ online kamp dönemi ve yüzlerce bireysel danışmanlıkta; omurga sağlığı, eklem mobilitesi, sinir sistemi regülasyonu ve metabolik glisemik dengeyi odağımıza alarak kalıcı alışkanlıklar inşa ettik.
-                </p>
+                <a href="<?= url('/programs') ?>" class="card-action-btn">
+                    BİYOGRAFİ
+                </a>
+            </div>
+        </div>
 
-                <div class="mentor-credentials-list">
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>Fizyoterapi ve Rehabilitasyon Bilimsel Temeli</span>
+        <!-- 2. ORTA KART (FOTOĞRAF 2) -->
+        <div class="showcase-card showcase-card-2">
+            <!-- Sol Üstteki Dikey Beyaz Vurgu Bloğu -->
+            <div class="showcase-accent-block" aria-hidden="true"></div>
+
+            <!-- Fotoğraf Katmanı (Hover ile Renklenir) -->
+            <div class="showcase-img-wrap">
+                <img src="<?= asset('assets/images/betina-outdoor-inversion.jpg') ?>" 
+                     alt="Betina Tansuğ - BAR System &amp; Mobilite" 
+                     class="showcase-img" 
+                     loading="eager">
+            </div>
+
+            <!-- Üst Kontroller -->
+            <div class="card-top-controls">
+                <span class="card-top-badge">BAR SYSTEM</span>
+            </div>
+
+            <!-- Alt Editoryal Bilgi & Şeffaf Outline Buton (Yumuşak Oval Hatlar) -->
+            <div class="card-bottom-info">
+                <span class="card-code">METOD #172</span>
+                <p class="card-caption">
+                    17+ DÖNEM ONLİNE KAMP DENEYİMİ VE YÜZLERCE BİLİMSEL DÖNÜŞÜM HİKAYESİ.
+                </p>
+                <a href="<?= url('/programs') ?>" class="card-action-btn btn-outline-white">
+                    PROGRAMLAR
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. SAĞ EDİTORYAL PANEL (BETİNA TANSUĞ BİYOGRAFİ & AÇIKLAMA) -->
+        <div class="showcase-info-panel">
+            <div class="showcase-header-wrap">
+                <!-- Büyük Tipografik Başlık: BETİNA TANSUĞ© -->
+                <h1 class="showcase-main-title">BETİNA TANSUĞ&copy;</h1>
+
+                <!-- Alt Meta Satırı -->
+                <div class="showcase-sub-meta">
+                    <span class="sub-meta-left">HAREKETİN BİLİMSEL DÖNÜŞÜMÜ &rarr;</span>
+                    <span class="sub-meta-right">EST. 2020</span>
+                </div>
+
+                <!-- Yönlendirme Oku -->
+                <div class="showcase-scroll-arrow" aria-hidden="true">&darr;</div>
+
+                <!-- Betina Tansuğ Kimdir Açıklama Alanı (Editoryal Manifesto) -->
+                <div class="showcase-bio-box">
+                    <h2 class="showcase-bio-heading">KLİNİK FİZYOTERAPİST &bull; BAR SYSTEM KURUCUSU</h2>
+                    <p class="showcase-bio-para">
+                        Fizyoterapist kimliğim sayesinde insan bedenini anatomik, biyomekanik ve fonksiyonel açıdan ele alıyor; yoga ve mobilite pratiğini kanıta dayalı bilimsel bir temele oturtuyorum.
+                    </p>
+                    <p class="showcase-bio-subpara">
+                        Hareketi dönemsel bir heves değil; omurga sağlığını, eklem mobilitesini ve otonom sinir sistemi dengesini koruyan, uzun ve ağrısız bir ömür için kalıcı bir yaşam disiplini haline getiriyoruz.
+                    </p>
+                </div>
+
+                <!-- 3 Sütunlu Editoryal Matris -->
+                <div class="showcase-columns-grid">
+                    
+                    <!-- Sütun 1: UZMANLIK & METODOLOJİ -->
+                    <div class="showcase-col-group">
+                        <div class="showcase-col">
+                            <span class="showcase-col-title">METODOLOJİ</span>
+                            <ul class="showcase-links-list">
+                                <li>KLİNİK ANATOMİ</li>
+                                <li>POSTÜR &amp; HİZALANMA</li>
+                                <li>EKLEM MOBİLİTESİ</li>
+                                <li>VAGUS SİNİR DENGESİ</li>
+                                <li>LONGEVITY RUTİNLERİ</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>Uluslararası Sertifikalı Yoga &amp; Longevity Eğitmeni</span>
+
+                    <!-- Sütun 2: PROGRAMLAR & DENEYİMLER -->
+                    <div class="showcase-col-group">
+                        <div class="showcase-col">
+                            <span class="showcase-col-title">PROGRAMLAR</span>
+                            <ul class="showcase-links-list">
+                                <li><a href="<?= url('/programs') ?>">4 HAFTALIK DETOKS KAMPI</a></li>
+                                <li><a href="<?= url('/studio') ?>">ONLİNE STUDIO DERSLERİ</a></li>
+                                <li><a href="<?= url('/corporate') ?>">BİREBİR KLİNİK SEANSLAR</a></li>
+                                <li><a href="<?= url('/events') ?>">PLATFORM &amp; SUP YOGA</a></li>
+                                <li><a href="<?= url('/corporate') ?>">KURUMSAL WELLNESS</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>17+ Tamamlanan Kamp &amp; 100+ Başarılı Katılımcı Deneyimi</span>
+
+                    <!-- Sütun 3: TAKİP & İLETİŞİM -->
+                    <div class="showcase-col-group">
+                        <div class="showcase-col">
+                            <span class="showcase-col-title">İLETİŞİM</span>
+                            <ul class="showcase-links-list">
+                                <li><a href="https://instagram.com/betinatansug" target="_blank" rel="noopener">INSTAGRAM: @betinatansug</a></li>
+                                <li><a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener">WHATSAPP DANIŞMA</a></li>
+                                <li><a href="https://youtube.com" target="_blank" rel="noopener">YOUTUBE KANALI</a></li>
+                                <li><a href="https://spotify.com" target="_blank" rel="noopener">SPOTIFY ÇALMA LİSTELERİ</a></li>
+                                <li><a href="mailto:info@fizyobar.com">E-POSTA: info@fizyobar.com</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="cred-item">
-                        <span class="cred-check">✓</span>
-                        <span>BAR System (Body • Adapt • Reframe) Kurucusu</span>
-                    </div>
+
                 </div>
             </div>
-        </div>
-    </div>
-</section>
 
-<!-- 3. Fizyobar Kurumsal Felsefesi (BAR System) -->
-<section style="background-color: #fafafa; padding: clamp(3.5rem, 5vw, 5rem) 0; border-top: 1px solid #f0f0f0; border-bottom: 1px solid #f0f0f0;">
-    <div class="container">
-        <div class="section-title-wrap" style="text-align: center; margin-bottom: 3rem;">
-            <span class="section-kicker">KURUMSAL FELSEFE</span>
-            <h2 class="section-heading-lg">FİZYOBAR Neyi Temsil Eder?</h2>
-            <p class="section-lead-muted">Geçici trendler yerine insan biyolojisini ve omurga sağlığını merkeze alan 3 temel sütun.</p>
-        </div>
-
-        <div class="corporate-grid-3">
-            <div class="corp-feature-card">
-                <span class="feature-num">01</span>
-                <h3 class="feature-title">BODY • ANATOMİK FARKINDALIK</h3>
-                <p class="feature-desc">Bedeninizi zorlamak değil, onu anatomik olarak tanımak. Omurga eğrilikleri, boyun-sırt gerginlikleri ve postür bozukluklarına yönelik fizyoterapist gözetimli bilimsel düzeltmeler.</p>
-            </div>
-            <div class="corp-feature-card">
-                <span class="feature-num">02</span>
-                <h3 class="feature-title">ADAPT • HÜCRESEL UYUM</h3>
-                <p class="feature-desc">Metabolik denge ve mitokondriyal enerji. Rafine şekersiz glisemik beslenme ve vagus siniri regülasyonu ile bedenin stres ve enflamasyona karşı direncini artırmak.</p>
-            </div>
-            <div class="corp-feature-card">
-                <span class="feature-num">03</span>
-                <h3 class="feature-title">REFRAME • ZİHİNSEL YENİLENME</h3>
-                <p class="feature-desc">Hareketi bir zorunluluktan çıkarıp ödüllendirici bir zindelik disiplinine dönüştürmek. Günlük mikro rutinler ve sürdürülebilir longevity alışkanlıkları.</p>
+            <!-- Alt Telif & Kare Artı Butonu -->
+            <div class="showcase-footer-row">
+                <p class="showcase-copyright-text">
+                    FİZYOBAR &bull; BETİNA TANSUĞ İSTANBUL &bull; &copy; <?= date('Y') ?>
+                </p>
+                <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="showcase-plus-btn" title="İletişime Geç" aria-label="İletişim">
+                    +
+                </a>
             </div>
         </div>
+
     </div>
 </section>
-
-<!-- 4. İletişim & Lokasyon -->
-<section style="padding: clamp(3.5rem, 5vw, 5rem) 0;">
-    <div class="container text-center" style="max-width: 680px;">
-        <span class="section-kicker">STÜDYO &amp; İLETİŞİM</span>
-        <h2 class="section-heading-lg" style="margin-bottom: 1rem;">Birlikte Başlayalım</h2>
-        <p style="font-size: 0.95rem; color: #525252; line-height: 1.7; margin-bottom: 2rem;">
-            Stüdyo pratikleri, bireysel fizyoterapi seansları, kurumsal wellbeing iş birlikleri veya online kamplarımız hakkında doğrudan Betina Tansuğ ile iletişime geçebilirsiniz.
-        </p>
-
-        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="btn-pill-solid">
-                WHATSAPP İLE DANIŞ &rarr;
-            </a>
-            <a href="<?= url('/corporate') ?>" class="btn-pill-outline-dark">
-                KURUMSAL ÇÖZÜMLER
-            </a>
-        </div>
-    </div>
-</section>
-

@@ -116,8 +116,8 @@ declare(strict_types=1);
                                 Sonraki Seans: <?= e($nextLesson['workout_number']) ?> &rarr;
                             </a>
                         <?php elseif ($nextLesson): ?>
-                            <span class="player-nav-arrow-btn next disabled" title="<?= $nextLesson['unlock_date'] ?> tarihinde açılacak">
-                                🔒 Sonraki Seans (<?= $nextLesson['unlock_date'] ?>)
+                            <span class="player-nav-arrow-btn next disabled" title="<?= e($nextLesson['unlock_date'] ?? '') ?> tarihinde açılacak">
+                                🔒 Sonraki Seans <?= !empty($nextLesson['unlock_date']) ? '(' . e($nextLesson['unlock_date']) . ')' : '' ?>
                             </span>
                         <?php endif; ?>
                     </div>
@@ -182,7 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const lessonId = this.getAttribute('data-lesson-id');
             const courseId = this.getAttribute('data-course-id');
-            const isAlreadyCompleted = this.classList.contains('is-completed');
+            const csrfMeta = document.querySelector('meta[name="csrf-token"]');
+            const csrfToken = csrfMeta ? csrfMeta.getAttribute('content') : '<?= csrf_token() ?>';
 
             completeBtn.disabled = true;
             completeBtn.style.opacity = '0.6';
@@ -191,35 +192,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': csrfToken
                 },
                 body: JSON.stringify({
                     lesson_id: lessonId,
                     course_id: courseId,
+                    _csrf_token: csrfToken,
                     toggle: true
                 })
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('HTTP Status: ' + res.status);
+                }
+                return res.json();
+            })
             .then(data => {
                 completeBtn.disabled = false;
                 completeBtn.style.opacity = '1';
 
                 if (data.success) {
-                    if (data.is_completed) {
-                        completeBtn.classList.add('is-completed');
-                        completeBtn.innerHTML = '✓ ANTRENMAN TAMAMLANDI';
-                    } else {
-                        completeBtn.classList.remove('is-completed');
-                        completeBtn.innerHTML = 'ANTRENMANI TAMAMLADIM &rarr;';
-                    }
-
-                    if (percentEl) percentEl.textContent = '%' + data.progress;
-                    if (countEl) countEl.textContent = data.completedCount;
-                    if (progressBar) progressBar.style.width = data.progress + '%';
-
-                    if (data.newBadge) {
-                        alert('🎉 TEBRİKLER! Yeni Rozet Kazandınız:\n' + data.newBadge.icon + ' ' + data.newBadge.name);
-                    }
+                    // Sayfayı yenileyerek sonraki açılan dersin kilidini ve listeyi anında güncelle
+                    window.location.reload();
                 } else {
                     alert('İşlem sırasında bir hata oluştu: ' + (data.error || 'Bilinmeyen hata'));
                 }
@@ -228,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 completeBtn.disabled = false;
                 completeBtn.style.opacity = '1';
                 console.error(err);
-                alert('Sunucu ile iletişim kurulamadı.');
+                alert('İşlem tamamlanırken bir bağlantı hatası oluştu. Lütfen tekrar deneyin.');
             });
         });
     }
