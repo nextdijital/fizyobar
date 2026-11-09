@@ -4585,89 +4585,6 @@ button, input, textarea, select {
     color: #0e0e0f !important;
 }
 
-/* Dark Sayfa & Dark Footer Uyumu */
-body.page-dark-theme,
-body.page-dark-theme main {
-    background-color: #0c0c0e !important;
-    color: #ffffff !important;
-}
-
-body.page-dark-theme .site-footer,
-.site-footer.footer-dark-theme {
-    background-color: #09090b !important;
-    color: #ffffff !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
-body.page-dark-theme .site-footer .footer-svg-brand-text,
-.site-footer.footer-dark-theme .footer-svg-brand-text {
-    fill: #ffffff !important;
-}
-
-body.page-dark-theme .site-footer .footer-svg-tagline,
-.site-footer.footer-dark-theme .footer-svg-tagline {
-    fill: rgba(255, 255, 255, 0.7) !important;
-}
-
-body.page-dark-theme .site-footer .footer-sliced-line,
-.site-footer.footer-dark-theme .footer-sliced-line {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-body.page-dark-theme .site-footer .footer-brand-heading,
-.site-footer.footer-dark-theme .footer-brand-heading,
-body.page-dark-theme .site-footer .footer-col-title,
-.site-footer.footer-dark-theme .footer-col-title {
-    color: #ffffff !important;
-}
-
-body.page-dark-theme .site-footer .footer-brand-text,
-.site-footer.footer-dark-theme .footer-brand-text,
-body.page-dark-theme .site-footer .footer-col-links a,
-.site-footer.footer-dark-theme .footer-col-links a {
-    color: rgba(255, 255, 255, 0.75) !important;
-}
-
-body.page-dark-theme .site-footer .footer-col-links a:hover,
-.site-footer.footer-dark-theme .footer-col-links a:hover {
-    color: #fca5a5 !important;
-}
-
-body.page-dark-theme .site-footer .footer-location-tag,
-.site-footer.footer-dark-theme .footer-location-tag {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-    color: rgba(255, 255, 255, 0.8) !important;
-    border-color: rgba(255, 255, 255, 0.12) !important;
-}
-
-body.page-dark-theme .site-footer .footer-contact-item,
-.site-footer.footer-dark-theme .footer-contact-item,
-body.page-dark-theme .site-footer .footer-contact-item a,
-.site-footer.footer-dark-theme .footer-contact-item a {
-    color: rgba(255, 255, 255, 0.85) !important;
-}
-
-body.page-dark-theme .site-footer .footer-contact-item a:hover,
-.site-footer.footer-dark-theme .footer-contact-item a:hover {
-    color: #fca5a5 !important;
-}
-
-body.page-dark-theme .site-footer .footer-bottom-bar,
-.site-footer.footer-dark-theme .footer-bottom-bar {
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-body.page-dark-theme .site-footer .footer-legal-links a,
-.site-footer.footer-dark-theme .footer-legal-links a {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-body.page-dark-theme .site-footer .footer-legal-links a:hover,
-.site-footer.footer-dark-theme .footer-legal-links a:hover {
-    color: #fca5a5 !important;
-}
-
 /* Sayfa Gövdesi */
 .editorial-dark-page {
     background-color: #0e0e0f !important;
@@ -6551,18 +6468,18 @@ body.page-dark-theme .site-footer .footer-legal-links a:hover,
     color: #52525b;
 }
 
-/* Playlist Kenar Çubuğu */
+/* Playlist Kenar Çubuğu - Sade & Minimal */
 .playlist-card {
-    background: #0c0c0f;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    padding: 1.35rem;
+    background: #09090b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
 }
 
 .playlist-kicker {
-    font-size: 0.68rem;
+    font-size: 0.64rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: #fca5a5;
     text-transform: uppercase;
     display: block;
@@ -6570,74 +6487,104 @@ body.page-dark-theme .site-footer .footer-legal-links a:hover,
 }
 
 .playlist-title {
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: #ffffff;
-    margin: 0 0 1rem 0;
-    padding-bottom: 0.85rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 0 0.85rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    letter-spacing: -0.01em;
 }
 
 .playlist-items-scroll {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.45rem;
     max-height: 580px;
     overflow-y: auto;
-    padding-right: 4px;
+    padding-right: 0;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE / Edge */
+}
+
+.playlist-items-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge, Opera */
+    width: 0;
+    height: 0;
 }
 
 .playlist-item {
-    background: #141418;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.75rem;
     position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.18s ease;
 }
 
 .playlist-item:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    background: #181820;
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .playlist-item.active {
     border-color: #fca5a5;
-    background: rgba(252, 165, 165, 0.1);
+    background: rgba(252, 165, 165, 0.08);
 }
 
 .playlist-item.completed {
-    border-color: rgba(16, 185, 129, 0.4);
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.03);
+}
+
+.playlist-item.locked {
+    opacity: 0.5;
 }
 
 .item-left-num {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: #ffffff;
-    width: 24px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #e4e4e7;
+    width: 22px;
     text-align: center;
+    flex-shrink: 0;
 }
 
 .item-icon-check {
     color: #10b981;
 }
 
+.item-icon-lock {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.item-content-body {
+    flex: 1;
+    min-width: 0;
+}
+
 .item-day-meta {
-    font-size: 0.66rem;
+    font-size: 0.62rem;
     font-weight: 700;
-    color: #a1a1aa;
+    color: #71717a;
     text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
 }
 
 .item-title {
-    font-size: 0.84rem;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 600;
     color: #ffffff;
     margin: 0;
-    line-height: 1.3;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .playlist-item-link {

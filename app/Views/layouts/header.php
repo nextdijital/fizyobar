@@ -41,7 +41,7 @@ $isDarkPage = ($isDarkPage ?? false)
     || str_contains($cleanUri, 'course')
     || str_contains($cleanUri, 'lesson');
 ?>
-<body class="<?= $isDarkPage ? 'page-dark-theme' : '' ?>">
+<body>
     <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #391214 - Kenarlara Yaslı) -->
     <div class="top-announcement-bar">
         <div class="announcement-inner">
