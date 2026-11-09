@@ -27,8 +27,9 @@ declare(strict_types=1);
                 </div>
 
                 <div class="auth-form-group">
-                    <div class="auth-label-row">
-                        <label class="auth-form-label" for="password">ŞİFRE</label>
+                    <div class="auth-label-row" style="display: flex; justify-content: space-between; align-items: center;">
+                        <label class="auth-form-label" for="password" style="margin-bottom: 0;">ŞİFRE</label>
+                        <a href="<?= url('/forgot-password') ?>" style="font-size: 0.75rem; color: #fca5a5; text-decoration: none;">Şifremi Unuttum</a>
                     </div>
                     <input type="password" id="password" name="password" class="auth-form-input" required autocomplete="current-password">
                 </div>

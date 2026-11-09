@@ -122,7 +122,7 @@ $isDarkPage = str_contains($cleanUri, 'blog') || str_contains($cleanUri, 'articl
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <span class="user-role-tag"><?= (auth_user()['role'] ?? '') === 'admin' ? 'XPANEL' : 'PANEL' ?></span>
+                        <span class="user-role-tag"><?= (auth_user()['role'] ?? '') === 'admin' ? 'XPANEL' : 'MOVEMENT SPACE' ?></span>
                     </a>
                 <?php else: ?>
                     <a href="<?= url('/login') ?>" class="header-user-btn" title="Giriş Yap">

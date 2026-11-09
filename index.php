@@ -121,12 +121,20 @@ Router::post('/login/process', [AuthController::class, 'loginProcess']);
 Router::get('/register', [AuthController::class, 'register']);
 Router::post('/register/process', [AuthController::class, 'registerProcess']);
 Router::get('/logout', [AuthController::class, 'logout']);
+Router::get('/forgot-password', [AuthController::class, 'forgotPassword']);
+Router::post('/forgot-password/process', [AuthController::class, 'forgotPasswordProcess']);
+Router::get('/reset-password/{token}', [AuthController::class, 'resetPassword']);
+Router::post('/reset-password/process', [AuthController::class, 'resetPasswordProcess']);
 
-// --- Öğrenci Paneli & Video Eğitim Sistemi ---
+// --- Öğrenci Paneli & Movement Space (Kişisel Hareket Alanı) ---
 Router::get('/dashboard', [StudentController::class, 'dashboard']);
+Router::get('/movement-space', [StudentController::class, 'dashboard']);
 Router::get('/course/{slug}', [StudentController::class, 'viewCourse']);
 Router::get('/course/{slug}/lesson/{id}', [StudentController::class, 'viewLesson']);
 Router::post('/api/lesson/complete', [StudentController::class, 'completeLesson']);
+Router::post('/api/movement/toggle-mode', [StudentController::class, 'toggleLockMode']);
+Router::post('/api/profile/update', [StudentController::class, 'updateProfile']);
+Router::post('/api/profile/password', [StudentController::class, 'changePassword']);
 
 // --- Satın Alma & IBAN Havale Ödeme Bildirimi ---
 Router::get('/checkout/{id}', [CheckoutController::class, 'checkout']);
