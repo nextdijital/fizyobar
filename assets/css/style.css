@@ -4522,6 +4522,152 @@ button, input, textarea, select {
     color: #fca5a5 !important;
 }
 
+.site-header.header-dark-theme .user-role-tag {
+    background-color: #391214 !important;
+    color: #fca5a5 !important;
+    border: 1px solid rgba(252, 165, 165, 0.35) !important;
+}
+
+/* Dark Header Hover & Scroll Koruması (Beyazlaşmayı Kesin Olarak Engeller) */
+.site-header.header-dark-theme.scrolled,
+.site-header.header-dark-theme.scrolled-solid,
+.site-header.header-dark-theme:hover {
+    background-color: #0e0e0f !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5) !important;
+}
+.site-header.header-dark-theme.scrolled .nav-link,
+.site-header.header-dark-theme.scrolled-solid .nav-link,
+.site-header.header-dark-theme:hover .nav-link {
+    color: #ffffff !important;
+}
+.site-header.header-dark-theme.scrolled .logo-text-main,
+.site-header.header-dark-theme.scrolled-solid .logo-text-main,
+.site-header.header-dark-theme:hover .logo-text-main {
+    color: #ffffff !important;
+}
+.site-header.header-dark-theme.scrolled .logo-text-sub,
+.site-header.header-dark-theme.scrolled-solid .logo-text-sub,
+.site-header.header-dark-theme:hover .logo-text-sub {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+.site-header.header-dark-theme.scrolled .header-user-btn,
+.site-header.header-dark-theme.scrolled-solid .header-user-btn,
+.site-header.header-dark-theme:hover .header-user-btn {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+.site-header.header-dark-theme.scrolled .header-user-btn svg,
+.site-header.header-dark-theme.scrolled-solid .header-user-btn svg,
+.site-header.header-dark-theme:hover .header-user-btn svg {
+    stroke: #ffffff !important;
+}
+.site-header.header-dark-theme.scrolled .lang-switcher,
+.site-header.header-dark-theme.scrolled-solid .lang-switcher,
+.site-header.header-dark-theme:hover .lang-switcher,
+.site-header.header-dark-theme.scrolled .lang-btn,
+.site-header.header-dark-theme.scrolled-solid .lang-btn,
+.site-header.header-dark-theme:hover .lang-btn,
+.site-header.header-dark-theme.scrolled .lang-divider,
+.site-header.header-dark-theme.scrolled-solid .lang-divider,
+.site-header.header-dark-theme:hover .lang-divider {
+    color: #ffffff !important;
+}
+.site-header.header-dark-theme.scrolled .btn-betella-cta,
+.site-header.header-dark-theme.scrolled-solid .btn-betella-cta {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.85) !important;
+}
+.site-header.header-dark-theme.scrolled .btn-betella-cta:hover,
+.site-header.header-dark-theme.scrolled-solid .btn-betella-cta:hover {
+    background-color: #ffffff !important;
+    color: #0e0e0f !important;
+}
+
+/* Dark Sayfa & Dark Footer Uyumu */
+body.page-dark-theme,
+body.page-dark-theme main {
+    background-color: #0c0c0e !important;
+    color: #ffffff !important;
+}
+
+body.page-dark-theme .site-footer,
+.site-footer.footer-dark-theme {
+    background-color: #09090b !important;
+    color: #ffffff !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.page-dark-theme .site-footer .footer-svg-brand-text,
+.site-footer.footer-dark-theme .footer-svg-brand-text {
+    fill: #ffffff !important;
+}
+
+body.page-dark-theme .site-footer .footer-svg-tagline,
+.site-footer.footer-dark-theme .footer-svg-tagline {
+    fill: rgba(255, 255, 255, 0.7) !important;
+}
+
+body.page-dark-theme .site-footer .footer-sliced-line,
+.site-footer.footer-dark-theme .footer-sliced-line {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+body.page-dark-theme .site-footer .footer-brand-heading,
+.site-footer.footer-dark-theme .footer-brand-heading,
+body.page-dark-theme .site-footer .footer-col-title,
+.site-footer.footer-dark-theme .footer-col-title {
+    color: #ffffff !important;
+}
+
+body.page-dark-theme .site-footer .footer-brand-text,
+.site-footer.footer-dark-theme .footer-brand-text,
+body.page-dark-theme .site-footer .footer-col-links a,
+.site-footer.footer-dark-theme .footer-col-links a {
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+body.page-dark-theme .site-footer .footer-col-links a:hover,
+.site-footer.footer-dark-theme .footer-col-links a:hover {
+    color: #fca5a5 !important;
+}
+
+body.page-dark-theme .site-footer .footer-location-tag,
+.site-footer.footer-dark-theme .footer-location-tag {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.page-dark-theme .site-footer .footer-contact-item,
+.site-footer.footer-dark-theme .footer-contact-item,
+body.page-dark-theme .site-footer .footer-contact-item a,
+.site-footer.footer-dark-theme .footer-contact-item a {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+body.page-dark-theme .site-footer .footer-contact-item a:hover,
+.site-footer.footer-dark-theme .footer-contact-item a:hover {
+    color: #fca5a5 !important;
+}
+
+body.page-dark-theme .site-footer .footer-bottom-bar,
+.site-footer.footer-dark-theme .footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+body.page-dark-theme .site-footer .footer-legal-links a,
+.site-footer.footer-dark-theme .footer-legal-links a {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+body.page-dark-theme .site-footer .footer-legal-links a:hover,
+.site-footer.footer-dark-theme .footer-legal-links a:hover {
+    color: #fca5a5 !important;
+}
+
 /* Sayfa Gövdesi */
 .editorial-dark-page {
     background-color: #0e0e0f !important;

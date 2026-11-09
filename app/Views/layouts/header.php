@@ -30,7 +30,18 @@
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
     <link rel="stylesheet" href="<?= asset('assets/css/cookie-consent.css') ?>">
 </head>
-<body>
+<?php
+$cleanUri = trim($currentUri ?? '', '/');
+$isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
+$isDarkPage = ($isDarkPage ?? false)
+    || str_contains($cleanUri, 'blog')
+    || str_contains($cleanUri, 'articles')
+    || str_contains($cleanUri, 'makaleler')
+    || str_contains($cleanUri, 'movement-space')
+    || str_contains($cleanUri, 'course')
+    || str_contains($cleanUri, 'lesson');
+?>
+<body class="<?= $isDarkPage ? 'page-dark-theme' : '' ?>">
     <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #391214 - Kenarlara Yaslı) -->
     <div class="top-announcement-bar">
         <div class="announcement-inner">
@@ -41,11 +52,6 @@
         </div>
     </div>
 
-<?php
-$cleanUri = trim($currentUri ?? '', '/');
-$isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
-$isDarkPage = str_contains($cleanUri, 'blog') || str_contains($cleanUri, 'articles') || str_contains($cleanUri, 'makaleler');
-?>
     <!-- Gezinme Çubuğu (Editorial Mimarisi: Sol Menü • Orta Logo • Sağ Aksiyon) -->
     <header class="site-header <?= $isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : '') ?>" id="siteHeader">
         <div class="header-container">

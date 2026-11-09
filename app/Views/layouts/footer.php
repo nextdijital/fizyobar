@@ -2,7 +2,7 @@
     <!-- Ana İçerik Sonu -->
 
     <!-- Global Footer (Brutalist Editorial & Yan Yana Menü Sütunları) -->
-    <footer class="site-footer">
+    <footer class="site-footer <?= ($isDarkPage ?? false) ? 'footer-dark-theme' : '' ?>">
         <div class="footer-editorial-container">
             <!-- 1. Üst Alan: Sliced / %75'i Görünen Dev Tipografik Marka & Çizgi & Sağ Slogan -->
             <div class="footer-sliced-brand-wrap">
