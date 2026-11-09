@@ -22,7 +22,7 @@ declare(strict_types=1);
         <div class="container player-header-container">
             <div class="player-header-left">
                 <a href="<?= url('/movement-space') ?>" class="player-back-link">
-                    &larr; MOVEMENT SPACE'E DÖN
+                    &larr; HAREKET ALANIMA DÖN
                 </a>
                 <h1 class="player-workout-title">
                     <span class="workout-order-prefix"><?= $currentLesson['workout_number'] ?> &mdash;</span> 

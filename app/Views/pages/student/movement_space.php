@@ -26,7 +26,7 @@ declare(strict_types=1);
 ?>
 
 <!-- ==============================================================================
-     FİZYOBAR MOVEMENT SPACE (KİŞİSEL HAREKET ALANI & İNTERAKTİF TAKVİM)
+     FİZYOBAR KİŞİSEL HAREKET ALANI (İNTERAKTİF TAKVİM & ANTRENMAN PLATFORMU)
      ============================================================================== -->
 <div class="movement-space-wrapper">
     <!-- 1. Üst Navigasyon & Hoş Geldin Şeridi -->
@@ -42,7 +42,7 @@ declare(strict_types=1);
 
             <!-- Tab Butonları -->
             <nav class="movement-tabs-nav" id="movementTabsNav">
-                <button type="button" class="movement-tab-btn active" data-tab="tab-overview">Movement Space</button>
+                <button type="button" class="movement-tab-btn active" data-tab="tab-overview">Hareket Alanım</button>
                 <button type="button" class="movement-tab-btn" data-tab="tab-calendar">Program Takvimim</button>
                 <button type="button" class="movement-tab-btn" data-tab="tab-workouts">Antrenmanlarım</button>
                 <button type="button" class="movement-tab-btn" data-tab="tab-nutrition">Beslenme Köşesi</button>
@@ -66,68 +66,68 @@ declare(strict_types=1);
         <?php endif; ?>
 
         <!-- ======================================================================
-             TAB 1: MOVEMENT SPACE (ANA SAYFA - REFERANS GÖRSEL BİREBİR)
+             SEKME 1: HAREKET ALANIM (ANA SAYFA - REFERANS GÖRSEL 1:1 TÜRKÇE)
              ====================================================================== -->
         <div class="movement-tab-content active" id="tab-overview">
             
-            <!-- A. MY MOVEMENT JOURNEY (REFERANS GÖRSEL 1:1) -->
+            <!-- A. HAREKET YOLCULUĞUM (REFERANS GÖRSEL) -->
             <section class="movement-journey-hero">
                 <div class="journey-header-flex">
                     <div>
-                        <span class="journey-kicker">HAREKET YOLCULUĞUM</span>
-                        <h1 class="journey-main-title">MY MOVEMENT JOURNEY</h1>
-                        <p class="journey-meta-specs">28 Days &bull; 12 Workouts &bull; 40 Min</p>
+                        <span class="journey-kicker">KİŞİSEL GELİŞİM PANELİ</span>
+                        <h1 class="journey-main-title">HAREKET YOLCULUĞUM</h1>
+                        <p class="journey-meta-specs">28 Gün &bull; 12 Antrenman &bull; 40 Dakika</p>
                     </div>
 
                     <!-- Kilit / Önizleme Modu Butonu -->
                     <div class="journey-actions-right">
                         <form action="<?= url('/api/movement/toggle-mode') ?>" method="POST" style="margin: 0;">
                             <?= csrf_field() ?>
-                            <button type="submit" class="btn-lock-toggle <?= $unlockAll ? 'unlocked-active' : '' ?>" title="Geliştirici / Önizleme Modu">
+                            <button type="submit" class="btn-lock-toggle <?= $unlockAll ? 'unlocked-active' : '' ?>" title="Eğitmen & Önizleme Modu">
                                 <?= $unlockAll ? '🔓 Tüm Kilitler Açık (Önizleme)' : '🔒 Günlük Kilit Modu (Aktif)' ?>
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <!-- İlerleme Çubuğu (Görsel Segment Bar) -->
+                <!-- İlerleme Çubuğu (12 Bloklu Görsel Segment Bar) -->
                 <div class="journey-progress-block">
                     <div class="progress-label-row">
-                        <span class="progress-title-text">Your Progress:</span>
+                        <span class="progress-title-text">İlerleme Durumunuz:</span>
                         <!-- 12 Bloklu Görsel Parçalı İlerleme Çubuğu -->
                         <div class="progress-blocks-track" id="progressBlocksTrack">
                             <?php foreach ($progressBlocks as $bIdx => $isDone): ?>
                                 <span class="progress-segment <?= $isDone ? 'filled' : 'empty' ?>" title="<?= ($bIdx + 1) ?>. Antrenman <?= $isDone ? '(Tamamlandı)' : '' ?>"></span>
                             <?php endforeach; ?>
                         </div>
-                        <span class="progress-percent-number" id="progressPercentNumber"><?= $progressPercent ?>%</span>
+                        <span class="progress-percent-number" id="progressPercentNumber">%<?= $progressPercent ?></span>
                     </div>
 
                     <div class="progress-counter-text" id="progressCounterText">
-                        <?= $completedCount ?>/<?= $totalWorkouts ?> Workouts Completed (<?= $completedCount ?>/<?= $totalWorkouts ?> Antrenman Tamamlandı)
+                        <?= $completedCount ?>/<?= $totalWorkouts ?> Antrenman Tamamlandı
                     </div>
                 </div>
             </section>
 
-            <!-- B. MY MOVEMENT CALENDAR (28 GÜNLÜK TAKVİM - REFERANS GÖRSEL 1:1) -->
+            <!-- B. HAREKET TAKVİMİM (28 GÜNLÜK İNTERAKTİF TAKVİM) -->
             <section class="movement-calendar-section">
                 <div class="calendar-title-wrap">
-                    <span class="calendar-kicker">HAREKET TAKVİMİM</span>
-                    <h2 class="calendar-main-title">MY MOVEMENT CALENDAR</h2>
+                    <span class="calendar-kicker">AYLIK PLAN</span>
+                    <h2 class="calendar-main-title">HAREKET TAKVİMİM</h2>
                     <h3 class="calendar-month-heading"><?= e($monthTitle) ?></h3>
                 </div>
 
-                <!-- Takvim Tablosu (Mon - Sun) -->
+                <!-- Takvim Tablosu (Pzt - Paz) -->
                 <div class="movement-calendar-card">
-                    <!-- Gün Başlıkları -->
+                    <!-- Gün Başlıkları (Sadece Türkçe) -->
                     <div class="calendar-weekdays-row">
-                        <div><span>MON</span><small>PZT</small></div>
-                        <div><span>TUE</span><small>SAL</small></div>
-                        <div><span>WED</span><small>ÇAR</small></div>
-                        <div><span>THU</span><small>PER</small></div>
-                        <div><span>FRI</span><small>CUM</small></div>
-                        <div><span>SAT</span><small>CTS</small></div>
-                        <div><span>SUN</span><small>PAZ</small></div>
+                        <div><span>PZT</span></div>
+                        <div><span>SAL</span></div>
+                        <div><span>ÇAR</span></div>
+                        <div><span>PER</span></div>
+                        <div><span>CUM</span></div>
+                        <div><span>CTS</span></div>
+                        <div><span>PAZ</span></div>
                     </div>
 
                     <!-- 4 Hafta Grid -->
@@ -148,9 +148,9 @@ declare(strict_types=1);
                                             <?php if ($isComp): ?>
                                                 <span class="cell-status-icon icon-check" title="Antrenman Tamamlandı">✓</span>
                                             <?php elseif ($isLocked): ?>
-                                                <span class="cell-status-icon icon-lock" title="<?= $w['unlock_date'] ?> tarihinde açılacak">🔒</span>
+                                                <span class="cell-status-icon icon-lock" title="<?= $w['unlock_date'] ?> tarihinde açılacaktır">🔒</span>
                                             <?php else: ?>
-                                                <span class="cell-status-icon icon-ready" title="Antrenmana Başla">▶</span>
+                                                <span class="cell-status-icon icon-ready" title="Antrenmanı Başlat">▶</span>
                                             <?php endif; ?>
                                         <?php endif; ?>
                                     </div>
@@ -158,17 +158,17 @@ declare(strict_types=1);
                                     <?php if ($hasW): ?>
                                         <div class="cell-workout-info">
                                             <span class="cell-workout-name"><?= e(explode(':', $w['title'])[0]) ?></span>
-                                            <span class="cell-workout-dur">40m</span>
+                                            <span class="cell-workout-dur">40 Dk</span>
                                         </div>
 
                                         <?php if (!$isLocked): ?>
                                             <a href="<?= url('/course/' . $course['slug'] . '/lesson/' . $w['id']) ?>" class="cell-click-overlay" title="<?= e($w['title']) ?>"></a>
                                         <?php else: ?>
-                                            <button type="button" class="cell-click-overlay cell-locked-btn" onclick="alert('🔒 Bu antrenman programınızın <?= $w['day_number'] ?>. gününde (<?= $w['unlock_date'] ?>) açılacaktır.')"></button>
+                                            <button type="button" class="cell-click-overlay cell-locked-btn" onclick="alert('🔒 Bu antrenman programınızın <?= $w['day_number'] ?>. gününde (<?= $w['unlock_date'] ?>) erişime açılacaktır.')"></button>
                                         <?php endif; ?>
                                     <?php else: ?>
                                         <div class="cell-rest-info">
-                                            <span class="cell-rest-label">Rest / Recovery</span>
+                                            <span class="cell-rest-label">Dinlenme / Toparlanma</span>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -178,11 +178,11 @@ declare(strict_types=1);
                 </div>
             </section>
 
-            <!-- C. THIS WEEK'S MOVEMENT (BU HAFTANIN ANTRENMANLARI - REFERANS GÖRSEL 1:1) -->
+            <!-- C. BU HAFTANIN ANTRENMANLARI -->
             <section class="this-weeks-movement-section">
                 <div class="section-heading-clean">
-                    <span class="section-kicker">GÜNCEL PROGRAM</span>
-                    <h2 class="section-title-clean">THIS WEEK'S MOVEMENT (<?= $currentWeekNumber ?>. HAFTA)</h2>
+                    <span class="section-kicker">GÜNCEL AKIŞ</span>
+                    <h2 class="section-title-clean">BU HAFTANIN ANTRENMANLARI (<?= $currentWeekNumber ?>. HAFTA)</h2>
                 </div>
 
                 <div class="this-week-grid">
@@ -195,7 +195,7 @@ declare(strict_types=1);
                             <div class="workout-card-badge-row">
                                 <span class="workout-order-badge">GÜN <?= $wItem['day_number'] ?></span>
                                 <?php if ($isComp): ?>
-                                    <span class="workout-status-badge badge-green">✓ Completed</span>
+                                    <span class="workout-status-badge badge-green">✓ Tamamlandı</span>
                                 <?php elseif ($isLocked): ?>
                                     <span class="workout-status-badge badge-locked">🔒 <?= $wItem['days_left'] ?> Gün Sonra</span>
                                 <?php else: ?>
@@ -208,7 +208,7 @@ declare(strict_types=1);
                             </h3>
 
                             <p class="workout-feature-focus">
-                                <?= e($wItem['focus_area'] ?? 'Biyomekanik & Kuvvet') ?> &bull; <?= (int)$wItem['duration_minutes'] ?> MIN
+                                <?= e($wItem['focus_area'] ?? 'Biyomekanik & Kuvvet') ?> &bull; <?= (int)$wItem['duration_minutes'] ?> DAKİKA
                             </p>
 
                             <p class="workout-feature-desc">
@@ -218,7 +218,7 @@ declare(strict_types=1);
                             <div class="workout-card-footer">
                                 <?php if ($isLocked): ?>
                                     <button type="button" class="btn-workout-action disabled" disabled>
-                                        🔒 <?= $wItem['unlock_date'] ?> Tarihinde Açılacak
+                                        🔒 <?= $wItem['unlock_date'] ?> Tarihinde Açılacaktır
                                     </button>
                                 <?php else: ?>
                                     <a href="<?= url('/course/' . $course['slug'] . '/lesson/' . $wItem['id']) ?>" class="btn-workout-action <?= $isComp ? 'action-replay' : 'action-start' ?>">
@@ -233,13 +233,13 @@ declare(strict_types=1);
         </div>
 
         <!-- ======================================================================
-             TAB 2: PROGRAM TAKVİMİM (TAM 28 GÜNLÜK DETAYLI MİMARİ)
+             SEKME 2: PROGRAM TAKVİMİM (28 GÜNLÜK DETAYLI LİSTE)
              ====================================================================== -->
         <div class="movement-tab-content" id="tab-calendar">
             <div class="tab-header-box">
                 <span class="tab-kicker">4 HAFTALIK DÖNGÜ</span>
                 <h2 class="tab-title">28 Günlük İnteraktif Antrenman Takvimi</h2>
-                <p class="tab-subtitle">Haftanın 3 günü (Pazartesi, Çarşamba, Cuma) 40 dakikalık bilimsel antrenmanlar yer alır. Diğer günler sinir sistemi toparlanması ve dinlenmeye ayrılmıştır.</p>
+                <p class="tab-subtitle">Haftanın 3 günü (Pazartesi, Çarşamba, Cuma) 40 dakikalık bilimsel seanslar yer alır. Diğer günler sinir sistemi toparlanması, vagus nefesi ve dinlenmeye ayrılmıştır.</p>
             </div>
 
             <div class="weeks-breakdown-list">
@@ -286,7 +286,7 @@ declare(strict_types=1);
                                     <?php else: ?>
                                         <div class="micro-rest-content">
                                             <span class="micro-rest-icon">🌿</span>
-                                            <span class="micro-rest-text">Aktif Toparlanma &amp; Dinlenme</span>
+                                            <span class="micro-rest-text">Dinlenme &amp; Toparlanma</span>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -298,7 +298,7 @@ declare(strict_types=1);
         </div>
 
         <!-- ======================================================================
-             TAB 3: ANTRENMANLARIM (TÜM 12 DERS LİSTESİ)
+             SEKME 3: ANTRENMANLARIM (TÜM 12 DERS LİSTESİ)
              ====================================================================== -->
         <div class="movement-tab-content" id="tab-workouts">
             <div class="tab-header-box">
@@ -345,11 +345,11 @@ declare(strict_types=1);
         </div>
 
         <!-- ======================================================================
-             TAB 4: BESLENME KÖŞESİ & EKSTRA MİKRO RUTİNLER
+             SEKME 4: BESLENME KÖŞESİ & EKSTRA MİKRO RUTİNLER
              ====================================================================== -->
         <div class="movement-tab-content" id="tab-nutrition">
             <div class="tab-header-box">
-                <span class="tab-kicker">BESLENME &amp; LONGEVITY</span>
+                <span class="tab-kicker">FONKSİYONEL BESLENME &amp; LONGEVITY</span>
                 <h2 class="tab-title">Beslenme Köşesi &amp; Ekstra Mikro Rutinler</h2>
                 <p class="tab-subtitle">Antrenman etkisini katlayan fonksiyonel, anti-enflamatuar tarifler ve gün içi mikro mobilite egzersizleri.</p>
             </div>
@@ -427,7 +427,7 @@ declare(strict_types=1);
         </div>
 
         <!-- ======================================================================
-             TAB 5: İLERLEMEM & ROZETLERİM
+             SEKME 5: İLERLEMEM & ROZETLERİM
              ====================================================================== -->
         <div class="movement-tab-content" id="tab-progress">
             <div class="tab-header-box">
@@ -458,7 +458,7 @@ declare(strict_types=1);
 
             <!-- Rozetler Bölümü -->
             <div class="badges-showcase-section">
-                <h3 class="badges-title">Kazanılan Gamification Rozetleri</h3>
+                <h3 class="badges-title">Kazanılan Başarı Rozetleri</h3>
                 <div class="badges-grid-list">
                     <div class="badge-item-card <?= ($completedCount >= 1) ? 'badge-earned' : 'badge-locked' ?>">
                         <div class="badge-icon-box">🌱</div>
@@ -485,7 +485,7 @@ declare(strict_types=1);
         </div>
 
         <!-- ======================================================================
-             TAB 6: PROFİLİM & HESAP AYARLARI
+             SEKME 6: PROFİLİM & HESAP AYARLARI
              ====================================================================== -->
         <div class="movement-tab-content" id="tab-profile">
             <div class="tab-header-box">
@@ -561,7 +561,7 @@ declare(strict_types=1);
 </div>
 
 <!-- ==============================================================================
-     MOVEMENT SPACE TAB GEÇİŞLERİ VE İNTERAKTİF SCRİPT
+     TAB GEÇİŞLERİ VE İNTERAKTİF SCRİPT
      ============================================================================== -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -597,7 +597,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Hash kontrolü (Örn: #calendar, #workouts, #nutrition, #profile)
     const currentHash = window.location.hash.replace('#', '');
     if (currentHash) {
         const matchingBtn = document.querySelector(`[data-tab="tab-${currentHash}"]`);
@@ -607,4 +606,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-

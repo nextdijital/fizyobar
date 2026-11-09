@@ -180,17 +180,17 @@ class StudentController extends Controller
             [$userId]
         );
 
-        // Ay başlığı (Örn: KASIM 2026 / NOVEMBER 2026)
-        $monthTitle = mb_strtoupper(date('F Y', $startTime), 'UTF-8');
+        // Ay başlığı (Örn: KASIM 2026)
+        $monthEn = mb_strtoupper(date('F', $startTime), 'UTF-8');
         $trMonths = [
             'JANUARY' => 'OCAK', 'FEBRUARY' => 'ŞUBAT', 'MARCH' => 'MART', 'APRIL' => 'NİSAN',
             'MAY' => 'MAYIS', 'JUNE' => 'HAZİRAN', 'JULY' => 'TEMMUZ', 'AUGUST' => 'AĞUSTOS',
             'SEPTEMBER' => 'EYLÜL', 'OCTOBER' => 'EKİM', 'NOVEMBER' => 'KASIM', 'DECEMBER' => 'ARALIK'
         ];
-        $monthTitleTr = $trMonths[$monthTitle] ?? $monthTitle;
+        $monthTitleTr = ($trMonths[$monthEn] ?? $monthEn) . ' ' . date('Y', $startTime);
 
         $this->render('pages/student/movement_space', [
-            'metaTitle' => 'Movement Space | FİZYOBAR Kişisel Hareket Alanı',
+            'metaTitle' => 'Kişisel Hareket Alanı | FİZYOBAR',
             'user' => $user,
             'course' => $course,
             'enrollment' => $enrollment,
@@ -205,7 +205,7 @@ class StudentController extends Controller
             'thisWeekWorkouts' => $thisWeekWorkouts,
             'calendarWeeks' => $calendarWeeks,
             'unlockAll' => $unlockAll,
-            'monthTitle' => $monthTitleTr . ' / ' . $monthTitle,
+            'monthTitle' => $monthTitleTr,
             'recipes' => $recipes,
             'tips' => $tips,
             'routines' => $routines,
