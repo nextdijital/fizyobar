@@ -73,8 +73,8 @@ class CheckoutController extends Controller
         }
 
         Database::execute(
-            "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, sender_name, receipt_ref, created_at) 
-             VALUES (?, ?, 'iban', 'pending', ?, ?, ?, NOW())",
+            "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, sender_name, receipt_ref, approved_at, start_date, expires_at, created_at) 
+             VALUES (?, ?, 'iban', 'approved', ?, ?, ?, NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 90 DAY), NOW())",
             [$userId, $course['id'], $course['price'], $senderName, $receiptRef]
         );
 
