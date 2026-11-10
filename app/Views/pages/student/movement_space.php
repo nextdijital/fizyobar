@@ -489,69 +489,126 @@ declare(strict_types=1);
              ====================================================================== -->
         <div class="movement-tab-content" id="tab-profile">
             <div class="tab-header-box">
-                <span class="tab-kicker">HESAP GÜVENLİĞİ</span>
+                <span class="tab-kicker">HESAP GÜVENLİĞİ &amp; ÜYELİK</span>
                 <h2 class="tab-title">Profil &amp; Hesap Ayarlarım</h2>
-                <p class="tab-subtitle">Kişisel bilgilerinizi düzenleyin ve şifrenizi güncelleyin.</p>
+                <p class="tab-subtitle">Kayıtlı programlarınızı görüntüleyin, kişisel bilgilerinizi ve şifrenizi güncelleyin.</p>
+            </div>
+
+            <!-- Aktif Programlarım & Abonelik Durumu Kartı -->
+            <div class="profile-subscriptions-block" style="background: #ffffff; border: 1px solid #e5e5e5; border-radius: 12px; padding: clamp(1.25rem, 2.5vw, 1.75rem); margin-bottom: 2rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.75rem; border-bottom: 1px solid #f0f0f0; padding-bottom: 0.85rem;">
+                    <div>
+                        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; color: #111111;">Kayıtlı Programlarım &amp; Paketlerim</h3>
+                        <p style="font-size: 0.84rem; color: #666666; margin: 0.25rem 0 0 0;">Satın aldığınız veya tanımlanan aktif antrenman paketleriniz.</p>
+                    </div>
+                    <span style="display: inline-flex; align-items: center; gap: 0.35rem; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: 999px; padding: 0.35rem 0.85rem; font-size: 0.78rem; font-weight: 600;">
+                        <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
+                        Üyelik Durumu: Aktif
+                    </span>
+                </div>
+
+                <?php if (!empty($userEnrollments)): ?>
+                    <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                        <?php foreach ($userEnrollments as $uEnr): ?>
+                            <?php 
+                                $isThisActive = ((int)$uEnr['course_id'] === (int)$course['id']);
+                                $isApproved = ($uEnr['payment_status'] === 'approved');
+                            ?>
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-radius: 8px; border: 1px solid <?= $isThisActive ? '#111111' : '#e5e5e5' ?>; background: <?= $isThisActive ? '#fafafa' : '#ffffff' ?>; flex-wrap: wrap; gap: 1rem;">
+                                <div>
+                                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                        <h4 style="font-size: 0.98rem; font-weight: 700; color: #111111; margin: 0;"><?= e($uEnr['course_title']) ?></h4>
+                                        <?php if ($isThisActive): ?>
+                                            <span style="background: #111111; color: #ffffff; font-size: 0.68rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px; letter-spacing: 0.05em;">SEÇİLİ ALAN</span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: #71717a; margin-top: 0.35rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                                        <span><strong>Kayıt:</strong> <?= date('d.m.Y', strtotime($uEnr['created_at'])) ?></span>
+                                        <?php if (!empty($uEnr['expires_at'])): ?>
+                                            <span><strong>Geçerlilik:</strong> <?= date('d.m.Y', strtotime($uEnr['expires_at'])) ?></span>
+                                        <?php endif; ?>
+                                        <span><strong>Erişim:</strong> <?= $isApproved ? '<span style="color: #059669; font-weight: 600;">Tüm Videolar Açık</span>' : '<span style="color: #d97706;">Onay Bekleniyor</span>' ?></span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <?php if ($isThisActive): ?>
+                                        <button type="button" class="btn-clean-plan" onclick="document.querySelector('[data-tab=\'tab-overview\']').click()" style="padding: 0.45rem 1.1rem; font-size: 0.82rem; background: #000000; color: #ffffff; border-radius: 999px; text-decoration: none; display: inline-block;">
+                                            Antrenmanlara Devam Et &rarr;
+                                        </button>
+                                    <?php else: ?>
+                                        <a href="<?= url('/movement-space?course=' . $uEnr['course_id']) ?>" style="padding: 0.45rem 1.1rem; font-size: 0.82rem; background: #ffffff; color: #111111; border: 1px solid #111111; border-radius: 999px; text-decoration: none; display: inline-block; font-weight: 600;">
+                                            Bu Programa Geç &rarr;
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <p style="color: #71717a; font-size: 0.88rem; margin: 0;">Henüz kayıtlı bir programınız bulunmamaktadır. <a href="<?= url('/programs') ?>" style="color: #111111; font-weight: 600;">Programlar sayfamızdan</a> dilediğiniz eğitime katılabilirsiniz.</p>
+                <?php endif; ?>
             </div>
 
             <div class="profile-settings-grid">
                 <!-- Sol Form: Profil Bilgileri -->
-                <div class="profile-card-form">
+                <div class="profile-card-form" style="border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h3 class="profile-card-title">Kişisel Bilgiler</h3>
                     <form action="<?= url('/api/profile/update') ?>" method="POST" class="auth-form">
                         <?= csrf_field() ?>
 
                         <div class="auth-form-group">
                             <label class="auth-form-label" for="full_name">ADINIZ SOYADINIZ</label>
-                            <input type="text" id="full_name" name="full_name" class="auth-form-input" value="<?= e($user['full_name']) ?>" required>
+                            <input type="text" id="full_name" name="full_name" class="auth-form-input" value="<?= e($user['full_name']) ?>" required style="border-radius: 999px; padding: 11px 18px;">
                         </div>
 
                         <div class="auth-form-group">
                             <label class="auth-form-label" for="prof_email">E-POSTA ADRESİ (DEĞİŞTİRİLEMEZ)</label>
-                            <input type="email" id="prof_email" class="auth-form-input" value="<?= e($user['email']) ?>" disabled style="opacity: 0.6;">
+                            <input type="email" id="prof_email" class="auth-form-input" value="<?= e($user['email']) ?>" disabled style="opacity: 0.65; border-radius: 999px; padding: 11px 18px; background: #f4f4f6;">
                         </div>
 
                         <div class="auth-form-group">
                             <label class="auth-form-label" for="phone">TELEFON / WHATSAPP</label>
-                            <input type="tel" id="phone" name="phone" class="auth-form-input" value="<?= e($user['phone'] ?? '') ?>">
+                            <input type="tel" id="phone" name="phone" class="auth-form-input" value="<?= e($user['phone'] ?? '') ?>" placeholder="05XX XXX XX XX" style="border-radius: 999px; padding: 11px 18px;">
                         </div>
 
-                        <button type="submit" class="btn-pill-solid" style="background: #391214; color: #ffffff; margin-top: 1rem;">
+                        <button type="submit" class="btn-pill-solid" style="background: #111111; color: #ffffff; margin-top: 1.25rem; width: 100%; border-radius: 999px; padding: 12px; font-weight: 600;">
                             BİLGİLERİ GÜNCELLE &rarr;
                         </button>
                     </form>
                 </div>
 
                 <!-- Sağ Form: Şifre Değiştirme -->
-                <div class="profile-card-form">
+                <div class="profile-card-form" style="border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
                     <h3 class="profile-card-title">Şifre Değiştir</h3>
                     <form action="<?= url('/api/profile/password') ?>" method="POST" class="auth-form">
                         <?= csrf_field() ?>
 
                         <div class="auth-form-group">
                             <label class="auth-form-label" for="current_password">MEVCUT ŞİFRENİZ</label>
-                            <input type="password" id="current_password" name="current_password" class="auth-form-input" required autocomplete="current-password">
+                            <input type="password" id="current_password" name="current_password" class="auth-form-input" required autocomplete="current-password" placeholder="Mevcut şifreniz" style="border-radius: 999px; padding: 11px 18px;">
                         </div>
 
                         <div class="auth-form-group">
                             <label class="auth-form-label" for="new_password">YENİ ŞİFRE (EN AZ 6 KARAKTER)</label>
-                            <input type="password" id="new_password" name="new_password" class="auth-form-input" required autocomplete="new-password">
+                            <input type="password" id="new_password" name="new_password" class="auth-form-input" required autocomplete="new-password" placeholder="Yeni şifreniz" style="border-radius: 999px; padding: 11px 18px;">
                         </div>
 
                         <div class="auth-form-group">
                             <label class="auth-form-label" for="new_password_confirm">YENİ ŞİFRE TEKRARI</label>
-                            <input type="password" id="new_password_confirm" name="new_password_confirm" class="auth-form-input" required autocomplete="new-password">
+                            <input type="password" id="new_password_confirm" name="new_password_confirm" class="auth-form-input" required autocomplete="new-password" placeholder="Yeni şifrenizi tekrar girin" style="border-radius: 999px; padding: 11px 18px;">
                         </div>
 
-                        <button type="submit" class="btn-pill-solid" style="background: #391214; color: #ffffff; margin-top: 1rem;">
+                        <button type="submit" class="btn-pill-solid" style="background: #111111; color: #ffffff; margin-top: 1.25rem; width: 100%; border-radius: 999px; padding: 12px; font-weight: 600;">
                             ŞİFREYİ GÜNCELLE &rarr;
                         </button>
                     </form>
                 </div>
             </div>
 
-            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e4e4e7; text-align: right;">
-                <a href="<?= url('/logout') ?>" class="btn-workout-action" style="display: inline-block; width: auto; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca;">
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e4e4e7; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <span style="font-size: 0.82rem; color: #71717a;">Giriş Yapılan Hesap: <strong><?= e($user['email']) ?></strong></span>
+                <a href="<?= url('/logout') ?>" class="btn-workout-action" style="display: inline-block; width: auto; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; border-radius: 999px; padding: 0.5rem 1.25rem; font-weight: 600; text-decoration: none;">
                     Güvenli Çıkış Yap &rarr;
                 </a>
             </div>

@@ -30,20 +30,51 @@ class StudentController extends Controller
         $userId = Auth::id();
         $user = Auth::user();
 
-        // 1. Ana 4 Haftalık Online Kamp Programını Al (Course ID: 1)
-        $course = Database::fetch("SELECT * FROM courses WHERE id = 1");
-        if (!$course) {
-            $course = Database::fetch("SELECT * FROM courses ORDER BY id ASC LIMIT 1");
+        // 1. Kurs Seçimi: URL parametresi (?course=X), yoksa kullanıcının en son kayıtlı olduğu kurs, yoksa Course ID 1
+        $course = null;
+        $selectedCourseId = (int)($_GET['course'] ?? 0);
+        if ($selectedCourseId > 0) {
+            $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [$selectedCourseId]);
+        }
+
+        if (empty($course)) {
+            $latestEnrollment = Database::fetch(
+                "SELECT e.course_id 
+                 FROM enrollments e
+                 WHERE e.user_id = ? AND e.payment_status = 'approved'
+                 ORDER BY e.id DESC LIMIT 1",
+                [$userId]
+            );
+            if ($latestEnrollment) {
+                $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [(int)$latestEnrollment['course_id']]);
+            }
+        }
+
+        if (empty($course)) {
+            $course = Database::fetch("SELECT * FROM courses WHERE id = 1");
+            if (!$course) {
+                $course = Database::fetch("SELECT * FROM courses ORDER BY id ASC LIMIT 1");
+            }
         }
         $courseId = (int)($course['id'] ?? 1);
 
-        // 2. Kullanıcının Enrollment Kontrolü
+        // 2. Kullanıcının Tüm Kayıtları (Profil ve Kurs Değiştirme için)
+        $userEnrollments = Database::query(
+            "SELECT e.*, c.title AS course_title, c.slug AS course_slug, c.duration_weeks
+             FROM enrollments e
+             INNER JOIN courses c ON e.course_id = c.id
+             WHERE e.user_id = ?
+             ORDER BY e.id DESC",
+            [$userId]
+        );
+
+        // Aktif Kursun Kayıt Durumu
         $enrollment = Database::fetch(
             "SELECT * FROM enrollments WHERE user_id = ? AND course_id = ? ORDER BY id DESC LIMIT 1",
             [$userId, $courseId]
         );
 
-        // Eğer kayıtlı değilse veya pending ise, kullanıcıyı doğrudan Movement Space'e dahil et
+        // Eğer henüz kaydı yoksa ve sistemde kayıtlı ilk kullanıcılarsa otomatik erişim aç
         if (!$enrollment) {
             Database::execute(
                 "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, approved_at, start_date, expires_at, created_at) 
@@ -54,6 +85,14 @@ class StudentController extends Controller
                 "SELECT * FROM enrollments WHERE user_id = ? AND course_id = ? ORDER BY id DESC LIMIT 1",
                 [$userId, $courseId]
             );
+            $userEnrollments = Database::query(
+                "SELECT e.*, c.title AS course_title, c.slug AS course_slug, c.duration_weeks
+                 FROM enrollments e
+                 INNER JOIN courses c ON e.course_id = c.id
+                 WHERE e.user_id = ?
+                 ORDER BY e.id DESC",
+                [$userId]
+            );
         }
 
         // Program Başlangıç Tarihi ve Kaçıncı Gün Olduğu
@@ -63,8 +102,11 @@ class StudentController extends Controller
         $diffDays = (int)floor(($nowTime - $startTime) / 86400);
         $currentProgramDay = max(1, min(28, $diffDays + 1));
 
-        // Eğitmen / Önizleme Modu (Tüm videoları aç)
-        $unlockAll = (bool)($_SESSION['movement_unlock_all'] ?? false) || Auth::isAdmin();
+        // SATIN ALMA / ONAYLI ERİŞİM KONTROLÜ:
+        // Kullanıcı plan seçip satın alma gerçekleştirdiğinde (payment_status == 'approved'),
+        // veya admin ise, veya önizleme modu aktifse TÜM VİDEOLARA ERİŞİM ANINDA AÇILIR.
+        $isEnrolledAndApproved = ($enrollment && $enrollment['payment_status'] === 'approved');
+        $unlockAll = $isEnrolledAndApproved || (bool)($_SESSION['movement_unlock_all'] ?? false) || Auth::isAdmin();
 
         // 3. 12 Antrenmanı Getir
         $lessons = Database::query(
@@ -206,6 +248,7 @@ class StudentController extends Controller
             'calendarWeeks' => $calendarWeeks,
             'unlockAll' => $unlockAll,
             'monthTitle' => $monthTitleTr,
+            'userEnrollments' => $userEnrollments,
             'recipes' => $recipes,
             'tips' => $tips,
             'routines' => $routines,
@@ -252,7 +295,10 @@ class StudentController extends Controller
         $startTime = strtotime($startDateStr);
         $diffDays = (int)floor((time() - $startTime) / 86400);
         $currentProgramDay = max(1, min(28, $diffDays + 1));
-        $unlockAll = (bool)($_SESSION['movement_unlock_all'] ?? false) || Auth::isAdmin();
+        
+        // Satın alan / onaylı kullanıcının tüm videoları anında açıktır
+        $isEnrolledAndApproved = ($enrollment && $enrollment['payment_status'] === 'approved');
+        $unlockAll = $isEnrolledAndApproved || (bool)($_SESSION['movement_unlock_all'] ?? false) || Auth::isAdmin();
 
         // Tüm Dersler
         $lessons = Database::query(
@@ -302,9 +348,9 @@ class StudentController extends Controller
             $nextLesson = $lessons[$matchedIdx + 1];
         }
 
-        // Kilit kontrolü
+        // Kilit kontrolü: Satın alan / onaylı öğrenciler kilitlenmez
         if (!empty($currentLesson['is_locked'])) {
-            Session::setFlash('profile_error', 'Bu antrenman henüz kilitlidir. Programınızın ' . $currentLesson['day_number'] . '. gününde açılacaktır.');
+            Session::setFlash('profile_error', 'Bu antrenmana erişebilmek için lütfen programa kayıt olunuz.');
             $this->redirect(url('/movement-space'));
         }
 

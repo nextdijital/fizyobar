@@ -34,16 +34,39 @@
 $cleanUri = trim($currentUri ?? '', '/');
 $isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
 $isDarkPage = ($isDarkPage ?? false)
-    || str_contains($cleanUri, 'blog')
     || str_contains($cleanUri, 'articles')
     || str_contains($cleanUri, 'makaleler');
+$isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($cleanUri, 'find-program');
 ?>
-<body>
+<body class="<?= $isFinderPage ? 'body-finder-pure-white' : '' ?>">
+<?php if ($isFinderPage): ?>
+    <!-- PROGRAMINI BUL: SADECE BEYAZ SAYFA, SOLDA GERİ DÖN, ORTADA FİZYOBAR LOGOSU -->
+    <header class="finder-clean-header" id="finderHeader">
+        <div class="finder-clean-header-inner">
+            <a href="<?= url('/') ?>" class="finder-header-back-btn" aria-label="Geri Dön">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>GERİ DÖN</span>
+            </a>
+
+            <div class="finder-header-logo-wrap">
+                <a href="<?= url('/') ?>" class="brand-logo-link brand-logo-type" aria-label="FİZYOBAR Ana Sayfa">
+                    <span class="logo-text-main">FİZYOBAR</span>
+                    <span class="logo-text-sub">BODY • ADAPT • REFRAME</span>
+                </a>
+            </div>
+
+            <div class="finder-header-right-ghost" aria-hidden="true"></div>
+        </div>
+    </header>
+<?php else: ?>
     <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #391214 - Kenarlara Yaslı) -->
     <div class="top-announcement-bar">
         <div class="announcement-inner">
             <span>WELLNESS EXPERIENCES BY BETINA TANSUĞ • 4 HAFTALIK ONLINE DETOX & YOGA KAMPI YENİ DÖNEMİ BAŞLIYOR</span>
-            <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="announcement-link">
+            <a href="<?= url('/detox') ?>" class="announcement-link">
                 HEMEN KATIL &rarr;
             </a>
         </div>
@@ -52,46 +75,47 @@ $isDarkPage = ($isDarkPage ?? false)
     <!-- Gezinme Çubuğu (Editorial Mimarisi: Sol Menü • Orta Logo • Sağ Aksiyon) -->
     <header class="site-header <?= $isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : '') ?>" id="siteHeader">
         <div class="header-container">
-            <!-- 1. Sol Menü (Betella Mimarisi: STUDIO • PROGRAMLAR • ETKİNLİKLER • KURUMSAL) -->
+            <!-- 1. Sol Menü (Betella Mimarisi: STUDIO • BAR KITCHEN • PROGRAMLAR • ETKİNLİKLER • KURUMSAL) -->
             <nav class="header-nav-left" id="navMenu">
                 <ul class="nav-list">
-                    <!-- STUDIO Dropdown (Referans Birebir) -->
+                    <!-- STUDIO Dropdown: Tıklanınca Ana Sayfaya Gider -->
                     <li class="nav-item-dropdown">
-                        <a href="<?= url('/studio') ?>" class="nav-link <?= (str_contains($currentUri, '/studio') || str_contains($currentUri, '/recipes') || str_contains($currentUri, '/guides') || str_contains($currentUri, '/plans') || str_contains($currentUri, '/articles') || str_contains($currentUri, '/makaleler') || str_contains($currentUri, '/blog')) ? 'active' : '' ?>">
+                        <a href="<?= url('/') ?>" class="nav-link <?= ($isHomePage || str_contains($currentUri, '/makaleler') || str_contains($currentUri, '/articles') || str_contains($currentUri, '/blog')) ? 'active' : '' ?>">
                             STUDIO <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="<?= url('/studio') ?>" class="dropdown-link">Studio Ana Sayfa <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/plans') ?>" class="dropdown-link">Beslenme Planları <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/guides') ?>" class="dropdown-link">Rehberler <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/recipes') ?>" class="dropdown-link">Tarifler <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/') ?>" class="dropdown-link">Studio Ana Sayfa <span class="dropdown-chevron">▸</span></a>
                             <a href="<?= url('/makaleler') ?>" class="dropdown-link">Makaleler <span class="dropdown-chevron">▸</span></a>
                             <a href="<?= url('/blog') ?>" class="dropdown-link">Blog <span class="dropdown-chevron">▸</span></a>
                         </div>
                     </li>
 
+                    <!-- BAR KITCHEN (Doğrudan Link - Alt Kategorisiz) -->
+                    <li>
+                        <a href="<?= url('/recipes') ?>" class="nav-link <?= (str_contains($cleanUri, 'recipes') || str_contains($cleanUri, 'tarifler') || str_contains($cleanUri, 'kitchen') || str_contains($cleanUri, 'bar-kitchen')) ? 'active' : '' ?>">
+                            BAR KITCHEN
+                        </a>
+                    </li>
+
                     <!-- PROGRAMLAR Dropdown -->
                     <li class="nav-item-dropdown">
-                        <a href="<?= url('/programs') ?>" class="nav-link <?= str_contains($currentUri, '/programs') ? 'active' : '' ?>">
+                        <a href="<?= url('/programs') ?>" class="nav-link <?= (str_contains($currentUri, '/programs') || str_contains($currentUri, '/detox')) ? 'active' : '' ?>">
                             PROGRAMLAR <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
                             <a href="<?= url('/programs') ?>" class="dropdown-link">Tüm Programlar <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/programs') ?>" class="dropdown-link">4 Haftalık Online Detox Kampı <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/programs') ?>" class="dropdown-link">Warrior Yoga Serisi <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/events') ?>" class="dropdown-link">Platform &amp; SUP Yoga <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/detox') ?>" class="dropdown-link">4 Haftalık Online Detox Kampı <span class="dropdown-chevron">▸</span></a>
                         </div>
                     </li>
 
                     <!-- ETKİNLİKLER Dropdown -->
                     <li class="nav-item-dropdown">
-                        <a href="<?= url('/events') ?>" class="nav-link <?= (str_contains($currentUri, '/events') || str_contains($currentUri, '/duyurular') || str_contains($currentUri, '/haberler') || str_contains($currentUri, '/announcements') || str_contains($currentUri, '/news')) ? 'active' : '' ?>">
+                        <a href="<?= url('/events') ?>" class="nav-link <?= (str_contains($currentUri, '/events') || str_contains($currentUri, '/duyurular') || str_contains($currentUri, '/announcements')) ? 'active' : '' ?>">
                             ETKİNLİKLER <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
                             <a href="<?= url('/events') ?>" class="dropdown-link">Etkinlikler <span class="dropdown-chevron">▸</span></a>
                             <a href="<?= url('/duyurular') ?>" class="dropdown-link">Duyurular <span class="dropdown-chevron">▸</span></a>
-                            <a href="<?= url('/haberler') ?>" class="dropdown-link">Haberler <span class="dropdown-chevron">▸</span></a>
                         </div>
                     </li>
 
@@ -151,7 +175,7 @@ $isDarkPage = ($isDarkPage ?? false)
                 </div>
 
                 <!-- Betella Tarzı İnce Çerçeveli Aksiyon Butonu -->
-                <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="btn-betella-cta">
+                <a href="<?= url('/detox') ?>" class="btn-betella-cta">
                     <?= __('nav.cta_action') ?>
                 </a>
 
@@ -164,6 +188,7 @@ $isDarkPage = ($isDarkPage ?? false)
             </div>
         </div>
     </header>
+<?php endif; ?>
 
     <!-- Ana İçerik Başlangıcı -->
     <main class="main-content">

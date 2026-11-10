@@ -117,5 +117,13 @@ class Database
         $stmt = $db->prepare($sql);
         return $stmt->execute($params);
     }
+
+    /**
+     * Son eklenen kaydın ID'si
+     */
+    public static function lastInsertId(?string $name = null): string|false
+    {
+        return self::getConnection()?->lastInsertId($name) ?? false;
+    }
 }
 

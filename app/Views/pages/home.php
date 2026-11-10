@@ -25,76 +25,99 @@ declare(strict_types=1);
                 <a href="#featured-program" class="btn-pill-solid">
                     PROGRAMLARI KEŞFET
                 </a>
-                <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="btn-pill-outline">
-                    WHATSAPP DANIŞMA
+                <a href="<?= url('/programini-bul') ?>" class="btn-pill-outline">
+                    PROGRAMINI BUL
                 </a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- 2. Markalar & Topluluklar Ticker (Bannerın Hemen Altında) -->
-<section class="partners-section">
+<!-- Gizli SVG Renk Akışı Tanımı (Bordo - Siyah - Gri Tonlarında Kesintisiz Slow Geçiş) -->
+<svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+        <linearGradient id="physioFlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%">
+                <animate attributeName="stop-color" 
+                         values="#391214;#111111;#6b7280;#1f2937;#4a0e17;#391214" 
+                         dur="14s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="50%">
+                <animate attributeName="stop-color" 
+                         values="#111111;#52525b;#4a0e17;#18181b;#6b7280;#111111" 
+                         dur="14s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%">
+                <animate attributeName="stop-color" 
+                         values="#6b7280;#4a0e17;#111111;#52525b;#18181b;#6b7280" 
+                         dur="14s" repeatCount="indefinite" />
+            </stop>
+        </linearGradient>
+    </defs>
+</svg>
+
+<!-- 2. Minimalist İkon Alanı (Çerçevesiz, Geniş Boşluklu & Kalın İkonlar) -->
+<section class="physio-pillars-section" aria-label="Fizyobar İkonlar">
     <div class="container">
-        <div class="partners-sublabel">BİRLİKTE DENEYİM YARATTIĞIMIZ MARKALAR & TOPLULUKLAR</div>
-        <div class="partners-flex-row">
-            <span class="partner-name">LOURE COMMUNITY</span>
-            <span class="partner-slash">/</span>
-            <span class="partner-name">QGYM</span>
-            <span class="partner-slash">/</span>
-            <span class="partner-name">ADANA KÜREK KULÜBÜ</span>
-            <span class="partner-slash">/</span>
-            <span class="partner-name">BOSNALI HOTEL</span>
-            <span class="partner-slash">/</span>
-            <span class="partner-name">BOBO</span>
-            <span class="partner-slash">/</span>
-            <span class="partner-name">ABABE</span>
+        <div class="physio-icons-grid">
+            <!-- 1. Dambıl (Dumbbell) -->
+            <div class="physio-icon-item" title="Dumbbell">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="16" y1="32" x2="48" y2="32" stroke-width="5.5"/>
+                    <rect x="7" y="17" width="11" height="30" rx="5.5" stroke-width="4.8"/>
+                    <rect x="46" y="17" width="11" height="30" rx="5.5" stroke-width="4.8"/>
+                    <line x1="21" y1="27" x2="21" y2="37" stroke-width="4.8"/>
+                    <line x1="43" y1="27" x2="43" y2="37" stroke-width="4.8"/>
+                </svg>
+            </div>
+
+            <!-- 2. El Yayı (Hand Gripper) -->
+            <div class="physio-icon-item" title="Hand Gripper">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M26 23a6.5 6.5 0 1 1 12 0" stroke-width="4.8"/>
+                    <path d="M27 23L19 49" stroke-width="4.8"/>
+                    <path d="M37 23L45 49" stroke-width="4.8"/>
+                    <line x1="23.5" y1="33" x2="19" y2="48" stroke-width="9" stroke-linecap="round"/>
+                    <line x1="40.5" y1="33" x2="45" y2="48" stroke-width="9" stroke-linecap="round"/>
+                </svg>
+            </div>
+
+            <!-- 3. Egzersiz Bisikleti (Exercise Bike) -->
+            <div class="physio-icon-item" title="Exercise Bike">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 48h34a3 3 0 0 0 3-3c0-11-8.5-19.5-19.5-19.5H20a10 10 0 0 0-10 10v7.5a5 5 0 0 0 4 5z" stroke-width="4.8"/>
+                    <circle cx="28" cy="38" r="4.2" stroke-width="4.5"/>
+                    <path d="M31 41l6 6" stroke-width="4.5"/>
+                    <path d="M21 26L18 16" stroke-width="4.8"/>
+                    <path d="M12 16h13a2 2 0 0 0 0-4h-13a2 2 0 0 0 0 4z" stroke-width="4.8"/>
+                    <path d="M43 28L48 14" stroke-width="4.8"/>
+                    <path d="M44 14h9c2 0 3-1.5 2.5-3" stroke-width="4.8"/>
+                </svg>
+            </div>
+
+            <!-- 4. Kas / Güçlü Kol (Flexed Bicep Arm) -->
+            <div class="physio-icon-item" title="Flexed Arm">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16c-5.5 0-9 4.5-9 11 0 10 8 18.5 19 18.5 7 0 13-4 15.5-9.5 2.5-5.5 1-11-3.5-13.5-4-2.5-8.5-1-11 3-3-5.5-7-8.5-11-8.5z" stroke-width="4.8"/>
+                    <path d="M22 31c3.5 2 8 1.5 11-1.5" stroke-width="4.8"/>
+                </svg>
+            </div>
+
+            <!-- 5. Su Şişesi / Matara (Water Shaker Bottle) -->
+            <div class="physio-icon-item" title="Water Bottle">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M32 7v5" stroke-width="4.8"/>
+                    <rect x="23" y="12" width="18" height="6" rx="3" stroke-width="4.8"/>
+                    <line x1="18" y1="18" x2="46" y2="18" stroke-width="4.8"/>
+                    <path d="M19 18l3 13c.6 2.5 0 5-1.5 7.5L19 50a3 3 0 0 0 3 3h20a3 3 0 0 0 3-3l-1.5-11.5c-1.5-2.5-2.1-5-1.5-7.5l3-13" stroke-width="4.8"/>
+                </svg>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- 3. Bölüm I: YAKLAŞIMIMIZ (ABOUT - 2 Kolonlu Mimari Grid & Kenarlardan Çizgisel Organik Akış) -->
+<!-- 3. Bölüm I: YAKLAŞIMIMIZ (ABOUT - 2 Kolonlu Mimari Grid & Minimalist Saf Beyaz) -->
 <section class="editorial-about-section" id="metod">
-    <!-- Sol Kenar Çizgisel Organik Akış (3 Adımda Başla Tarzı) -->
-    <div class="about-line-art-wrap about-lines-left" aria-hidden="true">
-        <svg class="about-svg-lines" viewBox="0 0 240 360" fill="none" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="aboutGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#C6B39A"/>
-                    <stop offset="55%" stop-color="#8D3A3C"/>
-                    <stop offset="100%" stop-color="#3B1319"/>
-                </linearGradient>
-            </defs>
-            <!-- Silik Kılavuz Çizgisi -->
-            <path class="about-track-path" d="M -10 30 C 90 60, 180 110, 150 190 C 120 270, 30 290, 80 370" stroke="#ede7df" stroke-width="2" stroke-linecap="round"/>
-            <!-- Scroll ile Çizilen Canlı Çizgi -->
-            <path class="about-draw-path" id="aboutDrawPathLeft" d="M -10 30 C 90 60, 180 110, 150 190 C 120 270, 30 290, 80 370" stroke="url(#aboutGradLeft)" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Estetik Node / Halka -->
-            <circle cx="150" cy="190" r="11" fill="#ffffff" stroke="#C6B39A" stroke-width="1.5"/>
-            <circle cx="150" cy="190" r="4.5" fill="#8D3A3C"/>
-        </svg>
-    </div>
-
-    <!-- Sağ Kenar Çizgisel Organik Akış -->
-    <div class="about-line-art-wrap about-lines-right" aria-hidden="true">
-        <svg class="about-svg-lines" viewBox="0 0 240 360" fill="none" preserveAspectRatio="none">
-            <defs>
-                <linearGradient id="aboutGradRight" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#8D3A3C"/>
-                    <stop offset="50%" stop-color="#C6B39A"/>
-                    <stop offset="100%" stop-color="#7B694E"/>
-                </linearGradient>
-            </defs>
-            <!-- Silik Kılavuz Çizgisi -->
-            <path class="about-track-path" d="M 250 40 C 160 80, 70 140, 100 220 C 125 285, 210 310, 170 370" stroke="#ede7df" stroke-width="2" stroke-linecap="round"/>
-            <!-- Scroll ile Çizilen Canlı Çizgi -->
-            <path class="about-draw-path" id="aboutDrawPathRight" d="M 250 40 C 160 80, 70 140, 100 220 C 125 285, 210 310, 170 370" stroke="url(#aboutGradRight)" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Estetik Node / Halka -->
-            <circle cx="100" cy="220" r="11" fill="#ffffff" stroke="#8D3A3C" stroke-width="1.5"/>
-            <circle cx="100" cy="220" r="4.5" fill="#C6B39A"/>
-        </svg>
-    </div>
-
     <div class="container editorial-about-inner">
         <div class="editorial-about-grid">
             <!-- Sol Kolon: Başlık -->

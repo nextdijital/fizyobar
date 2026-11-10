@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use Core\Language;
+use Core\Database;
 
 /**
  * Fizyobar Studio Controller
@@ -12,14 +13,12 @@ use Core\Language;
 class StudioController extends Controller
 {
     /**
-     * Studio Ana Sayfa (Egzersiz, Beslenme, Rehberler ve Tarifler Merkezi)
+     * Studio Ana Sayfa (Logo gibi doğrudan Ana Sayfaya Yönlendirir)
      */
     public function index(): void
     {
-        $this->render('pages/studio', [
-            'metaTitle' => 'Studio | FİZYOBAR Wellness Experiences',
-            'metaDescription' => 'Fizyobar Studio: Fonksiyonel beslenme planları, rehberler, rafine şekersiz tarifler, makaleler ve blog.',
-        ]);
+        header('Location: ' . url('/'), true, 301);
+        exit;
     }
 
     /**
@@ -140,6 +139,36 @@ class StudioController extends Controller
             ]
         ];
 
+        // Veritabanından (Xpanel'den) eklenen tarifleri dinamik olarak dahil et
+        try {
+            $dbRecipes = Database::query("SELECT * FROM movement_nutrition WHERE category = 'recipe' ORDER BY sort_order ASC, id DESC");
+            foreach ($dbRecipes as $dbr) {
+                // Önceden var olan static tariflerle çakışmayı önlemek için id kontrolü
+                $exists = false;
+                foreach ($recipes as $r) {
+                    if ($r['title'] === $dbr['title']) {
+                        $exists = true;
+                        break;
+                    }
+                }
+                if (!$exists) {
+                    $ingList = !empty($dbr['ingredients']) ? array_values(array_filter(array_map('trim', preg_split('/[\r\n,]+/', $dbr['ingredients'])))) : [];
+                    $recipes[] = [
+                        'id' => (int)$dbr['id'],
+                        'category' => 'functional',
+                        'category_label' => 'Fonksiyonel Studio',
+                        'title' => $dbr['title'],
+                        'time' => $dbr['time_needed'] ?: '10 dk',
+                        'calories' => '',
+                        'badge' => $dbr['badge'] ?: 'RAFİNE ŞEKERSİZ',
+                        'description' => $dbr['subtitle'] ?: $dbr['content'],
+                        'ingredients' => $ingList,
+                        'instructions' => $dbr['content']
+                    ];
+                }
+            }
+        } catch (\Throwable $e) {}
+
         $this->render('pages/recipes', [
             'metaTitle' => 'Tarifler | FİZYOBAR Studio',
             'metaDescription' => 'Rafine şekersiz, anti-enflamatuar, glutensiz ve metabolik denge sağlayan fonksiyonel Fizyobar tarifleri.',
@@ -214,6 +243,33 @@ class StudioController extends Controller
                 'summary' => 'Derin uyku sırasında beynin glimfatik sistemi aktifleşir ve hücresel atıkları temizler. Doğru bir akşam kapatma rutiniyle uyku kalitenizi ölçülebilir biçimde artırabilirsiniz.'
             ]
         ];
+
+        // Veritabanından (Xpanel'den) eklenen rehberleri dinamik olarak dahil et
+        try {
+            $dbGuides = Database::query("SELECT * FROM movement_nutrition WHERE category IN ('guide', 'tip') ORDER BY sort_order ASC, id DESC");
+            foreach ($dbGuides as $dbg) {
+                $exists = false;
+                foreach ($guides as $g) {
+                    if ($g['title'] === $dbg['title']) {
+                        $exists = true;
+                        break;
+                    }
+                }
+                if (!$exists) {
+                    $hlList = !empty($dbg['ingredients']) ? array_values(array_filter(array_map('trim', preg_split('/[\r\n,]+/', $dbg['ingredients'])))) : [];
+                    $guides[] = [
+                        'id' => (int)$dbg['id'],
+                        'category' => 'longevity',
+                        'category_label' => 'Longevity & Sağlık',
+                        'read_time' => $dbg['time_needed'] ?: '5 dk okuma',
+                        'title' => $dbg['title'],
+                        'subtitle' => $dbg['subtitle'] ?: '',
+                        'highlights' => $hlList,
+                        'summary' => $dbg['content']
+                    ];
+                }
+            }
+        } catch (\Throwable $e) {}
 
         $this->render('pages/guides', [
             'metaTitle' => 'Rehberler | FİZYOBAR Studio',

@@ -11,12 +11,24 @@ $activeCategory = $activeCategory ?? 'all';
 ?>
 
 <!-- ==============================================================================
-     FİZYOBAR MAKALELER (LÜKS DARK EDİTORYAL MİMARİ - LİSTELEME & DETAY OKUYUCU)
+     FİZYOBAR MAKALELER (EDİTORYAL GAZETE DOKUSU MİMARİSİ - LİSTELEME & DETAY OKUYUCU)
      ============================================================================== -->
-<div class="editorial-dark-page">
+<div class="editorial-dark-page articles-newspaper-theme">
     <div class="container">
         <!-- 1. Üst Başlık & Kategori Filtreleri -->
         <header class="editorial-dark-hero">
+            <div class="newspaper-texture-controls">
+                <div class="newspaper-texture-toggle" id="newspaperTextureToggle" title="Gazete Dokusunu Değiştir">
+                    <span class="texture-label">BASKI TEMASI:</span>
+                    <button type="button" class="btn-texture active" data-style="collage" title="Gazete Kolajı Baskı Deseni">
+                        📰 Kolaj Baskı
+                    </button>
+                    <button type="button" class="btn-texture" data-style="vintage" title="Antik Arşiv Kağıt Dokusu">
+                        📜 Antik Arşiv
+                    </button>
+                </div>
+            </div>
+
             <h1 class="editorial-display-title">
                 Kanıta dayalı anatomi<br>ve longevity.
             </h1>
@@ -181,6 +193,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const cards = document.querySelectorAll('#articlesPostsGrid .editorial-post-card');
     const archiveTitle = document.getElementById('archiveFilterTitle');
     const backBtn = document.getElementById('btnBackToArchive');
+
+    // Gazete Dokusu Seçici (Kolaj vs Antik Arşiv)
+    const pageWrapper = document.querySelector('.articles-newspaper-theme');
+    const textureButtons = document.querySelectorAll('#newspaperTextureToggle .btn-texture');
+    const savedTexture = localStorage.getItem('fizyobar_newspaper_texture') || 'collage';
+
+    function setTextureStyle(style) {
+        if (!pageWrapper) return;
+        if (style === 'vintage') {
+            pageWrapper.classList.add('newspaper-style-vintage');
+        } else {
+            pageWrapper.classList.remove('newspaper-style-vintage');
+        }
+        textureButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-style') === style);
+        });
+        localStorage.setItem('fizyobar_newspaper_texture', style);
+    }
+
+    if (savedTexture === 'vintage') {
+        setTextureStyle('vintage');
+    }
+
+    textureButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const style = this.getAttribute('data-style');
+            setTextureStyle(style);
+        });
+    });
 
     const categoryTitles = {
         'all': 'Yayınlanan Tüm Bilimsel Araştırmalar',

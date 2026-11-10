@@ -18,6 +18,7 @@ return [
 
     'nav' => [
         'studio' => 'Studio',
+        'bar_kitchen' => 'Bar Kitchen',
         'recipes' => 'Recipes',
         'guides' => 'Guides',
         'plans' => 'Nutrition Plans',
@@ -41,7 +42,7 @@ return [
         'hero_title' => 'Reconnect With Your Body. Science-Backed Holistic Wellness.',
         'hero_subtitle' => 'A longevity-focused, sustainable lifestyle powered by the "BAR System", merging clinical physical therapy principles with mindful yoga discipline.',
         'hero_cta_primary' => 'Explore Programs & Enroll',
-        'hero_cta_secondary' => 'Which Program Fits You? (WhatsApp)',
+        'hero_cta_secondary' => 'Find Your Program',
         
         // Social proof bar
         'sp_camps' => '17+ Completed Camp Seasons',

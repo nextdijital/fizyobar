@@ -119,6 +119,12 @@ ServerSignature Off
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # Canlı sunucu için HTTP -> HTTPS otomatik yönlendirme (Localhost ve yerel IP hariç)
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP_HOST} !^localhost [NC]
+    RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
     # Hassas klasörlere doğrudan web erişimini 403 Forbidden ile kesin olarak engelle
     RewriteRule ^(config|core|app|storage|languages)(/.*)?$ - [F,L]
 

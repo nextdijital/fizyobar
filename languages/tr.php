@@ -18,6 +18,7 @@ return [
 
     'nav' => [
         'studio' => 'Studio',
+        'bar_kitchen' => 'Bar Kitchen',
         'recipes' => 'Tarifler',
         'guides' => 'Rehberler',
         'plans' => 'Beslenme Planları',
@@ -41,7 +42,7 @@ return [
         'hero_title' => 'Bedeninle Yeniden Bağ Kur.',
         'hero_subtitle' => 'Fizyoterapi temelli hareket bilimi ve yoga disiplinini birleştiren "BAR System" ile longevity odaklı, kalıcı bir yaşam rutini.',
         'hero_cta_primary' => 'Programları Keşfet',
-        'hero_cta_secondary' => 'WhatsApp Danışma',
+        'hero_cta_secondary' => 'Programını Bul',
         
         // Social proof bar
         'sp_camps' => '17+ Kamp Dönemi',

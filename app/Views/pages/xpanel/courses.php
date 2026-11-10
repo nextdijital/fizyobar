@@ -13,8 +13,8 @@ require __DIR__ . '/layout_top.php';
         </p>
     </div>
 
-    <button type="button" onclick="document.getElementById('newCourseFormModal').style.display='flex';" class="btn btn-primary btn-sm">
-        + YENİ PROGRAM EKLE
+    <button type="button" onclick="document.getElementById('newCourseFormModal').style.display='flex';" class="xp-btn-pill-primary">
+        + YENİ PROGRAM EKLE &rarr;
     </button>
 </div>
 
@@ -31,7 +31,7 @@ require __DIR__ . '/layout_top.php';
                     <th>Ders Sayısı</th>
                     <th>Rozet</th>
                     <th>Durum</th>
-                    <th>İşlemler</th>
+                    <th style="text-align: right;">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,30 +39,30 @@ require __DIR__ . '/layout_top.php';
                     <tr>
                         <td>#<?= $c['id'] ?></td>
                         <td>
-                            <strong><?= e($c['title']) ?></strong>
+                            <strong style="color: #111; font-size: 0.95rem;"><?= e($c['title']) ?></strong>
                             <div style="font-size: 0.72rem; color: var(--text-muted);"><?= e($c['slug']) ?></div>
                         </td>
-                        <td><span style="text-transform: uppercase; font-size: 0.75rem;"><?= e($c['category']) ?></span></td>
+                        <td><span style="text-transform: uppercase; font-size: 0.72rem; background: #f1f5f9; padding: 2px 7px; border-radius: 999px; font-weight: 600;"><?= e($c['category']) ?></span></td>
                         <td><strong>₺<?= number_format((float)$c['price'], 2, ',', '.') ?></strong></td>
                         <td><?= (int)$c['duration_weeks'] ?> Hafta</td>
                         <td>
-                            <a href="<?= url('/xpanel/courses/' . $c['id'] . '/lessons') ?>" class="btn btn-outline btn-xs" style="color: var(--primary); border-color: var(--primary);">
-                                🎬 <?= (int)$c['lesson_count'] ?> Video Ders
+                            <a href="<?= url('/xpanel/courses/' . $c['id'] . '/lessons') ?>" class="xp-btn-action-pill xp-btn-action-edit">
+                                🎬 <?= (int)$c['lesson_count'] ?> Video Seans
                             </a>
                         </td>
                         <td><?= e($c['badge_icon']) ?> <?= e($c['badge_title']) ?></td>
                         <td>
-                            <?= $c['is_active'] ? '<span style="color:#065f46; background:#ecfdf5; padding:2px 6px; font-size:0.75rem; border-radius:3px;">Yayında</span>' : '<span style="color:#666;">Pasif</span>' ?>
+                            <?= $c['is_active'] ? '<span style="color:#065f46; background:#ecfdf5; border: 1px solid #a7f3d0; padding:2px 8px; font-size:0.72rem; border-radius:999px; font-weight:600;">Yayında</span>' : '<span style="color:#64748b; background:#f1f5f9; padding:2px 8px; font-size:0.72rem; border-radius:999px;">Pasif</span>' ?>
                         </td>
-                        <td>
-                            <div style="display: flex; gap: 0.4rem;">
-                                <a href="<?= url('/xpanel/courses/' . $c['id'] . '/lessons') ?>" class="btn btn-primary btn-xs" title="Video Dersleri Yönet">
-                                    Dersler
+                        <td style="text-align: right;">
+                            <div style="display: inline-flex; gap: 0.35rem; align-items: center; justify-content: flex-end;">
+                                <a href="<?= url('/xpanel/courses/' . $c['id'] . '/lessons') ?>" class="xp-btn-action-pill xp-btn-action-edit" title="Video Dersleri Yönet">
+                                    Dersler &rarr;
                                 </a>
-                                <form action="<?= url('/xpanel/courses/delete') ?>" method="POST" onsubmit="return confirm('Bu programı silmek istediğinize emin misiniz?');" style="display:inline;">
+                                <form action="<?= url('/xpanel/courses/delete') ?>" method="POST" onsubmit="return confirm('Bu programı silmek istediğinize emin misiniz?');" style="display:inline; margin: 0;">
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="id" value="<?= $c['id'] ?>">
-                                    <button type="submit" class="btn btn-outline btn-xs" style="color:#b91c1c; border-color:#fca5a5;">Sil</button>
+                                    <button type="submit" class="xp-btn-action-pill xp-btn-action-danger">Sil</button>
                                 </form>
                             </div>
                         </td>
@@ -134,9 +134,9 @@ require __DIR__ . '/layout_top.php';
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
-                <button type="button" onclick="document.getElementById('newCourseFormModal').style.display='none';" class="btn btn-outline btn-sm">İptal</button>
-                <button type="submit" class="btn btn-primary btn-sm">KAYDET & EKLE</button>
+            <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+                <button type="button" onclick="document.getElementById('newCourseFormModal').style.display='none';" class="xp-btn-pill-outline">İptal</button>
+                <button type="submit" class="xp-btn-pill-primary">✓ Programı Kaydet &rarr;</button>
             </div>
         </form>
     </div>

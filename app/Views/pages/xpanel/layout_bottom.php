@@ -1,10 +1,10 @@
-    </main>
+        </main><!-- /.xp-content-area -->
 
-    <footer style="background-color: var(--white); border-top: 1px solid var(--border-color); padding: 1.25rem 0; font-size: var(--font-xs); color: var(--text-muted); text-align: center;">
-        <div class="container">
-            FİZYOBAR xPanel v1.0 • PHP <?= PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION ?> • Güvenli Yönetici Alanı
-        </div>
-    </footer>
+        <footer style="background-color: #ffffff; border-top: 1px solid #e2e8f0; padding: 1.15rem 2.5rem; font-size: 0.78rem; color: #94a3b8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; box-sizing: border-box;">
+            <span>FİZYOBAR xPanel v2.0 &bull; Güvenli Yönetici Paneli</span>
+            <span>PHP <?= PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION ?> &bull; UTF-8</span>
+        </footer>
+    </div><!-- /.xp-main-wrapper -->
+
 </body>
 </html>
-

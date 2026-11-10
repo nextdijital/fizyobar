@@ -29,12 +29,20 @@ require __DIR__ . '/layout_top.php';
         <a href="<?= url('/xpanel/users') ?>" style="font-size: var(--font-xs); color: var(--primary); text-decoration: underline;">Öğrenci listesi &rarr;</a>
     </div>
 
-    <div class="xpanel-card" style="border-left: 3px solid #6366f1;">
-        <span style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Eğitim Programı</span>
-        <div style="font-size: 2.2rem; font-weight: 500; color: #4338ca; margin-top: 0.25rem;">
-            <?= (int)$stats['total_courses'] ?>
+    <div class="xpanel-card" style="border-left: 3px solid #16a34a;">
+        <span style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Toplam Onaylı Ciro</span>
+        <div style="font-size: 2.2rem; font-weight: 500; color: #16a34a; margin-top: 0.25rem;">
+            ₺<?= number_format((float)($stats['total_revenue'] ?? 0), 2, ',', '.') ?>
         </div>
-        <a href="<?= url('/xpanel/courses') ?>" style="font-size: var(--font-xs); color: #4f46e5; text-decoration: underline;">Programları yönet &rarr;</a>
+        <span style="font-size: var(--font-xs); color: var(--text-muted);">Tüm onaylı ödemeler toplamı</span>
+    </div>
+
+    <div class="xpanel-card" style="border-left: 3px solid #ec4899;">
+        <span style="font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Studio İçerik Sayısı</span>
+        <div style="font-size: 2.2rem; font-weight: 500; color: #db2777; margin-top: 0.25rem;">
+            <?= (int)($stats['total_nutrition'] ?? 0) ?>
+        </div>
+        <a href="<?= url('/xpanel/nutrition') ?>" style="font-size: var(--font-xs); color: #db2777; text-decoration: underline;">Tarif &amp; Rehberleri yönet &rarr;</a>
     </div>
 </div>
 
@@ -44,7 +52,7 @@ require __DIR__ . '/layout_top.php';
         <h2 style="font-size: 1.15rem; font-weight: 500; color: var(--black); text-transform: uppercase; letter-spacing: 0.05em;">
             Son Abonelik & Ödeme Bildirimleri
         </h2>
-        <a href="<?= url('/xpanel/enrollments') ?>" class="btn btn-outline btn-xs">Tümünü Gör</a>
+        <a href="<?= url('/xpanel/enrollments') ?>" class="xp-btn-pill-outline" style="font-size: 0.75rem; padding: 0.35rem 0.9rem;">Tümünü Gör &rarr;</a>
     </div>
 
     <?php if (empty($recentEnrollments)): ?>
@@ -89,7 +97,7 @@ require __DIR__ . '/layout_top.php';
                                     <form action="<?= url('/xpanel/enrollments/approve') ?>" method="POST" style="display: inline;">
                                         <?= csrf_field() ?>
                                         <input type="hidden" name="id" value="<?= $r['id'] ?>">
-                                        <button type="submit" class="btn btn-primary btn-xs" style="padding: 2px 8px; font-size: 0.7rem;">ONAYLA</button>
+                                        <button type="submit" class="xp-btn-action-pill xp-btn-action-approve">✓ Onayla</button>
                                     </form>
                                 <?php else: ?>
                                     <span style="font-size: 0.75rem; color: var(--text-light);">-</span>

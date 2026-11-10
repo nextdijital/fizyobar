@@ -11,9 +11,12 @@ use Core\Setting;
 
 class CheckoutController extends Controller
 {
-    private function requireAuth(): void
+    private function requireAuth(string $redirectAfter = ''): void
     {
         if (!Auth::check()) {
+            if (!empty($redirectAfter)) {
+                Session::set('intended_url', $redirectAfter);
+            }
             Session::setFlash('login_error', 'Satın alma veya kayıt işlemi için lütfen önce giriş yapınız ya da üye olunuz.');
             $this->redirect(url('/login'));
         }
@@ -21,7 +24,7 @@ class CheckoutController extends Controller
 
     public function checkout(string $courseId): void
     {
-        $this->requireAuth();
+        $this->requireAuth('/checkout/' . (int)$courseId);
         $courseId = (int)$courseId;
 
         $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [$courseId]);

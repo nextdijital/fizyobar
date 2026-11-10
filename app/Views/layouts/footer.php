@@ -5,7 +5,9 @@
     $uriPath = trim($currentUri ?? '', '/');
     $hideFooter = ($hideFooter ?? false) 
         || str_ends_with($uriPath, 'login') 
-        || str_ends_with($uriPath, 'register');
+        || str_ends_with($uriPath, 'register')
+        || str_contains($uriPath, 'programini-bul')
+        || str_contains($uriPath, 'find-program');
     ?>
 
     <?php if (!$hideFooter): ?>
@@ -42,11 +44,11 @@
                 <div class="footer-menu-col">
                     <h5 class="footer-col-title">STUDIO &amp; PROGRAMLAR</h5>
                     <ul class="footer-col-links">
-                        <li><a href="<?= url('/studio') ?>">Fizyobar Studio</a></li>
+                        <li><a href="<?= url('/') ?>">Fizyobar Studio</a></li>
+                        <li><a href="<?= url('/recipes') ?>">Bar Kitchen (Tarifler)</a></li>
                         <li><a href="<?= url('/programs') ?>">Dönüşüm Programları</a></li>
                         <li><a href="<?= url('/plans') ?>">Beslenme Planları</a></li>
                         <li><a href="<?= url('/guides') ?>">Wellness Rehberleri</a></li>
-                        <li><a href="<?= url('/recipes') ?>">Fonksiyonel Tarifler</a></li>
                         <li><a href="<?= url('/events') ?>">Platform &amp; SUP Yoga</a></li>
                     </ul>
                 </div>

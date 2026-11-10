@@ -48,6 +48,9 @@ if ($appDebug || $appEnv === 'local') {
     error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
     ini_set('display_errors', '0');
     ini_set('log_errors', '1');
+    if (!is_dir(__DIR__ . '/storage/logs')) {
+        @mkdir(__DIR__ . '/storage/logs', 0755, true);
+    }
     ini_set('error_log', __DIR__ . '/storage/logs/php_error.log');
 }
 
@@ -88,6 +91,8 @@ Router::get('/', [HomeController::class, 'index']);
 Router::get('/studio', [StudioController::class, 'index']);
 Router::get('/recipes', [StudioController::class, 'recipes']);
 Router::get('/tarifler', [StudioController::class, 'recipes']);
+Router::get('/bar-kitchen', [StudioController::class, 'recipes']);
+Router::get('/kitchen', [StudioController::class, 'recipes']);
 Router::get('/guides', [StudioController::class, 'guides']);
 Router::get('/rehberler', [StudioController::class, 'guides']);
 Router::get('/plans', [StudioController::class, 'plans']);
@@ -95,8 +100,13 @@ Router::get('/beslenme-planlari', [StudioController::class, 'plans']);
 Router::get('/articles', [StudioController::class, 'articles']);
 Router::get('/makaleler', [StudioController::class, 'articles']);
 Router::get('/blog', [StudioController::class, 'blog']);
+Router::get('/programini-bul', [ProgramController::class, 'finder']);
+Router::get('/find-program', [ProgramController::class, 'finder']);
 Router::get('/metod', [MetodController::class, 'index']);
 Router::get('/programs', [ProgramController::class, 'index']);
+Router::get('/detox', [ProgramController::class, 'detox']);
+Router::get('/detox-kampi', [ProgramController::class, 'detox']);
+Router::get('/online-detox', [ProgramController::class, 'detox']);
 Router::get('/events', [EventController::class, 'index']);
 Router::get('/duyurular', [EventController::class, 'announcements']);
 Router::get('/announcements', [EventController::class, 'announcements']);
@@ -144,9 +154,11 @@ Router::get('/checkout/success/{id}', [CheckoutController::class, 'success']);
 // --- Çerez Tercihleri AJAX API Rotası ---
 Router::post('/api/cookie-preferences', [CookieController::class, 'savePreferences']);
 
-// --- Yapay Zeka AI Chat Asistanı API Rotası ---
+// --- Yapay Zeka AI Chat Asistanı & Programını Bul API Rotaları ---
 Router::post('/api/ai-chat', [AiChatController::class, 'chat']);
 Router::get('/api/ai-chat', [AiChatController::class, 'chat']);
+Router::post('/api/find-program-ai', [AiChatController::class, 'recommendProgram']);
+Router::get('/api/find-program-ai', [AiChatController::class, 'recommendProgram']);
 
 // --- XPANEL YÖNETİM MERKEZİ (Ayrı & Güvenli Admin Girişi) ---
 Router::get('/xpanel/login', [XpanelController::class, 'login']);
@@ -162,9 +174,21 @@ Router::get('/xpanel/courses/{id}/lessons', [XpanelController::class, 'lessons']
 Router::post('/xpanel/lessons/save', [XpanelController::class, 'saveLesson']);
 Router::post('/xpanel/lessons/delete', [XpanelController::class, 'deleteLesson']);
 Router::get('/xpanel/enrollments', [XpanelController::class, 'enrollments']);
+Router::post('/xpanel/enrollments/save', [XpanelController::class, 'saveEnrollment']);
+Router::post('/xpanel/enrollments/delete', [XpanelController::class, 'deleteEnrollment']);
 Router::post('/xpanel/enrollments/approve', [XpanelController::class, 'approveEnrollment']);
 Router::post('/xpanel/enrollments/reject', [XpanelController::class, 'rejectEnrollment']);
 Router::get('/xpanel/users', [XpanelController::class, 'users']);
+Router::post('/xpanel/users/status', [XpanelController::class, 'updateUserStatus']);
+Router::post('/xpanel/users/role', [XpanelController::class, 'updateUserRole']);
+Router::post('/xpanel/users/password', [XpanelController::class, 'resetUserPassword']);
+Router::post('/xpanel/users/delete', [XpanelController::class, 'deleteUser']);
+Router::post('/xpanel/users/enroll', [XpanelController::class, 'enrollUser']);
+
+// Studio & İçerik Yönetimi (Tarifler, Rehberler, Mikro Rutinler)
+Router::get('/xpanel/nutrition', [XpanelController::class, 'nutrition']);
+Router::post('/xpanel/nutrition/save', [XpanelController::class, 'saveNutrition']);
+Router::post('/xpanel/nutrition/delete', [XpanelController::class, 'deleteNutrition']);
 
 // 9. İstek Dağıtımı (Dispatch)
 Router::dispatch();

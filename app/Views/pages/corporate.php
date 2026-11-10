@@ -1,123 +1,166 @@
 <?php
 declare(strict_types=1);
+/**
+ * @var string|null $flashSuccess
+ */
 ?>
 
-<!-- Kurumsal Sayfası Hero -->
-<section class="page-editorial-hero">
-    <div class="container text-center">
-        <span class="section-kicker">KURUMSAL WELLBEING ÇÖZÜMLERİ</span>
-        <h1 class="page-editorial-title">Şirketler & Ekipler İçin Bütüncül İyi Yaşam</h1>
-        <p class="page-editorial-lead">
-            Modern çalışma hayatının getirdiği kronik stresi, omurga problemlerini ve motivasyon kayıplarını; fizyoterapi temelli hareket bilimi, ergonomi ve nefes atölyeleriyle çözüyoruz.
-        </p>
-    </div>
-</section>
-
-<!-- Kurumsal Hizmet Sütunları -->
-<section class="corporate-services-section">
+<!-- ==============================================================================
+     FİZYOBAR KURUMSAL (EDİTORYAL BRUTALIST & MİLANO MİMARİSİ)
+     ============================================================================== -->
+<div class="corp-agency-page">
     <div class="container">
-        <!-- Kurucu Beyanı / Manifestosu -->
-        <div class="corporate-quote-frame">
-            <blockquote class="corp-quote-text">
-                "Ekip sağlığı ve çalışan esenliği bir şirket lüksü değil; sürdürülebilir başarı ve yüksek odaklanma için en kritik yatırımdır."
-            </blockquote>
-            <cite class="corp-quote-author">— Betina Tansuğ, Fizyoterapist & Fizyobar Kurucusu</cite>
-        </div>
-
-        <div class="section-title-wrap text-center" style="margin-top: 4rem;">
-            <span class="section-kicker">HİZMET ALANLARIMIZ</span>
-            <h2 class="section-heading-lg">Kurumlara Özel Tasarlanan Modüller</h2>
-            <p class="section-lead-muted">Şirketinizin ihtiyaçlarına göre şekillendirilen online ve yüz yüze atölyeler.</p>
-        </div>
-
-        <div class="corporate-grid-3">
-            <!-- 1. Ofis Ergonomisi -->
-            <article class="corp-card">
-                <span class="corp-card-num">01 /</span>
-                <span class="corp-card-tag">OFİS VE ÇALIŞMA ALANI</span>
-                <h3 class="corp-card-title">Masa Başı Ergonomi & Omurga Sağlığı</h3>
-                <p class="corp-card-desc">
-                    Uzun saatler bilgisayar başında oturmanın yarattığı boyun, sırt ve bel gerginliklerini sıfırlayan; iş yerinde kolayca uygulanabilir mikro hareket dizileri ve doğru oturma eğitimi.
-                </p>
-            </article>
-
-            <!-- 2. Lansman & Etkinlik -->
-            <article class="corp-card corp-card-accent">
-                <span class="corp-card-num">02 /</span>
-                <span class="corp-card-tag tag-bordo">MARKA VE ETKİNLİK</span>
-                <h3 class="corp-card-title">Kurumsal Lansman & Wellness Seansları</h3>
-                <p class="corp-card-desc">
-                    Markanızın prestijine uygun açık hava festivalleri, basın lansmanları, şirket offsite buluşmaları veya özel davetlerde ilham verici grup yoga ve meditasyon deneyimleri.
-                </p>
-            </article>
-
-            <!-- 3. Stres Yönetimi -->
-            <article class="corp-card">
-                <span class="corp-card-num">03 /</span>
-                <span class="corp-card-tag">YÖNETİCİ & EKİP</span>
-                <h3 class="corp-card-title">Sinir Sistemi & Stres Regülasyonu</h3>
-                <p class="corp-card-desc">
-                    Yüksek baskı altında çalışan ekipler ve liderler için vagus siniri uyarımı, diyafram nefesi mekaniği ve zihinsel berraklık kazandıran somatik stres yönetimi atölyesi.
-                </p>
-            </article>
-        </div>
-
-        <!-- Kurumsal Teklif ve İletişim Formu -->
-        <div class="corporate-form-container" id="teklif-formu">
-            <div class="form-header-wrap text-center">
-                <span class="section-kicker">İŞ BİRLİĞİ VE TEKLİF</span>
-                <h3 class="form-main-title">Şirketiniz İçin Özel Bir Program Planlayalım</h3>
-                <p class="form-sub-lead">Ekip büyüklüğünüzü ve hedefinizi belirtin, size en uygun atölye içeriğini birlikte oluşturalım.</p>
+        <!-- 1. Üst Manzara Hero Banner & Üzerinde Metin (Yazı Görselin Üzerinde) -->
+        <div class="corp-hero-banner-wrap">
+            <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" 
+                 alt="Fizyobar Kurumsal Wellbeing & Ergonomi" 
+                 class="corp-hero-banner-img" 
+                 loading="eager">
+            <div class="corp-hero-banner-overlay">
+                <header class="corp-agency-header text-center">
+                    <span class="corp-sub-pill">FİZYOBAR WELLBEING &bull; CORPORATE SOLUTIONS</span>
+                    <h1 class="corp-agency-title">KURUMSAL WELLBEING</h1>
+                    <p class="corp-agency-lead">
+                        Fizyoterapi temelli hareket bilimi, omurga biyomekaniği ve ergonomik iyi yaşam çözümleriyle kurumunuzun insan sermayesini güçlendiriyor, tükenmişliği önlüyor ve ekibinizin zihinsel-fiziksel üretkenliğini en üst seviyeye taşıyoruz.
+                    </p>
+                </header>
             </div>
-
-            <?php if (isset($flashSuccess)): ?>
-                <div class="alert-success-box">
-                    ✓ <?= e($flashSuccess) ?>
-                </div>
-            <?php endif; ?>
-
-            <form action="<?= url('/corporate/submit') ?>" method="POST" class="corp-form">
-                <?= csrf_field() ?>
-
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label" for="corp_name">Yetkili Adı Soyadı *</label>
-                        <input type="text" id="corp_name" name="name" class="form-control" required placeholder="Adınız Soyadınız">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="corp_company">Şirket / Marka Adı *</label>
-                        <input type="text" id="corp_company" name="company" class="form-control" required placeholder="Şirketinizin Ünvanı">
-                    </div>
-                </div>
-
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label" for="corp_email">Kurumsal E-posta Adresi *</label>
-                        <input type="email" id="corp_email" name="email" class="form-control" required placeholder="adiniz@sirketiniz.com">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="corp_phone">Telefon Numarası *</label>
-                        <input type="tel" id="corp_phone" name="phone" class="form-control" required placeholder="05XX XXX XX XX">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" for="corp_message">Etkinlik / Talep Detayları *</label>
-                    <textarea id="corp_message" name="message" class="form-control form-textarea" rows="4" required placeholder="Planlanan tarih, katılımcı sayısı (tahmini) ve arzu ettiğiniz konsept hakkında kısa bilgi veriniz..."></textarea>
-                </div>
-
-                <div class="form-submit-wrap text-center">
-                    <button type="submit" class="btn-pill-solid-dark">
-                        TEKLİF TALEBİNİ GÖNDER &rarr;
-                    </button>
-                    <div class="form-direct-wa">
-                        veya doğrudan kurumsal WhatsApp hattından ulaşın:
-                        <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba,%20kurumsal%20wellbeing%20ve%20at%C3%B6lye%20teklifi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">
-                            <?= __('brand.phone_display') ?>
-                        </a>
-                    </div>
-                </div>
-            </form>
         </div>
+
+        <!-- 3. Değerlerimiz / 4'lü Kart Grid (OUR VALUES) - Kart İçi Canlı Fotoğraflar & Beyaz Gölge -->
+        <section class="corp-values-section" aria-label="Kurumsal Değerlerimiz">
+            <div class="corp-values-grid">
+                <!-- Kart 1: Değerlerimiz İndeks Kartı (Ok İkonu & Başlık) -->
+                <div class="corp-value-card card-index-action">
+                    <div class="value-card-top-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                            <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                    </div>
+                    <div class="value-card-bottom-label">
+                        <span class="card-kicker-small">FİZYOBAR</span>
+                        <h3 class="card-lead-heading">KURUMSAL<br>DEĞERLERİMİZ</h3>
+                    </div>
+                </div>
+
+                <!-- Kart 2: Şeffaflık & Bilimsellik (Kart İçi Canlı Renkli Görsel + Yazı) -->
+                <div class="corp-value-card card-with-photo">
+                    <div class="value-card-header">
+                        <h3 class="value-card-title">ŞEFFAFLIK &amp; BİLİMSELLİK</h3>
+                    </div>
+                    <div class="value-card-photo-box">
+                        <img src="<?= asset('assets/images/betina-user-photo1.jpg') ?>" 
+                             alt="Fizyobar Şeffaflık & Bilimsellik" 
+                             class="value-card-img" 
+                             loading="lazy">
+                    </div>
+                    <div class="value-card-body">
+                        <p class="value-card-text">
+                            Kanıta dayalı klinik fizyoterapi ve anatomi verileriyle çalışır; tüm süreçlerde kurumunuza ölçülebilir, somut kazanımlar sunarız.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kart 3: Sonuç Odaklılık (Kart İçi Canlı Renkli Görsel + Yazı) -->
+                <div class="corp-value-card card-with-photo">
+                    <div class="value-card-header">
+                        <h3 class="value-card-title">ÖLÇÜLEBİLİR SONUÇ</h3>
+                    </div>
+                    <div class="value-card-photo-box">
+                        <img src="<?= asset('assets/images/betina-user-photo2.jpg') ?>" 
+                             alt="Fizyobar Ölçülebilir Sonuç" 
+                             class="value-card-img" 
+                             loading="lazy">
+                    </div>
+                    <div class="value-card-body">
+                        <p class="value-card-text">
+                            Masa başı çalışanların duruş bozuklukları, boyun ve bel gerginliklerini kalıcı biçimde azaltarak ekip motivasyonunu yükseltiriz.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Kart 4: Yenilikçilik & Ergonomi (Kart İçi Canlı Renkli Görsel + Yazı) -->
+                <div class="corp-value-card card-with-photo">
+                    <div class="value-card-header">
+                        <h3 class="value-card-title">YENİLİKÇİ ERGONOMİ</h3>
+                    </div>
+                    <div class="value-card-photo-box">
+                        <img src="<?= asset('assets/images/betina-studio-forward-fold.jpg') ?>" 
+                             alt="Fizyobar Yenilikçi Ergonomi" 
+                             class="value-card-img" 
+                             loading="lazy">
+                    </div>
+                    <div class="value-card-body">
+                        <p class="value-card-text">
+                            Geleneksel seminerler yerine interaktif ofis hareket molaları, GLP-1 beslenme ve vagus nefes protokolleri uygularız.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Nelerle Çalışıyoruz & Çözümlerimiz (WHAT WE WORK WITH Split Mimarisi) -->
+        <section class="corp-work-section" aria-label="Kurumsal Çözümlerimiz">
+            <div class="corp-work-split">
+                <!-- Sol Kolon: Büyük Başlık • Açıklama -->
+                <div class="corp-work-left">
+                    <h2 class="corp-work-headline">
+                        NELERLE<br>
+                        ÇALIŞIYORUZ
+                    </h2>
+                    <p class="corp-work-desc">
+                        Çalışanlarınızın ofis ergonomisini güçlendirmek, boyun ve bel gerginliklerini gidermek ya da kurumsal motivasyon ve üretkenliği artırmak olsun; hedeflerinize en verimli şekilde ulaşmanız için kanıta dayalı fizyoterapi çözümleri üretiyoruz.
+                    </p>
+                </div>
+
+                <!-- Sağ Kolon: Numaralandırılmış Çizgili Hizmet Listesi -->
+                <div class="corp-work-right">
+                    <!-- Servis 1 -->
+                    <div class="corp-service-item">
+                        <div class="service-item-main">
+                            <h3 class="service-item-name">OFİS ERGONOMİSİ &amp; POSTÜR ATÖLYESİ</h3>
+                            <p class="service-item-desc">
+                                Masa başı çalışanlar için servikal omurga dekompresyonu, ekran-koltuk hizalanması ve iş günü içine entegre edilen mikro hareket molaları.
+                            </p>
+                        </div>
+                        <span class="service-item-number">01 /</span>
+                    </div>
+
+                    <!-- Servis 2 -->
+                    <div class="corp-service-item">
+                        <div class="service-item-main">
+                            <h3 class="service-item-name">KURUMSAL YOGA &amp; HAREKET SEANSLARI</h3>
+                            <p class="service-item-desc">
+                                Şirket ofisinde veya online canlı yayınla eklemleri rahatlatan, duruşu güçlendiren ve gün ortası zihinsel netlik kazandıran akışlar.
+                            </p>
+                        </div>
+                        <span class="service-item-number">02 /</span>
+                    </div>
+
+                    <!-- Servis 3 -->
+                    <div class="corp-service-item">
+                        <div class="service-item-main">
+                            <h3 class="service-item-name">METABOLİK BESLENME &amp; GLP-1 WEBINARLARI</h3>
+                            <p class="service-item-desc">
+                                Gün ortası şeker çökmelerini, halsizliği ve beyin sisini önleyen; rafine şekersiz, doğal doygunluk odaklı mutfak kılavuzları.
+                            </p>
+                        </div>
+                        <span class="service-item-number">03 /</span>
+                    </div>
+
+                    <!-- Servis 4 -->
+                    <div class="corp-service-item">
+                        <div class="service-item-main">
+                            <h3 class="service-item-name">YÖNETİCİ REHBERLİĞİ &amp; VAGUS STRES REGÜLASYONU</h3>
+                            <p class="service-item-desc">
+                                Lider kadro ve yüksek baskı altındaki ekipler için vagus siniri uyarımı, diyafram nefesi mekaniği ve otonom sinir sistemi sakinliği.
+                            </p>
+                        </div>
+                        <span class="service-item-number">04 /</span>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
+</div>

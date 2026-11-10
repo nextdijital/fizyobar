@@ -162,6 +162,134 @@ class AiChatController extends Controller
         ];
     }
 
+    /**
+     * "Programını Bul" Yapay Zeka Analiz Motoru
+     * Test adımlarındaki yanıtları değerlendirerek kişiselleştirilmiş program ve biyomekanik rapor üretir.
+     */
+    public function recommendProgram(): void
+    {
+        $raw = file_get_contents('php://input');
+        $payload = json_decode($raw, true) ?? [];
+
+        $goal      = (string) ($payload['goal'] ?? 'spine_pain');
+        $lifestyle = (string) ($payload['lifestyle'] ?? 'desk_heavy');
+        $symptoms  = (array)  ($payload['symptoms'] ?? []);
+        $format    = (string) ($payload['format'] ?? 'online_camp');
+        $notes     = trim((string) ($payload['notes'] ?? ''));
+
+        // Hedef ve semptomlara göre program eşleştirme
+        $isWarrior = ($goal === 'flexibility_warrior') || ($lifestyle === 'active_mobility');
+        $isStudio  = ($format === 'studio_adana');
+
+        if ($isWarrior && !$isStudio) {
+            $programTitle = 'Warrior Yoga: Güç & Biyomekanik';
+            $programSlug  = 'warrior-yoga-guc-biyomekanik';
+            $matchScore   = 96;
+            $badge        = 'GÜÇ & MOBİLİTE ŞAMPİYONU';
+            $programDesc  = 'Anatomik eksende güçlenme, derin kalça açıcılar ve omurga rotasyonlarıyla atletik performansı ve esnekliği zirveye taşıyan ileri seviye akış serisi.';
+            $investment   = '1.250 ₺ (Ömür Boyu Video Erişim)';
+        } elseif ($isStudio) {
+            $programTitle = 'Fizyobar Stüdyo & SUP Yoga (Adana)';
+            $programSlug  = 'events';
+            $matchScore   = 94;
+            $badge        = 'BİREBİR KLİNİK & SU ÜSTÜ DENEYİM';
+            $programDesc  = 'Adana Seyhan Barajı üzerinde su üstü dengesi (SUP Yoga) ve stüdyoda fizyoterapist kontrolünde küçük gruplarla klinik mat/reformer seansları.';
+            $investment   = 'Seans ve Grup Seçimine Göre Belirlenir';
+        } else {
+            // En popüler ve kapsamlı: 4 Haftalık Online Detox & Yoga Kampı
+            $programTitle = '4 Haftalık Online Detox & Yoga Kampı';
+            $programSlug  = 'online-detox-yoga-kampi';
+            $matchScore   = 98;
+            $badge        = 'EN ÇOK TERCİH EDİLEN BÜTÜNCÜL DÖNÜŞÜM';
+            $programDesc  = 'Haftada 3 gün canlı yoga dersleri, Fizyoterapist Betina Tansuğ ile günlük birebir WhatsApp postür kontrolü ve aç kalmadan glisemik dengenizi sağlayan GLP-1 beslenme rehberi.';
+            $investment   = '4.500 ₺ (16+ Canlı Seans + Birebir Eğitmen Takibi + Beslenme Protokolü)';
+        }
+
+        // Biyomekanik ve Klinik Teşhis Değerlendirmesi
+        $analysisPoints = [];
+
+        if ($goal === 'spine_pain' || in_array('neck_shoulder', $symptoms, true) || in_array('lower_back', $symptoms, true)) {
+            $analysisPoints[] = "<strong>Omurga & Postür Dinamiği:</strong> Belirtileriniz boyun (servikal) ve bel (lomber) bölgesinde omurlar arası disklerin yerçekimi ve hareketsizlikle sıkıştığını gösteriyor. Hedefimiz geçici rahatlama değil, omurgayı anatomik ekseninde yeniden hizalayarak derin core kaslarını aktifleştirmektir.";
+        }
+        if ($lifestyle === 'desk_heavy') {
+            $analysisPoints[] = "<strong>Masa Başı Sendromu:</strong> Gün boyu 6+ saat oturmak kalça fleksörlerini kısaltır ve torakal (sırt) omurgayı kilitler. Bu durum boyun düzleşmesine ve kamburluğa yol açar. Günlük 10'ar dakikalık mikro mobilizasyon akışları sinir sisteminize doğrudan 'güven' sinyali verir.";
+        }
+        if ($goal === 'detox_nutrition' || in_array('sugar_cravings', $symptoms, true)) {
+            $analysisPoints[] = "<strong>Metabolik GLP-1 Dengesi:</strong> Ani şeker düşüşleri ve ödem, kan şekeri dalgalanmalarından kaynaklanır. Kısıtlayıcı diyetler yerine tokluk hormonu GLP-1'i doğal yoldan uyaran lif ve sağlıklı yağ kombinasyonları hücre içi enflamasyonu 10 günde dindirir.";
+        }
+        if ($goal === 'stress_vagus' || in_array('morning_stiffness', $symptoms, true)) {
+            $analysisPoints[] = "<strong>Vagus Siniri ve Uyku Kalitesi:</strong> Sabahları tutulma ve yorgun uyanma, sempatik sinir sisteminin gece boyunca alarm modunda kalmasından kaynaklanır. Yatmadan önce 4-7-8 diyafram nefesi ve kedi-deve akışları vagus tonusunu yükseltir.";
+        }
+        if (empty($analysisPoints)) {
+            $analysisPoints[] = "<strong>Sürdürülebilir Longevity Analizi:</strong> Fiziksel profiliniz düzenli mobilite ve fonksiyonel anatomik güçlenme için son derece elverişli. Hareketi yaşam boyu sürecek ağrısız bir alışkanlığa dönüştüreceğiz.";
+        }
+
+        // Kişiye Özel 3 Adımlı Başlangıç Rutini
+        $microRoutines = [
+            [
+                'title' => 'Adım 1: Sabah 5 Dakika Pelvik Tilt & Omurga Açılışı',
+                'desc' => 'Uyanır uyanmaz yatakta dizlerinizi karnınıza çekin ve 10 tekrar nazik kedi-deve hareketiyle omurga disklerini sıvılandırın.'
+            ],
+            [
+                'title' => 'Adım 2: Masa Başında 90 Dakikada Bir Göğüs Açıcı Nefes',
+                'desc' => 'Ellerinizi ensenizde kenetleyip dirseklerinizi geriye doğru açarak derin 3 diyafram nefesi alın. Kürek kemiklerinizi birbirine yaklaştırın.'
+            ],
+            [
+                'title' => 'Adım 3: Akşam Rafine Şekersiz Tokluk Kuralı',
+                'desc' => 'Akşam yemeğinden sonra tatlı arayışı olduğunda 1 tatlı kaşığı seylan tarçını ve ılık su veya elma sirkeli tonik ile tokluğu sabitleyin.'
+            ]
+        ];
+
+        // WhatsApp Hazır Mesajı
+        $waSummary = "Merhaba Betina Hocam! Fizyobar Yapay Zeka Testini tamamladım.\n\n"
+            . "🎯 Hedefim: " . $this->getGoalLabel($goal) . "\n"
+            . "⏳ Yaşam Tarzım: " . $this->getLifestyleLabel($lifestyle) . "\n"
+            . "💡 Bana Önerilen Program: " . $programTitle . " (Uyumluluk: %" . $matchScore . ")\n"
+            . ($notes !== '' ? "📝 Notum: " . $notes . "\n" : "")
+            . "\nDetayları konuşmak ve kampa/seansa katılım için danışmak istiyorum.";
+
+        $waUrl = __('brand.whatsapp_url') . '?text=' . rawurlencode($waSummary);
+
+        $this->json([
+            'success' => true,
+            'recommendation' => [
+                'program_title'   => $programTitle,
+                'program_slug'    => $programSlug,
+                'program_desc'    => $programDesc,
+                'badge'           => $badge,
+                'match_score'     => $matchScore,
+                'investment'      => $investment,
+                'analysis_points' => $analysisPoints,
+                'micro_routines'  => $microRoutines,
+                'whatsapp_url'    => $waUrl,
+                'user_notes'      => $notes,
+            ]
+        ]);
+    }
+
+    private function getGoalLabel(string $g): string
+    {
+        return match($g) {
+            'spine_pain' => 'Omurga, Sırt & Boyun Ağrılarını Gidermek',
+            'posture' => 'Duruş & Postür Bozukluklarını Düzeltmek',
+            'detox_nutrition' => 'Kilo Kontrolü, Ödem & Rafine Şekersiz Yaşam',
+            'flexibility_warrior' => 'Esneklik, Beden Gücü & Warrior Yoga',
+            'stress_vagus' => 'Stres Yönetimi, Derin Uyku & Vagus Regülasyonu',
+            default => 'Bedenle Yeniden Bağ Kurmak'
+        };
+    }
+
+    private function getLifestyleLabel(string $l): string
+    {
+        return match($l) {
+            'desk_heavy' => 'Günde 6-8+ saat masa başında hareketsiz',
+            'intermittent_active' => 'Bazen spor yapıyorum ama ağrım nüksediyor',
+            'inactive_restart' => 'Uzun süredir spordan uzağım, güvenli başlamak istiyorum',
+            'active_mobility' => 'Düzenli hareket ediyorum, mobilite ve toparlanma arıyorum',
+            default => 'Standart Günlük Rutin'
+        };
+    }
+
     private function hasAny(string $haystack, array $needles): bool
     {
         foreach ($needles as $needle) {

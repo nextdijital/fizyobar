@@ -13,7 +13,7 @@ $activeCategory = $activeCategory ?? 'all';
 <!-- ==============================================================================
      FİZYOBAR BLOG (LÜKS DARK EDİTORYAL MİMARİ - LİSTELEME & DETAY OKUYUCU)
      ============================================================================== -->
-<div class="editorial-dark-page">
+<div class="editorial-dark-page blog-page-white">
     <div class="container">
         <!-- 1. Üst Başlık & Kategori Filtreleri -->
         <header class="editorial-dark-hero">

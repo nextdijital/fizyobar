@@ -2,36 +2,38 @@
 declare(strict_types=1);
 ?>
 
-<!-- Programlar Sayfası: Sade, Ferah & Betella Stili Minimal Mimari -->
+<!-- Programlar Sayfası: 3 Ana Eğitim Paketi & Betella Stili Minimal Mimari -->
 <section class="programs-clean-section">
     <div class="container">
-        <!-- 1. Sade ve Güçlü Betella Stili Başlık -->
+        <!-- 1. Sade ve Güçlü Başlık -->
         <div class="programs-hero-clean text-center">
-            <h1 class="programs-headline">DEĞİŞİME KATILIN</h1>
+            <span class="programs-kicker-pill">KLİNİK FİZYOTERAPİ &amp; ANATOMİK GÜÇ</span>
+            <h1 class="programs-headline">EĞİTİM PROGRAMLARI</h1>
+            <p class="programs-subheadline">Fizyoterapist Betina Tansuğ metodolojisiyle bedeninize kalıcı fonksiyon ve denge kazandıran 3 ana eğitim:</p>
             
-            <!-- Betella Kapsül Toggle Seçici -->
-            <div class="betella-toggle-wrap">
-                <div class="betella-toggle-pill" role="tablist">
-                    <button type="button" class="betella-toggle-btn active" data-filter="all" role="tab" aria-selected="true">
-                        Tüm Programlar
-                    </button>
-                    <button type="button" class="betella-toggle-btn" data-filter="camp" role="tab" aria-selected="false">
-                        Canlı Kamplar
-                    </button>
+            <!-- Canlı Kamp Ayrı Sayfa Duyurusu -->
+            <div class="programs-detox-callout">
+                <div class="detox-callout-inner">
+                    <span class="detox-callout-badge">CANLI KAMP</span>
+                    <span class="detox-callout-text">Birebir WhatsApp takipli ve beslenmeli 4 haftalık dönem:</span>
+                    <a href="<?= url('/detox') ?>" class="detox-callout-link">
+                        4 Haftalık Online Detox &amp; Yoga Kampı Sayfası &rarr;
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Üçlü Sade ve Net Program Kartları -->
+        <!-- 2. Üçlü Eğitim Paketleri Grid (Sadece 3 Eğitim) -->
         <div class="programs-clean-grid" id="programsGrid">
-            <!-- Kart 1: Warrior Yoga Plani -->
-            <article class="clean-plan-card" data-category="program">
+            <!-- Eğitim 1: Warrior Yoga Planı -->
+            <article class="clean-plan-card" id="warrior">
                 <div class="plan-card-top">
+                    <div class="plan-category-tag">EĞİTİM I</div>
                     <h2 class="clean-plan-title">WARRIOR YOGA<br>PLANI</h2>
-                    <p class="clean-plan-subtitle">3 Haftalık Dinamik Akış &amp; Omurga Gücü</p>
+                    <p class="clean-plan-subtitle">3 Haftalık Dinamik Akış, Güç &amp; Omurga Stabilitesi</p>
                     <div class="clean-plan-price">
                         <span class="price-val">1.250 TL</span>
-                        <span class="price-note">3 haftalık canlı program bedeli</span>
+                        <span class="price-note">3 haftalık canlı eğitim programı</span>
                     </div>
                 </div>
 
@@ -43,7 +45,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Aligned Lines &amp; Fonksiyonel Güç</span>
+                        <span class="feature-text">Aligned Lines &amp; Fonksiyonel Beden Gücü</span>
                     </div>
                     <div class="clean-feature-item">
                         <span class="betella-check" aria-hidden="true">
@@ -52,7 +54,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Omurga &amp; Eklem Biyomekaniği</span>
+                        <span class="feature-text">Omurga &amp; Eklem Biyomekaniği Akışları</span>
                     </div>
                     <div class="clean-feature-item">
                         <span class="betella-check" aria-hidden="true">
@@ -79,7 +81,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Evde Uygulanabilir Günlük Sonuç Rutinleri</span>
+                        <span class="feature-text">Evde Uygulanabilir Günlük Güç Rutinleri</span>
                     </div>
                 </div>
 
@@ -90,15 +92,16 @@ declare(strict_types=1);
                 </div>
             </article>
 
-            <!-- Kart 2: 4 Haftalık Online Detox & Yoga Kampı (Merkez / Öne Çıkan) -->
-            <article class="clean-plan-card is-featured" data-category="camp">
-                <div class="featured-badge-pill">EN ÇOK TERCİH EDİLEN</div>
+            <!-- Eğitim 2: Omurga & Postür Biyomekaniği -->
+            <article class="clean-plan-card is-featured" id="posture">
+                <div class="featured-badge-pill">ÖNE ÇIKAN KLİNİK EĞİTİM</div>
                 <div class="plan-card-top">
-                    <h2 class="clean-plan-title">ONLINE DETOX &amp;<br>YOGA KAMPI</h2>
-                    <p class="clean-plan-subtitle">4 Haftalık Bütünsel Yenilenme ve Birebir Takip</p>
+                    <div class="plan-category-tag">EĞİTİM II</div>
+                    <h2 class="clean-plan-title">OMURGA &amp; POSTÜR<br>BİYOMEKANİĞİ</h2>
+                    <p class="clean-plan-subtitle">4 Haftalık Klinik Hizalanma, Dekompresyon &amp; Duruş</p>
                     <div class="clean-plan-price">
-                        <span class="price-val">4.500 TL</span>
-                        <span class="price-note">4 haftalık tam kamp ve eğitmen desteği</span>
+                        <span class="price-val">1.850 TL</span>
+                        <span class="price-note">4 haftalık modüler eğitim protokolü</span>
                     </div>
                 </div>
 
@@ -110,7 +113,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Fizyoterapist ile Birebir WhatsApp Takibi</span>
+                        <span class="feature-text">Servikal (Boyun) &amp; Torakal Dekompresyon</span>
                     </div>
                     <div class="clean-feature-item">
                         <span class="betella-check" aria-hidden="true">
@@ -119,7 +122,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">16+ Canlı Seans &amp; Özel Atölyeler</span>
+                        <span class="feature-text">İleri Baş &amp; Kifoz (Kamburluk) Düzeltme</span>
                     </div>
                     <div class="clean-feature-item">
                         <span class="betella-check" aria-hidden="true">
@@ -128,7 +131,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Diyafram Nefesi &amp; Vagus Sinir Regülasyonu</span>
+                        <span class="feature-text">Fasya Ağı Rahatlatma &amp; Sinir Germeleri</span>
                     </div>
                     <div class="clean-feature-item">
                         <span class="betella-check" aria-hidden="true">
@@ -137,7 +140,7 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Rafine Şekersiz &amp; Glisemik Beslenme Rehberi</span>
+                        <span class="feature-text">Masa Başı Çalışanlar İçin Günlük 15 Dk Seanslar</span>
                     </div>
                     <div class="clean-feature-item">
                         <span class="betella-check" aria-hidden="true">
@@ -146,20 +149,21 @@ declare(strict_types=1);
                                 <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </span>
-                        <span class="feature-text">Ömür Boyu Sınırsız Video Kütüphanesi</span>
+                        <span class="feature-text">Ömür Boyu Sınırsız Video Paneli Erişimi</span>
                     </div>
                 </div>
 
                 <div class="plan-card-bottom">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-clean-plan btn-featured">
-                        KAMPA KATIL
+                    <a href="<?= url('/checkout/3') ?>" class="btn-clean-plan btn-featured">
+                        PROGRAMA KATIL
                     </a>
                 </div>
             </article>
 
-            <!-- Kart 3: Platform & SUP Yoga -->
-            <article class="clean-plan-card" data-category="program">
+            <!-- Eğitim 3: Platform & SUP Yoga -->
+            <article class="clean-plan-card" id="sup">
                 <div class="plan-card-top">
+                    <div class="plan-category-tag">EĞİTİM III</div>
                     <h2 class="clean-plan-title">PLATFORM &amp;<br>SUP YOGA</h2>
                     <p class="clean-plan-subtitle">Seyhan Baraj Gölü Üzerinde Açık Hava Pratiği</p>
                     <div class="clean-plan-price">
@@ -224,40 +228,14 @@ declare(strict_types=1);
             </article>
         </div>
 
-        <!-- 3. Alt Destek Notu -->
+        <!-- 3. Alt Destek & AI Test Yönlendirmesi -->
         <div class="programs-minimal-footer text-center">
-            <p>Hangi programın bedeninize uygun olduğundan emin değil misiniz? <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer">WhatsApp üzerinden doğrudan danışın &rarr;</a></p>
+            <p>
+                Bedeninize en uygun eğitimi belirlemekte kararsız mısınız? 
+                <a href="<?= url('/programini-bul') ?>" class="footer-finder-link">Yapay Zeka ile Programınızı Bulun &rarr;</a>
+                veya 
+                <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer">WhatsApp'tan Danışın &rarr;</a>
+            </p>
         </div>
     </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const toggleBtns = document.querySelectorAll('.betella-toggle-btn');
-    const cards = document.querySelectorAll('.clean-plan-card');
-
-    toggleBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            toggleBtns.forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-selected', 'false');
-            });
-            this.classList.add('active');
-            this.setAttribute('aria-selected', 'true');
-
-            const filter = this.dataset.filter;
-            cards.forEach(card => {
-                if (filter === 'all') {
-                    card.style.display = 'flex';
-                } else if (filter === 'camp') {
-                    if (card.dataset.category === 'camp') {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-        });
-    });
-});
-</script>

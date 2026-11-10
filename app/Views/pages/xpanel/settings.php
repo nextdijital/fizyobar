@@ -139,8 +139,8 @@ require __DIR__ . '/layout_top.php';
             </div>
         </div>
 
-        <div style="text-align: right;">
-            <button type="submit" class="btn btn-primary btn-lg">
+        <div style="text-align: right; margin-top: 1.5rem;">
+            <button type="submit" class="xp-btn-pill-primary" style="padding: 0.75rem 2.25rem; font-size: 0.88rem;">
                 AYARLARI KAYDET &rarr;
             </button>
         </div>

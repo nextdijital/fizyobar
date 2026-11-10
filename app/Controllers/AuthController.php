@@ -48,12 +48,15 @@ class AuthController extends Controller
             $this->redirect(url('/login'));
         }
 
-        if ($user['role'] === 'admin') {
-            Session::setFlash('login_error', 'Yönetici hesabı güvenlik nedeniyle bu alandan giriş yapamaz. Lütfen xpanel yönetim merkezini kullanınız.');
-            $this->redirect(url('/login'));
+        Auth::login((int)$user['id']);
+
+        // Eğer kullanıcı bir satın alma veya kilitli sayfadan yönlendiyse oraya geri dön
+        $intended = Session::get('intended_url');
+        if (!empty($intended)) {
+            Session::remove('intended_url');
+            $this->redirect(url($intended));
         }
 
-        Auth::login((int)$user['id']);
         $this->redirect(url('/dashboard'));
     }
 
@@ -114,6 +117,12 @@ class AuthController extends Controller
         );
 
         Auth::login($userId);
+
+        $intended = Session::get('intended_url');
+        if (!empty($intended)) {
+            Session::remove('intended_url');
+            $this->redirect(url($intended));
+        }
 
         $this->redirect(url('/dashboard'));
     }

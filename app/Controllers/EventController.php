@@ -27,11 +27,8 @@ class EventController extends Controller
 
     public function news(): void
     {
-        $this->render('pages/news', [
-            'metaTitle' => 'Haberler & Basın | FİZYOBAR Wellness Experiences',
-            'metaDescription' => 'Fizyobar topluluk haberleri, etkinlik gelişmeleri ve basında yer alan röportajlar.',
-            'activeTab' => 'news',
-        ]);
+        header('Location: ' . url('/events'), true, 301);
+        exit;
     }
 }
 
