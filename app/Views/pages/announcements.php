@@ -1,78 +1,184 @@
 <?php
 declare(strict_types=1);
+
+$announcements = $announcements ?? [];
+$symbols = ['✱', '✤', '◎', '✧', '❀'];
 ?>
 
-<!-- Duyurular Hero -->
-<section class="page-editorial-hero">
-    <div class="container text-center">
-        <span class="section-kicker">GÜNCEL GELİŞMELER</span>
-        <h1 class="page-editorial-title">Duyurular &amp; Kamp Kayıtları</h1>
-        <p class="page-editorial-lead">
-            Fizyobar yeni dönem online kampları, canlı atölyeler, stüdyo etkinlikleri ve kayıt takvimi.
-        </p>
-    </div>
-</section>
-
-<!-- Duyurular Listesi -->
-<section style="padding: clamp(3rem, 5vw, 5rem) 0;">
-    <div class="container" style="max-width: 900px;">
-        <div style="display: flex; flex-direction: column; gap: 1.75rem;">
-            
-            <!-- Duyuru 1 -->
-            <article class="event-card event-card-featured" style="padding: 2rem;">
-                <div class="event-card-header" style="margin-bottom: 0.75rem;">
-                    <span class="event-badge badge-bordo">YENİ DÖNEM KAYITLARI AÇIK</span>
-                    <span class="event-loc">ONLİNE CANLI</span>
-                </div>
-                <h3 class="event-title" style="font-size: 1.45rem; margin-bottom: 0.5rem;">4 Haftalık Online Canlı Yoga &amp; Metabolik Detox Kampı</h3>
-                <p class="event-desc" style="font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.25rem;">
-                    Yeni dönem kontenjanları açıldı. Haftada 3 canlı yoga ve postür seansı, günlük WhatsApp eğitmen takibi, rafine şekersiz glisemik beslenme rehberi ve GLP-1 tokluk yönetimi dahil.
-                </p>
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #f0f0f0; padding-top: 1rem;">
-                    <span style="font-size: 0.84rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em;">BAŞLANGIÇ: YAKINDA • KONTENJAN: SINIRLI</span>
-                    <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="btn-pill-solid" style="padding: 0.55rem 1.4rem; font-size: 0.76rem;">
-                        HEMEN KAYDOL &rarr;
-                    </a>
-                </div>
-            </article>
-
-            <!-- Duyuru 2 -->
-            <article class="event-card" style="padding: 2rem;">
-                <div class="event-card-header" style="margin-bottom: 0.75rem;">
-                    <span class="event-badge">WORKSHOP &amp; ATÖLYE</span>
-                    <span class="event-loc">ADANA GÜLEK PLAZA</span>
-                </div>
-                <h3 class="event-title" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Fasya Sağlığı &amp; Foam Roller Derin Doku Atölyesi</h3>
-                <p class="event-desc" style="font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.25rem;">
-                    Kronik boyun, bel ve kalça gerginliklerini hafifletmek için fasya hidrasyonu ve myofasyal gevşeme tekniklerini öğreneceğimiz yüz yüze mini çalıştay.
-                </p>
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #f0f0f0; padding-top: 1rem;">
-                    <span style="font-size: 0.84rem; font-weight: 600; color: #737373;">KONTENJAN: 12 KİŞİ</span>
-                    <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="btn-pill-outline-dark" style="padding: 0.55rem 1.4rem; font-size: 0.76rem;">
-                        BİLGİ AL &rarr;
-                    </a>
-                </div>
-            </article>
-
-            <!-- Duyuru 3 -->
-            <article class="event-card" style="padding: 2rem;">
-                <div class="event-card-header" style="margin-bottom: 0.75rem;">
-                    <span class="event-badge">STUDİO GÜNCELLEMESİ</span>
-                    <span class="event-loc">DİJİTAL KÜTÜPHANE</span>
-                </div>
-                <h3 class="event-title" style="font-size: 1.35rem; margin-bottom: 0.5rem;">Fizyobar Studio Yeni Fonksiyonel Tarifler &amp; Rehberler Yayında</h3>
-                <p class="event-desc" style="font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.25rem;">
-                    Anti-enflamatuar altın smoothie'ler, glisemik dengeli chia pudingler ve servikal omurga mobilite serileri dijital stüdyo üyelerine açıldı.
-                </p>
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid #f0f0f0; padding-top: 1rem;">
-                    <span style="font-size: 0.84rem; font-weight: 600; color: #737373;">TÜM ÜYELERE AÇIK</span>
-                    <a href="<?= url('/studio') ?>" class="btn-pill-outline-dark" style="padding: 0.55rem 1.4rem; font-size: 0.76rem;">
-                        STUDIO'YU İNCELE &rarr;
-                    </a>
-                </div>
-            </article>
-
+<div class="announcements-page-wrapper">
+    <!-- 1. Ortalanmış Başlık Alanı -->
+    <header class="announcements-centered-hero">
+        <div class="container text-center">
+            <span class="announcements-hero-kicker">GÜNCEL BÜLTEN &bull; BİLDİRİLER</span>
+            <h1 class="announcements-centered-title">DUYURULAR</h1>
+            <p class="announcements-centered-desc">
+                Yeni dönem online kampları, canlı atölyeler ve stüdyo etkinlik takvimi.
+            </p>
         </div>
-    </div>
-</section>
+    </header>
 
+    <!-- 2. İki Kolonlu Split Sahne: Sol Dikey Kutu Listesi + Sağ Açık Kart -->
+    <section class="announcements-stage-section">
+        <div class="container" style="max-width: 1240px;">
+            <div class="announcements-split-layout">
+                
+                <!-- SOL KOLON: Dikey Kutu Listesi (Kullanıcı İsteği: Sol Tarafta Kutu Listesi) -->
+                <aside class="announcements-sidebar-strip">
+                    <div class="sidebar-sticky-wrapper">
+                        <div class="sidebar-kicker-title">DUYURU LİSTESİ</div>
+
+                        <div class="sidebar-cards-list" role="tablist" aria-label="Duyurular Listesi">
+                            <?php foreach ($announcements as $idx => $item): ?>
+                                <?php 
+                                    $isActive = ($idx === 0);
+                                    $symbol = $symbols[$idx % count($symbols)];
+                                    $shortTitle = $item['short_title'] ?? $item['title'];
+                                ?>
+                                <button type="button" 
+                                        class="slumber-side-card <?= $isActive ? 'is-active' : '' ?>"
+                                        data-index="<?= $idx ?>"
+                                        id="sidebar-card-<?= (int)$item['id'] ?>"
+                                        role="tab"
+                                        aria-selected="<?= $isActive ? 'true' : 'false' ?>"
+                                        aria-controls="stage-card-<?= (int)$item['id'] ?>">
+                                    
+                                    <div class="side-card-top">
+                                        <div class="side-card-title-group">
+                                            <span class="side-card-num"><?= htmlspecialchars((string)$item['number']) ?>.</span>
+                                            <span class="side-card-title"><?= htmlspecialchars((string)$shortTitle) ?></span>
+                                        </div>
+                                        <span class="side-card-symbol" aria-hidden="true"><?= $symbol ?></span>
+                                    </div>
+
+                                    <div class="side-card-bottom">
+                                        <span class="side-card-date"><?= htmlspecialchars((string)$item['date']) ?></span>
+                                        <span class="side-card-arrow" aria-hidden="true">&rarr;</span>
+                                    </div>
+                                </button>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- SAĞ KOLON: Aktif Açılan Büyük Kart Alanı (İçerik Sahnesi) -->
+                <main class="announcements-main-stage">
+                    <?php foreach ($announcements as $idx => $item): ?>
+                        <?php 
+                            $isActive = ($idx === 0);
+                            $symbol = $symbols[$idx % count($symbols)];
+                        ?>
+                        <article class="stage-expanded-card <?= $isActive ? 'is-active' : '' ?>" 
+                                 id="stage-card-<?= (int)$item['id'] ?>"
+                                 data-index="<?= $idx ?>"
+                                 role="region"
+                                 aria-labelledby="sidebar-card-<?= (int)$item['id'] ?>">
+                            
+                            <div class="stage-card-inner">
+                                <!-- Üst Satır: Kategori, Tarih ve Sembol -->
+                                <div class="stage-card-meta-bar">
+                                    <div class="stage-meta-left">
+                                        <span class="stage-num-badge"><?= htmlspecialchars((string)$item['number']) ?>. BİLDİRİ</span>
+                                        <span class="stage-meta-sep">&bull;</span>
+                                        <span class="stage-date">📅 <?= htmlspecialchars((string)$item['date']) ?></span>
+                                        <?php if (!empty($item['category'])): ?>
+                                            <span class="stage-meta-sep">&bull;</span>
+                                            <span class="stage-category"><?= htmlspecialchars((string)$item['category']) ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                    <span class="stage-card-symbol" aria-hidden="true"><?= $symbol ?></span>
+                                </div>
+
+                                <!-- Başlık -->
+                                <h2 class="stage-card-title"><?= htmlspecialchars((string)$item['title']) ?></h2>
+
+                                <!-- Konum -->
+                                <?php if (!empty($item['location'])): ?>
+                                    <div class="stage-card-location">
+                                        📍 <?= htmlspecialchars((string)$item['location']) ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!-- Özet Vurgusu -->
+                                <?php if (!empty($item['summary'])): ?>
+                                    <div class="stage-card-lead">
+                                        <p><?= htmlspecialchars((string)$item['summary']) ?></p>
+                                    </div>
+                                <?php endif; ?>
+
+                                <!-- Tam Duyuru Metni -->
+                                <div class="stage-card-prose">
+                                    <p><?= nl2br(htmlspecialchars((string)$item['content'])) ?></p>
+                                </div>
+
+                                <!-- Detay Maddeleri -->
+                                <?php if (!empty($item['details']) && is_array($item['details'])): ?>
+                                    <ul class="stage-card-bullets">
+                                        <?php foreach ($item['details'] as $det): ?>
+                                            <li>
+                                                <span class="bullet-icon" aria-hidden="true">✦</span>
+                                                <span><?= htmlspecialchars((string)$det) ?></span>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif; ?>
+
+                                <!-- Aksiyon Butonu & Mühür -->
+                                <?php if (!empty($item['cta_text'])): ?>
+                                    <div class="stage-card-footer">
+                                        <a href="<?= htmlspecialchars((string)$item['cta_link']) ?>" 
+                                           target="<?= str_starts_with((string)$item['cta_link'], 'http') ? '_blank' : '_self' ?>"
+                                           rel="noopener noreferrer" 
+                                           class="stage-cta-btn">
+                                            <span><?= htmlspecialchars((string)$item['cta_text']) ?></span>
+                                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                <polyline points="12 5 19 12 12 19"></polyline>
+                                            </svg>
+                                        </a>
+                                        <span class="stage-archive-tag">FİZYOBAR RESMİ DUYURUSU</span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+
+                        </article>
+                    <?php endforeach; ?>
+                </main>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sideCards = document.querySelectorAll('.slumber-side-card');
+    const stageCards = document.querySelectorAll('.stage-expanded-card');
+
+    sideCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const index = this.getAttribute('data-index');
+
+            sideCards.forEach(c => {
+                c.classList.remove('is-active');
+                c.setAttribute('aria-selected', 'false');
+            });
+            stageCards.forEach(s => {
+                s.classList.remove('is-active');
+            });
+
+            this.classList.add('is-active');
+            this.setAttribute('aria-selected', 'true');
+
+            const target = document.querySelector(`.stage-expanded-card[data-index="${index}"]`);
+            if (target) {
+                target.classList.add('is-active');
+                
+                // Mobilde aktif kart açılınca hafifçe görünür alana kaydır
+                if (window.innerWidth <= 960) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
+});
+</script>

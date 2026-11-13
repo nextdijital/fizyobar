@@ -10,22 +10,13 @@ declare(strict_types=1);
      ============================================================================== -->
 <div class="corp-agency-page">
     <div class="container">
-        <!-- 1. Üst Manzara Hero Banner & Üzerinde Metin (Yazı Görselin Üzerinde) -->
-        <div class="corp-hero-banner-wrap">
-            <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" 
-                 alt="Fizyobar Kurumsal Wellbeing & Ergonomi" 
-                 class="corp-hero-banner-img" 
-                 loading="eager">
-            <div class="corp-hero-banner-overlay">
-                <header class="corp-agency-header text-center">
-                    <span class="corp-sub-pill">FİZYOBAR WELLBEING &bull; CORPORATE SOLUTIONS</span>
-                    <h1 class="corp-agency-title">KURUMSAL WELLBEING</h1>
-                    <p class="corp-agency-lead">
-                        Fizyoterapi temelli hareket bilimi, omurga biyomekaniği ve ergonomik iyi yaşam çözümleriyle kurumunuzun insan sermayesini güçlendiriyor, tükenmişliği önlüyor ve ekibinizin zihinsel-fiziksel üretkenliğini en üst seviyeye taşıyoruz.
-                    </p>
-                </header>
-            </div>
-        </div>
+        <!-- 1. Üst Başlık & Giriş Metni (Ortalanmış Başlık ve Metin) -->
+        <header class="corp-agency-header text-center">
+            <h1 class="corp-agency-title">KURUMSAL WELLBEING</h1>
+            <p class="corp-agency-lead">
+                Fizyoterapi temelli hareket bilimi, omurga biyomekaniği ve ergonomik iyi yaşam çözümleriyle kurumunuzun insan sermayesini güçlendiriyor, tükenmişliği önlüyor ve ekibinizin zihinsel-fiziksel üretkenliğini en üst seviyeye taşıyoruz.
+            </p>
+        </header>
 
         <!-- 3. Değerlerimiz / 4'lü Kart Grid (OUR VALUES) - Kart İçi Canlı Fotoğraflar & Beyaz Gölge -->
         <section class="corp-values-section" aria-label="Kurumsal Değerlerimiz">

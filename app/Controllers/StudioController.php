@@ -29,113 +29,155 @@ class StudioController extends Controller
         $recipes = [
             [
                 'id' => 1,
-                'category' => 'smoothie',
-                'category_label' => 'Kahvaltı & Smoothie',
-                'title' => 'Anti-Enflamatuar Altın Smoothie',
-                'time' => '8 dk',
-                'calories' => '220 kcal',
-                'badge' => 'RAFİNE ŞEKERSİZ',
-                'description' => 'Zerdeçal, zencefil, badem sütü ve keten tohumu ile hücresel enflamasyonu azaltan ve güne yüksek enerjiyle başlatan sabah iksiri.',
+                'category' => 'snack',
+                'category_label' => 'Atıştırmalık',
+                'title' => 'Bitter Enerji Topları',
+                'time' => '15 dk',
+                'calories' => '110 kcal',
+                'badge' => 'Şekersiz',
+                'image' => 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Medjool hurma, çiğ kakao ve fındık ezmesi ile hazırlanan rafine şekersiz, hızlı ve temiz metabolik enerji kaynağı.',
                 'ingredients' => [
-                    '1 su bardağı şekersiz badem sütü',
-                    '1/2 çay kaşığı organik zerdeçal & karabiber',
-                    '1 tatlı kaşığı chia tohumu',
-                    '1/2 dondurulmuş muz veya 1/4 avokado',
-                    '1 tatlı kaşığı taze rendelenmiş zencefil'
+                    '6 adet Medjool hurma (çekirdeksiz)',
+                    '1/2 su bardağı çiğ fındık & ceviz',
+                    '2 yemek kaşığı ham kakao tozu',
+                    '1 yemek kaşığı katkısız fındık ezmesi',
+                    'Üzeri için: Hindistan cevizi rendesi'
                 ],
-                'instructions' => 'Tüm malzemeleri yüksek devirli blenderda pürüzsüz kıvama gelene kadar yaklaşık 60 saniye karıştırın. Taze tüketin.'
+                'instructions' => 'Tüm malzemeleri mutfak robotunda pürüzsüz kıvam alana kadar çekin. Ceviz büyüklüğünde yuvarlayıp Hindistan cevizine bulayın ve soğutun.'
             ],
             [
                 'id' => 2,
                 'category' => 'meals',
-                'category_label' => 'Sağlıklı Öğünler',
-                'title' => 'Avokadolu Yeşil Longevity Kasesi',
-                'time' => '15 dk',
-                'calories' => '340 kcal',
-                'badge' => 'GLUTENSİZ',
-                'description' => 'Haşlanmış kinoa, taze bebek ıspanak, fermente zeytin, ceviz ve soğuk sıkım zeytinyağı ile mitokondriyal sağlığı destekleyen hafif öğün.',
+                'category_label' => 'Ana Öğün',
+                'title' => 'Kinoa & Fırın Sebze Bowl',
+                'time' => '25 dk',
+                'calories' => '360 kcal',
+                'badge' => 'Dengeli Öğün',
+                'image' => 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Fırınlanmış balkabağı, kinoa, nar taneleri, taze yeşillikler ve keçi peyniri ile hücresel yenilenmeyi destekleyen antioksidan zengini kase.',
                 'ingredients' => [
                     '1 çay bardağı haşlanmış kinoa',
-                    '1/2 olgun avokado (dilimlenmiş)',
-                    '1 avuç bebek ıspanak & roka',
-                    '4-5 adet kırma yeşil zeytin',
-                    '1 yemek kaşığı soğuk sıkım natürel sızma zeytinyağı',
-                    'Yarım limon suyu & kaya tuzu'
+                    '1 su bardağı fırınlanmış küp balkabağı veya tatlı patates',
+                    '1 avuç bebek ıspanak & taze nane',
+                    '2 yemek kaşığı nar tanesi & ceviz',
+                    '1 yemek kaşığı soğuk sıkım natürel sızma zeytinyağı & limon sosu'
                 ],
-                'instructions' => 'Kinoayı kase tabanına yayın, üzerine yeşillikleri ve avokado dilimlerini yerleştirin. Zeytinyağı ve limon sosuyla harmanlayıp servis yapın.'
+                'instructions' => 'Kinoayı kaseye yayın, fırın sebzeleri ve taze yeşillikleri yerleştirin. Nar taneleri ve zeytinyağlı sos ile servis yapın.'
             ],
             [
                 'id' => 3,
                 'category' => 'dessert',
-                'category_label' => 'Şekersiz Tatlılar',
-                'title' => 'Ham Kakaolu Chia Puding',
-                'time' => '10 dk (+dinlenme)',
-                'calories' => '180 kcal',
-                'badge' => 'DÜŞÜK GLİSEMİK',
-                'description' => 'Çiğ kakao, Hindistan cevizi sütü ve chia tohumu ile tatlı krizlerini sıfırlayan, kan şekerini dengede tutan antioksidan deposu tatlı.',
+                'category_label' => 'Tatlı',
+                'title' => 'Chia Puding',
+                'time' => '10 dk',
+                'calories' => '190 kcal',
+                'badge' => 'Yüksek Lif',
+                'image' => 'https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Hindistan cevizi sütü, chia tohumu ve taze incirle hazırlanan, kan şekerini dengede tutan prebiyotik lif deposu hafif tatlı.',
                 'ingredients' => [
-                    '3 yemek kaşığı chia tohumu',
-                    '1 su bardağı Hindistan cevizi sütü',
-                    '1 yemek kaşığı ham çiğ kakao tozu',
+                    '3 yemek kaşığı organik chia tohumu',
+                    '1 su bardağı şekersiz Hindistan cevizi sütü',
                     '1 çay kaşığı saf vanilya özütü',
-                    'Üzeri için: Yaban mersini & ceviz parçaları'
+                    '1 adet taze incir veya yaban mersini',
+                    '1 tatlı kaşığı çiğ ceviz parçası'
                 ],
-                'instructions' => 'Tüm malzemeleri bir kavanozda çırpın. 10 dakika sonra tekrar karıştırıp buzdolabında en az 2 saat (tercihen gece boyu) jelleşmeye bırakın.'
+                'instructions' => 'Chia tohumu ile sütü bir kavanozda karıştırın. 10 dakika sonra tekrar çırpıp buzdolabında en az 2 saat jelleşmeye bırakın. Taze incirle süsleyin.'
             ],
             [
                 'id' => 4,
                 'category' => 'drinks',
-                'category_label' => 'Detox & İçecekler',
-                'title' => 'Metabolik Zencefilli Detox İksiri',
+                'category_label' => 'İçecek',
+                'title' => 'Detoks Yeşil Smoothie',
                 'time' => '5 dk',
-                'calories' => '35 kcal',
-                'badge' => 'VAGUS DOSTU',
-                'description' => 'Taze limon suyu, elma sirkesi, seylan tarçını ve zencefil ile sabahları sindirim ateşini (Agni) yakan ve vagus sinirini uyaran canlandırıcı tonik.',
+                'calories' => '140 kcal',
+                'badge' => 'Arındırıcı',
+                'image' => 'https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Taze bebek ıspanak, salatalık, yeşil elma ve taze zencefil ile sindirimi rahatlatan, karaciğeri ve vagus sinirini destekleyen yeşil iksir.',
                 'ingredients' => [
-                    '1 su bardağı ılık içme suyu',
-                    '1 tatlı kaşığı organik elma sirkesi (katkısız)',
-                    'Yarım limonun taze sıkılmış suyu',
-                    'Çeyrek çay kaşığı seylan tarçını',
-                    'Bir çimdik taze çekilmiş zencefil'
+                    '2 avuç taze bebek ıspanak',
+                    '1 adet yeşil elma & yarım salatalık',
+                    '1 tatlı kaşığı taze rendelenmiş zencefil',
+                    'Yarım limon suyu',
+                    '1 su bardağı soğuk hindistan cevizi suyu'
                 ],
-                'instructions' => 'Ilık suya tüm malzemeleri ekleyip iyice karıştırın. Sabah aç karnına, ilk öğünden 20 dakika önce yudumlayarak için.'
+                'instructions' => 'Tüm malzemeleri yüksek devirli blenderda 45-60 saniye pürüzsüz olana kadar karıştırın. Hemen taze tüketin.'
             ],
             [
                 'id' => 5,
-                'category' => 'meals',
-                'category_label' => 'Sağlıklı Öğünler',
-                'title' => 'Fırınlanmış Somon & Kuşkonmaz Salatası',
-                'time' => '20 dk',
-                'calories' => '390 kcal',
-                'badge' => 'OMEGA-3 ZENGİNİ',
-                'description' => 'Yüksek kaliteli omega-3 yağ asitleri ve prebiyotik lif kaynağı kuşkonmaz ile eklem sağlığını ve zihinsel odaklanmayı artıran akşam yemeği.',
+                'category' => 'breakfast',
+                'category_label' => 'Kahvaltı',
+                'title' => 'Böğürtlenli Protein Kasesi',
+                'time' => '10 dk',
+                'calories' => '280 kcal',
+                'badge' => 'Protein Zengini',
+                'image' => 'https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Dondurulmuş böğürtlen, bitkisel protein, chia tohumu ve ev yapımı granola ile güne enerjik başlatan antioksidan şöleni.',
                 'ingredients' => [
-                    '150g taze somon fileto',
-                    '1 demet taze yeşil kuşkonmaz',
-                    '1 diş ezilmiş sarımsak',
-                    '1 tatlı kaşığı zeytinyağı',
-                    'Deniz tuzu & taze çekilmiş karabiber',
-                    'Limon dilimleri'
+                    '1 su bardağı dondurulmuş organik böğürtlen',
+                    '1 ölçek bitkisel bezelye proteini',
+                    '1/2 su bardağı şekersiz badem sütü',
+                    '1/2 dondurulmuş muz',
+                    'Üzeri için: Nar taneleri, granola ve chia tohumu'
                 ],
-                'instructions' => 'Fırını 190°C’ye ısıtın. Fırın tepsisine somon ve kuşkonmazları dizin, sarımsaklı zeytinyağını gezdirin. 15-18 dakika pişirin.'
+                'instructions' => 'Malzemeleri yoğun kıvamlı smoothie kıvamına gelene kadar blenderdan geçirin, kaseye döküp taze meyvelerle süsleyin.'
             ],
             [
                 'id' => 6,
-                'category' => 'dessert',
-                'category_label' => 'Şekersiz Tatlılar',
-                'title' => 'Fındık Ezmeli Vegan Enerji Topları',
-                'time' => '12 dk',
-                'calories' => '110 kcal / adet',
-                'badge' => 'PİŞİRME GEREKTİRMEZ',
-                'description' => 'Medjool hurma, çiğ fındık ve keten tohumu ile egzersiz öncesi veya öğleden sonra enerji düşüşlerinde hızlı ve temiz yakıt.',
+                'category' => 'meals',
+                'category_label' => 'Ana Öğün',
+                'title' => 'Fırın Somon & Kuşkonmaz Bowl',
+                'time' => '20 dk',
+                'calories' => '390 kcal',
+                'badge' => 'Omega-3 Zengini',
+                'image' => 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Yüksek kaliteli omega-3 yağ asitleri ve prebiyotik kuşkonmaz ile eklem ve sinir sistemi sağlığını koruyan akşam yemeği.',
                 'ingredients' => [
-                    '6 adet çekirdeği çıkarılmış Medjool hurma',
-                    '1/2 su bardağı çiğ fındık veya ceviz',
-                    '1 yemek kaşığı katkısız fındık ezmesi',
-                    '1 yemek kaşığı keten tohumu unu',
-                    'Dışını kaplamak için Hindistan cevizi tozu'
+                    '160g taze somon fileto',
+                    '1 demet taze yeşil kuşkonmaz',
+                    '1 tatlı kaşığı sızma zeytinyağı',
+                    'Deniz tuzu, karabiber & taze biberiye',
+                    'Limon dilimleri'
                 ],
-                'instructions' => 'Tüm malzemeleri mutfak robotunda yapışkan bir hamur olana dek çekin. Ceviz büyüklüğünde toplar yuvarlayıp Hindistan cevizine bulayın.'
+                'instructions' => 'Fırını 190°C’ye getirin. Somon ve kuşkonmazları tepsiye yerleştirin, zeytinyağı ve baharatları ekleyip 16-18 dakika pişirin.'
+            ],
+            [
+                'id' => 7,
+                'category' => 'drinks',
+                'category_label' => 'İçecek',
+                'title' => 'Anti-Enflamatuar Altın İksir',
+                'time' => '8 dk',
+                'calories' => '120 kcal',
+                'badge' => 'Vagus Dostu',
+                'image' => 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Zerdeçal, Seylan tarçını ve zencefil ile hücresel enflamasyonu azaltan ve sinir sistemini yatıştıran sıcak iksir.',
+                'ingredients' => [
+                    '1 su bardağı ılık badem sütü',
+                    '1/2 çay kaşığı saf zerdeçal tozu',
+                    '1 çimdik taze çekilmiş karabiber',
+                    '1/2 çay kaşığı Seylan tarçını',
+                    '1 tatlı kaşığı soğuk sıkım hindistan cevizi yağı'
+                ],
+                'instructions' => 'Küçük bir cezvede tüm malzemeleri hafifçe ısıtın (kaynatmayın). Köpürtücü ile 30 saniye çırpıp ılık için.'
+            ],
+            [
+                'id' => 8,
+                'category' => 'breakfast',
+                'category_label' => 'Kahvaltı',
+                'title' => 'Avokado Tartin & Çiğ Tohumlar',
+                'time' => '12 dk',
+                'calories' => '290 kcal',
+                'badge' => 'Sağlıklı Yağlar',
+                'image' => 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=800&q=80',
+                'description' => 'Ekşi mayalı karabuğday ekmeği üzerinde ezilmiş olgun avokado, kenevir tohumu, çörek otu ve sızma zeytinyağı.',
+                'ingredients' => [
+                    '1 dilim ekşi mayalı karabuğday ekmeği',
+                    '1/2 olgun avokado (çatalla ezilmiş)',
+                    '1 tatlı kaşığı soyulmuş kenevir tohumu',
+                    'Pul biber, deniz tuzu ve limon damlaları',
+                    '1 tatlı kaşığı sızma zeytinyağı'
+                ],
+                'instructions' => 'Ekmeği hafifçe kızartın. Ezilmiş avokadoyu üzerine sürün, tohumları ve baharatları serpip zeytinyağı gezdirin.'
             ]
         ];
 
@@ -161,6 +203,7 @@ class StudioController extends Controller
                         'time' => $dbr['time_needed'] ?: '10 dk',
                         'calories' => '',
                         'badge' => $dbr['badge'] ?: 'RAFİNE ŞEKERSİZ',
+                        'image' => !empty($dbr['image']) ? $dbr['image'] : 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80',
                         'description' => $dbr['subtitle'] ?: $dbr['content'],
                         'ingredients' => $ingList,
                         'instructions' => $dbr['content']

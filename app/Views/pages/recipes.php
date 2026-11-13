@@ -2,166 +2,207 @@
 declare(strict_types=1);
 ?>
 
-<!-- Tarifler Sayfası: Sade, Ferah & Betella Stili Mimari -->
-<section class="editorial-subpage-section">
+<div class="bar-kitchen-page">
     <div class="container">
-        <!-- 1. Sade ve Güçlü Betella Stili Başlık -->
-        <div class="programs-hero-clean text-center">
-            <h1 class="programs-headline">TARİFLER</h1>
-            <p class="editorial-subpage-desc">Rafine şekersiz, fonksiyonel, anti-enflamatuar ve glisemik dengeli mutfak pratikleri</p>
+        <!-- 1. Üst Giriş Başlık Alanı (Hero Intro) -->
+        <section class="kitchen-hero-intro">
+            <div class="kitchen-kicker-row">
+                <span class="kitchen-kicker">NOURISH</span>
+                <span class="kitchen-kicker-line" aria-hidden="true"></span>
+            </div>
             
-            <!-- Betella Kapsül Toggle Seçici -->
-            <div class="betella-toggle-wrap">
-                <div class="betella-toggle-pill" role="tablist">
-                    <button type="button" class="betella-toggle-btn active" data-filter="all" role="tab" aria-selected="true">
-                        Tümü
-                    </button>
-                    <button type="button" class="betella-toggle-btn" data-filter="smoothie" role="tab" aria-selected="false">
-                        Smoothie
-                    </button>
-                    <button type="button" class="betella-toggle-btn" data-filter="meals" role="tab" aria-selected="false">
-                        Öğünler
-                    </button>
-                    <button type="button" class="betella-toggle-btn" data-filter="dessert" role="tab" aria-selected="false">
-                        Tatlılar
-                    </button>
-                    <button type="button" class="betella-toggle-btn" data-filter="drinks" role="tab" aria-selected="false">
-                        Detox İksirleri
-                    </button>
-                </div>
+            <h1 class="kitchen-headline">BAR KITCHEN</h1>
+            
+            <p class="kitchen-hero-desc">
+                Dengeli, gerçek ve bedeni destekleyen tarifler. Rafine şekersiz, anti-enflamatuar ve glisemik dengeli fonksiyonel mutfak pratikleri.
+            </p>
+        </section>
+
+        <!-- 2. Kategori Filtreleme Barı -->
+        <div class="kitchen-filter-bar" id="kitchenFilterBar">
+            <div class="kitchen-filter-nav" role="tablist">
+                <button type="button" class="kitchen-filter-btn active" data-filter="all">TÜM TARİFLER</button>
+                <span class="kitchen-filter-sep" aria-hidden="true">|</span>
+                <button type="button" class="kitchen-filter-btn" data-filter="breakfast">KAHVALTI</button>
+                <span class="kitchen-filter-sep" aria-hidden="true">|</span>
+                <button type="button" class="kitchen-filter-btn" data-filter="meals">ANA ÖĞÜN</button>
+                <span class="kitchen-filter-sep" aria-hidden="true">|</span>
+                <button type="button" class="kitchen-filter-btn" data-filter="snack">ATIŞTIRMALIK</button>
+                <span class="kitchen-filter-sep" aria-hidden="true">|</span>
+                <button type="button" class="kitchen-filter-btn" data-filter="dessert">TATLI</button>
+                <span class="kitchen-filter-sep" aria-hidden="true">|</span>
+                <button type="button" class="kitchen-filter-btn" data-filter="drinks">İÇECEK</button>
             </div>
         </div>
 
-        <!-- 2. Sade ve Net Tarif Kartları Izgarası -->
-        <div class="editorial-cards-grid" id="recipesGrid">
-            <?php foreach ($recipes as $item): ?>
-                <article class="editorial-clean-card" data-category="<?= htmlspecialchars($item['category']) ?>">
-                    <div class="editorial-card-top">
-                        <div class="editorial-meta-row">
-                            <span class="editorial-pill-tag"><?= htmlspecialchars($item['badge']) ?></span>
-                            <span class="editorial-meta-info">⏱ <?= htmlspecialchars($item['time']) ?> • <?= htmlspecialchars($item['calories']) ?></span>
-                        </div>
-                        <h2 class="editorial-card-title"><?= htmlspecialchars($item['title']) ?></h2>
-                        <p class="editorial-card-text"><?= htmlspecialchars($item['description']) ?></p>
+        <!-- 3. Alttaki Koyu Renkli & Ekstra Büyütülmüş Yuvarlak Tabaklı Kartlar -->
+        <div class="kitchen-dark-cards-grid" id="kitchenCardsGrid">
+            <?php foreach ($recipes as $idx => $item): ?>
+                <div class="kitchen-dark-card"
+                     data-index="<?= $idx ?>"
+                     data-category="<?= htmlspecialchars((string)($item['category'] ?? 'all')) ?>"
+                     data-title="<?= htmlspecialchars((string)($item['title'] ?? '')) ?>"
+                     data-time="<?= htmlspecialchars((string)($item['time'] ?? '')) ?>"
+                     data-badge="<?= htmlspecialchars((string)($item['badge'] ?? '')) ?>"
+                     data-image="<?= htmlspecialchars((string)($item['image'] ?? '')) ?>"
+                     data-desc="<?= htmlspecialchars((string)($item['description'] ?? '')) ?>"
+                     data-ingredients='<?= json_encode($item['ingredients'] ?? [], JSON_HEX_APOS | JSON_HEX_QUOT) ?>'
+                     data-instructions="<?= htmlspecialchars((string)($item['instructions'] ?? '')) ?>"
+                     role="button"
+                     tabindex="0"
+                     aria-label="<?= htmlspecialchars((string)$item['title']) ?>">
+                    
+                    <!-- Sol Üstten Dışarı Taşarak Gelen Ekstra Büyütülmüş Yuvarlak Tabak -->
+                    <img src="<?= htmlspecialchars((string)($item['image'] ?? '')) ?>" 
+                         alt="<?= htmlspecialchars((string)$item['title']) ?>" 
+                         class="kitchen-dark-card-plate" 
+                         loading="lazy" />
+
+                    <!-- Sağ Üst: Süre ve Yukarı Alınan Ok Butonu -->
+                    <div class="kitchen-dark-card-top-meta">
+                        <span class="kitchen-dark-card-time"><?= htmlspecialchars((string)$item['time']) ?></span>
+                        <span class="kitchen-dark-card-arrow" aria-hidden="true">&rarr;</span>
                     </div>
 
-                    <div class="editorial-card-middle">
-                        <h4 class="editorial-sub-title">ÖNE ÇIKAN İÇERİKLER</h4>
-                        <ul class="editorial-bullet-list">
-                            <?php foreach (array_slice($item['ingredients'], 0, 3) as $ing): ?>
-                                <li>
-                                    <span class="betella-check" aria-hidden="true">
-                                        <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                                            <circle cx="10" cy="10" r="10" fill="#111111"/>
-                                            <path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                    <span><?= htmlspecialchars($ing) ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                    <!-- Kart İçerik (Kalori kaldırıldı, yükseklik daraltıldı) -->
+                    <div class="kitchen-dark-card-content">
+                        <h4 class="kitchen-dark-card-title"><?= htmlspecialchars((string)$item['title']) ?></h4>
+                        <span class="kitchen-dark-card-sub"><?= htmlspecialchars((string)($item['badge'] ?? 'FONKSİYONEL TABAK')) ?></span>
                     </div>
-
-                    <div class="editorial-card-bottom">
-                        <button type="button" class="btn-clean-plan btn-recipe-modal" 
-                                data-title="<?= htmlspecialchars($item['title']) ?>"
-                                data-badge="<?= htmlspecialchars($item['badge']) ?>"
-                                data-time="<?= htmlspecialchars($item['time']) ?>"
-                                data-calories="<?= htmlspecialchars($item['calories']) ?>"
-                                data-ingredients='<?= json_encode($item['ingredients'], JSON_HEX_APOS | JSON_HEX_QUOT) ?>'
-                                data-instructions="<?= htmlspecialchars($item['instructions']) ?>">
-                            TARİFİ İNCELE
-                        </button>
-                    </div>
-                </article>
+                </div>
             <?php endforeach; ?>
         </div>
-
-        <!-- 3. Alt Danışma / Destek Kutusu -->
-        <div class="programs-minimal-footer text-center">
-            <p>Kişiye özel beslenme ve yağ yakımı protokolleri için <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba,%20beslenme%20tarifleri%20ve%20planlar%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." target="_blank" rel="noopener noreferrer">WhatsApp üzerinden doğrudan danışın &rarr;</a></p>
-        </div>
     </div>
-</section>
+</div>
 
-<!-- Tarif Detay Modal Penceresi -->
-<div id="recipeModal" class="clean-editorial-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modalRecipeTitle">
-    <div class="modal-backdrop-clean" id="recipeModalBackdrop"></div>
-    <div class="modal-content-clean">
-        <button type="button" class="modal-close-clean" id="recipeModalClose" aria-label="Kapat">&times;</button>
-        <span class="editorial-pill-tag" id="modalRecipeBadge"></span>
-        <h3 class="modal-recipe-heading" id="modalRecipeTitle"></h3>
-        <p class="modal-recipe-meta" id="modalRecipeMeta"></p>
-
-        <div class="modal-recipe-body">
-            <h4 class="editorial-sub-title">MALZEMELER</h4>
-            <ul class="editorial-bullet-list" id="modalRecipeIngredients"></ul>
-
-            <h4 class="editorial-sub-title" style="margin-top: 1.5rem;">HAZIRLANIŞI</h4>
-            <p class="modal-instructions-text" id="modalRecipeInstructions"></p>
-        </div>
+<!-- Tarif Detay Modal Penceresi (Sol Bordo Blok + Sağ İçerik) -->
+<div id="recipeModal" class="recipe-notebook-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="modalRecipeTitle">
+    <div class="notebook-modal-backdrop" id="recipeModalBackdrop"></div>
+    <div class="recipe-split-modal-card">
+        <!-- Kapat Butonu -->
+        <button type="button" class="notebook-modal-close" id="recipeModalClose" aria-label="Kapat">&times;</button>
         
+        <!-- Sol Taraf: Bordo Kalın Blok & Görsel -->
+        <div class="modal-bordeaux-col">
+            <div class="modal-bordeaux-header">
+                <span class="modal-bordeaux-kicker">✦ TARİF DEFTERİ</span>
+                <span class="modal-bordeaux-time" id="modalRecipeMeta"></span>
+            </div>
 
+            <div class="modal-bordeaux-plate-wrap">
+                <img id="modalRecipeImg" src="" alt="Tarif Görseli" class="modal-bordeaux-plate-img" style="display: none;" />
+            </div>
+
+            <div class="modal-bordeaux-badge-wrap">
+                <span class="modal-bordeaux-pill" id="modalRecipeBadge"></span>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: İçerik Alanı -->
+        <div class="modal-content-col">
+            <div class="modal-content-header">
+                <h3 class="notebook-recipe-title" id="modalRecipeTitle"></h3>
+            </div>
+
+            <!-- Defter İçi Kaydırılabilir Bölüm -->
+            <div class="notebook-body-scroll">
+                <div class="notebook-section">
+                    <div class="notebook-section-header">
+                        <span class="notebook-section-title">MALZEMELER</span>
+                        <span class="notebook-rule-line" aria-hidden="true"></span>
+                    </div>
+                    <ul class="notebook-ingredients-list" id="modalRecipeIngredients"></ul>
+                </div>
+
+                <div class="notebook-section" style="margin-top: 1rem;">
+                    <div class="notebook-section-header">
+                        <span class="notebook-section-title">HAZIRLANIŞI</span>
+                        <span class="notebook-rule-line" aria-hidden="true"></span>
+                    </div>
+                    <p class="notebook-instructions-text" id="modalRecipeInstructions"></p>
+                </div>
+            </div>
+
+            <!-- Defter Alt Sayfa İmzası -->
+            <div class="notebook-footer-sign">
+                <span>FIZYOBAR • NOURISH NOTEBOOK</span>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Kategori Filtreleme
-    const filterBtns = document.querySelectorAll('.betella-toggle-btn');
-    const cards = document.querySelectorAll('.editorial-clean-card');
+    // 1. Kartlar ve Filtreleme
+    const cards = Array.from(document.querySelectorAll('.kitchen-dark-card'));
+    const filterBtns = document.querySelectorAll('.kitchen-filter-btn');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => {
-                b.classList.remove('active');
-                b.setAttribute('aria-selected', 'false');
-            });
-            this.classList.add('active');
-            this.setAttribute('aria-selected', 'true');
-
-            const filter = this.dataset.filter;
-            cards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // Tarif Detay Modalı
+    // 2. Modal Açma / Kapatma (Tarif Defteri)
     const modal = document.getElementById('recipeModal');
     const modalClose = document.getElementById('recipeModalClose');
     const backdrop = document.getElementById('recipeModalBackdrop');
-    const modalBtns = document.querySelectorAll('.btn-recipe-modal');
-
+    const mImg = document.getElementById('modalRecipeImg');
     const mBadge = document.getElementById('modalRecipeBadge');
     const mTitle = document.getElementById('modalRecipeTitle');
     const mMeta = document.getElementById('modalRecipeMeta');
     const mIng = document.getElementById('modalRecipeIngredients');
     const mInst = document.getElementById('modalRecipeInstructions');
 
-    modalBtns.forEach(btn => {
+    function openModal(data) {
+        mTitle.textContent = data.title || '';
+        mBadge.textContent = data.badge || '';
+        mMeta.textContent = '⏱ ' + (data.time || '15 dk');
+        mInst.textContent = data.instructions || '';
+
+        if (data.image) {
+            mImg.src = data.image;
+            mImg.alt = data.title || '';
+            mImg.style.display = 'block';
+        } else {
+            mImg.style.display = 'none';
+        }
+
+        mIng.innerHTML = '';
+        try {
+            const ings = JSON.parse(data.ingredients || '[]');
+            ings.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = '<span class="notebook-bullet-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#391214"/><path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>' + item + '</span>';
+                mIng.appendChild(li);
+            });
+        } catch(err) {}
+
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            openModal(this.dataset);
+        });
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(this.dataset);
+            }
+        });
+    });
+
+    // 3. Kategori Filtreleme
+    filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
-            mTitle.textContent = this.dataset.title;
-            mBadge.textContent = this.dataset.badge;
-            mMeta.textContent = '⏱ Hazırlık: ' + this.dataset.time + ' • Kalori: ' + this.dataset.calories;
-            mInst.textContent = this.dataset.instructions;
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
 
-            mIng.innerHTML = '';
-            try {
-                const ings = JSON.parse(this.dataset.ingredients);
-                ings.forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = '<span class="betella-check" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#111111"/><path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>' + item + '</span>';
-                    mIng.appendChild(li);
-                });
-            } catch(e) {}
+            const filter = this.dataset.filter;
 
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
+            cards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         });
     });
 
@@ -170,8 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     }
 
-    modalClose.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (backdrop) backdrop.addEventListener('click', closeModal);
 });
 </script>
-

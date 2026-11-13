@@ -33,83 +33,60 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- Gizli SVG Renk Akışı Tanımı (Bordo - Siyah - Gri Tonlarında Kesintisiz Slow Geçiş) -->
-<svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
-    <defs>
-        <linearGradient id="physioFlowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%">
-                <animate attributeName="stop-color" 
-                         values="#391214;#111111;#6b7280;#1f2937;#4a0e17;#391214" 
-                         dur="14s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="50%">
-                <animate attributeName="stop-color" 
-                         values="#111111;#52525b;#4a0e17;#18181b;#6b7280;#111111" 
-                         dur="14s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="100%">
-                <animate attributeName="stop-color" 
-                         values="#6b7280;#4a0e17;#111111;#52525b;#18181b;#6b7280" 
-                         dur="14s" repeatCount="indefinite" />
-            </stop>
-        </linearGradient>
-    </defs>
-</svg>
-
 <!-- 2. Minimalist İkon Alanı (Çerçevesiz, Geniş Boşluklu & Kalın İkonlar) -->
 <section class="physio-pillars-section" aria-label="Fizyobar İkonlar">
     <div class="container">
         <div class="physio-icons-grid">
-            <!-- 1. Dambıl (Dumbbell) -->
-            <div class="physio-icon-item" title="Dumbbell">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="16" y1="32" x2="48" y2="32" stroke-width="5.5"/>
-                    <rect x="7" y="17" width="11" height="30" rx="5.5" stroke-width="4.8"/>
-                    <rect x="46" y="17" width="11" height="30" rx="5.5" stroke-width="4.8"/>
-                    <line x1="21" y1="27" x2="21" y2="37" stroke-width="4.8"/>
-                    <line x1="43" y1="27" x2="43" y2="37" stroke-width="4.8"/>
+            <!-- 1. Açık Kitap (Open Book) -->
+            <div class="physio-icon-item" title="Kitap">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 20c7-3.5 16-3 24 2v24c-8-4.5-17-5-24-2V20z"/>
+                    <path d="M56 20c-7-3.5-16-3-24 2v24c8-4.5 17-5 24-2V20z"/>
                 </svg>
             </div>
 
-            <!-- 2. El Yayı (Hand Gripper) -->
-            <div class="physio-icon-item" title="Hand Gripper">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M26 23a6.5 6.5 0 1 1 12 0" stroke-width="4.8"/>
-                    <path d="M27 23L19 49" stroke-width="4.8"/>
-                    <path d="M37 23L45 49" stroke-width="4.8"/>
-                    <line x1="23.5" y1="33" x2="19" y2="48" stroke-width="9" stroke-linecap="round"/>
-                    <line x1="40.5" y1="33" x2="45" y2="48" stroke-width="9" stroke-linecap="round"/>
+            <!-- 2. Topluluk (Community / 3 Kişi) -->
+            <div class="physio-icon-item" title="Topluluk">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="32" cy="19" r="6.5"/>
+                    <path d="M19 46c0-7 5.8-12 13-12s13 5 13 12"/>
+                    <circle cx="17" cy="24" r="5"/>
+                    <path d="M9 46c0-5 3.5-8.5 7.5-9.5"/>
+                    <circle cx="47" cy="24" r="5"/>
+                    <path d="M47.5 36.5c4 1 7.5 4.5 7.5 9.5"/>
                 </svg>
             </div>
 
-            <!-- 3. Egzersiz Bisikleti (Exercise Bike) -->
-            <div class="physio-icon-item" title="Exercise Bike">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14 48h34a3 3 0 0 0 3-3c0-11-8.5-19.5-19.5-19.5H20a10 10 0 0 0-10 10v7.5a5 5 0 0 0 4 5z" stroke-width="4.8"/>
-                    <circle cx="28" cy="38" r="4.2" stroke-width="4.5"/>
-                    <path d="M31 41l6 6" stroke-width="4.5"/>
-                    <path d="M21 26L18 16" stroke-width="4.8"/>
-                    <path d="M12 16h13a2 2 0 0 0 0-4h-13a2 2 0 0 0 0 4z" stroke-width="4.8"/>
-                    <path d="M43 28L48 14" stroke-width="4.8"/>
-                    <path d="M44 14h9c2 0 3-1.5 2.5-3" stroke-width="4.8"/>
+            <!-- 3. Havan ve Tokmak (Mortar and Pestle) -->
+            <div class="physio-icon-item" title="Havan ve Tokmak">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M47 16l-13 16"/>
+                    <path d="M44 13l5 5"/>
+                    <path d="M13 28h38"/>
+                    <path d="M15 28c0 12 7.5 19 17 19s17-7 17-19"/>
+                    <path d="M25 47h14"/>
                 </svg>
             </div>
 
-            <!-- 4. Kas / Güçlü Kol (Flexed Bicep Arm) -->
-            <div class="physio-icon-item" title="Flexed Arm">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M21 16c-5.5 0-9 4.5-9 11 0 10 8 18.5 19 18.5 7 0 13-4 15.5-9.5 2.5-5.5 1-11-3.5-13.5-4-2.5-8.5-1-11 3-3-5.5-7-8.5-11-8.5z" stroke-width="4.8"/>
-                    <path d="M22 31c3.5 2 8 1.5 11-1.5" stroke-width="4.8"/>
+            <!-- 4. Lotus Çiçeği (Lotus Flower) -->
+            <div class="physio-icon-item" title="Lotus Çiçeği">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M32 15c-5 9-5 22 0 31c5-9 5-22 0-31z"/>
+                    <path d="M32 46c-9-3-17-12-16-22c6 2 13 10 16 22z"/>
+                    <path d="M32 46c9-3 17-12 16-22c-6 2-13 10-16 22z"/>
+                    <path d="M23 44c-7 1-13-4-14-10c5 0 11 4 14 10z"/>
+                    <path d="M41 44c7 1 13-4 14-10c-5 0-11 4-14 10z"/>
                 </svg>
             </div>
 
-            <!-- 5. Su Şişesi / Matara (Water Shaker Bottle) -->
-            <div class="physio-icon-item" title="Water Bottle">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="url(#physioFlowGrad)" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M32 7v5" stroke-width="4.8"/>
-                    <rect x="23" y="12" width="18" height="6" rx="3" stroke-width="4.8"/>
-                    <line x1="18" y1="18" x2="46" y2="18" stroke-width="4.8"/>
-                    <path d="M19 18l3 13c.6 2.5 0 5-1.5 7.5L19 50a3 3 0 0 0 3 3h20a3 3 0 0 0 3-3l-1.5-11.5c-1.5-2.5-2.1-5-1.5-7.5l3-13" stroke-width="4.8"/>
+            <!-- 5. El Yayı (Hand Gripper) -->
+            <div class="physio-icon-item" title="El Yayı">
+                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M26 23a6.5 6.5 0 1 1 12 0"/>
+                    <path d="M27 23L19 49"/>
+                    <path d="M37 23L45 49"/>
+                    <line x1="23.5" y1="33" x2="19" y2="48" stroke-width="8" stroke-linecap="round"/>
+                    <line x1="40.5" y1="33" x2="45" y2="48" stroke-width="8" stroke-linecap="round"/>
                 </svg>
             </div>
         </div>
@@ -459,49 +436,49 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="trans-edge-fog edge-right" aria-hidden="true"></div>
 
         <div class="transformation-track" id="transTrack">
-            <!-- Kart 1 -->
+            <!-- Kart 1 (Vaka 1) -->
             <div class="trans-card is-active" data-index="0">
                 <div class="card-inner">
                     <div class="card-face card-front">
-                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-1-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
-                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-1-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Kart 2 -->
+            <!-- Kart 2 (Vaka 2) -->
             <div class="trans-card" data-index="1">
                 <div class="card-inner">
                     <div class="card-face card-front">
-                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-2-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
-                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-2-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Kart 3 -->
+            <!-- Kart 3 (Vaka 3) -->
             <div class="trans-card" data-index="2">
                 <div class="card-inner">
                     <div class="card-face card-front">
-                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-3-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
-                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-3-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Kart 4 -->
+            <!-- Kart 4 (Vaka 4 - Klasik) -->
             <div class="trans-card" data-index="3">
                 <div class="card-inner">
                     <div class="card-face card-front">
@@ -515,29 +492,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
 
-            <!-- Kart 5 -->
+            <!-- Kart 5 (Vaka 1 Alternatif Açı) -->
             <div class="trans-card" data-index="4">
                 <div class="card-inner">
                     <div class="card-face card-front">
-                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-1-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
-                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-1-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Kart 6 -->
+            <!-- Kart 6 (Vaka 2 Alternatif Açı) -->
             <div class="trans-card" data-index="5">
                 <div class="card-inner">
                     <div class="card-face card-front">
-                        <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-2-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
-                        <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
+                        <img src="<?= asset('assets/images/trans-2-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
                 </div>

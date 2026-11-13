@@ -108,6 +108,7 @@ Router::get('/detox', [ProgramController::class, 'detox']);
 Router::get('/detox-kampi', [ProgramController::class, 'detox']);
 Router::get('/online-detox', [ProgramController::class, 'detox']);
 Router::get('/events', [EventController::class, 'index']);
+Router::get('/etkinlikler', [EventController::class, 'index']);
 Router::get('/duyurular', [EventController::class, 'announcements']);
 Router::get('/announcements', [EventController::class, 'announcements']);
 Router::get('/haberler', [EventController::class, 'news']);

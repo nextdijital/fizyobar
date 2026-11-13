@@ -33,12 +33,13 @@
 <?php
 $cleanUri = trim($currentUri ?? '', '/');
 $isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
+$isKitchenPage = (str_contains($cleanUri, 'recipes') || str_contains($cleanUri, 'tarifler') || str_contains($cleanUri, 'bar-kitchen') || str_contains($cleanUri, 'kitchen'));
 $isDarkPage = ($isDarkPage ?? false)
     || str_contains($cleanUri, 'articles')
     || str_contains($cleanUri, 'makaleler');
 $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($cleanUri, 'find-program');
 ?>
-<body class="<?= $isFinderPage ? 'body-finder-pure-white' : '' ?>">
+<body class="<?= $isFinderPage ? 'body-finder-pure-white' : ($isKitchenPage ? 'body-kitchen-dark' : '') ?>">
 <?php if ($isFinderPage): ?>
     <!-- PROGRAMINI BUL: SADECE BEYAZ SAYFA, SOLDA GERİ DÖN, ORTADA FİZYOBAR LOGOSU -->
     <header class="finder-clean-header" id="finderHeader">
@@ -73,7 +74,7 @@ $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($clean
     </div>
 
     <!-- Gezinme Çubuğu (Editorial Mimarisi: Sol Menü • Orta Logo • Sağ Aksiyon) -->
-    <header class="site-header <?= $isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : '') ?>" id="siteHeader">
+    <header class="site-header <?= $isKitchenPage ? 'header-kitchen-dark' : ($isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : '')) ?>" id="siteHeader">
         <div class="header-container">
             <!-- 1. Sol Menü (Betella Mimarisi: STUDIO • BAR KITCHEN • PROGRAMLAR • ETKİNLİKLER • KURUMSAL) -->
             <nav class="header-nav-left" id="navMenu">
