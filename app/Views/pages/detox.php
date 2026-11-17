@@ -24,30 +24,42 @@ declare(strict_types=1);
                 <!-- Öne Çıkan Hızlı Metrikler -->
                 <div class="detox-metrics-grid">
                     <div class="detox-metric-box">
-                        <span class="metric-val">16+</span>
-                        <span class="metric-lbl">Canlı Online Seans</span>
+                        <span class="metric-val">⚡ +12</span>
+                        <span class="metric-lbl">Antrenman &amp; Seans</span>
                     </div>
                     <div class="detox-metric-box">
-                        <span class="metric-val">28 Gün</span>
-                        <span class="metric-lbl">Birebir WhatsApp Takibi</span>
+                        <span class="metric-val">📅 +28</span>
+                        <span class="metric-lbl">Gün Dönüşüm Takvimi</span>
                     </div>
                     <div class="detox-metric-box">
-                        <span class="metric-val">GLP-1</span>
-                        <span class="metric-lbl">Şekersiz Beslenme Kılavuzu</span>
+                        <span class="metric-val">🏡 +%100</span>
+                        <span class="metric-lbl">Ekipmansız Ev Pratiği</span>
                     </div>
                     <div class="detox-metric-box">
-                        <span class="metric-val">∞</span>
-                        <span class="metric-lbl">Sınırsız Kayıt Erişimi</span>
+                        <span class="metric-val">🎁 3'lü</span>
+                        <span class="metric-lbl">Meditasyon Paketi Hediye</span>
+                    </div>
+                </div>
+
+                <!-- Kontenjan Doluluk Barı -->
+                <div class="quota-occupancy-card" style="max-width: 620px; margin: 1.8rem auto 1.5rem; text-align: left;">
+                    <div class="quota-header">
+                        <span class="quota-badge">
+                            <span class="quota-pulse-dot"></span> CANLI DÖNEM KONTENJANI
+                        </span>
+                        <span class="quota-count">Son <strong>8</strong> Kişilik Yer Kaldı</span>
+                    </div>
+                    <div class="quota-bar-track">
+                        <div class="quota-bar-fill" style="width: 87%;">
+                            <span class="quota-percent-label">%87 DOLU</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- CTA Aksiyon Butonları -->
-                <div class="detox-hero-actions">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-detox-primary">
-                        KAMPA HEMEN KAYIT OL &rarr;
-                    </a>
-                    <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba%20Betina%20Hocam,%204%20Haftal%C4%B1k%20Online%20Detox%20ve%20Yoga%20Kamp%C4%B1%20hakk%C4%B1nda%20bilgi%20ve%20kontenjan%20dan%C4%B1%C5%9Fmak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn-detox-outline">
-                        WHATSAPP İLE DANIŞ
+                <div class="detox-hero-actions" style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                    <a href="<?= url('/checkout/1') ?>" class="btn-yogi-cta">
+                        <span class="btn-yogi-icon">⚡</span> 500+ KALİSTHENİCS YOGİ ARASINA KATIL &rarr;
                     </a>
                 </div>
             </div>
@@ -217,26 +229,44 @@ declare(strict_types=1);
                 <p class="pricing-subtitle">Kontenjan kalitesi için katılımcı sayısı sınırlı tutulmaktadır.</p>
 
                 <div class="pricing-amount">
-                    <span class="price-val">4.500 ₺</span>
-                    <span class="price-term">/ 4 haftalık program, takip ve arşiv dahil</span>
+                    <span class="price-val">1.850 ₺</span>
+                    <span class="price-term">/ 4 haftalık program, 12 antrenman ve arşiv dahil</span>
+                </div>
+
+                <!-- Paket İçeriği -->
+                <div class="package-specs-highlight" style="justify-content: center; margin: 1.2rem 0;">
+                    <span class="spec-pill"><span class="spec-icon">⚡</span> <strong>+12</strong> antrenman</span>
+                    <span class="spec-pill"><span class="spec-icon">📅</span> <strong>+28</strong> gün</span>
+                    <span class="spec-pill"><span class="spec-icon">🏡</span> <strong>+%100</strong> ekipmansız</span>
+                </div>
+
+                <!-- Program Hedefleri -->
+                <div class="package-goals-box" style="margin: 1.2rem auto; max-width: 580px;">
+                    <h4 class="goals-title">🎯 Program Hedefleri:</h4>
+                    <ul class="goals-list">
+                        <li><strong>Metabolik Sıfırlama:</strong> Şekersiz beslenmeyle ödem atımı ve kalıcı yağ yakımı.</li>
+                        <li><strong>Biyomekanik Postür:</strong> Omurga ve eklem dekompresyonuyla dik duruş.</li>
+                        <li><strong>Kalisthenics Güç:</strong> %100 vücut ağırlığıyla derin kas dayanıklılığı.</li>
+                        <li><strong>Sinir Sistemi:</strong> Vagus nefesiyle kortizolü düşürme ve derin uyku.</li>
+                    </ul>
                 </div>
 
                 <div class="pricing-checks-list">
                     <div class="check-row">
                         <span class="check-icon">✓</span>
-                        <span>16+ Canlı Seans ve Soru-Cevap Atölyeleri</span>
+                        <span>12 Modüler Antrenman &amp; Canlı Atölyeler</span>
+                    </div>
+                    <div class="check-row">
+                        <span class="check-icon">✓</span>
+                        <span>Fizyobar Kitchen (Rafine Şekersiz Bütünsel Tarifler)</span>
                     </div>
                     <div class="check-row">
                         <span class="check-icon">✓</span>
                         <span>Fizyoterapist ile Birebir WhatsApp İletişimi &amp; Takip</span>
                     </div>
                     <div class="check-row">
-                        <span class="check-icon">✓</span>
-                        <span>Aç Kalmadan GLP-1 Doğal Doygunluk Beslenme Rehberi</span>
-                    </div>
-                    <div class="check-row">
-                        <span class="check-icon">✓</span>
-                        <span>Kaçıranlar İçin Panelde Ömür Boyu Arşiv Kayıtları</span>
+                        <span class="check-icon">🎁</span>
+                        <span style="font-weight: 700; color: #b8860b;">HEDİYE: 3'lü Meditasyon &amp; Vagus Sinir Paketi (Ücretsiz Dahil)</span>
                     </div>
                     <div class="check-row">
                         <span class="check-icon">✓</span>
@@ -244,12 +274,9 @@ declare(strict_types=1);
                     </div>
                 </div>
 
-                <div class="pricing-action-wrap">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-pricing-join">
-                        KAMPA KATIL &rarr;
-                    </a>
-                    <a href="<?= __('brand.whatsapp_url') ?>?text=Merhaba%20Betina%20Hocam,%204%20Haftal%C4%B1k%20Detox%20Kamp%C4%B1%20kayd%C4%B1%20hakk%C4%B1nda%20konu%C5%9Fmak%20istiyorum." target="_blank" rel="noopener noreferrer" class="btn-pricing-wa">
-                        WhatsApp ile Kontenjan Sor
+                <div class="pricing-action-wrap" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.5rem;">
+                    <a href="<?= url('/checkout/1') ?>" class="btn-yogi-cta" style="padding: 1rem 2rem !important;">
+                        <span class="btn-yogi-icon">🔥</span> 500+ KALİSTHENİCS YOGİ ARASINA KATIL &rarr;
                     </a>
                 </div>
 

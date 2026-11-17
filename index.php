@@ -104,6 +104,7 @@ Router::get('/programini-bul', [ProgramController::class, 'finder']);
 Router::get('/find-program', [ProgramController::class, 'finder']);
 Router::get('/metod', [MetodController::class, 'index']);
 Router::get('/programs', [ProgramController::class, 'index']);
+Router::get('/programlar', [ProgramController::class, 'index']);
 Router::get('/detox', [ProgramController::class, 'detox']);
 Router::get('/detox-kampi', [ProgramController::class, 'detox']);
 Router::get('/online-detox', [ProgramController::class, 'detox']);
@@ -144,6 +145,8 @@ Router::get('/course/{slug}', [StudentController::class, 'viewCourse']);
 Router::get('/course/{slug}/lesson/{id}', [StudentController::class, 'viewLesson']);
 Router::post('/api/lesson/complete', [StudentController::class, 'completeLesson']);
 Router::post('/api/movement/toggle-mode', [StudentController::class, 'toggleLockMode']);
+Router::post('/api/student/task/complete', [StudentController::class, 'completeTask']);
+Router::post('/student/task/complete', [StudentController::class, 'completeTask']);
 Router::post('/api/profile/update', [StudentController::class, 'updateProfile']);
 Router::post('/api/profile/password', [StudentController::class, 'changePassword']);
 
@@ -180,11 +183,30 @@ Router::post('/xpanel/enrollments/delete', [XpanelController::class, 'deleteEnro
 Router::post('/xpanel/enrollments/approve', [XpanelController::class, 'approveEnrollment']);
 Router::post('/xpanel/enrollments/reject', [XpanelController::class, 'rejectEnrollment']);
 Router::get('/xpanel/users', [XpanelController::class, 'users']);
+Router::get('/xpanel/users/{id}', [XpanelController::class, 'userDetail']);
+Router::post('/xpanel/users/update', [XpanelController::class, 'updateUserDetails']);
 Router::post('/xpanel/users/status', [XpanelController::class, 'updateUserStatus']);
 Router::post('/xpanel/users/role', [XpanelController::class, 'updateUserRole']);
 Router::post('/xpanel/users/password', [XpanelController::class, 'resetUserPassword']);
 Router::post('/xpanel/users/delete', [XpanelController::class, 'deleteUser']);
 Router::post('/xpanel/users/enroll', [XpanelController::class, 'enrollUser']);
+Router::post('/xpanel/users/task/create', [XpanelController::class, 'createUserTask']);
+Router::post('/xpanel/users/task/status', [XpanelController::class, 'updateUserTaskStatus']);
+Router::post('/xpanel/users/task/delete', [XpanelController::class, 'deleteUserTask']);
+Router::post('/xpanel/users/loyalty/adjust', [XpanelController::class, 'adjustUserLoyalty']);
+Router::post('/xpanel/users/gift/grant', [XpanelController::class, 'grantGiftPackage']);
+Router::post('/xpanel/users/note/save', [XpanelController::class, 'saveUserNote']);
+Router::post('/xpanel/users/note/delete', [XpanelController::class, 'deleteUserNote']);
+
+// Sayfa & Ön Yüz İçerik Yönetimi
+Router::get('/xpanel/pages', [XpanelController::class, 'pages']);
+Router::post('/xpanel/pages/save', [XpanelController::class, 'savePage']);
+Router::post('/xpanel/upload-image', [XpanelController::class, 'uploadImage']);
+
+// Duyurular & Bülten Yönetimi
+Router::get('/xpanel/announcements', [XpanelController::class, 'announcements']);
+Router::post('/xpanel/announcements/save', [XpanelController::class, 'saveAnnouncement']);
+Router::post('/xpanel/announcements/delete', [XpanelController::class, 'deleteAnnouncement']);
 
 // Studio & İçerik Yönetimi (Tarifler, Rehberler, Mikro Rutinler)
 Router::get('/xpanel/nutrition', [XpanelController::class, 'nutrition']);

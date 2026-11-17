@@ -140,9 +140,15 @@ class Router
             exit;
         }
 
-        // POST isteklerinde otomatik CSRF doğrulaması (Genel arama/danışma API'leri hariç)
+        // POST isteklerinde otomatik CSRF doğrulaması (Genel arama/danışma API'leri ve local xpanel login hariç)
         if ($method === 'POST') {
-            $csrfExempt = ['/api/ai-chat', '/api/find-program-ai', '/api/lesson/complete', '/api/movement/toggle-mode'];
+            $csrfExempt = [
+                '/api/ai-chat', 
+                '/api/find-program-ai', 
+                '/api/lesson/complete', 
+                '/api/movement/toggle-mode',
+                '/xpanel/login/process'
+            ];
             if (!in_array($normalizedPath, $csrfExempt, true) && !Csrf::validate()) {
                 http_response_code(403);
                 if ($firstSegment === 'api') {

@@ -3,468 +3,195 @@ declare(strict_types=1);
 $currentUri = \Core\Router::getCurrentUri();
 $adminUser = \Core\Auth::user();
 $pendingCount = (int)(\Core\Database::fetch("SELECT COUNT(*) as cnt FROM enrollments WHERE payment_status = 'pending'")['cnt'] ?? 0);
+$currentTab = $_GET['tab'] ?? ($currentUri === '/xpanel/pages' || str_contains($currentUri, 'pages') ? 'home' : '');
+$isPagesRoute = str_contains($currentUri, 'pages');
 ?>
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="tr" dir="ltr" class="xp-html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($metaTitle ?? 'xPanel Yönetim Merkezi') ?> | Fizyobar</title>
+    <title><?= e($metaTitle ?? 'Yönetim Merkezi') ?> | Fizyobar</title>
     <meta name="robots" content="noindex, nofollow">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= asset('assets/css/xpanel.css') ?>?v=<?= time() ?>">
+
+    <!-- Global Scrollbar Ayarları (Tablolarda Yatay Scrollbar Görünür) -->
     <style>
-        :root {
-            --xp-sidebar-bg: #0d0d0f;
-            --xp-sidebar-width: 275px;
-            --xp-sidebar-border: rgba(255, 255, 255, 0.08);
-            --xp-pill: 999px;
-            --xp-primary: #111111;
+        html, body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-
-        body.xpanel-body-layout {
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            font-family: 'Plus Jakarta Sans', var(--font-sans), -apple-system, sans-serif;
-            color: #0f172a;
-            min-height: 100vh;
-            display: flex;
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+            display: none;
         }
-
-        /* 1. SOL MENÜ (SIDEBAR) */
-        .xp-sidebar {
-            width: var(--xp-sidebar-width);
-            min-width: var(--xp-sidebar-width);
-            background-color: var(--xp-sidebar-bg);
-            color: #ffffff;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-right: 1px solid var(--xp-sidebar-border);
-            z-index: 1000;
-            box-sizing: border-box;
-            overflow-y: auto;
+        /* Tablolarda yatay kaydırma çubuğu her zaman temiz ve görünür olsun */
+        .xpanel-table-wrap {
+            scrollbar-width: thin !important;
+            scrollbar-color: #cbd5e1 #f8fafc !important;
         }
-
-        .xp-sidebar-brand {
-            padding: 1.75rem 1.5rem 1.25rem 1.5rem;
-            border-bottom: 1px solid var(--xp-sidebar-border);
+        .xpanel-table-wrap::-webkit-scrollbar {
+            height: 7px !important;
+            display: block !important;
         }
-
-        .xp-brand-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #ffffff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin: 0;
-            line-height: 1;
+        .xpanel-table-wrap::-webkit-scrollbar-track {
+            background: #f8fafc !important;
+            border-radius: 999px;
         }
-
-        .xp-brand-tag {
-            background: #ffffff;
-            color: #000000;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: var(--xp-pill);
-            letter-spacing: 0.08em;
+        .xpanel-table-wrap::-webkit-scrollbar-thumb {
+            background: #cbd5e1 !important;
+            border-radius: 999px;
         }
-
-        .xp-brand-motto {
-            font-size: 0.66rem;
-            color: #71717a;
-            margin-top: 0.5rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        /* Navigasyon Listesi */
-        .xp-nav-section {
-            padding: 1.25rem 0.85rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-
-        .xp-nav-label {
-            font-size: 0.66rem;
-            font-weight: 700;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: #52525b;
-            padding: 0.4rem 0.75rem;
-            margin-bottom: 0.2rem;
-            display: block;
-        }
-
-        .xp-nav-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.75rem 1.1rem;
-            color: #a1a1aa;
-            text-decoration: none;
-            border-radius: var(--xp-pill);
-            font-size: 0.84rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            letter-spacing: 0.01em;
-        }
-
-        .xp-nav-link:hover {
-            color: #ffffff;
-            background-color: rgba(255, 255, 255, 0.07);
-        }
-
-        .xp-nav-link.active {
-            color: #ffffff;
-            background: #1f1f23;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .xp-nav-link-left {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .xp-nav-icon {
-            font-size: 1rem;
-            width: 20px;
-            text-align: center;
-            display: inline-block;
-        }
-
-        .xp-badge-count {
-            background-color: #ef4444;
-            color: #ffffff;
-            padding: 2px 7px;
-            font-size: 0.68rem;
-            border-radius: var(--xp-pill);
-            font-weight: 700;
-        }
-
-        /* Alt Yönetici & Çıkış Kutusu */
-        .xp-sidebar-footer {
-            padding: 1.25rem;
-            border-top: 1px solid var(--xp-sidebar-border);
-            background: rgba(0, 0, 0, 0.25);
-        }
-
-        .xp-user-info-box {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.85rem;
-        }
-
-        .xp-user-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: #27272a;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .xp-user-meta {
-            overflow: hidden;
-        }
-
-        .xp-user-name {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #ffffff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .xp-user-role {
-            font-size: 0.68rem;
-            color: #71717a;
-        }
-
-        .xp-footer-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .xp-btn-side-action {
-            flex: 1;
-            text-align: center;
-            padding: 0.5rem 0.6rem;
-            font-size: 0.74rem;
-            font-weight: 600;
-            border-radius: var(--xp-pill);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .xp-btn-side-site {
-            background: rgba(255, 255, 255, 0.08);
-            color: #e4e4e7;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .xp-btn-side-site:hover {
-            background: rgba(255, 255, 255, 0.18);
-            color: #ffffff;
-        }
-
-        .xp-btn-side-logout {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.25);
-        }
-        .xp-btn-side-logout:hover {
-            background: #ef4444;
-            color: #ffffff;
-        }
-
-        /* 2. SAĞ İÇERİK ALANI (MAIN CONTENT) */
-        .xp-main-wrapper {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .xp-top-bar {
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 0.85rem 2.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 900;
-        }
-
-        .xp-breadcrumb {
-            font-size: 0.82rem;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .xp-content-area {
-            flex: 1;
-            padding: 2rem 2.5rem 3.5rem 2.5rem;
-            max-width: 1400px;
-            width: 100%;
-            box-sizing: border-box;
-            margin: 0 auto;
-        }
-
-        /* FİZYOBAR GENEL BUTON STANDARDI (OVAL / PILL) */
-        .xp-btn-pill-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-            background: #000000;
-            color: #ffffff !important;
-            border: 1px solid #000000;
-            border-radius: var(--xp-pill);
-            padding: 0.6rem 1.45rem;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.12);
-        }
-        .xp-btn-pill-primary:hover {
-            background: #27272a;
-            border-color: #27272a;
-            transform: translateY(-1px);
-        }
-
-        .xp-btn-pill-outline {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-            background: #ffffff;
-            color: #0f172a !important;
-            border: 1px solid #cbd5e1;
-            border-radius: var(--xp-pill);
-            padding: 0.5rem 1.25rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .xp-btn-pill-outline:hover {
-            border-color: #0f172a;
-            background: #f8fafc;
-        }
-
-        /* Tablo İçi Aksiyon Pill Butonları */
-        .xp-btn-action-pill {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.35rem 0.85rem;
-            font-size: 0.74rem;
-            font-weight: 600;
-            border-radius: var(--xp-pill);
-            text-decoration: none;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: 1px solid transparent;
-            line-height: 1.2;
-        }
-        .xp-btn-action-edit {
-            background: #f1f5f9;
-            color: #0f172a !important;
-            border-color: #cbd5e1;
-        }
-        .xp-btn-action-edit:hover {
-            background: #0f172a;
-            color: #ffffff !important;
-            border-color: #0f172a;
-        }
-        .xp-btn-action-approve {
-            background: #047857;
-            color: #ffffff !important;
-            border-color: #047857;
-        }
-        .xp-btn-action-approve:hover {
-            background: #065f46;
-        }
-        .xp-btn-action-danger {
-            background: #fef2f2;
-            color: #dc2626 !important;
-            border-color: #fecaca;
-        }
-        .xp-btn-action-danger:hover {
-            background: #dc2626;
-            color: #ffffff !important;
-        }
-
-        /* Kart ve Tablo Standartları */
-        .xpanel-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 1.75rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-            margin-bottom: 1.5rem;
-        }
-        .xpanel-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-        .xpanel-table th {
-            background-color: #f8fafc;
-            color: #64748b;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.72rem;
-            letter-spacing: 0.06em;
-            padding: 0.85rem 1rem;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .xpanel-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #f1f5f9;
-            color: #1e293b;
-        }
-        .xpanel-table tbody tr:hover {
-            background-color: #f8fafc;
+        .xpanel-table-wrap::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8 !important;
         }
     </style>
 </head>
-<body class="xpanel-body-layout">
+<body class="xp-body">
+
+    <!-- Mobilde Menü Açıldığında Karartma Katmanı -->
+    <div class="xp-sidebar-overlay" id="xpSidebarOverlay"></div>
 
     <!-- =========================================================================
-         SOL MENÜ (SIDEBAR NAVIGATION)
+         SOL SIDEBAR (YÖNETİM MENÜSÜ & PROFİL)
          ========================================================================= -->
-    <aside class="xp-sidebar">
-        <div>
-            <!-- Marka & Başlık -->
-            <div class="xp-sidebar-brand">
-                <a href="<?= url('/xpanel') ?>" class="xp-brand-title">
+    <aside class="xp-sidebar" id="xpSidebar">
+        <!-- Marka & Mobil Kapatma Butonu -->
+        <div class="xp-sidebar-brand">
+            <a href="<?= url('/xpanel') ?>" class="xp-brand-link">
+                <h1 class="xp-brand-title">
                     FİZYOBAR
-                    <span class="xp-brand-tag">XPANEL</span>
-                </a>
-                <div class="xp-brand-motto">BODY &bull; ADAPT &bull; REFRAME</div>
-            </div>
+                    <span class="xp-brand-tag">YÖNETİM</span>
+                </h1>
+                <span class="xp-brand-motto">BEDEN &bull; UYUM &bull; DÖNÜŞÜM</span>
+            </a>
+            <button type="button" class="xp-mobile-close-btn" id="xpSidebarClose" aria-label="Menüyü Kapat">
+                ✕
+            </button>
+        </div>
 
-            <!-- Menü Linkleri -->
+<?php
+$isCrmRoute = str_contains($currentUri, 'users') || str_contains($currentUri, 'enrollments') || str_contains($currentUri, 'courses') || str_contains($currentUri, 'announcements') || str_contains($currentUri, 'nutrition');
+?>
+        <!-- Bağımsız Kaydırılabilir Menü Öğeleri -->
+        <div class="xp-sidebar-nav-scroll">
             <nav class="xp-nav-section">
-                <span class="xp-nav-label">Yönetim Menüsü</span>
-
-                <a href="<?= url('/xpanel') ?>" class="xp-nav-link <?= $currentUri === '/xpanel' || $currentUri === '/tr/xpanel' ? 'active' : '' ?>">
-                    <span class="xp-nav-link-left">
+                <!-- 1. KONSOL -->
+                <a href="<?= url('/xpanel') ?>" class="xp-nav-link <?= ($currentUri === '/xpanel' || $currentUri === '/tr/xpanel') && !$isPagesRoute ? 'active' : '' ?>">
+                    <span class="xp-nav-left">
                         <span class="xp-nav-icon">📊</span>
                         <span>Genel Bakış</span>
                     </span>
                 </a>
 
-                <a href="<?= url('/xpanel/enrollments') ?>" class="xp-nav-link <?= str_contains($currentUri, 'enrollments') ? 'active' : '' ?>">
-                    <span class="xp-nav-link-left">
-                        <span class="xp-nav-icon">💳</span>
-                        <span>IBAN &amp; Ödemeler</span>
-                    </span>
-                    <?php if ($pendingCount > 0): ?>
-                        <span class="xp-badge-count" title="<?= $pendingCount ?> onay bekleyen ödeme"><?= $pendingCount ?></span>
-                    <?php endif; ?>
-                </a>
+                <!-- 2. ÖN YÜZ SAYFALARI & YAPILANDIRMA (AÇILIR KAPANIR ACCORDION) -->
+                <div class="xp-nav-group <?= $isPagesRoute ? 'is-open' : '' ?>" id="navGroupPages">
+                    <button type="button" class="xp-nav-group-header" onclick="toggleNavGroup('navGroupPages')">
+                        <span class="xp-nav-group-title">
+                            <span class="xp-nav-icon">🎨</span>
+                            <span>Ön Yüz Sayfaları</span>
+                        </span>
+                        <svg class="xp-nav-group-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="xp-nav-group-items">
+                        <a href="<?= url('/xpanel/pages?tab=header_nav') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'header_nav' ? 'active' : '' ?>">
+                            <span>🏷️</span>
+                            <span>Üst Menü, Logo &amp; Duyuru</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=home') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'home' ? 'active' : '' ?>">
+                            <span>🏠</span>
+                            <span>Ana Sayfa</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=programs') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'programs' ? 'active' : '' ?>">
+                            <span>🏋️</span>
+                            <span>Programlar &amp; Paketler</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=betina') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'betina' ? 'active' : '' ?>">
+                            <span>🧘</span>
+                            <span>Betina Tansuğ &amp; Metot</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=detox') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'detox' ? 'active' : '' ?>">
+                            <span>🌿</span>
+                            <span>Online Detoks Kampı</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=studio') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'studio' ? 'active' : '' ?>">
+                            <span>🥗</span>
+                            <span>Stüdyo &amp; Mutfak</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=events') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'events' ? 'active' : '' ?>">
+                            <span>📅</span>
+                            <span>Etkinlikler &amp; Haberler</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=corporate') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'corporate' ? 'active' : '' ?>">
+                            <span>🏢</span>
+                            <span>Kurumsal &amp; Wellness</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=find_program') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'find_program' ? 'active' : '' ?>">
+                            <span>🧭</span>
+                            <span>Programını Bul (Test)</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=footer_contact') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'footer_contact' ? 'active' : '' ?>">
+                            <span>📞</span>
+                            <span>İletişim, Alt Menü &amp; Sosyal</span>
+                        </a>
+                        <a href="<?= url('/xpanel/pages?tab=legal') ?>" class="xp-nav-sub-link <?= $isPagesRoute && $currentTab === 'legal' ? 'active' : '' ?>">
+                            <span>⚖️</span>
+                            <span>Yasal &amp; KVKK Metinleri</span>
+                        </a>
+                    </div>
+                </div>
 
-                <a href="<?= url('/xpanel/courses') ?>" class="xp-nav-link <?= str_contains($currentUri, 'courses') ? 'active' : '' ?>">
-                    <span class="xp-nav-link-left">
-                        <span class="xp-nav-icon">🎬</span>
-                        <span>Eğitim &amp; Videolar</span>
-                    </span>
-                </a>
+                <!-- 3. ÖĞRENCİ & KURSİYER YÖNETİMİ (AÇILIR KAPANIR ACCORDION) -->
+                <div class="xp-nav-group <?= $isCrmRoute ? 'is-open' : '' ?>" id="navGroupCrm">
+                    <button type="button" class="xp-nav-group-header" onclick="toggleNavGroup('navGroupCrm')">
+                        <span class="xp-nav-group-title">
+                            <span class="xp-nav-icon">👥</span>
+                            <span>Öğrenci &amp; Kursiyer Yönetimi</span>
+                            <?php if ($pendingCount > 0): ?>
+                                <span class="xp-badge-count" style="margin-left: 6px;"><?= $pendingCount ?></span>
+                            <?php endif; ?>
+                        </span>
+                        <svg class="xp-nav-group-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="xp-nav-group-items">
+                        <a href="<?= url('/xpanel/users') ?>" class="xp-nav-sub-link <?= str_contains($currentUri, 'users') ? 'active' : '' ?>">
+                            <span>👥</span>
+                            <span>Kullanıcılar &amp; Sadakat</span>
+                        </a>
+                        <a href="<?= url('/xpanel/enrollments') ?>" class="xp-nav-sub-link <?= str_contains($currentUri, 'enrollments') ? 'active' : '' ?>">
+                            <span>💳</span>
+                            <span>Banka &amp; Havale Ödemeleri</span>
+                            <?php if ($pendingCount > 0): ?>
+                                <span class="xp-badge-count" style="margin-left: auto;"><?= $pendingCount ?></span>
+                            <?php endif; ?>
+                        </a>
+                        <a href="<?= url('/xpanel/courses') ?>" class="xp-nav-sub-link <?= str_contains($currentUri, 'courses') ? 'active' : '' ?>">
+                            <span>🎬</span>
+                            <span>Eğitim &amp; Seanslar</span>
+                        </a>
+                        <a href="<?= url('/xpanel/announcements') ?>" class="xp-nav-sub-link <?= str_contains($currentUri, 'announcements') ? 'active' : '' ?>">
+                            <span>📢</span>
+                            <span>Duyurular &amp; Bülten</span>
+                        </a>
+                        <a href="<?= url('/xpanel/nutrition') ?>" class="xp-nav-sub-link <?= str_contains($currentUri, 'nutrition') ? 'active' : '' ?>">
+                            <span>🍏</span>
+                            <span>Mutfak &amp; Beslenme Rehberi</span>
+                        </a>
+                    </div>
+                </div>
 
-                <a href="<?= url('/xpanel/nutrition') ?>" class="xp-nav-link <?= str_contains($currentUri, 'nutrition') ? 'active' : '' ?>">
-                    <span class="xp-nav-link-left">
-                        <span class="xp-nav-icon">🍏</span>
-                        <span>Studio &amp; Tarif / Rehber</span>
-                    </span>
-                </a>
-
-                <a href="<?= url('/xpanel/users') ?>" class="xp-nav-link <?= str_contains($currentUri, 'users') ? 'active' : '' ?>">
-                    <span class="xp-nav-link-left">
-                        <span class="xp-nav-icon">👥</span>
-                        <span>Kullanıcılar &amp; İlerleme</span>
-                    </span>
-                </a>
-
+                <!-- 4. YAPILANDIRMA & AYARLAR -->
                 <a href="<?= url('/xpanel/settings') ?>" class="xp-nav-link <?= str_contains($currentUri, 'settings') ? 'active' : '' ?>">
-                    <span class="xp-nav-link-left">
+                    <span class="xp-nav-left">
                         <span class="xp-nav-icon">⚙️</span>
                         <span>Site &amp; Ödeme Ayarları</span>
                     </span>
@@ -472,24 +199,25 @@ $pendingCount = (int)(\Core\Database::fetch("SELECT COUNT(*) as cnt FROM enrollm
             </nav>
         </div>
 
-        <!-- Alt Yönetici Bilgisi & Aksiyonlar -->
+        <!-- Alt Yönetici Bilgisi & Aksiyonlar (Her zaman en altta sabit) -->
         <div class="xp-sidebar-footer">
-            <div class="xp-user-info-box">
+            <div class="xp-user-card">
                 <div class="xp-user-avatar">
-                    <?= mb_substr($adminUser['full_name'] ?? 'A', 0, 1) ?>
+                    <?= mb_substr($adminUser['full_name'] ?? 'S', 0, 1) ?>
                 </div>
                 <div class="xp-user-meta">
-                    <div class="xp-user-name"><?= e($adminUser['full_name'] ?? 'Superadmin') ?></div>
+                    <div class="xp-user-name"><?= e($adminUser['full_name'] ?? 'Süper Yönetici') ?></div>
                     <div class="xp-user-role"><?= e($adminUser['email'] ?? 'Yönetici') ?></div>
                 </div>
             </div>
 
             <div class="xp-footer-actions">
-                <a href="<?= url('/') ?>" target="_blank" class="xp-btn-side-action xp-btn-side-site" title="Ön yüzü yeni sekmede aç">
-                    Siteyi Gör ↗
+                <a href="<?= url('/') ?>" target="_blank" class="xp-btn-side-site" title="Site ön yüzünü yeni sekmede aç">
+                    <span>Siteyi Gör</span>
+                    <span>↗</span>
                 </a>
-                <a href="<?= url('/xpanel/logout') ?>" class="xp-btn-side-action xp-btn-side-logout">
-                    Çıkış Yap
+                <a href="<?= url('/xpanel/logout') ?>" class="xp-btn-side-logout">
+                    <span>Çıkış Yap</span>
                 </a>
             </div>
         </div>
@@ -499,26 +227,35 @@ $pendingCount = (int)(\Core\Database::fetch("SELECT COUNT(*) as cnt FROM enrollm
          SAĞ İÇERİK ALANI (MAIN CONTENT AREA)
          ========================================================================= -->
     <div class="xp-main-wrapper">
-        <!-- Üst Bilgi Barı -->
+        <!-- Üst Bar & Mobil Hamburger -->
         <header class="xp-top-bar">
-            <div class="xp-breadcrumb">
-                <span>xPanel</span>
-                <span>/</span>
-                <strong style="color: #0f172a;"><?= e($metaTitle ?? 'Yönetim Merkezi') ?></strong>
+            <div class="xp-top-bar-left">
+                <button type="button" class="xp-hamburger-btn" id="xpHamburgerBtn" aria-label="Menüyü Aç">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="xp-breadcrumb">
+                    <span>Yönetim</span>
+                    <span>/</span>
+                    <strong><?= e($metaTitle ?? 'Kontrol Paneli') ?></strong>
+                </div>
             </div>
 
             <div style="display: flex; align-items: center; gap: 0.75rem;">
-                <span style="display: inline-flex; align-items: center; gap: 0.35rem; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; border-radius: var(--xp-pill); padding: 0.25rem 0.75rem; font-size: 0.74rem; font-weight: 600;">
-                    <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
-                    Sistem Aktif
-                </span>
+                <div class="xp-top-status-badge">
+                    <span class="xp-status-dot"></span>
+                    <span>Sistem Aktif</span>
+                </div>
             </div>
         </header>
 
         <!-- Asıl Sayfa İçeriği -->
         <main class="xp-content-area">
             <?php if (!empty($flash)): ?>
-                <div style="background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; padding: 0.85rem 1.25rem; border-radius: var(--xp-pill); margin-bottom: 1.5rem; font-size: 0.84rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                <div style="background-color: var(--xp-emerald-light); border: 1px solid #a7f3d0; color: #065f46; padding: 0.85rem 1.25rem; border-radius: var(--xp-radius-md); margin-bottom: 1.5rem; font-size: 0.84rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
                     <span>✓</span>
                     <span><?= e($flash) ?></span>
                 </div>

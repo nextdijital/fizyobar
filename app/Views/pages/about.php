@@ -1,5 +1,28 @@
 <?php
 declare(strict_types=1);
+$bData = function_exists('page_data') ? page_data('betina') : [];
+
+$photo1 = !empty($bData['betina_photo1']) ? $bData['betina_photo1'] : 'assets/images/betina-outdoor-stretch.jpg';
+if (!str_starts_with($photo1, 'http') && !str_starts_with($photo1, '/fizyobar')) {
+    $photo1 = asset(ltrim($photo1, '/'));
+}
+$photo2 = !empty($bData['betina_photo2']) ? $bData['betina_photo2'] : 'assets/images/betina-outdoor-inversion.jpg';
+if (!str_starts_with($photo2, 'http') && !str_starts_with($photo2, '/fizyobar')) {
+    $photo2 = asset(ltrim($photo2, '/'));
+}
+
+$bioHeading = $bData['betina_bio_heading'] ?? 'KLİNİK FİZYOTERAPİST • BAR SYSTEM KURUCUSU';
+$bioPara1 = $bData['betina_bio_para1'] ?? 'Fizyoterapist kimliğim sayesinde insan bedenini anatomik, biyomekanik ve fonksiyonel açıdan ele alıyor; yoga ve mobilite pratiğini kanıta dayalı bilimsel bir temele oturtuyorum.';
+$bioPara2 = $bData['betina_bio_para2'] ?? 'Hareketi dönemsel bir heves değil; omurga sağlığını, eklem mobilitesini ve otonom sinir sistemi dengesini koruyan, uzun ve ağrısız bir ömür için kalıcı bir yaşam disiplini haline getiriyoruz.';
+
+$methodHeading = $bData['betina_method_heading'] ?? 'BAR SYSTEM NEDİR?';
+$methodDesc = $bData['betina_method_desc'] ?? 'Klinik fizyoterapi temelli hareket bilimi ile yoga disiplinini birleştiren; omurga sağlığını, vagus sinir regülasyonunu ve longevity odaklı kalıcı bir yaşam disiplinini koruyan patentli metodumuz.';
+
+$actionBtnText = $bData['betina_action_btn_text'] ?? 'PROGRAMLARI İNCELE →';
+$actionBtnLink = $bData['betina_action_btn_link'] ?? '/programs';
+if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_starts_with($actionBtnLink, '/fizyobar')) {
+    $actionBtnLink = url($actionBtnLink);
+}
 ?>
 
 <!-- WE/AR© REFERANS BİREBİR EDİTORYAL SPLIT-PANEL VİTRİNİ -->
@@ -8,23 +31,12 @@ declare(strict_types=1);
         
         <!-- 1. SOL KART (FOTOĞRAF 1) -->
         <div class="showcase-card showcase-card-1">
-            <!-- Sol Ortadaki Yatay Beyaz Vurgu Bloğu -->
-            <div class="showcase-accent-block" aria-hidden="true"></div>
-
             <!-- Fotoğraf Katmanı (Hover ile Renklenir) -->
             <div class="showcase-img-wrap">
-                <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" 
+                <img src="<?= e($photo1) ?>" 
                      alt="Betina Tansuğ - Biyomekanik &amp; Yoga Pratiği" 
                      class="showcase-img" 
                      loading="eager">
-            </div>
-
-            <!-- Üst Kontroller: Sol Yuvarlak Buton & Sağda YENİ -->
-            <div class="card-top-controls">
-                <a href="<?= url('/') ?>" class="card-back-circle" title="Ana Sayfaya Dön" aria-label="Geri Dön">
-                    &larr;
-                </a>
-                <span class="card-top-badge">YENİ</span>
             </div>
 
             <!-- Alt Editoryal Bilgi & Beyaz Buton (Yumuşak Oval Hatlar) -->
@@ -41,20 +53,12 @@ declare(strict_types=1);
 
         <!-- 2. ORTA KART (FOTOĞRAF 2) -->
         <div class="showcase-card showcase-card-2">
-            <!-- Sol Üstteki Dikey Beyaz Vurgu Bloğu -->
-            <div class="showcase-accent-block" aria-hidden="true"></div>
-
             <!-- Fotoğraf Katmanı (Hover ile Renklenir) -->
             <div class="showcase-img-wrap">
-                <img src="<?= asset('assets/images/betina-outdoor-inversion.jpg') ?>" 
+                <img src="<?= e($photo2) ?>" 
                      alt="Betina Tansuğ - BAR System &amp; Mobilite" 
                      class="showcase-img" 
                      loading="eager">
-            </div>
-
-            <!-- Üst Kontroller -->
-            <div class="card-top-controls">
-                <span class="card-top-badge">BAR SYSTEM</span>
             </div>
 
             <!-- Alt Editoryal Bilgi & Şeffaf Outline Buton (Yumuşak Oval Hatlar) -->
@@ -86,28 +90,28 @@ declare(strict_types=1);
 
                 <!-- Betina Tansuğ Kimdir Açıklama Alanı (Editoryal Manifesto) -->
                 <div class="showcase-bio-box">
-                    <h2 class="showcase-bio-heading">KLİNİK FİZYOTERAPİST &bull; BAR SYSTEM KURUCUSU</h2>
+                    <h2 class="showcase-bio-heading"><?= e($bioHeading) ?></h2>
                     <p class="showcase-bio-para">
-                        Fizyoterapist kimliğim sayesinde insan bedenini anatomik, biyomekanik ve fonksiyonel açıdan ele alıyor; yoga ve mobilite pratiğini kanıta dayalı bilimsel bir temele oturtuyorum.
+                        <?= e($bioPara1) ?>
                     </p>
                     <p class="showcase-bio-subpara">
-                        Hareketi dönemsel bir heves değil; omurga sağlığını, eklem mobilitesini ve otonom sinir sistemi dengesini koruyan, uzun ve ağrısız bir ömür için kalıcı bir yaşam disiplini haline getiriyoruz.
+                        <?= e($bioPara2) ?>
                     </p>
                 </div>
 
                 <!-- 3 Sütunlu Editoryal Matris -->
                 <div class="showcase-columns-grid">
                     
-                    <!-- Sütun 1: UZMANLIK & METODOLOJİ -->
+                    <!-- Sütun 1: BLOGLARDAN SEÇMELER -->
                     <div class="showcase-col-group">
                         <div class="showcase-col">
-                            <span class="showcase-col-title">METODOLOJİ</span>
+                            <span class="showcase-col-title">BLOGLARDAN SEÇMELER</span>
                             <ul class="showcase-links-list">
-                                <li>KLİNİK ANATOMİ</li>
-                                <li>POSTÜR &amp; HİZALANMA</li>
-                                <li>EKLEM MOBİLİTESİ</li>
-                                <li>VAGUS SİNİR DENGESİ</li>
-                                <li>LONGEVITY RUTİNLERİ</li>
+                                <li><a href="<?= url('/blog?id=1') ?>">4 HAFTALIK DÖNÜŞÜM YOLCULUĞU</a></li>
+                                <li><a href="<?= url('/blog?id=2') ?>">5 DAKİKALIK MOBİLİTE SERİSİ</a></li>
+                                <li><a href="<?= url('/blog?id=3') ?>">GLP-1 &amp; KAN ŞEKERİ DENGESİ</a></li>
+                                <li><a href="<?= url('/blog') ?>">FASYA AĞI &amp; POSTÜR</a></li>
+                                <li><a href="<?= url('/blog') ?>">TÜM BLOG YAZILARI &rarr;</a></li>
                             </ul>
                         </div>
                     </div>
@@ -152,6 +156,100 @@ declare(strict_types=1);
                     +
                 </a>
             </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- BAR SYSTEM METODOLOJİSİ & BİLİMSEL DERİNLİK (BETİNA TANSUĞ ALANININ ALTINDA DEVAM EDEN EDİTORYAL YAZILI BÖLÜM) -->
+<section class="betina-barsystem-section" id="bar-system" style="background: #111111; color: #ffffff; padding: clamp(4.5rem, 6vw, 6.5rem) 0; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+    <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 1.5rem;">
+        
+        <!-- Üst Başlık & Kicker -->
+        <div style="margin-bottom: 3.5rem;">
+            <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #C6B39A; display: block; margin-bottom: 0.8rem;">
+                METODOLOJİ &bull; BİYOMEKANİK &bull; LONGEVITY
+            </span>
+            <h2 style="font-family: var(--font-display); font-size: clamp(2.2rem, 3.8vw, 3.4rem); font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #ffffff; line-height: 1.15; margin: 0 0 1.2rem;">
+                <?= e($methodHeading) ?>
+            </h2>
+            <p style="font-size: 1.15rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.85); max-width: 860px; margin: 0;">
+                <?= e($methodDesc) ?>
+            </p>
+        </div>
+
+        <!-- Editoryal Metin Grid (Betina Tansuğ Kimdir Tasarım Stilinde) -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3.5rem;">
+            
+            <!-- Blok 1: Body (Biyomekanik Temel) -->
+            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #C6B39A; display: block; margin-bottom: 0.75rem;">
+                        01 / BODY &bull; KLİNİK ANATOMİ
+                    </span>
+                    <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem; line-height: 1.3;">
+                        Biyomekanik Denge &amp; Omurga Dekompresyonu
+                    </h3>
+                    <p style="font-size: 0.92rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.78); margin: 0 0 1rem;">
+                        Fizyoterapist kimliğimle geliştirdiğim bu aşamada, beden anatomik ve biyomekanik prensipler doğrultusunda ele alınır. Eklem mobilitesi korunarak omurga anatomik ekseninde yeniden hizalanır ve günlük yaşamın yarattığı baskı ve kompresyon hafifletilir.
+                    </p>
+                </div>
+                <p style="font-size: 0.86rem; font-weight: 300; line-height: 1.7; color: rgba(255, 255, 255, 0.55); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                    Sakatlık riskini sıfırlayan kontrollü akışlar sayesinde, hareketler bedeni yıpratmadan derin bir stabilite ve güç kazandırır.
+                </p>
+            </div>
+
+            <!-- Blok 2: Adapt (Sinir Sistemi & Vagus) -->
+            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #C6B39A; display: block; margin-bottom: 0.75rem;">
+                        02 / ADAPT &bull; SİNİR SİSTEMİ ONARIMI
+                    </span>
+                    <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem; line-height: 1.3;">
+                        Nöro-Biyolojik Regülasyon &amp; Diyafram
+                    </h3>
+                    <p style="font-size: 0.92rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.78); margin: 0 0 1rem;">
+                        Fiziksel güç kadar sinir sisteminin regülasyonu da esastır. Diyafram nefesi ve vagus siniri uyarımı aracılığıyla, bedenin sürekli alarmda olan sempatik stres hali yatıştırılır ve beden onarıcı parasempatik moda geçirilir.
+                    </p>
+                </div>
+                <p style="font-size: 0.86rem; font-weight: 300; line-height: 1.7; color: rgba(255, 255, 255, 0.55); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                    Kortizol dengelenir, uyku kalitesi artar ve hücresel düzeyde derin bir yenilenme sağlanır.
+                </p>
+            </div>
+
+            <!-- Blok 3: Reframe (Kalıcı Yaşam Disiplini) -->
+            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #C6B39A; display: block; margin-bottom: 0.75rem;">
+                        03 / REFRAME &bull; YAŞAM DİSİPLİNİ
+                    </span>
+                    <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem; line-height: 1.3;">
+                        Sürdürülebilir Longevity &amp; Hücresel Canlılık
+                    </h3>
+                    <p style="font-size: 0.92rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.78); margin: 0 0 1rem;">
+                        Hareketi dönemsel bir heves veya zorlayıcı bir ceza olmaktan çıkarıp, uzun ve ağrısız bir ömür için kalıcı bir yaşam disiplinine dönüştürüyoruz. Mitokondriyal kapasite ve fonksiyonel esneklik desteklenir.
+                    </p>
+                </div>
+                <p style="font-size: 0.86rem; font-weight: 300; line-height: 1.7; color: rgba(255, 255, 255, 0.55); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.06);">
+                    Yaşsız bir beden ve berrak bir zihin için sürdürülebilir, kanıta dayalı bilimsel bir pratik oluşturulur.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- Alt Manifesto & Programlara Yönlendirme -->
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 20px; padding: 2.5rem clamp(1.5rem, 4vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem;">
+            <div style="max-width: 680px;">
+                <h4 style="font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: #ffffff; margin: 0 0 0.6rem; text-transform: uppercase;">
+                    "BEDENİNLE YENİDEN BAĞ KURMAYA HAZIR MISIN?"
+                </h4>
+                <p style="font-size: 0.92rem; font-weight: 300; line-height: 1.65; color: rgba(255, 255, 255, 0.70); margin: 0;">
+                    17+ dönem boyunca yüzlerce katılımcının omurga ve beden dönüşümüne eşlik eden BAR System programlarına hemen katılabilirsiniz.
+                </p>
+            </div>
+            <a href="<?= e($actionBtnLink) ?>" class="card-action-btn" style="padding: 1rem 2.2rem; font-size: 0.95rem; font-weight: 700; background: #ffffff; color: #111111; text-decoration: none; border-radius: 999px; display: inline-block; text-transform: uppercase; letter-spacing: 0.08em; transition: all 0.3s ease;">
+                <?= e($actionBtnText) ?>
+            </a>
         </div>
 
     </div>

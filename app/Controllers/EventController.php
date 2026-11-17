@@ -100,7 +100,35 @@ class EventController extends Controller
 
     public function announcements(): void
     {
-        $announcements = [
+        $dbRows = \Core\Database::query("SELECT * FROM site_announcements WHERE is_active = 1 ORDER BY sort_order ASC, id DESC");
+        if (!empty($dbRows)) {
+            $announcements = [];
+            foreach ($dbRows as $idx => $row) {
+                $num = str_pad((string)($idx + 1), 2, '0', STR_PAD_LEFT);
+                $announcements[] = [
+                    'id' => (int)$row['id'],
+                    'number' => $num,
+                    'title' => $row['title'],
+                    'short_title' => mb_substr($row['title'], 0, 24),
+                    'category' => $row['badge'] ?: 'Genel Bildiri',
+                    'badge' => $row['badge'] ?: 'Aktif',
+                    'date' => $row['date_text'] ?: date('d.m.Y'),
+                    'ref_code' => 'FZB-DOC.' . $num,
+                    'location' => $row['location'] ?: 'Fizyobar Online / Stüdyo',
+                    'summary' => $row['spot'] ?: '',
+                    'content' => $row['content'] ?: '',
+                    'details' => [
+                        'Tarih: ' . ($row['date_text'] ?: '-'),
+                        'Lokasyon: ' . ($row['location'] ?: 'Stüdyo & Online'),
+                        'Kategori: ' . ($row['badge'] ?: 'Bildiri')
+                    ],
+                    'cta_text' => 'Detaylı Bilgi & WhatsApp',
+                    'cta_link' => 'https://wa.me/905357056828?text=' . rawurlencode('Merhaba, ' . $row['title'] . ' hakkında bilgi ve kayıt için yazıyorum.'),
+                    'is_featured' => ($idx === 0)
+                ];
+            }
+        } else {
+            $announcements = [
             [
                 'id' => 1,
                 'number' => '01',
@@ -207,6 +235,7 @@ class EventController extends Controller
                 'is_featured' => false,
             ],
         ];
+        }
 
         $this->render('pages/announcements', [
             'metaTitle' => 'Duyurular & Kamp Kayıtları | FİZYOBAR Wellness Experiences',

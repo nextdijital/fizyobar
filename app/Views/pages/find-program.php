@@ -638,13 +638,14 @@ const FinderApp = (function() {
         4: 'Katılım Tercihi & Kişisel Not'
     };
 
-    function selectCard(cardElement, groupName) {
+    function selectCard(cardElement, groupName, ev) {
+        if (!cardElement) return;
         const carousel = cardElement.closest('.finder-cards-carousel');
-        if (!carousel) return;
-
-        carousel.querySelectorAll('.finder-visual-card').forEach(c => {
-            c.classList.remove('is-selected');
-        });
+        if (carousel) {
+            carousel.querySelectorAll('.finder-visual-card').forEach(c => {
+                c.classList.remove('is-selected');
+            });
+        }
 
         cardElement.classList.add('is-selected');
         const radio = cardElement.querySelector('input[type="radio"]');
@@ -653,12 +654,16 @@ const FinderApp = (function() {
         }
     }
 
-    function toggleCheckCard(cardElement) {
+    function toggleCheckCard(cardElement, ev) {
+        if (!cardElement) return;
         const checkbox = cardElement.querySelector('input[type="checkbox"]');
         if (!checkbox) return;
 
-        // Tıklama input'un durumunu tersine çevirir
-        checkbox.checked = !checkbox.checked;
+        // Eğer doğrudan input tıklanmadıysa durumunu değiştir
+        if (!ev || ev.target.tagName !== 'INPUT') {
+            checkbox.checked = !checkbox.checked;
+        }
+
         if (checkbox.checked) {
             cardElement.classList.add('is-selected');
         } else {
@@ -688,6 +693,19 @@ const FinderApp = (function() {
                 pill.classList.remove('is-active');
             }
         });
+
+        // Aktif adımdaki pagination dotlarını güncelle
+        const activePane = document.getElementById('stepPane' + currentStep);
+        if (activePane) {
+            const dots = activePane.querySelectorAll('.finder-dot');
+            dots.forEach((dot, idx) => {
+                if (idx + 1 === currentStep) {
+                    dot.classList.add('is-active');
+                } else {
+                    dot.classList.remove('is-active');
+                }
+            });
+        }
 
         // 1 of 4 metni güncelle
         const counter = document.getElementById('stepCounterText');
@@ -720,6 +738,10 @@ const FinderApp = (function() {
         }
     }
 
+    function getCurrentStep() {
+        return currentStep;
+    }
+
     async function submitAnalysis() {
         const form = document.getElementById('findProgramForm');
         const scanning = document.getElementById('finderAiScanning');
@@ -728,9 +750,9 @@ const FinderApp = (function() {
         const statusText = document.getElementById('aiScanStatus');
         const barFill = document.getElementById('aiScanBarFill');
 
-        form.style.display = 'none';
+        if (form) form.style.display = 'none';
         if (progBar) progBar.style.display = 'none';
-        scanning.style.display = 'block';
+        if (scanning) scanning.style.display = 'block';
 
         const statuses = [
             'Biyomekanik verileriniz ve omurga profiliniz taranıyor...',
@@ -777,25 +799,29 @@ const FinderApp = (function() {
                 body: JSON.stringify(payload)
             });
 
+            if (!res.ok) {
+                throw new Error('Server returned ' + res.status);
+            }
+
             const data = await res.json();
 
             setTimeout(() => {
                 clearInterval(statusInterval);
-                scanning.style.display = 'none';
-                results.style.display = 'block';
+                if (scanning) scanning.style.display = 'none';
+                if (results) results.style.display = 'block';
                 populateResults(data.recommendation);
-                results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 2400);
+                if (results) results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 2000);
 
         } catch (err) {
             console.error('Finder AI error:', err);
             setTimeout(() => {
                 clearInterval(statusInterval);
-                scanning.style.display = 'none';
-                results.style.display = 'block';
+                if (scanning) scanning.style.display = 'none';
+                if (results) results.style.display = 'block';
                 populateFallbackResults(goal);
-                results.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 2000);
+                if (results) results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 1500);
         }
     }
 
@@ -815,7 +841,7 @@ const FinderApp = (function() {
         if (desc) desc.textContent = rec.program_desc || '';
 
         const invest = document.getElementById('resInvestment');
-        if (invest) invest.textContent = rec.investment || '4.500 ₺ (Tüm Süreç ve Birebir Koçluk Dahil)';
+        if (invest) invest.textContent = rec.investment || '1.850 ₺ (12 Antrenman + Birebir Eğitmen Takibi Dahil)';
 
         const btnEnroll = document.getElementById('btnResEnroll');
         if (btnEnroll) btnEnroll.href = '<?= url('/programs') ?>';
@@ -854,7 +880,7 @@ const FinderApp = (function() {
             badge: 'EN ÇOK TERCİH EDİLEN BÜTÜNCÜL DÖNÜŞÜM',
             match_score: 98,
             program_desc: 'Haftada 3 gün canlı yoga dersleri, Fizyoterapist Betina Tansuğ ile günlük birebir WhatsApp postür kontrolü ve aç kalmadan glisemik dengenizi sağlayan GLP-1 beslenme rehberi.',
-            investment: '4.500 ₺ (Tüm Ay Boyunca Birebir Eğitmen Takibi Dahil)',
+            investment: '1.850 ₺ (12 Antrenman + Birebir Eğitmen Takibi Dahil)',
             analysis_points: [
                 '<strong>Omurga Hizalanması:</strong> Masa başı hareketsiz saatler boyun ve bel omurlarında sıkışma yaratır. Günlük mobilite seanslarıyla omurga ekseninizi yeniden kuracağız.',
                 '<strong>Metabolik Tokluk:</strong> Rafine şeker krizlerini önleyen protein-lif dengesiyle hücresel enflamasyonu hızla dindiriyoruz.'
@@ -891,14 +917,52 @@ const FinderApp = (function() {
         updateUi();
     }
 
+    // DOM hazır olduğunda form event listener ve header back handler
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('findProgramForm');
+        if (form) {
+            form.addEventListener('change', function(e) {
+                const target = e.target;
+                if (target.type === 'radio') {
+                    const card = target.closest('.finder-visual-card');
+                    const carousel = card ? card.closest('.finder-cards-carousel') : null;
+                    if (carousel) {
+                        carousel.querySelectorAll('.finder-visual-card').forEach(c => c.classList.remove('is-selected'));
+                    }
+                    if (card) card.classList.add('is-selected');
+                } else if (target.type === 'checkbox') {
+                    const card = target.closest('.finder-visual-card');
+                    if (card) {
+                        if (target.checked) card.classList.add('is-selected');
+                        else card.classList.remove('is-selected');
+                    }
+                }
+            });
+        }
+
+        const headerBackBtn = document.querySelector('.finder-header-back-btn');
+        if (headerBackBtn) {
+            headerBackBtn.addEventListener('click', function(e) {
+                if (currentStep > 1) {
+                    e.preventDefault();
+                    prevStep();
+                }
+            });
+        }
+    });
+
     return {
         selectCard,
         toggleCheckCard,
         nextStep,
         prevStep,
+        getCurrentStep,
         submitAnalysis,
         openAiDrawer,
         restart
     };
 })();
+
+// Global erişim
+window.FinderApp = FinderApp;
 </script>

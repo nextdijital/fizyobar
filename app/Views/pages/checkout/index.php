@@ -23,26 +23,55 @@ declare(strict_types=1);
             
             <!-- Sol: Program Özeti -->
             <div style="background-color: var(--black-card); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: var(--radius-sm); padding: clamp(1.5rem, 3vw, 2.2rem);">
-                <span class="badge-pill" style="font-size: 0.65rem; margin-bottom: 0.75rem;">SEÇİLEN PROGRAM</span>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+                    <span class="badge-pill" style="font-size: 0.65rem;">SEÇİLEN PROGRAM</span>
+                    <span class="badge-pill" style="font-size: 0.65rem; background: #c5a059; color: #111;">
+                        <?= ($planType === 'yearly') ? 'YILLIK ALL-ACCESS' : 'AYLIK ÜYELİK' ?>
+                    </span>
+                </div>
                 <h2 style="font-family: var(--font-display); font-size: 1.45rem; font-weight: 800; color: var(--white); margin-bottom: 0.5rem; line-height: 1.25;">
                     <?= e($course['title']) ?>
                 </h2>
-                <p style="font-size: var(--font-sm); color: var(--text-muted); font-weight: 300; line-height: 1.6; margin-bottom: 1.5rem;">
+                <p style="font-size: var(--font-sm); color: var(--text-muted); font-weight: 300; line-height: 1.6; margin-bottom: 1.2rem;">
                     <?= e($course['subtitle']) ?>
                 </p>
 
-                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 1rem 0; margin-bottom: 1.5rem;">
+                <!-- Paket İçeriği -->
+                <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem;">
+                    <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; font-size: 0.75rem; color: #fff;">
+                        ⚡ <strong>+12</strong> antrenman
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; font-size: 0.75rem; color: #fff;">
+                        📅 <strong>+28</strong> gün
+                    </span>
+                    <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 999px; font-size: 0.75rem; color: #fff;">
+                        🏡 <strong>+%100</strong> ekipmansız
+                    </span>
+                </div>
+
+                <!-- Hediye Meditasyon Paketi Bilgisi -->
+                <div style="background: rgba(197, 160, 89, 0.12); border: 1px dashed #c5a059; border-radius: var(--radius-sm); padding: 0.8rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="font-size: 1.5rem;">🎁</span>
+                    <div style="font-size: 0.8rem; line-height: 1.35;">
+                        <strong style="color: #e2c275;">3'lü Meditasyon Paketi Hediye!</strong><br>
+                        <span style="color: rgba(255,255,255,0.85);">Normalde ₺750 değerindeki özel seans kilitleri satın alımla hesabınıza ücretsiz açılır.</span>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 1rem 0; margin-bottom: 1.2rem;">
                     <div style="display: flex; justify-content: space-between; font-size: var(--font-sm); margin-bottom: 0.4rem;">
-                        <span style="color: var(--text-muted);">Program Süresi:</span>
-                        <strong style="color: var(--white);"><?= (int)$course['duration_weeks'] ?> Hafta</strong>
+                        <span style="color: var(--text-muted);">Üyelik Modeli:</span>
+                        <strong style="color: var(--white);"><?= ($planType === 'yearly') ? 'Yıllık Sınırsız (All-Access)' : 'Aylık Standart' ?></strong>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: var(--font-sm); margin-bottom: 0.4rem;">
-                        <span style="color: var(--text-muted);">Eğitim Formatı:</span>
-                        <span style="color: var(--white);">Canlı & Kayıt Seanslar</span>
+                        <span style="color: var(--text-muted);">Erişim Kapsamı:</span>
+                        <span style="color: var(--white);">
+                            <?= ($planType === 'yearly') ? 'Tüm Paketler + Kitchen + Beslenme Rehberleri' : 'Seçilen Paket + Fizyobar Kitchen' ?>
+                        </span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-size: 1.3rem; margin-top: 0.75rem; color: #fca5a5;">
                         <span>Toplam Tutar:</span>
-                        <strong>₺<?= number_format((float)$course['price'], 2, ',', '.') ?></strong>
+                        <strong>₺<?= number_format((float)$activePrice, 2, ',', '.') ?></strong>
                     </div>
                 </div>
 
@@ -68,6 +97,10 @@ declare(strict_types=1);
                         <span style="color: var(--text-muted);">IBAN:</span><br>
                         <code style="font-size: 0.95rem; font-weight: 700; color: #fca5a5; display: inline-block; padding: 4px 6px; background: #1c1c1c; border: 1px dashed #fca5a5; margin-top: 4px;"><?= e($ibanNo) ?></code>
                     </div>
+                    <div style="margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px dashed rgba(255,255,255,0.15);">
+                        <span style="color: var(--text-muted);">Yatırılacak Tutar:</span> 
+                        <strong style="color: #34d399; font-size: 1.1rem;">₺<?= number_format((float)$activePrice, 2, ',', '.') ?></strong>
+                    </div>
                     <p style="font-size: var(--font-xs); color: #fbbf24; margin-top: 0.5rem; line-height: 1.4;">
                         ⚠️ <?= e($ibanNotes) ?>
                     </p>
@@ -79,6 +112,8 @@ declare(strict_types=1);
 
                 <form action="<?= url('/checkout/' . $course['id'] . '/submit-iban') ?>" method="POST">
                     <?= csrf_field() ?>
+                    <input type="hidden" name="plan_type" value="<?= e($planType) ?>">
+                    <input type="hidden" name="amount" value="<?= (float)$activePrice ?>">
 
                     <div class="form-group">
                         <label class="form-label" for="sender_name">Havale Yapan Ad Soyad *</label>

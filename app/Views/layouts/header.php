@@ -29,6 +29,20 @@
     <!-- CSS Stilleri (Cache-busting ile) -->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
     <link rel="stylesheet" href="<?= asset('assets/css/cookie-consent.css') ?>">
+
+    <!-- Global Hidden Scrollbars (Scrollbarlar Her Yerde Gizli, Akıcı Kaydırma Aktif) -->
+    <style>
+        html, body, *, *::before, *::after {
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+        *::-webkit-scrollbar, html::-webkit-scrollbar, body::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+            display: none !important;
+            background: transparent !important;
+        }
+    </style>
 </head>
 <?php
 $cleanUri = trim($currentUri ?? '', '/');
@@ -38,6 +52,24 @@ $isDarkPage = ($isDarkPage ?? false)
     || str_contains($cleanUri, 'articles')
     || str_contains($cleanUri, 'makaleler');
 $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($cleanUri, 'find-program');
+
+// Dinamik Header & Nav Verileri (xPanel Yönetiminden)
+$headerNavData = function_exists('page_data') ? page_data('header_nav') : [];
+$topAnnouncementText = !empty($headerNavData['top_announcement_text']) ? $headerNavData['top_announcement_text'] : 'WELLNESS EXPERIENCES BY BETINA TANSUĞ • 4 HAFTALIK ONLINE DETOX & YOGA KAMPI YENİ DÖNEMİ BAŞLIYOR';
+$topAnnouncementAction = !empty($headerNavData['top_announcement_action']) ? $headerNavData['top_announcement_action'] : 'HEMEN KATIL →';
+$topAnnouncementLink = !empty($headerNavData['top_announcement_link']) ? $headerNavData['top_announcement_link'] : '/detox';
+if (!empty($topAnnouncementLink) && !str_starts_with($topAnnouncementLink, 'http') && !str_starts_with($topAnnouncementLink, '/fizyobar')) {
+    $topAnnouncementLink = url($topAnnouncementLink);
+}
+
+$logoMain = !empty($headerNavData['logo_main']) ? $headerNavData['logo_main'] : 'FİZYOBAR';
+$logoSub = !empty($headerNavData['logo_sub']) ? $headerNavData['logo_sub'] : 'BODY • ADAPT • REFRAME';
+
+$navBtnText = !empty($headerNavData['nav_btn_text']) ? $headerNavData['nav_btn_text'] : __('nav.cta_action');
+$navBtnLink = !empty($headerNavData['nav_btn_link']) ? $headerNavData['nav_btn_link'] : '/detox';
+if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_with($navBtnLink, '/fizyobar')) {
+    $navBtnLink = url($navBtnLink);
+}
 ?>
 <body class="<?= $isFinderPage ? 'body-finder-pure-white' : ($isKitchenPage ? 'body-kitchen-dark' : '') ?>">
 <?php if ($isFinderPage): ?>
@@ -66,9 +98,9 @@ $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($clean
     <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #391214 - Kenarlara Yaslı) -->
     <div class="top-announcement-bar">
         <div class="announcement-inner">
-            <span>WELLNESS EXPERIENCES BY BETINA TANSUĞ • 4 HAFTALIK ONLINE DETOX & YOGA KAMPI YENİ DÖNEMİ BAŞLIYOR</span>
-            <a href="<?= url('/detox') ?>" class="announcement-link">
-                HEMEN KATIL &rarr;
+            <span><?= e($topAnnouncementText) ?></span>
+            <a href="<?= e($topAnnouncementLink) ?>" class="announcement-link">
+                <?= e($topAnnouncementAction) ?>
             </a>
         </div>
     </div>
@@ -142,9 +174,9 @@ $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($clean
 
             <!-- 2. Orta Logo (Barlow Condensed Tipografik Marka Mimarisi) -->
             <div class="header-center-logo">
-                <a href="<?= url('/') ?>" class="brand-logo-link brand-logo-type" aria-label="FİZYOBAR Ana Sayfa">
-                    <span class="logo-text-main">FİZYOBAR</span>
-                    <span class="logo-text-sub">BODY • ADAPT • REFRAME</span>
+                <a href="<?= url('/') ?>" class="brand-logo-link brand-logo-type" aria-label="<?= e($logoMain) ?> Ana Sayfa">
+                    <span class="logo-text-main"><?= e($logoMain) ?></span>
+                    <span class="logo-text-sub"><?= e($logoSub) ?></span>
                 </a>
             </div>
 
@@ -157,7 +189,7 @@ $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($clean
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                        <span class="user-role-tag"><?= (auth_user()['role'] ?? '') === 'admin' ? 'XPANEL' : 'HAREKET ALANIM' ?></span>
+                        <span class="user-role-tag"><?= (auth_user()['role'] ?? '') === 'admin' ? 'YÖNETİM' : 'HAREKET ALANIM' ?></span>
                     </a>
                 <?php else: ?>
                     <a href="<?= url('/login') ?>" class="header-user-btn" title="Giriş Yap">
@@ -176,8 +208,8 @@ $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($clean
                 </div>
 
                 <!-- Betella Tarzı İnce Çerçeveli Aksiyon Butonu -->
-                <a href="<?= url('/detox') ?>" class="btn-betella-cta">
-                    <?= __('nav.cta_action') ?>
+                <a href="<?= e($navBtnLink) ?>" class="btn-betella-cta">
+                    <?= e($navBtnText) ?>
                 </a>
 
                 <!-- Mobil Hamburger Butonu -->

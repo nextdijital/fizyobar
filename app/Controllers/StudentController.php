@@ -74,6 +74,22 @@ class StudentController extends Controller
             [$userId, $courseId]
         );
 
+        // Otomatik Hediye 3'lü Meditasyon Paketi Tanımlama Kontrolü
+        $meditationCourse = Database::fetch("SELECT id FROM courses WHERE slug = '3lu-meditasyon-serisi'");
+        if ($meditationCourse) {
+            $hasMeditation = Database::fetch(
+                "SELECT id FROM enrollments WHERE user_id = ? AND course_id = ?",
+                [$userId, $meditationCourse['id']]
+            );
+            if (!$hasMeditation) {
+                Database::execute(
+                    "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, plan_type, amount, is_gift, gift_message, approved_at, start_date, expires_at, created_at)
+                     VALUES (?, ?, 'iban', 'approved', 'yearly', 0.00, 1, 'Hediye 3lü Meditasyon Paketi', NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 365 DAY), NOW())",
+                    [$userId, $meditationCourse['id']]
+                );
+            }
+        }
+
         // Eğer henüz kaydı yoksa ve sistemde kayıtlı ilk kullanıcılarsa otomatik erişim aç
         if (!$enrollment) {
             Database::execute(
@@ -95,6 +111,12 @@ class StudentController extends Controller
             );
         }
 
+        // Yıllık Üyelik Kontrolü: Yıllık abonelerin tüm eğitim ve materyallere tam erişimi vardır
+        $isYearlySubscriber = (bool)Database::fetch(
+            "SELECT id FROM enrollments WHERE user_id = ? AND payment_status = 'approved' AND plan_type = 'yearly' AND (expires_at IS NULL OR expires_at >= NOW()) LIMIT 1",
+            [$userId]
+        );
+
         // Program Başlangıç Tarihi ve Kaçıncı Gün Olduğu
         $startDateStr = $enrollment['start_date'] ?? $enrollment['approved_at'] ?? $enrollment['created_at'] ?? date('Y-m-d');
         $startTime = strtotime($startDateStr);
@@ -104,9 +126,9 @@ class StudentController extends Controller
 
         // SATIN ALMA / ONAYLI ERİŞİM KONTROLÜ:
         // Kullanıcı plan seçip satın alma gerçekleştirdiğinde (payment_status == 'approved'),
-        // veya admin ise, veya önizleme modu aktifse TÜM VİDEOLARA ERİŞİM ANINDA AÇILIR.
+        // veya yıllık abone ise, veya admin ise TÜM VİDEOLARA ERİŞİM ANINDA AÇILIR.
         $isEnrolledAndApproved = ($enrollment && $enrollment['payment_status'] === 'approved');
-        $unlockAll = $isEnrolledAndApproved || (bool)($_SESSION['movement_unlock_all'] ?? false) || Auth::isAdmin();
+        $unlockAll = $isEnrolledAndApproved || $isYearlySubscriber || (bool)($_SESSION['movement_unlock_all'] ?? false) || Auth::isAdmin();
 
         // 3. 12 Antrenmanı Getir
         $lessons = Database::query(
@@ -222,6 +244,29 @@ class StudentController extends Controller
             [$userId]
         );
 
+        // 8. Sadakat Puanı, Kademe & Streak
+        $loyalty = Database::fetch("SELECT * FROM user_loyalty WHERE user_id = ?", [$userId]);
+        if (!$loyalty) {
+            Database::execute("INSERT IGNORE INTO user_loyalty (user_id, points, tier, streak_days, total_completed_workouts) VALUES (?, 120, 'bronze', 3, ?)", [$userId, $completedCount]);
+            $loyalty = Database::fetch("SELECT * FROM user_loyalty WHERE user_id = ?", [$userId]);
+        }
+
+        // 9. Özel Görevler (Atanan ödevler)
+        $tasks = Database::query(
+            "SELECT * FROM user_tasks WHERE user_id = ? ORDER BY CASE WHEN status = 'pending' THEN 1 WHEN status = 'in_progress' THEN 2 ELSE 3 END, id DESC",
+            [$userId]
+        );
+
+        // 10. Hediye Paketler
+        $giftEnrollments = Database::query(
+            "SELECT e.*, c.title as course_title, c.duration_weeks, c.badge_title
+             FROM enrollments e
+             INNER JOIN courses c ON e.course_id = c.id
+             WHERE e.user_id = ? AND e.is_gift = 1
+             ORDER BY e.id DESC",
+            [$userId]
+        );
+
         // Ay başlığı (Örn: KASIM 2026)
         $monthEn = mb_strtoupper(date('F', $startTime), 'UTF-8');
         $trMonths = [
@@ -253,9 +298,12 @@ class StudentController extends Controller
             'tips' => $tips,
             'routines' => $routines,
             'badges' => $badges,
+            'loyalty' => $loyalty,
+            'tasks' => $tasks,
+            'giftEnrollments' => $giftEnrollments,
             'successMsg' => Session::getFlash('profile_success'),
             'errorMsg' => Session::getFlash('profile_error')
-        ]);
+        ], true);
     }
 
     /**
@@ -463,6 +511,49 @@ class StudentController extends Controller
             'blocks' => $blocks,
             'newBadge' => $newBadge
         ]);
+    }
+
+    /**
+     * Önizleme / Demo Modu Aç/Kapat (Tüm Kilitleri Aç)
+     */
+    public function completeTask(): void
+    {
+        $this->requireAuth();
+        $userId = Auth::id();
+        $taskId = (int)$this->input('task_id');
+
+        if ($taskId > 0) {
+            $task = Database::fetch("SELECT * FROM user_tasks WHERE id = ? AND user_id = ?", [$taskId, $userId]);
+            if ($task && $task['status'] !== 'completed') {
+                Database::execute("UPDATE user_tasks SET status = 'completed', completed_at = NOW() WHERE id = ?", [$taskId]);
+                $pts = (int)$task['points'];
+                Database::execute("UPDATE user_loyalty SET points = points + ? WHERE user_id = ?", [$pts, $userId]);
+
+                Database::execute(
+                    "INSERT INTO user_activity_logs (user_id, action_type, description, created_at)
+                     VALUES (?, 'task_completed', ?, NOW())",
+                    [$userId, "Öğrenci '{$task['title']}' görevini başarıyla tamamladı (+{$pts} Sadakat Puanı)."]
+                );
+
+                Session::setFlash('profile_success', "Tebrikler! '{$task['title']}' görevini tamamladınız ve +{$pts} Sadakat Puanı kazandınız!");
+
+                if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+                    $this->json([
+                        'success' => true,
+                        'message' => "Görev tamamlandı!",
+                        'points_awarded' => $pts
+                    ]);
+                    return;
+                }
+            }
+        }
+
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+            $this->json(['success' => false, 'error' => 'Görev bulunamadı']);
+            return;
+        }
+
+        $this->redirect(url('/dashboard'));
     }
 
     /**

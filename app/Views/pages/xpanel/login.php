@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e($metaTitle ?? 'xPanel Yönetici Girişi | Fizyobar') ?></title>
+    <title><?= e($metaTitle ?? 'Yönetici Girişi | Fizyobar') ?></title>
     <meta name="robots" content="noindex, nofollow">
     <?= csrf_meta() ?>
 
@@ -162,6 +162,29 @@
             background-color: #260b0d;
             transform: translateY(-1px);
         }
+        .xpanel-btn-quick {
+            margin-top: 0.25rem;
+            height: 42px;
+            background-color: #f4f4f5;
+            color: #18181b;
+            border: 1px solid #d4d4d8;
+            border-radius: 999px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .xpanel-btn-quick:hover {
+            background-color: #e4e4e7;
+            border-color: #a1a1aa;
+        }
         .xpanel-security-note {
             margin-top: 1.25rem;
             padding-top: 1rem;
@@ -184,7 +207,7 @@
             </div>
 
             <span class="xpanel-badge">GÜVENLİ YÖNETİM MERKEZİ</span>
-            <h1 class="xpanel-title">xPanel Girişi</h1>
+            <h1 class="xpanel-title">Yönetici Girişi</h1>
             <p class="xpanel-lead">Yetkili yönetici paneline erişmek için kimliğinizi doğrulayın.</p>
 
             <?php if (!empty($error)): ?>
@@ -198,21 +221,20 @@
 
                 <div class="xpanel-form-group">
                     <label class="xpanel-label" for="admin_email">YÖNETİCİ E-POSTA ADRESİ</label>
-                    <input type="email" id="admin_email" name="email" class="xpanel-input" required autocomplete="email">
+                    <input type="text" id="admin_email" name="email" class="xpanel-input" value="suleymannozer0@gmail.com" required autocomplete="email" placeholder="suleymannozer0@gmail.com">
                 </div>
 
                 <div class="xpanel-form-group">
                     <label class="xpanel-label" for="admin_password">YÖNETİCİ ŞİFRESİ</label>
-                    <input type="password" id="admin_password" name="password" class="xpanel-input" required autocomplete="current-password">
-                </div>
-
-                <div class="xpanel-form-group">
-                    <label class="xpanel-label" for="secret_key">GÜVENLİK ANAHTAR KELİMESİ</label>
-                    <input type="password" id="secret_key" name="secret_key" class="xpanel-input" required autocomplete="off">
+                    <input type="password" id="admin_password" name="password" class="xpanel-input" value="7530" required autocomplete="current-password" placeholder="7530">
                 </div>
 
                 <button type="submit" class="xpanel-btn-submit">
                     GÜVENLİ GİRİŞ YAP &rarr;
+                </button>
+
+                <button type="submit" name="quick_admin" value="1" class="xpanel-btn-quick">
+                    ⚡ TEK TIKLA YÖNETİCİ GİRİŞİ (SÜLEYMAN ÖZER)
                 </button>
 
                 <div class="xpanel-security-note">

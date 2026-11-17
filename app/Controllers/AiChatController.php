@@ -202,7 +202,7 @@ class AiChatController extends Controller
             $matchScore   = 98;
             $badge        = 'EN ÇOK TERCİH EDİLEN BÜTÜNCÜL DÖNÜŞÜM';
             $programDesc  = 'Haftada 3 gün canlı yoga dersleri, Fizyoterapist Betina Tansuğ ile günlük birebir WhatsApp postür kontrolü ve aç kalmadan glisemik dengenizi sağlayan GLP-1 beslenme rehberi.';
-            $investment   = '4.500 ₺ (16+ Canlı Seans + Birebir Eğitmen Takibi + Beslenme Protokolü)';
+            $investment   = '1.850 ₺ (12 Antrenman + Birebir Eğitmen Takibi + Beslenme Protokolü)';
         }
 
         // Biyomekanik ve Klinik Teşhis Değerlendirmesi

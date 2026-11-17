@@ -19,7 +19,7 @@ $symbols = ['✱', '✤', '◎', '✧', '❀'];
 
     <!-- 2. İki Kolonlu Split Sahne: Sol Dikey Kutu Listesi + Sağ Açık Kart -->
     <section class="announcements-stage-section">
-        <div class="container" style="max-width: 1240px;">
+        <div class="announcements-wide-shell" style="max-width: 1820px; width: 98%; margin: 0 auto; padding-left: clamp(0.75rem, 1.8vw, 2rem); padding-right: clamp(0.75rem, 1.8vw, 2rem);">
             <div class="announcements-split-layout">
                 
                 <!-- SOL KOLON: Dikey Kutu Listesi (Kullanıcı İsteği: Sol Tarafta Kutu Listesi) -->

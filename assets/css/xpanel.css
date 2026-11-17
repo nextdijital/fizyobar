@@ -1,0 +1,1776 @@
+/* ==============================================================================
+   FİZYOBAR XPANEL - MODERN ADMIN DASHBOARD & MOBILE RESPONSIVE DESIGN SYSTEM
+   ============================================================================== */
+
+:root {
+    --xp-sidebar-bg: #0b0c10;
+    --xp-sidebar-surface: #14161f;
+    --xp-sidebar-border: rgba(255, 255, 255, 0.08);
+    --xp-sidebar-text: #e2e8f0;
+    --xp-sidebar-muted: #94a3b8;
+    
+    --xp-bg: #f8fafc;
+    --xp-surface: #ffffff;
+    --xp-border: #e2e8f0;
+    --xp-border-subtle: #f1f5f9;
+    
+    --xp-text: #0f172a;
+    --xp-text-muted: #64748b;
+    --xp-text-dim: #94a3b8;
+    
+    --xp-primary: #391214;
+    --xp-primary-light: #5b1e22;
+    --xp-gold: #c59b6c;
+    
+    --xp-emerald: #10b981;
+    --xp-emerald-light: #ecfdf5;
+    --xp-amber: #f59e0b;
+    --xp-amber-light: #fffbeb;
+    --xp-rose: #ef4444;
+    --xp-rose-light: #fef2f2;
+    --xp-sky: #0284c7;
+    --xp-sky-light: #f0f9ff;
+    --xp-indigo: #6366f1;
+    
+    --xp-radius-sm: 8px;
+    --xp-radius-md: 14px;
+    --xp-radius-lg: 20px;
+    --xp-radius-pill: 9999px;
+    
+    --xp-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --xp-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.04);
+    --xp-shadow-lg: 0 12px 30px -4px rgba(0, 0, 0, 0.08);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html.xp-html {
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body.xp-body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--xp-bg) !important;
+    color: var(--xp-text) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==============================================================================
+   1. SOL SIDEBAR NAVİGASYON (DESKTOP)
+   ============================================================================== */
+.xp-sidebar {
+    width: 260px;
+    min-width: 260px;
+    background-color: var(--xp-sidebar-bg);
+    color: var(--xp-sidebar-text);
+    height: 100vh;
+    max-height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--xp-sidebar-border);
+    z-index: 1000;
+    overflow: hidden !important;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, left 0.3s ease;
+}
+
+.xp-sidebar-brand {
+    padding: 1.25rem 1.4rem 1.1rem;
+    border-bottom: 1px solid var(--xp-sidebar-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    background-color: var(--xp-sidebar-bg);
+    z-index: 10;
+}
+
+.xp-sidebar-nav-scroll {
+    flex: 1;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.xp-sidebar-nav-scroll::-webkit-scrollbar {
+    width: 0 !important;
+    display: none !important;
+}
+
+.xp-brand-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.xp-brand-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.xp-brand-tag {
+    background: linear-gradient(135deg, var(--xp-gold), #dfaa74);
+    color: #0b0c10;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: var(--xp-radius-pill);
+    letter-spacing: 0.08em;
+}
+
+.xp-brand-motto {
+    font-size: 0.62rem;
+    color: var(--xp-sidebar-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.xp-mobile-close-btn {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Menü Öğeleri */
+.xp-nav-section {
+    padding: 1.25rem 0.85rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.xp-nav-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #64748b;
+    padding: 0.4rem 0.85rem;
+    margin-bottom: 0.2rem;
+    display: block;
+}
+
+.xp-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.72rem 1rem;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: var(--xp-radius-pill);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.xp-nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.xp-nav-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(197, 155, 108, 0.25), rgba(57, 18, 20, 0.4));
+    border: 1px solid rgba(197, 155, 108, 0.35);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.xp-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.xp-nav-icon {
+    font-size: 1.05rem;
+    width: 22px;
+    text-align: center;
+    display: inline-block;
+}
+
+.xp-badge-count {
+    background-color: var(--xp-rose);
+    color: #ffffff;
+    padding: 2px 8px;
+    font-size: 0.68rem;
+    border-radius: var(--xp-radius-pill);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+/* ==============================================================================
+   AÇILIR KAPANIR SİDEBAR KATEGORİLERİ (ACCORDION)
+   ============================================================================== */
+.xp-nav-group {
+    margin-bottom: 0.35rem;
+}
+
+.xp-nav-group-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.9rem;
+    color: #94a3b8;
+    background: transparent;
+    border: none;
+    border-radius: var(--xp-radius-pill);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.xp-nav-group-header:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.xp-nav-group.is-open > .xp-nav-group-header {
+    color: #ffffff;
+}
+
+.xp-nav-group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.xp-nav-group-chevron {
+    transition: transform 0.25s ease;
+    transform: rotate(-90deg);
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.xp-nav-group.is-open .xp-nav-group-chevron {
+    transform: rotate(0deg);
+    color: #ffffff;
+}
+
+.xp-nav-group-items {
+    display: none;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 0.3rem;
+    margin-left: 1rem;
+    padding-left: 0.65rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.xp-nav-group.is-open .xp-nav-group-items {
+    display: flex;
+}
+
+.xp-nav-sub-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.46rem 0.85rem;
+    color: #94a3b8;
+    text-decoration: none;
+    border-radius: var(--xp-radius-pill);
+    font-size: 0.81rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.xp-nav-sub-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.06);
+}
+
+.xp-nav-sub-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(197, 155, 108, 0.25), rgba(57, 18, 20, 0.45));
+    border: 1px solid rgba(197, 155, 108, 0.35);
+    font-weight: 700;
+}
+
+/* Sidebar Footer & Kullanıcı Kartı */
+.xp-sidebar-footer {
+    padding: 0.75rem 1rem 0.85rem;
+    border-top: 1px solid var(--xp-sidebar-border);
+    background: #07080a;
+    flex-shrink: 0 !important;
+    z-index: 20;
+    box-sizing: border-box;
+}
+
+.xp-user-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.55rem;
+}
+
+.xp-user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--xp-gold), var(--xp-primary));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+}
+
+.xp-user-meta {
+    overflow: hidden;
+}
+
+.xp-user-name {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.xp-user-role {
+    font-size: 0.7rem;
+    color: var(--xp-sidebar-muted);
+}
+
+.xp-footer-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.xp-btn-side-site, .xp-btn-side-logout {
+    flex: 1;
+    text-align: center;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.76rem;
+    font-weight: 600;
+    border-radius: var(--xp-radius-pill);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.xp-btn-side-site {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.xp-btn-side-site:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.xp-btn-side-logout {
+    background: rgba(239, 68, 68, 0.18);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.xp-btn-side-logout:hover {
+    background: var(--xp-rose);
+    color: #ffffff;
+}
+
+/* ==============================================================================
+   2. SAĞ İÇERİK ALANI (MAIN CONTENT AREA)
+   ============================================================================== */
+.xp-main-wrapper {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--xp-bg);
+}
+
+.xp-top-bar {
+    background: var(--xp-surface);
+    border-bottom: 1px solid var(--xp-border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    box-shadow: var(--xp-shadow-sm);
+}
+
+.xp-top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.xp-hamburger-btn {
+    display: none;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--xp-text);
+}
+
+.xp-breadcrumb {
+    font-size: 0.88rem;
+    color: var(--xp-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.xp-breadcrumb strong {
+    color: var(--xp-text);
+    font-weight: 700;
+}
+
+.xp-top-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--xp-emerald-light);
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.3rem 0.85rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.xp-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--xp-emerald);
+}
+
+.xp-content-area {
+    flex: 1;
+    padding: 1.25rem 1.5rem 3rem;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* ==============================================================================
+   3. MODERN KARTLAR, İSTATİSTİK SAYAÇLARI VE TABLOLAR
+   ============================================================================== */
+.xpanel-card {
+    background: var(--xp-surface);
+    border: 1px solid var(--xp-border);
+    border-radius: var(--xp-radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--xp-shadow);
+    margin-bottom: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+/* ==============================================================================
+   3. ORIPIOFIN MODERN DASHBOARD SAYAÇLARI & HERO KARTLARI
+   ============================================================================== */
+.xp-dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.xp-dash-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.xp-dash-subtitle {
+    font-size: 0.84rem;
+    color: #64748b;
+    margin-top: 0.2rem;
+    margin-bottom: 0;
+}
+
+.xp-dash-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.xp-pill-dropdown {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #334155;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.xp-btn-reload {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #334155;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.xp-btn-reload:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* OripioFin 4'lü Stat Grid */
+.xp-oripio-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+    .xp-oripio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 680px) {
+    .xp-oripio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 1. Öne Çıkan Kart (Zümrüt Yeşil / Dark Gradient) */
+.xp-oripio-card-dark {
+    background: linear-gradient(145deg, #064e3b 0%, #065f46 45%, #047857 100%);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 1.5rem 1.6rem;
+    box-shadow: 0 8px 25px -4px rgba(6, 78, 59, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.xp-oripio-card-dark .xp-oripio-icon-wrap {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+}
+
+.xp-oripio-card-dark .xp-oripio-label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.xp-oripio-card-dark .xp-oripio-sublabel {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.xp-oripio-card-dark .xp-oripio-metric {
+    color: #ffffff;
+}
+
+.xp-oripio-card-dark .xp-oripio-badge {
+    background: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+}
+
+.xp-oripio-card-dark .xp-oripio-footer-link {
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* 2. Beyaz Modern Kartlar */
+.xp-oripio-card-white {
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 20px;
+    padding: 1.5rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.xp-oripio-card-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.xp-oripio-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.xp-oripio-card-top-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.xp-oripio-icon-wrap {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.xp-oripio-label {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.xp-oripio-sublabel {
+    font-size: 0.72rem;
+    color: #64748b;
+    margin-top: 0.15rem;
+}
+
+.xp-oripio-dots {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.xp-oripio-body {
+    margin: 1.1rem 0 0.85rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+}
+
+.xp-oripio-metric {
+    font-size: 1.95rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.xp-oripio-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--xp-radius-pill);
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.xp-oripio-badge-green {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.xp-oripio-badge-amber {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.xp-oripio-badge-blue {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.xp-oripio-footer-link {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.85rem;
+    border-top: 1px solid #f1f5f9;
+    transition: color 0.2s ease;
+}
+
+.xp-oripio-footer-link:hover {
+    color: #0f172a;
+}
+
+/* ==============================================================================
+   4. ORIPIOFIN MODERN TABLO TASARIMI (ID SÜTUNSUZ, AVATARLI & NOKTALI DURUMLAR)
+   ============================================================================== */
+.xp-table-card {
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 20px;
+    padding: 1.6rem 1.6rem 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 1.5rem;
+}
+
+.xp-table-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.xp-table-search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.45rem 1rem;
+    width: 240px;
+    transition: all 0.2s ease;
+}
+
+.xp-table-search-box:focus-within {
+    background: #ffffff;
+    border-color: #0f172a;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.06);
+}
+
+.xp-table-search-box input {
+    border: none;
+    background: transparent;
+    font-size: 0.8rem;
+    color: #0f172a;
+    width: 100%;
+    outline: none;
+}
+
+.xp-table-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.45rem 0.95rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.xp-table-filter-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.xp-user-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.xp-avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+    color: #334155;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.xp-avatar-circle.avatar-brand {
+    background: linear-gradient(135deg, #391214, #5b1e22);
+    color: #ffffff;
+}
+
+.xp-user-cell-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+
+.xp-user-cell-meta {
+    font-size: 0.74rem;
+    color: #64748b;
+    margin-top: 0.15rem;
+}
+
+.xp-method-pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: #f1f5f9;
+    color: #475569;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.xp-amount-val {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #0f172a;
+    font-variant-numeric: tabular-nums;
+}
+
+/* OripioFin Noktalı Durum Rozetleri (Status Pills) */
+.xp-status-dot-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--xp-radius-pill);
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.xp-status-dot-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.xp-status-dot-approved {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.xp-status-dot-approved .dot {
+    background: #10b981;
+}
+
+.xp-status-dot-pending {
+    background: #fffbeb;
+    color: #b45309;
+}
+
+.xp-status-dot-pending .dot {
+    background: #f59e0b;
+}
+
+.xp-status-dot-rejected {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.xp-status-dot-rejected .dot {
+    background: #ef4444;
+}
+
+.xp-date-primary {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #0f172a;
+    white-space: nowrap;
+}
+
+.xp-date-sub {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-top: 1px;
+}
+
+.xp-more-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    color: #94a3b8;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.xp-more-dots:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.xp-check-cell {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+    cursor: pointer;
+    accent-color: #0f172a;
+}
+
+/* ==============================================================================
+   4. TABLOLAR VE RESPONSİVE WRAPPER
+   ============================================================================== */
+.xpanel-table-wrap {
+    width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--xp-radius-sm);
+    border: 1px solid var(--xp-border);
+    background: #ffffff;
+    scrollbar-width: thin !important;
+    scrollbar-color: #cbd5e1 #f8fafc !important;
+}
+
+.xpanel-table-wrap::-webkit-scrollbar {
+    height: 7px !important;
+    display: block !important;
+}
+
+.xpanel-table-wrap::-webkit-scrollbar-track {
+    background: #f8fafc !important;
+    border-radius: 999px;
+}
+
+.xpanel-table-wrap::-webkit-scrollbar-thumb {
+    background: #cbd5e1 !important;
+    border-radius: 999px;
+}
+
+.xpanel-table-wrap::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
+}
+
+.xpanel-table {
+    width: 100%;
+    min-width: 820px;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    text-align: left;
+}
+
+.xpanel-table th {
+    background-color: #f8fafc;
+    color: var(--xp-text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid var(--xp-border);
+    white-space: nowrap;
+}
+
+.xpanel-table td {
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid var(--xp-border-subtle);
+    color: var(--xp-text);
+    vertical-align: middle;
+}
+
+.xpanel-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.xpanel-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ==============================================================================
+   5. BUTONLAR VE AKSİYONLAR
+   ============================================================================== */
+.xp-btn-pill-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: #0b0c10;
+    color: #ffffff !important;
+    border: 1px solid #0b0c10;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.65rem 1.5rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: var(--xp-shadow-sm);
+}
+
+.xp-btn-pill-primary:hover {
+    background: #27272a;
+    border-color: #27272a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.xp-btn-pill-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: #ffffff;
+    color: var(--xp-text) !important;
+    border: 1px solid #cbd5e1;
+    border-radius: var(--xp-radius-pill);
+    padding: 0.55rem 1.25rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.xp-btn-pill-outline:hover {
+    border-color: var(--xp-text);
+    background: #f8fafc;
+}
+
+.xp-btn-action-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.85rem;
+    font-size: 0.76rem;
+    font-weight: 700;
+    border-radius: var(--xp-radius-pill);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.xp-btn-action-approve {
+    background: var(--xp-emerald-light);
+    color: #065f46 !important;
+    border-color: #a7f3d0;
+}
+.xp-btn-action-approve:hover {
+    background: var(--xp-emerald);
+    color: #ffffff !important;
+}
+
+.xp-btn-action-edit {
+    background: #f1f5f9;
+    color: #0f172a !important;
+    border-color: #cbd5e1;
+}
+.xp-btn-action-edit:hover {
+    background: #0f172a;
+    color: #ffffff !important;
+}
+
+.xp-btn-action-danger {
+    background: var(--xp-rose-light);
+    color: #dc2626 !important;
+    border-color: #fecaca;
+}
+.xp-btn-action-danger:hover {
+    background: var(--xp-rose);
+    color: #ffffff !important;
+}
+
+/* Durum Rozetleri */
+.xp-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--xp-radius-pill);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.xp-status-approved {
+    background: var(--xp-emerald-light);
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.xp-status-pending {
+    background: var(--xp-amber-light);
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+
+.xp-status-rejected {
+    background: var(--xp-rose-light);
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+/* ==============================================================================
+   6. FORMLAR VE MODALLAR
+   ============================================================================== */
+.xp-form-group, .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.xp-form-label, .form-label {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--xp-text-muted);
+    margin-bottom: 0.4rem;
+}
+
+.xp-form-input, .form-input, .xp-form-select, .form-select, .xp-form-textarea, .form-textarea {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid var(--xp-border);
+    color: var(--xp-text);
+    padding: 0.75rem 1rem;
+    border-radius: var(--xp-radius-sm);
+    font-size: 0.9rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.xp-form-input:focus, .form-input:focus, .xp-form-select:focus, .form-select:focus, .xp-form-textarea:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #0b0c10;
+    box-shadow: 0 0 0 3px rgba(11, 12, 16, 0.08);
+}
+
+.xp-form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .xp-form-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal Arka Plan & Pencere */
+.xp-modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 12, 16, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.xp-modal-window {
+    background: #ffffff;
+    border-radius: var(--xp-radius-lg);
+    width: 100%;
+    max-width: 620px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    animation: xpModalIn 0.25s ease-out;
+}
+
+@keyframes xpModalIn {
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.xp-modal-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--xp-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.xp-modal-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--xp-text);
+    margin: 0;
+}
+
+.xp-modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.35rem;
+    cursor: pointer;
+    color: var(--xp-text-muted);
+}
+
+.xp-modal-body {
+    padding: 1.5rem;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+/* ==============================================================================
+   6.1 SAYFA SEKMELERİ (TABS)
+   ============================================================================== */
+.xp-tabs-bar {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--xp-border);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+
+.xp-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.4rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--xp-text-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s ease;
+    border-radius: var(--xp-radius-sm) var(--xp-radius-sm) 0 0;
+}
+
+.xp-tab-btn:hover {
+    color: var(--xp-text);
+    background: #f1f5f9;
+}
+
+.xp-tab-btn.active {
+    color: #0b0c10;
+    border-bottom: 2px solid #0b0c10;
+    background: #ffffff;
+}
+
+/* ==============================================================================
+   7. MOBİL RESPONSIVE (EKRAN GENİŞLİĞİ <= 960PX)
+   ============================================================================== */
+.xp-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+}
+
+@media (max-width: 960px) {
+    body.xp-body {
+        flex-direction: column !important;
+    }
+
+    .xp-sidebar {
+        position: fixed;
+        top: 0;
+        left: -290px;
+        width: 280px;
+        min-width: 280px;
+        height: 100vh;
+        z-index: 9999;
+        box-shadow: none;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .xp-sidebar.is-open {
+        left: 0;
+        box-shadow: 12px 0 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .xp-mobile-close-btn {
+        display: flex;
+    }
+
+    .xp-sidebar-overlay.is-active {
+        display: block;
+    }
+
+    .xp-top-bar {
+        padding: 0.75rem 1.25rem;
+    }
+
+    .xp-hamburger-btn {
+        display: flex;
+    }
+
+    .xp-content-area {
+        padding: 1.25rem 1rem 3rem;
+    }
+
+    .xp-stat-counter-card {
+        padding: 1.15rem 1rem;
+    }
+
+    .xp-stat-value {
+        font-size: 1.75rem;
+    }
+}
+
+/* ==============================================================================
+   8. MODERN SAYFA EDİTÖRÜ & KART SİSTEMİ (ORİPİOFİN STİLİ)
+   ============================================================================== */
+.xp-top-sticky-bar {
+    position: sticky;
+    top: 0;
+    z-index: 95;
+    background: rgba(248, 250, 252, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 0.85rem 0 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.xp-link-picker-wrap {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.xp-link-quick-select {
+    max-width: 260px;
+    height: 42px;
+    padding: 0 0.85rem;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #1e293b;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.xp-link-quick-select:focus {
+    border-color: #391214;
+    box-shadow: 0 0 0 3px rgba(57, 18, 20, 0.08);
+}
+
+.xp-editor-card {
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.025);
+    margin-bottom: 1.75rem;
+    transition: all 0.2s ease;
+}
+
+.xp-editor-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.xp-editor-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1.15rem;
+    margin-bottom: 1.35rem;
+    border-bottom: 1px solid #f1f5f9;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.xp-badge-section {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(57, 18, 20, 0.07);
+    color: #391214;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 9999px;
+    margin-bottom: 0.35rem;
+}
+
+.xp-badge-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 9999px;
+}
+
+.xp-pills-nav {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.35rem;
+    background: #f1f5f9;
+    border-radius: 9999px;
+    overflow-x: auto;
+    margin-bottom: 1.75rem;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.xp-pill-item {
+    padding: 0.55rem 1.15rem;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #64748b;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.xp-pill-item:hover {
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.xp-pill-item.active {
+    background: #0f172a;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+}
+
+.xp-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.xp-form-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.25rem;
+}
+
+.xp-input-hint {
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-top: 0.35rem;
+    line-height: 1.35;
+}
+
+.xp-sticky-save-bar {
+    position: sticky;
+    bottom: 1.25rem;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    border: 1px solid #e2e8f0;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 900;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.xp-btn-save-primary {
+    background: #391214;
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.7rem 1.75rem;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.xp-btn-save-primary:hover {
+    background: #250b0c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(57, 18, 20, 0.25);
+}
+
+/* ==============================================================================
+   8. MANUEL GÖRSEL YÜKLEME VE CANLI ÖNİZLEME BİLEŞENİ
+   ============================================================================== */
+.xp-image-picker-box {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.15rem;
+    margin-bottom: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.xp-image-picker-box:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.xp-image-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.xp-image-picker-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.xp-image-picker-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.xp-image-picker-status.active {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+}
+
+.xp-image-picker-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+@media (max-width: 640px) {
+    .xp-image-picker-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+.xp-preview-container {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.xp-preview-container:hover {
+    border-color: #94a3b8;
+}
+
+.xp-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+}
+
+.xp-preview-container:hover .xp-preview-img {
+    transform: scale(1.03);
+}
+
+.xp-preview-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.xp-preview-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    color: #94a3b8;
+    font-size: 0.76rem;
+    text-align: center;
+    padding: 0.75rem;
+}
+
+.xp-upload-spinner {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #0f172a;
+    font-size: 0.78rem;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.xp-spinner-circle {
+    width: 26px;
+    height: 26px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #0b0c10;
+    border-radius: 50%;
+    animation: xpSpin 0.8s linear infinite;
+}
+
+@keyframes xpSpin {
+    to { transform: rotate(360deg); }
+}
+
+.xp-picker-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.xp-picker-upload-row {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.xp-upload-file-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: #0b0c10;
+    color: #ffffff !important;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.55rem 1.15rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #0b0c10;
+    user-select: none;
+}
+
+.xp-upload-file-btn:hover {
+    background: #1e293b;
+    border-color: #1e293b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.xp-btn-remove-img {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: #fef2f2;
+    color: #dc2626 !important;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.xp-btn-remove-img:hover {
+    background: #fee2e2;
+    border-color: #f87171;
+}
+
+.xp-upload-success-toast {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #16a34a;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-left: 0.25rem;
+}

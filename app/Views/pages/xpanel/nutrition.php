@@ -10,10 +10,10 @@ $routinesCount = count(array_filter($items, fn($i) => $i['category'] === 'routin
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
     <div>
         <h1 style="font-size: 1.45rem; font-weight: 500; color: var(--black); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 0.25rem 0;">
-            Studio &amp; Beslenme İçerik Yönetimi
+            Mutfak &amp; Beslenme İçerik Yönetimi
         </h1>
         <p style="color: var(--text-muted); font-size: var(--font-sm); margin: 0;">
-            Öğrencilerin Studio ve Movement Space alanında gördüğü rafine şekersiz tarifleri, longevity rehberlerini ve mikro rutinleri yönetin.
+            Öğrencilerin Mutfak ve Eğitim alanında gördüğü rafine şekersiz tarifleri, sağlıklı yaşam rehberlerini ve mikro rutinleri yönetin.
         </p>
     </div>
 
@@ -33,7 +33,7 @@ $routinesCount = count(array_filter($items, fn($i) => $i['category'] === 'routin
         <strong style="font-size: 1.6rem; color: #16a34a;"><?= $recipesCount ?> Tarif</strong>
     </div>
     <div class="xpanel-card" style="padding: 1.15rem;">
-        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">Longevity Rehberleri</span>
+        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); display: block; margin-bottom: 0.35rem;">Sağlıklı Yaşam Rehberleri</span>
         <strong style="font-size: 1.6rem; color: #0284c7;"><?= $guidesCount ?> Rehber</strong>
     </div>
     <div class="xpanel-card" style="padding: 1.15rem;">
@@ -42,28 +42,37 @@ $routinesCount = count(array_filter($items, fn($i) => $i['category'] === 'routin
     </div>
 </div>
 
-<div class="xpanel-card">
+<div class="xp-table-card">
+    <div class="xp-table-header-bar">
+        <div>
+            <h2 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0 0 0.2rem 0;">
+                Stüdyo &amp; Mutfak İçerikleri
+            </h2>
+            <span style="font-size: 0.8rem; color: #64748b;">
+                Tüm fonksiyonel tarifler, longevity rehberleri ve günlük rutinler
+            </span>
+        </div>
+    </div>
+
     <?php if (empty($items)): ?>
-        <p style="color: var(--text-muted); font-size: var(--font-sm); text-align: center; padding: 2.5rem;">
+        <p style="color: #64748b; font-size: 0.9rem; text-align: center; padding: 2.5rem 0;">
             Henüz içerik eklenmemiş. Yukarıdaki '+ Yeni İçerik Ekle' butonundan ilk tarif veya rehberinizi oluşturabilirsiniz.
         </p>
     <?php else: ?>
-        <div style="overflow-x: auto;">
+        <div class="xpanel-table-wrap">
             <table class="xpanel-table">
                 <thead>
                     <tr>
-                        <th>SIRA</th>
-                        <th>Kategori</th>
-                        <th>İçerik Başlığı &amp; Rozet</th>
-                        <th>Süre / Ölçü</th>
-                        <th>Malzemeler &amp; Özet</th>
-                        <th style="text-align: right;">İşlemler</th>
+                        <th style="width: 130px;">Kategori</th>
+                        <th style="min-width: 180px;">İçerik Başlığı &amp; Rozet</th>
+                        <th style="width: 120px;">Süre / Ölçü</th>
+                        <th style="min-width: 220px;">Malzemeler &amp; Özet</th>
+                        <th style="text-align: right; width: 120px;">İşlemler</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($items as $item): ?>
                         <tr>
-                            <td><strong>#<?= (int)$item['sort_order'] ?></strong></td>
                             <td>
                                 <?php if ($item['category'] === 'recipe'): ?>
                                     <span style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 600;">
@@ -133,21 +142,21 @@ $routinesCount = count(array_filter($items, fn($i) => $i['category'] === 'routin
 </div>
 
 <!-- İçerik Ekleme / Düzenleme Modalı -->
-<div id="nutritionModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 10000; align-items: center; justify-content: center; padding: 1rem;">
-    <div style="background: var(--white); border-radius: 8px; max-width: 640px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem;">
-            <h3 id="nutritionModalTitle" style="font-size: 1.15rem; font-weight: 600; color: var(--black); margin: 0;">Studio İçeriği Ekle / Düzenle</h3>
-            <button type="button" onclick="document.getElementById('nutritionModal').style.display='none';" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748b;">&times;</button>
+<div id="nutritionModal" class="xp-modal-backdrop">
+    <div class="xp-modal-window">
+        <div class="xp-modal-header">
+            <h3 id="nutritionModalTitle" class="xp-modal-title">Studio İçeriği Ekle / Düzenle</h3>
+            <button type="button" onclick="document.getElementById('nutritionModal').style.display='none';" class="xp-modal-close-btn">&times;</button>
         </div>
 
-        <form action="<?= url('/xpanel/nutrition/save') ?>" method="POST">
+        <form action="<?= url('/xpanel/nutrition/save') ?>" method="POST" class="xp-modal-body">
             <?= csrf_field() ?>
             <input type="hidden" id="nut_id" name="id" value="0">
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
                 <div>
-                    <label class="form-label" for="nut_category" style="font-size: 0.8rem; font-weight: 600; color: #334155;">İçerik Kategorisi *</label>
-                    <select id="nut_category" name="category" class="form-input" required style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <label class="xp-form-label" for="nut_category">İçerik Kategorisi *</label>
+                    <select id="nut_category" name="category" class="xp-form-select" required>
                         <option value="recipe">🍏 Fonksiyonel Tarif</option>
                         <option value="guide">📖 Longevity / Biyomekanik Rehberi</option>
                         <option value="routine">⚡ Ekstra Mikro Rutin (5-10 Dk)</option>
@@ -155,40 +164,40 @@ $routinesCount = count(array_filter($items, fn($i) => $i['category'] === 'routin
                     </select>
                 </div>
                 <div>
-                    <label class="form-label" for="nut_sort" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Sıralama Sırası</label>
-                    <input type="number" id="nut_sort" name="sort_order" class="form-input" value="1" min="0" style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <label class="xp-form-label" for="nut_sort">Sıralama Sırası</label>
+                    <input type="number" id="nut_sort" name="sort_order" class="xp-form-input" value="1" min="0">
                 </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label class="form-label" for="nut_title" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Başlık *</label>
-                <input type="text" id="nut_title" name="title" class="form-input" required placeholder="Örn: Anti-Enflamatuar Sabah Altın İksiri" style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+            <div class="xp-form-group">
+                <label class="xp-form-label" for="nut_title">Başlık *</label>
+                <input type="text" id="nut_title" name="title" class="xp-form-input" required placeholder="Örn: Anti-Enflamatuar Sabah Altın İksiri">
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
                 <div>
-                    <label class="form-label" for="nut_badge" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Rozet / Etiket</label>
-                    <input type="text" id="nut_badge" name="badge" class="form-input" placeholder="Örn: RAFİNE ŞEKERSİZ veya VAGUS DOSTU" style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <label class="xp-form-label" for="nut_badge">Rozet / Etiket</label>
+                    <input type="text" id="nut_badge" name="badge" class="xp-form-input" placeholder="Örn: RAFİNE ŞEKERSİZ veya VAGUS DOSTU">
                 </div>
                 <div>
-                    <label class="form-label" for="nut_time" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Süre / Kalori / Okuma</label>
-                    <input type="text" id="nut_time" name="time_needed" class="form-input" placeholder="Örn: 8 dk • 220 kcal veya 6 dk okuma" style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+                    <label class="xp-form-label" for="nut_time">Süre / Kalori / Okuma</label>
+                    <input type="text" id="nut_time" name="time_needed" class="xp-form-input" placeholder="Örn: 8 dk • 220 kcal veya 6 dk okuma">
                 </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label class="form-label" for="nut_subtitle" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Kısa Açıklama / Alt Başlık</label>
-                <input type="text" id="nut_subtitle" name="subtitle" class="form-input" placeholder="Örn: Günlük metabolik iksir ve hücresel toparlanma protokolü." style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+            <div class="xp-form-group">
+                <label class="xp-form-label" for="nut_subtitle">Kısa Açıklama / Alt Başlık</label>
+                <input type="text" id="nut_subtitle" name="subtitle" class="xp-form-input" placeholder="Örn: Günlük metabolik iksir ve hücresel toparlanma protokolü.">
             </div>
 
-            <div class="form-group" style="margin-bottom: 1rem;">
-                <label class="form-label" for="nut_ingredients" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Malzemeler / Öne Çıkan Maddeler (Virgülle veya satır satır)</label>
-                <textarea id="nut_ingredients" name="ingredients" rows="3" class="form-input" placeholder="1 bardak badem sütü, 1 tatlı kaşığı chia tohumu, yarım çay kaşığı zerdeçal..." style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;"></textarea>
+            <div class="xp-form-group">
+                <label class="xp-form-label" for="nut_ingredients">Malzemeler / Öne Çıkan Maddeler (Virgülle veya satır satır)</label>
+                <textarea id="nut_ingredients" name="ingredients" rows="3" class="xp-form-textarea" placeholder="1 bardak badem sütü, 1 tatlı kaşığı chia tohumu, yarım çay kaşığı zerdeçal..."></textarea>
             </div>
 
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label class="form-label" for="nut_content" style="font-size: 0.8rem; font-weight: 600; color: #334155;">Hazırlanış / Detaylı Rehber Metni *</label>
-                <textarea id="nut_content" name="content" rows="4" class="form-input" required placeholder="Hazırlanış adımları, kullanım talimatları veya rehberin detaylı içeriği..." style="width: 100%; padding: 0.55rem; border-radius: 6px; border: 1px solid #cbd5e1;"></textarea>
+            <div class="xp-form-group">
+                <label class="xp-form-label" for="nut_content">Hazırlanış / Detaylı Rehber Metni *</label>
+                <textarea id="nut_content" name="content" rows="4" class="xp-form-textarea" required placeholder="Hazırlanış adımları, kullanım talimatları veya rehberin detaylı içeriği..."></textarea>
             </div>
 
             <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">

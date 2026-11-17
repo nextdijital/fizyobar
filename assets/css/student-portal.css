@@ -1,0 +1,907 @@
+/* ==============================================================================
+   FİZYOBAR ÖĞRENCİ PORTALİ & HAREKET ALANI
+   LIGHT LUXURY ARCHITECTURAL EDITORIAL DESIGN SYSTEM
+   Arka Plan: Saf Beyaz & Sıcak Krem (#ffffff / #fcfbfa) • Marka Bordosu (#391214)
+   Tamamen Duyarlı (Mobil & Masaüstü Uyumlu) • Sıfır Scrollbar • Bağlantılı Bütüncül Tasarım
+   ============================================================================== */
+
+:root {
+    --sp-bg: #fcfbfa;
+    --sp-surface: #ffffff;
+    --sp-surface-subtle: #f8f6f3;
+    --sp-surface-tint: #f5f0ec;
+    
+    --sp-border: #ede8e3;
+    --sp-border-subtle: #f1ede8;
+    --sp-border-strong: #391214;
+    
+    --sp-text: #0e0e0e;
+    --sp-text-muted: #666056;
+    --sp-text-dim: #999388;
+    
+    --sp-bordo: #391214;
+    --sp-bordo-hover: #22090a;
+    --sp-bordo-light: #f7eeee;
+    --sp-bordo-tint: rgba(57, 18, 20, 0.06);
+    
+    --sp-gold: #c59b6c;
+    --sp-gold-light: #fbf6ef;
+    --sp-gold-border: rgba(197, 155, 108, 0.35);
+    
+    --sp-green: #15803d;
+    --sp-green-light: #f0fdf4;
+    --sp-green-border: #bbf7d0;
+    
+    --sp-radius-sm: 8px;
+    --sp-radius-md: 14px;
+    --sp-radius-lg: 20px;
+    --sp-radius-pill: 9999px;
+    
+    --sp-shadow-subtle: 0 4px 20px rgba(57, 18, 20, 0.04);
+    --sp-shadow-md: 0 8px 30px rgba(57, 18, 20, 0.08);
+}
+
+/* Scrollbarlar Her Yerde Gizli */
+*, *::before, *::after {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+    background: transparent !important;
+}
+
+/* ==============================================================================
+   1. PORTAL SARMALAYICI (LIGHT LUXURY WRAPPER)
+   ============================================================================== */
+.portal-light-wrapper {
+    background-color: var(--sp-bg);
+    min-height: calc(100vh - 120px);
+    color: var(--sp-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Segoe UI", Roboto, sans-serif;
+    padding-bottom: clamp(4rem, 6vw, 6rem);
+}
+
+.portal-container {
+    width: 100%;
+    max-width: 1420px;
+    margin: 0 auto;
+    padding-left: clamp(1rem, 3vw, 2.5rem);
+    padding-right: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* ==============================================================================
+   2. ÜST HOŞ GELDİN & KULLANICI ŞERİDİ (SUB-HEADER)
+   ============================================================================== */
+.portal-top-banner {
+    background: #ffffff;
+    border-bottom: 1px solid var(--sp-border);
+    padding: 1.25rem 0 0.85rem 0;
+    margin-bottom: 0;
+}
+
+.portal-top-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+
+.portal-user-welcome {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.portal-avatar-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: var(--sp-bordo);
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 14px rgba(57, 18, 20, 0.15);
+    flex-shrink: 0;
+}
+
+.portal-user-headings {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.portal-user-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--sp-bordo);
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.portal-program-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sp-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.portal-program-day-badge {
+    background: var(--sp-bordo-light);
+    color: var(--sp-bordo);
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: var(--sp-radius-pill);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.portal-top-metrics {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.portal-metric-pill {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    padding: 0.5rem 1rem;
+    border-radius: var(--sp-radius-pill);
+    font-size: 0.84rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    box-shadow: var(--sp-shadow-subtle);
+    color: var(--sp-text);
+}
+
+.portal-metric-pill.pill-loyalty {
+    background: var(--sp-gold-light);
+    border-color: var(--sp-gold-border);
+    color: #8b5e28;
+}
+
+.portal-metric-pill.pill-streak {
+    background: #fff7ed;
+    border-color: #ffedd5;
+    color: #c2410c;
+}
+
+.portal-metric-pill.pill-progress {
+    background: var(--sp-green-light);
+    border-color: var(--sp-green-border);
+    color: var(--sp-green);
+}
+
+/* ==============================================================================
+   3. BAĞLANTILI YATAY SEKMELER (NAV TABS - SLEEK EDITORIAL DESIGN)
+   ============================================================================== */
+.portal-tabs-track-wrap {
+    background: transparent;
+    border-bottom: 1px solid var(--sp-border);
+    padding: 0 0 0.75rem 0;
+    margin-bottom: 1.75rem;
+}
+
+.portal-tabs-track {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+
+.portal-tab-pill-btn {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    padding: 0.5rem 1.15rem;
+    border-radius: var(--sp-radius-pill);
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--sp-text-muted);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.portal-tab-pill-btn:hover {
+    color: var(--sp-bordo);
+    border-color: var(--sp-bordo);
+    background: var(--sp-surface-subtle);
+}
+
+.portal-tab-pill-btn.active {
+    background: var(--sp-bordo);
+    color: #ffffff;
+    border-color: var(--sp-bordo);
+    box-shadow: 0 2px 8px rgba(57, 18, 20, 0.15);
+}
+
+.portal-tab-pill-btn .tab-badge-num {
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 0.7rem;
+    padding: 1px 6px;
+    border-radius: var(--sp-radius-pill);
+}
+
+.portal-tab-pill-btn:not(.active) .tab-badge-num {
+    background: var(--sp-surface-subtle);
+    color: var(--sp-bordo);
+}
+
+/* ==============================================================================
+   4. KARTLAR & GENEL BAKIŞ (LIGHT CARDS GRID)
+   ============================================================================== */
+.sp-card {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--sp-shadow-subtle);
+    margin-bottom: 1.5rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sp-card-kicker {
+    font-family: var(--font-sans, 'Barlow Condensed', sans-serif);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sp-bordo);
+    margin-bottom: 0.25rem;
+    display: inline-block;
+}
+
+.sp-card-title {
+    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+    font-weight: 800;
+    color: var(--sp-text);
+    margin: 0 0 0.35rem 0;
+    letter-spacing: -0.01em;
+}
+
+/* Öne Çıkan "Günün Antrenmanı" Spotlight Kartı (Kompakt & Orantılı) */
+.sp-spotlight-card {
+    background: #ffffff;
+    border: 1.5px solid var(--sp-border);
+    border-radius: var(--sp-radius-md);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 360px minmax(0, 1fr);
+    height: 250px;
+    max-height: 260px;
+    box-shadow: 0 4px 18px rgba(57, 18, 20, 0.04);
+    margin-bottom: 1.75rem;
+    align-items: stretch;
+}
+
+@media (max-width: 900px) {
+    .sp-spotlight-card {
+        grid-template-columns: 1fr;
+        height: auto;
+        max-height: none;
+    }
+}
+
+.sp-spotlight-media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    max-height: 260px;
+    background-color: #111111;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .sp-spotlight-media {
+        height: 200px;
+        min-height: 200px;
+        max-height: 200px;
+    }
+}
+
+.sp-spotlight-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.sp-spotlight-card:hover .sp-spotlight-img {
+    transform: scale(1.03);
+}
+
+.sp-spotlight-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(57, 18, 20, 0.95);
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--sp-radius-pill);
+    backdrop-filter: blur(8px);
+}
+
+.sp-spotlight-body {
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .sp-spotlight-body {
+        padding: 1.25rem 1rem;
+    }
+}
+
+.sp-spotlight-title {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 800;
+    color: var(--sp-text);
+    margin: 0;
+    line-height: 1.25;
+}
+
+.sp-spotlight-desc {
+    font-size: 0.88rem;
+    color: var(--sp-text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.sp-spotlight-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-size: 0.82rem;
+    color: var(--sp-text-muted);
+    font-weight: 600;
+    margin-top: 0.25rem;
+}
+
+.sp-spotlight-action-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+}
+
+.btn-sp-primary {
+    background-color: var(--sp-bordo);
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 0.85rem 1.85rem;
+    border-radius: var(--sp-radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(57, 18, 20, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-sp-primary:hover {
+    background-color: var(--sp-bordo-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(57, 18, 20, 0.35);
+}
+
+.btn-sp-outline {
+    background: transparent;
+    color: var(--sp-bordo) !important;
+    border: 1.5px solid var(--sp-bordo);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--sp-radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-sp-outline:hover {
+    background: var(--sp-bordo-light);
+}
+
+/* 3 Sayaç Kartı Grid (Kalori, Süre, Tamamlanan) */
+.sp-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.sp-metric-card {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--sp-shadow-subtle);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sp-metric-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.sp-metric-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--sp-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sp-metric-icon {
+    font-size: 1.25rem;
+}
+
+.sp-metric-val {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--sp-bordo);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.sp-metric-sub {
+    font-size: 0.82rem;
+    color: var(--sp-text-muted);
+}
+
+.sp-metric-bar-wrap {
+    width: 100%;
+    height: 6px;
+    background: #f1ede8;
+    border-radius: var(--sp-radius-pill);
+    margin-top: 0.85rem;
+    overflow: hidden;
+}
+
+.sp-metric-bar-fill {
+    height: 100%;
+    background: var(--sp-bordo);
+    border-radius: var(--sp-radius-pill);
+    transition: width 0.6s ease;
+}
+
+/* ==============================================================================
+   5. ANTRENMAN KARTLARI (12 SEANS LİSTESİ)
+   ============================================================================== */
+.sp-workouts-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.sp-filter-chip {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    padding: 0.45rem 1.15rem;
+    border-radius: var(--sp-radius-pill);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--sp-text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sp-filter-chip:hover {
+    color: var(--sp-bordo);
+    border-color: var(--sp-bordo);
+}
+
+.sp-filter-chip.active {
+    background: var(--sp-bordo);
+    color: #ffffff;
+    border-color: var(--sp-bordo);
+}
+
+.sp-workouts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 600px) {
+    .sp-workouts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sp-workout-card {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius-md);
+    overflow: hidden;
+    box-shadow: var(--sp-shadow-subtle);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.sp-workout-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--sp-shadow-md);
+}
+
+.sp-workout-thumb-wrap {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    background: #111111;
+    overflow: hidden;
+}
+
+.sp-workout-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.sp-workout-card:hover .sp-workout-thumb {
+    transform: scale(1.04);
+}
+
+.sp-workout-day-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--sp-bordo);
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: var(--sp-radius-pill);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.sp-workout-status-badge {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: var(--sp-radius-pill);
+    backdrop-filter: blur(8px);
+}
+
+.sp-workout-status-badge.status-completed {
+    background: rgba(21, 128, 61, 0.95);
+    color: #ffffff;
+}
+
+.sp-workout-status-badge.status-locked {
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+}
+
+.sp-workout-status-badge.status-ready {
+    background: rgba(57, 18, 20, 0.95);
+    color: #ffffff;
+}
+
+.sp-workout-content {
+    padding: 1.25rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sp-workout-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--sp-text);
+    margin: 0 0 0.35rem 0;
+    line-height: 1.35;
+}
+
+.sp-workout-focus {
+    font-size: 0.8rem;
+    color: var(--sp-text-muted);
+    margin-bottom: 0.85rem;
+}
+
+.sp-workout-info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-size: 0.78rem;
+    color: var(--sp-text-dim);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.sp-workout-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.65rem 1rem;
+    border-radius: var(--sp-radius-pill);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s ease;
+}
+
+.sp-workout-btn.btn-play {
+    background: var(--sp-bordo);
+    color: #ffffff !important;
+}
+
+.sp-workout-btn.btn-play:hover {
+    background: var(--sp-bordo-hover);
+}
+
+.sp-workout-btn.btn-completed {
+    background: var(--sp-green-light);
+    color: var(--sp-green) !important;
+    border: 1px solid var(--sp-green-border);
+}
+
+.sp-workout-btn.btn-locked {
+    background: #f1ede8;
+    color: var(--sp-text-dim) !important;
+    cursor: not-allowed;
+}
+
+/* ==============================================================================
+   6. 28 GÜNLÜK İNTERAKTİF TAKVİM (4 HAFTA X 7 GÜN)
+   ============================================================================== */
+.sp-calendar-wrap {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius-lg);
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    box-shadow: var(--sp-shadow-subtle);
+}
+
+.sp-calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.sp-calendar-month-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--sp-bordo);
+    margin: 0;
+}
+
+.sp-calendar-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 6px;
+    table-layout: fixed;
+}
+
+.sp-calendar-th {
+    text-align: center;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--sp-text-dim);
+    padding-bottom: 0.75rem;
+    text-transform: uppercase;
+}
+
+.sp-cal-day-cell {
+    height: clamp(60px, 8vw, 85px);
+    border-radius: var(--sp-radius-md);
+    background: #faf8f5;
+    border: 1px solid var(--sp-border-subtle);
+    padding: 0.5rem;
+    vertical-align: top;
+    position: relative;
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.sp-cal-day-cell.has-workout {
+    background: #ffffff;
+    border-color: #e2d9cf;
+    cursor: pointer;
+}
+
+.sp-cal-day-cell.has-workout:hover {
+    border-color: var(--sp-bordo);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(57, 18, 20, 0.08);
+}
+
+.sp-cal-day-cell.is-completed {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+}
+
+.sp-cal-day-cell.is-current {
+    border: 2px solid var(--sp-bordo) !important;
+    box-shadow: 0 0 0 2px rgba(57, 18, 20, 0.15);
+}
+
+.sp-cal-day-num {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--sp-text);
+}
+
+.sp-cal-day-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    margin-top: 0.25rem;
+    display: block;
+    line-height: 1.2;
+}
+
+.sp-cal-day-cell.has-workout .sp-cal-day-label {
+    color: var(--sp-bordo);
+}
+
+.sp-cal-day-cell.is-completed .sp-cal-day-label {
+    color: var(--sp-green);
+}
+
+.sp-cal-day-cell.is-rest .sp-cal-day-label {
+    color: var(--sp-text-dim);
+}
+
+/* ==============================================================================
+   7. GÖREVLER & SADAKAT LİSTESİ (CHECKLIST & POINTS)
+   ============================================================================== */
+.sp-tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.sp-task-card {
+    background: #ffffff;
+    border: 1px solid var(--sp-border);
+    border-radius: var(--sp-radius-md);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    box-shadow: var(--sp-shadow-subtle);
+    transition: all 0.2s ease;
+}
+
+.sp-task-card.is-completed {
+    background: #fdfdfd;
+    opacity: 0.85;
+    border-color: #e5e5e5;
+}
+
+.sp-task-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.sp-task-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--sp-text);
+    margin: 0;
+}
+
+.sp-task-desc {
+    font-size: 0.82rem;
+    color: var(--sp-text-muted);
+    margin: 0;
+}
+
+.sp-task-reward {
+    background: var(--sp-gold-light);
+    color: #8b5e28;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: var(--sp-radius-pill);
+    display: inline-block;
+    margin-top: 0.25rem;
+}
+
+/* ==============================================================================
+   8. MOBİL ALT SABİT APP NAVİGASYONU (STICKY BOTTOM APP BAR)
+   ============================================================================== */
+.portal-mobile-app-bar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .portal-mobile-app-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: rgba(255, 255, 255, 0.96);
+        backdrop-filter: blur(14px);
+        border-top: 1px solid var(--sp-border);
+        z-index: 1000;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 0.5rem;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .sp-mob-nav-btn {
+        background: none;
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        color: var(--sp-text-muted);
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 6px 10px;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+    .sp-mob-nav-btn svg {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+    }
+
+    .sp-mob-nav-btn.active {
+        color: var(--sp-bordo);
+    }
+}

@@ -64,6 +64,26 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+    background: transparent !important;
+}
+
+html, body {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
 }
 
 html {
@@ -1070,12 +1090,81 @@ button, input, textarea, select {
 }
 
 /* ==============================================================================
-   5. BÖLÜM II: BAR SYSTEM - 3 SÜTUN (MİMARİ İNCE ÇERÇEVELİ KARTLAR)
+   5. BÖLÜM II: BAR SYSTEM - DÜZ & KOMPAKT 3 KART (EDİTORYAL MINIMALIST)
    ============================================================================== */
 .editorial-pillars-section {
     background-color: var(--white);
-    padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+    padding: clamp(3rem, 5vw, 4.2rem) 0;
     border-bottom: 1px solid var(--border-color);
+}
+
+.bar-compact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.bar-compact-card {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 1.6rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bar-compact-card:hover {
+    border-color: #111111;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.bar-compact-num {
+    font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary, #391214);
+    display: block;
+    margin-bottom: 0.35rem;
+    line-height: 1;
+}
+
+.bar-compact-title {
+    font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111111;
+    line-height: 1.3;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.bar-compact-desc {
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: #666666;
+    margin-bottom: 1.35rem;
+}
+
+.bar-compact-tag {
+    display: inline-block;
+    font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--primary, #391214);
+}
+
+@media (max-width: 900px) {
+    .bar-compact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
 }
 
 .pillars-grid-3 {
@@ -3216,47 +3305,48 @@ button, input, textarea, select {
 /* Kart Mimarisi (Referans Betella Kart Formatı) */
 .clean-plan-card {
     background-color: #ffffff;
-    border: 1.8px solid #141414;
-    border-radius: 22px;
-    padding: clamp(2.4rem, 3.2vw, 2.9rem) clamp(1.8rem, 2.4vw, 2.3rem);
+    border: 1px solid #e2e2e2;
+    border-radius: 16px;
+    padding: 1.8rem 1.6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .clean-plan-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
+    border-color: #111111;
 }
 
 /* Öne Çıkan Kart */
 .clean-plan-card.is-featured {
-    border: 2px solid var(--primary);
-    box-shadow: 0 10px 32px rgba(57, 18, 20, 0.1);
+    border: 2px solid #391214;
+    box-shadow: 0 6px 20px rgba(57, 18, 20, 0.08);
 }
 
 .clean-plan-card.is-featured:hover {
-    box-shadow: 0 20px 45px rgba(57, 18, 20, 0.18);
+    box-shadow: 0 12px 28px rgba(57, 18, 20, 0.15);
 }
 
 .featured-badge-pill {
     position: absolute;
-    top: -12px;
+    top: -11px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--primary);
+    background: #391214;
     color: #ffffff;
     font-family: var(--font-sans);
     font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
+    font-weight: 800;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 0.3rem 0.95rem;
+    padding: 0.25rem 0.85rem;
     border-radius: 9999px;
-    box-shadow: 0 4px 10px rgba(57, 18, 20, 0.3);
+    box-shadow: 0 2px 8px rgba(57, 18, 20, 0.3);
 }
 
 /* Kart Başlık & Fiyat */
@@ -3277,25 +3367,25 @@ button, input, textarea, select {
 
 .clean-plan-subtitle {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 0.84rem;
     font-weight: 500;
-    color: #71717a;
-    line-height: 1.45;
-    margin: 0 0 1.25rem;
+    color: #666666;
+    line-height: 1.4;
+    margin: 0 0 0.8rem;
 }
 
 .clean-plan-price {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    padding-bottom: 1.35rem;
+    gap: 0.2rem;
+    padding-bottom: 0.9rem;
     border-bottom: 1px solid #ededed;
 }
 
 .price-val {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 2.8vw, 2.45rem);
-    font-weight: 700;
+    font-size: clamp(1.75rem, 2.4vw, 2.1rem);
+    font-weight: 800;
     letter-spacing: -0.02em;
     color: #111111;
     line-height: 1;
@@ -3303,30 +3393,30 @@ button, input, textarea, select {
 
 .price-note {
     font-family: var(--font-sans);
-    font-size: 0.88rem;
+    font-size: 0.76rem;
     font-weight: 400;
     color: #71717a;
-    line-height: 1.4;
+    line-height: 1.35;
 }
 
-/* 3. Maddeli Özellikler Listesi (Betella İkonlu) */
+/* 3. Maddeli Özellikler Listesi */
 .clean-features-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2.2rem;
+    gap: 0.55rem;
+    margin-bottom: 1.4rem;
     flex-grow: 1;
 }
 
 .clean-feature-item {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.65rem;
     font-family: var(--font-sans);
-    font-size: 1.02rem;
+    font-size: 0.86rem;
     font-weight: 500;
-    color: #1a1a1a;
-    line-height: 1.4;
+    color: #222222;
+    line-height: 1.35;
 }
 
 .betella-check {
@@ -3347,27 +3437,33 @@ button, input, textarea, select {
     text-align: center;
     background-color: #111111;
     color: #ffffff;
-    border: 1.8px solid #111111;
+    border: 1px solid #111111;
     border-radius: 9999px;
-    padding: 0.95rem 1.25rem;
+    padding: 0.75rem 1.1rem;
     font-family: var(--font-sans);
-    font-size: 0.92rem;
+    font-size: 0.84rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: all 0.25s ease;
 }
 
 .btn-clean-plan:hover {
-    background-color: #2b2b2b;
-    border-color: #2b2b2b;
+    background-color: #391214;
+    border-color: #391214;
     transform: translateY(-2px);
     color: #ffffff;
 }
 
 .btn-clean-plan.btn-featured {
-    background-color: var(--primary);
-    border-color: var(--primary);
+    background-color: #391214;
+    border-color: #391214;
+}
+
+.btn-clean-plan.btn-featured:hover {
+    background-color: #111111;
+    border-color: #111111;
+}
     box-shadow: 0 4px 15px rgba(57, 18, 20, 0.28);
 }
 
@@ -4613,11 +4709,12 @@ body:has(.split-auth-page) .site-footer {
 }
 
 .ai-drawer-body::-webkit-scrollbar {
-    width: 5px;
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
 }
 .ai-drawer-body::-webkit-scrollbar-thumb {
-    background-color: #e4e4e7;
-    border-radius: 999px;
+    background-color: transparent !important;
 }
 
 .ai-msg-group {
@@ -8415,31 +8512,21 @@ body:has(.split-auth-page) .site-footer {
     background-color: #121114;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
-/* 1. Kart: Sol Ortadaki Yatay Beyaz Vurgu Bloğu */
-.showcase-card-1 .showcase-accent-block {
-    position: absolute;
-    width: 180px;
-    height: 120px;
-    background-color: #ffffff;
-    top: 170px;
-    left: 20px;
-    z-index: 1;
-    border-radius: 8px;
-}
-
-/* 2. Kart: Sol Üstteki Dikey Beyaz Vurgu Bloğu */
-.showcase-card-2 .showcase-accent-block {
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    background-color: #ffffff;
-    top: 30px;
-    left: 30px;
-    z-index: 1;
-    border-radius: 8px;
+/* Fotoğraf üzerindeki süs/boş bloklar ve gereksiz ikonlar kaldırıldı (Kullanıcı İsteği) */
+.showcase-accent-block,
+.showcase-card-1 .showcase-accent-block,
+.showcase-card-2 .showcase-accent-block,
+.card-top-controls,
+.card-back-circle,
+.card-top-badge {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .showcase-img-wrap {
@@ -8447,22 +8534,15 @@ body:has(.split-auth-page) .site-footer {
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 1;
     overflow: hidden;
 }
 
-/* 1. Kart Maskesi: Beyaz bloğun sol kenardan belirgin görünmesini sağlar */
-.showcase-card-1 .showcase-img-wrap {
-    mask-image: radial-gradient(ellipse 95% 75% at 75% 50%, black 50%, transparent 95%),
-                linear-gradient(to right, transparent 0%, black 32%);
-    -webkit-mask-image: radial-gradient(ellipse 95% 75% at 75% 50%, black 50%, transparent 95%),
-                        linear-gradient(to right, transparent 0%, black 32%);
-}
-
-/* 2. Kart Maskesi: Sol üst beyaz kare bloğun belirgin görünmesini sağlar */
+/* Fotoğraf Maskeleri Kaldırıldı: Görseller kesintisiz, net ve tam görünür */
+.showcase-card-1 .showcase-img-wrap,
 .showcase-card-2 .showcase-img-wrap {
-    mask-image: linear-gradient(135deg, transparent 0%, transparent 22%, black 48%);
-    -webkit-mask-image: linear-gradient(135deg, transparent 0%, transparent 22%, black 48%);
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
 }
 
 /* Fotoğraf Katmanı: Hover ile Renkli Olma Özelliği */
@@ -8479,50 +8559,6 @@ body:has(.split-auth-page) .site-footer {
 .showcase-card:hover .showcase-img {
     transform: scale(1.03);
     filter: grayscale(0%) contrast(105%) brightness(100%);
-}
-
-/* Kart Üst Rozet & Geri Butonu */
-.card-top-controls {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem 1.25rem 0;
-}
-
-.card-back-circle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    color: #0b0a0d;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border: none;
-    transition: transform 0.25s ease;
-}
-
-.card-back-circle:hover {
-    transform: translateX(-3px);
-}
-
-.card-top-badge {
-    font-family: var(--font-display);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #ffffff;
-    margin-left: auto;
-    background: rgba(255, 255, 255, 0.12);
-    padding: 4px 12px;
-    border-radius: 999px;
-    backdrop-filter: blur(8px);
 }
 
 /* Kart Alt Metin ve Buton Katmanı (Yumuşak Oval Butonlar) */
@@ -9934,7 +9970,7 @@ body.body-finder-pure-white {
     gap: 1.75rem;
 }
 
-.pillar-card {
+.detox-pillars-grid .pillar-card {
     background: #fafafa;
     border: 1.5px solid #f0f0f0;
     border-radius: 16px;
@@ -9942,7 +9978,7 @@ body.body-finder-pure-white {
     transition: all 0.25s ease;
 }
 
-.pillar-card:hover {
+.detox-pillars-grid .pillar-card:hover {
     background: #ffffff;
     border-color: #391214;
     transform: translateY(-4px);
@@ -11282,11 +11318,12 @@ body.body-kitchen-dark,
 }
 
 .notebook-body-scroll::-webkit-scrollbar {
-    width: 4px;
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
 }
 .notebook-body-scroll::-webkit-scrollbar-thumb {
-    background-color: #d1c8b9;
-    border-radius: 4px;
+    background-color: transparent !important;
 }
 
 .notebook-section {
@@ -11769,18 +11806,19 @@ body.has-events-viewport .main-content {
     text-align: center;
 }
 
-/* 2. Split Master-Detail Grid (Sol Dikey Yan Sütun + Sağ Açık Kart) */
+/* 2. Split Master-Detail Grid (Sol Dikey Yan Sütun + Sağ Açık Kart - Genişletilmiş Alan) */
 .announcements-split-layout {
     display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-    gap: 2.5rem;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 2rem;
     align-items: start;
+    width: 100%;
 }
 
 @media (max-width: 960px) {
     .announcements-split-layout {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
 }
 
@@ -12096,4 +12134,535 @@ body.has-events-viewport .main-content {
 
 .slumber-side-card.is-active .side-card-arrow {
     transform: translateX(3px);
+}
+
+
+/* ==============================================================================
+   REVIZYONLAR: DOLULUK ORANI, KALİSTHENİCS YOGİ CTA, PAKET ÖZELLİKLERİ,
+   ÜYELİK MODELLERİ (AYLIK/YILLIK), 3'LÜ MEDİTASYON HEDİYESİ VE 2 KATEGORİ DÖNÜŞÜMLER
+   ============================================================================== */
+
+/* 1. Canlı Kontenjan Doluluk Barı */
+.quota-occupancy-card {
+    background: linear-gradient(135deg, rgba(57, 18, 20, 0.06) 0%, rgba(197, 160, 89, 0.08) 100%);
+    border: 1px solid rgba(57, 18, 20, 0.14);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.quota-occupancy-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #391214;
+}
+
+.quota-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.65rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.quota-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #391214;
+}
+
+/* ==============================================================================
+   PROGRAMLAR SAYFASI - MİNİMALİST, DERLİ TOPLU & 4 RENK PALETİ
+   (YALNIZCA: SİYAH, BEYAZ, BORDO VE GRİ)
+   ============================================================================== */
+
+/* 1. Canlı Kontenjan ve Yogi Aksiyon Barı (Yatay, Kompakt & Sade) */
+.quota-occupancy-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 0.9rem 1.4rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.quota-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.quota-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #111111;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.quota-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #391214;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(57, 18, 20, 0.6);
+    animation: quotaPulse 1.8s infinite;
+}
+
+@keyframes quotaPulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 18, 20, 0.6); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(57, 18, 20, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(57, 18, 20, 0); }
+}
+
+.quota-count {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: #666666;
+}
+
+.quota-count strong {
+    color: #391214;
+    font-weight: 800;
+}
+
+.quota-bar-track {
+    width: 100%;
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+}
+
+.quota-bar-fill {
+    height: 100%;
+    background: #391214;
+    border-radius: 999px;
+    transition: width 1s ease;
+}
+
+.quota-percent-label {
+    display: none;
+}
+
+.quota-subtext {
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    color: #888888;
+    margin: 0;
+}
+
+/* 2. 500+ Kalisthenics Yogi Butonu */
+.btn-yogi-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: #391214 !important;
+    color: #ffffff !important;
+    border: 1px solid #391214 !important;
+    font-family: var(--font-sans);
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.3rem !important;
+    border-radius: 999px !important;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(57, 18, 20, 0.2);
+}
+
+.btn-yogi-cta:hover {
+    background: #111111 !important;
+    border-color: #111111 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.btn-yogi-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+/* 3. Paket İçeriği Vurgu Rozetleri (+12 Antrenman, +28 Gün, +%100 Ekipmansız) */
+.package-specs-highlight {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.8rem 0 1rem;
+}
+
+.spec-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #333333;
+}
+
+.spec-pill strong {
+    font-weight: 800;
+    color: #111111;
+}
+
+.clean-plan-card.is-featured .spec-pill {
+    background: #faf6f6;
+    border-color: #e5d4d4;
+    color: #391214;
+}
+
+.clean-plan-card.is-featured .spec-pill strong {
+    color: #391214;
+}
+
+/* 4. Program Hedefleri ve Özellikler Listesi */
+.package-goals-box {
+    display: none; /* Boylamasına aşırı uzamayı önlemek için kompakt tek liste mimarisine geçildi */
+}
+
+/* 5. Üyelik Planı Seçimi (Aylık vs Yıllık Switcher) */
+.plan-billing-switcher-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0 2.2rem;
+}
+
+.plan-billing-switcher {
+    display: inline-flex;
+    background: #f4f4f4;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid #e5e5e5;
+    position: relative;
+}
+
+.billing-switch-btn {
+    border: none;
+    background: transparent;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #666666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.billing-switch-btn.active {
+    background: #391214;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(57, 18, 20, 0.25);
+}
+
+.billing-save-badge {
+    background: #ffffff;
+    color: #391214;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.billing-tier-desc {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: #666666;
+    margin-top: 0.7rem;
+    text-align: center;
+    max-width: 620px;
+    line-height: 1.5;
+}
+
+.billing-tier-desc strong {
+    color: #111111;
+}
+
+/* 6. Hediye 3'lü Meditasyon Modülü Kartı (Siyah-Beyaz-Bordo-Gri) */
+.bonus-meditation-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 1.5rem 1.8rem;
+    margin: 2.5rem auto;
+    max-width: 1240px;
+    position: relative;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+}
+
+.bonus-ribbon {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: #391214;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+}
+
+.bonus-content {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+}
+
+.bonus-lock-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #faf6f6;
+    border: 1px solid #ebd4d4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #391214;
+}
+
+.bonus-kicker {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #391214;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.bonus-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111111;
+    margin: 0 0 0.35rem;
+    letter-spacing: 0.02em;
+}
+
+.bonus-desc {
+    font-family: var(--font-sans);
+    font-size: 0.84rem;
+    color: #666666;
+    line-height: 1.55;
+    margin: 0 0 0.9rem;
+}
+
+.bonus-lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 0.8rem;
+}
+
+.bonus-lesson-item {
+    background: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 0.55rem 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lesson-num {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: #391214;
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.lesson-name {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #222222;
+    line-height: 1.3;
+}
+
+.lock-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    color: #391214;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+/* 7. Üyeliğin Nasıl İşlediği Bölümü (4 Adım - Kompakt Yatay Grid) */
+.how-membership-works-section {
+    padding: 3rem 0;
+    background: #fafafa;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    margin: 2.5rem 0;
+}
+
+.membership-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.8rem;
+}
+
+.membership-step-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.3rem 1.15rem;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    transition: border-color 0.2s ease;
+}
+
+.membership-step-card:hover {
+    border-color: #391214;
+}
+
+.step-badge {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #391214;
+    background: #faf0f0;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.65rem;
+}
+
+.step-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111111;
+    margin: 0 0 0.45rem;
+    line-height: 1.3;
+}
+
+.step-desc {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: #666666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .membership-steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .membership-steps-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 8. Before / After 2 Kategori Filtre Butonları (Gri & Bordo) */
+.trans-cat-filter-tabs {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    background: #f4f4f4;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid #e5e5e5;
+    margin: 1.5rem auto 1.8rem;
+}
+
+.trans-tab-btn {
+    border: none;
+    background: transparent;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #666666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.trans-tab-btn.active {
+    background: #391214;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(57, 18, 20, 0.25);
+}
+
+.trans-category-tag {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(17, 17, 17, 0.85);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 3;
+}
+
+.trans-card.is-hidden {
+    display: none !important;
 }

@@ -51,6 +51,13 @@ if (!function_exists('asset')) {
     }
 }
 
+if (!function_exists('csrf_token')) {
+    function csrf_token(): string
+    {
+        return Csrf::token();
+    }
+}
+
 if (!function_exists('csrf_field')) {
     function csrf_field(): string
     {
@@ -97,5 +104,21 @@ if (!function_exists('youtube_embed_url')) {
     function youtube_embed_url(string $videoId): string
     {
         return "https://www.youtube-nocookie.com/embed/" . urlencode($videoId) . "?rel=0&modestbranding=1&showinfo=0";
+    }
+}
+
+if (!function_exists('page_data')) {
+    function page_data(string $pageKey): array
+    {
+        static $pageCache = [];
+        if (!isset($pageCache[$pageKey])) {
+            try {
+                $row = \Core\Database::fetch("SELECT data_json FROM site_pages WHERE page_key = ?", [$pageKey]);
+                $pageCache[$pageKey] = !empty($row['data_json']) ? (json_decode($row['data_json'], true) ?: []) : [];
+            } catch (\Throwable $e) {
+                $pageCache[$pageKey] = [];
+            }
+        }
+        return $pageCache[$pageKey];
     }
 }

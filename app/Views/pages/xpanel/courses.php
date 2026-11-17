@@ -18,29 +18,38 @@ require __DIR__ . '/layout_top.php';
     </button>
 </div>
 
-<div class="xpanel-card">
-    <div style="overflow-x: auto;">
+<div class="xp-table-card">
+    <div class="xp-table-header-bar">
+        <div>
+            <h2 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0 0 0.2rem 0;">
+                Tüm Eğitim &amp; Seans Programları
+            </h2>
+            <span style="font-size: 0.8rem; color: #64748b;">
+                Sitede satışta olan paketler, video seanslar ve fiyatlandırma
+            </span>
+        </div>
+    </div>
+
+    <div class="xpanel-table-wrap">
         <table class="xpanel-table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Program Adı</th>
-                    <th>Kategori</th>
-                    <th>Fiyat</th>
-                    <th>Süre</th>
-                    <th>Ders Sayısı</th>
-                    <th>Rozet</th>
-                    <th>Durum</th>
-                    <th style="text-align: right;">İşlemler</th>
+                    <th style="min-width: 180px;">Program Adı</th>
+                    <th style="width: 100px;">Kategori</th>
+                    <th style="width: 100px;">Fiyat</th>
+                    <th style="width: 90px;">Süre</th>
+                    <th style="width: 140px;">Ders Sayısı</th>
+                    <th style="width: 130px;">Rozet</th>
+                    <th style="width: 110px;">Durum</th>
+                    <th style="text-align: right; width: 130px;">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($courses as $c): ?>
                     <tr>
-                        <td>#<?= $c['id'] ?></td>
                         <td>
-                            <strong style="color: #111; font-size: 0.95rem;"><?= e($c['title']) ?></strong>
-                            <div style="font-size: 0.72rem; color: var(--text-muted);"><?= e($c['slug']) ?></div>
+                            <strong style="color: #0f172a; font-size: 0.95rem; display: block;"><?= e($c['title']) ?></strong>
+                            <div style="font-size: 0.72rem; color: #64748b; margin-top: 1px;"><?= e($c['slug']) ?></div>
                         </td>
                         <td><span style="text-transform: uppercase; font-size: 0.72rem; background: #f1f5f9; padding: 2px 7px; border-radius: 999px; font-weight: 600;"><?= e($c['category']) ?></span></td>
                         <td><strong>₺<?= number_format((float)$c['price'], 2, ',', '.') ?></strong></td>
@@ -74,63 +83,63 @@ require __DIR__ . '/layout_top.php';
 </div>
 
 <!-- Yeni Program Ekleme Modalı -->
-<div id="newCourseFormModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 10000; align-items: center; justify-content: center; padding: 1rem;">
-    <div style="background: var(--white); border-radius: var(--radius-sm); max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2rem; box-shadow: var(--shadow-lg);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
-            <h3 style="font-size: 1.2rem; font-weight: 500; color: var(--black); text-transform: uppercase;">Yeni Eğitim Programı Ekle</h3>
-            <button type="button" onclick="document.getElementById('newCourseFormModal').style.display='none';" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+<div id="newCourseFormModal" class="xp-modal-backdrop">
+    <div class="xp-modal-window">
+        <div class="xp-modal-header">
+            <h3 class="xp-modal-title">Yeni Eğitim Programı Ekle</h3>
+            <button type="button" onclick="document.getElementById('newCourseFormModal').style.display='none';" class="xp-modal-close-btn">&times;</button>
         </div>
 
-        <form action="<?= url('/xpanel/courses/save') ?>" method="POST">
+        <form action="<?= url('/xpanel/courses/save') ?>" method="POST" class="xp-modal-body">
             <?= csrf_field() ?>
 
-            <div class="form-group">
-                <label class="form-label">Program Başlığı *</label>
-                <input type="text" name="title" class="form-input" required placeholder="Örn: 4 Haftalık Online Detox & Yoga Kampı">
+            <div class="xp-form-group">
+                <label class="xp-form-label">Program Başlığı *</label>
+                <input type="text" name="title" class="xp-form-input" required placeholder="Örn: 4 Haftalık Online Detox & Yoga Kampı">
             </div>
 
-            <div class="form-group">
-                <label class="form-label">SEO URL (Slug) - Boş bırakılırsa otomatik üretilir</label>
-                <input type="text" name="slug" class="form-input" placeholder="online-detox-yoga-kampi">
+            <div class="xp-form-group">
+                <label class="xp-form-label">SEO URL (Slug) - Boş bırakılırsa otomatik üretilir</label>
+                <input type="text" name="slug" class="xp-form-input" placeholder="online-detox-yoga-kampi">
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Kısa Açıklama (Spot) *</label>
-                <input type="text" name="subtitle" class="form-input" required placeholder="Ev konforunda canlı seanslar...">
+            <div class="xp-form-group">
+                <label class="xp-form-label">Kısa Açıklama (Spot) *</label>
+                <input type="text" name="subtitle" class="xp-form-input" required placeholder="Ev konforunda canlı seanslar...">
             </div>
 
-            <div class="form-group">
-                <label class="form-label">Detaylı Açıklama</label>
-                <textarea name="description" class="form-textarea" placeholder="Program müfredatı ve içerik detayları..."></textarea>
+            <div class="xp-form-group">
+                <label class="xp-form-label">Detaylı Açıklama</label>
+                <textarea name="description" class="xp-form-textarea" rows="3" placeholder="Program müfredatı ve içerik detayları..."></textarea>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
-                <div class="form-group">
-                    <label class="form-label">Kategori</label>
-                    <select name="category" class="form-input">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+                <div>
+                    <label class="xp-form-label">Kategori</label>
+                    <select name="category" class="xp-form-select">
                         <option value="online">Online Kamp</option>
                         <option value="studio">Stüdyo & Birebir</option>
                         <option value="workshop">Workshop & Atölye</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Fiyat (TL) *</label>
-                    <input type="number" step="0.01" name="price" class="form-input" required value="1450.00">
+                <div>
+                    <label class="xp-form-label">Fiyat (TL) *</label>
+                    <input type="number" step="0.01" name="price" class="xp-form-input" required value="1450.00">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Süre (Hafta)</label>
-                    <input type="number" name="duration_weeks" class="form-input" required value="4">
+                <div>
+                    <label class="xp-form-label">Süre (Hafta)</label>
+                    <input type="number" name="duration_weeks" class="xp-form-input" required value="4">
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                <div class="form-group">
-                    <label class="form-label">Kazanılacak Rozet Adı</label>
-                    <input type="text" name="badge_title" class="form-input" value="Detox Master">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+                <div>
+                    <label class="xp-form-label">Kazanılacak Rozet Adı</label>
+                    <input type="text" name="badge_title" class="xp-form-input" value="Detox Master">
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Rozet İkonu (Emoji)</label>
-                    <input type="text" name="badge_icon" class="form-input" value="🌿">
+                <div>
+                    <label class="xp-form-label">Rozet İkonu (Emoji)</label>
+                    <input type="text" name="badge_icon" class="xp-form-input" value="🌿">
                 </div>
             </div>
 

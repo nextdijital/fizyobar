@@ -43,10 +43,16 @@ class CheckoutController extends Controller
         }
 
         $infoMsg = Session::getFlash('checkout_info');
+        $planType = ($_GET['plan'] ?? 'monthly') === 'yearly' ? 'yearly' : 'monthly';
+        $yearlyPrice = 7900.00;
+        $activePrice = ($planType === 'yearly') ? $yearlyPrice : (float)$course['price'];
 
         $this->render('pages/checkout/index', [
             'metaTitle' => 'Kayıt & Ödeme | ' . $course['title'],
             'course' => $course,
+            'planType' => $planType,
+            'activePrice' => $activePrice,
+            'yearlyPrice' => $yearlyPrice,
             'infoMsg' => $infoMsg,
             'ibanBank' => Setting::get('iban_bank', 'Garanti BBVA'),
             'ibanName' => Setting::get('iban_name', 'Betina Tansuğ'),
@@ -69,19 +75,61 @@ class CheckoutController extends Controller
 
         $senderName = trim((string)$this->input('sender_name'));
         $receiptRef = trim((string)$this->input('receipt_ref'));
+        $planType = $this->input('plan_type') === 'yearly' ? 'yearly' : 'monthly';
+        $amount = (float)($this->input('amount') ?: (($planType === 'yearly') ? 7900.00 : $course['price']));
 
         if (empty($senderName)) {
             Session::setFlash('checkout_error', 'Lütfen havale yapan kişinin adını ve soyadını belirtiniz.');
-            $this->redirect(url('/checkout/' . $courseId));
+            $this->redirect(url('/checkout/' . $courseId . '?plan=' . $planType));
         }
 
+        $durationDays = ($planType === 'yearly') ? 365 : 90;
+
         Database::execute(
-            "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, sender_name, receipt_ref, approved_at, start_date, expires_at, created_at) 
-             VALUES (?, ?, 'iban', 'approved', ?, ?, ?, NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 90 DAY), NOW())",
-            [$userId, $course['id'], $course['price'], $senderName, $receiptRef]
+            "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, plan_type, amount, sender_name, receipt_ref, approved_at, start_date, expires_at, created_at) 
+             VALUES (?, ?, 'iban', 'approved', ?, ?, ?, ?, NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL ? DAY), NOW())",
+            [$userId, $course['id'], $planType, $amount, $senderName, $receiptRef, $durationDays]
         );
 
         $enrollmentId = (int)Database::getConnection()->lastInsertId();
+
+        // Otomatik Hediye 3'lü Meditasyon Paketi Tanımlama
+        $meditationCourse = Database::fetch("SELECT id FROM courses WHERE slug = '3lu-meditasyon-serisi'");
+        if ($meditationCourse) {
+            $hasMeditation = Database::fetch(
+                "SELECT id FROM enrollments WHERE user_id = ? AND course_id = ?",
+                [$userId, $meditationCourse['id']]
+            );
+            if (!$hasMeditation) {
+                Database::execute(
+                    "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, plan_type, amount, is_gift, gift_message, approved_at, start_date, expires_at, created_at)
+                     VALUES (?, ?, 'iban', 'approved', ?, 0.00, 1, 'Satın Alıma Özel 3lü Meditasyon Hediyesi', NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 365 DAY), NOW())",
+                    [$userId, $meditationCourse['id'], $planType]
+                );
+            }
+        }
+
+        // Eğer Yıllık Plan seçildiyse, diğer tüm aktif kursları da kullanıcıya tanımla (Her şey açık!)
+        if ($planType === 'yearly') {
+            $otherCourses = Database::query(
+                "SELECT id FROM courses WHERE is_active = 1 AND id NOT IN (?, ?)",
+                [$course['id'], $meditationCourse['id'] ?? 0]
+            );
+            foreach ($otherCourses as $oc) {
+                $hasOc = Database::fetch(
+                    "SELECT id FROM enrollments WHERE user_id = ? AND course_id = ?",
+                    [$userId, $oc['id']]
+                );
+                if (!$hasOc) {
+                    Database::execute(
+                        "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, plan_type, amount, is_gift, gift_message, approved_at, start_date, expires_at, created_at)
+                         VALUES (?, ?, 'iban', 'approved', 'yearly', 0.00, 1, 'Yıllık All-Access Paketi Kapsamında', NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 365 DAY), NOW())",
+                        [$userId, $oc['id']]
+                    );
+                }
+            }
+        }
+
         $this->redirect(url('/checkout/success/' . $enrollmentId));
     }
 
