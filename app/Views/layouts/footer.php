@@ -17,9 +17,9 @@
             <!-- 1. Üst Alan: Sliced / %75'i Görünen Dev Tipografik Marka & Çizgi & Sağ Slogan -->
             <div class="footer-sliced-brand-wrap">
                 <div class="footer-sliced-brand-inner">
-                    <svg viewBox="0 0 1080 80" class="footer-sliced-svg" preserveAspectRatio="xMinYMin meet" aria-label="FİZYOBAR">
-                        <text x="0" y="98" class="footer-svg-brand-text">FİZYOBAR</text>
-                        <text x="1080" y="68" text-anchor="end" class="footer-svg-tagline">BODY &#8226; ADAPT &#8226; REFRAME</text>
+                    <svg viewBox="0 0 1080 115" class="footer-sliced-svg" preserveAspectRatio="xMinYMin meet" aria-label="FİZYOBAR">
+                        <text x="0" y="140" class="footer-svg-brand-text">FİZYOBAR</text>
+                        <text x="1080" y="98" text-anchor="end" class="footer-svg-tagline">BODY &#8226; ADAPT &#8226; REFRAME</text>
                     </svg>
                 </div>
                 <div class="footer-sliced-line"></div>

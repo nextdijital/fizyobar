@@ -76,7 +76,7 @@ if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_
     <!-- PROGRAMINI BUL: SADECE BEYAZ SAYFA, SOLDA GERİ DÖN, ORTADA FİZYOBAR LOGOSU -->
     <header class="finder-clean-header" id="finderHeader">
         <div class="finder-clean-header-inner">
-            <a href="<?= url('/') ?>" class="finder-header-back-btn" aria-label="Geri Dön">
+            <a href="<?= url('/programs') ?>" class="finder-header-back-btn" id="finderHeaderBackBtn" aria-label="Geri Dön" onclick="if (window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) { event.preventDefault(); window.history.back(); }">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>

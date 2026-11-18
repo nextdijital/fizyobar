@@ -37,44 +37,16 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
 <section class="programs-clean-section">
     <div class="container">
         
-        <!-- 1. Üst Tanıtım & Canlı Kontenjan Doluluk Barı -->
+        <!-- 1. Üst Tanıtım Başlığı & Minimal Açıklama -->
         <div class="programs-hero-clean text-center">
-            <span class="programs-kicker-pill" style="color: #391214; font-weight: 700; letter-spacing: 0.12em; font-size: 0.76rem;"><?= e($progKicker) ?></span>
-            <h1 class="programs-headline" style="font-size: clamp(1.9rem, 3vw, 2.6rem); margin: 0.35rem 0 0.5rem; letter-spacing: 0.03em;"><?= e($progHeadline) ?></h1>
+            <h1 class="programs-headline" style="font-size: clamp(1.9rem, 3vw, 2.6rem); margin: 0 0 0.5rem; letter-spacing: 0.03em;"><?= e($progHeadline) ?></h1>
             <p class="programs-subheadline" style="max-width: 680px; margin: 0 auto; font-size: 0.92rem; color: #666; line-height: 1.55;">
                 <?= e($progLead) ?>
             </p>
-
-            <!-- Canlı Kontenjan Göstergesi ve 500+ Kalisthenics Yogi Butonu (Yatay Kompakt Bar) -->
-            <div class="quota-occupancy-card" style="max-width: 860px; margin: 1.25rem auto 1.5rem; text-align: left;">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 250px;">
-                        <span class="quota-badge" style="white-space: nowrap;">
-                            <span class="quota-pulse-dot"></span> CANLI KONTENJAN: <strong style="color: #391214;">%<?= $quotaPercent ?> DOLU</strong>
-                        </span>
-                        <div class="quota-bar-track" style="flex: 1; min-width: 90px;">
-                            <div class="quota-bar-fill" style="width: <?= min(100, max(0, $quotaPercent)) ?>%;"></div>
-                        </div>
-                        <span class="quota-count" style="white-space: nowrap;">Son <strong><?= $quotaLeft ?></strong> Kişi</span>
-                    </div>
-                    <a href="<?= e($quotaBtnLink) ?>" class="btn-yogi-cta">
-                        <?= e($quotaBtnText) ?>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Canlı Kamp Sayfası Çağrısı (Minimal Gri-Bordo Çizgi) -->
-            <div style="font-size: 0.82rem; color: #666; margin-top: 0.4rem;">
-                <span style="background: #391214; color: #fff; font-size: 0.65rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: 0.05em; margin-right: 5px;">CANLI KAMP</span>
-                Birebir WhatsApp takipli ve beslenmeli 4 haftalık dönem:
-                <a href="<?= url('/detox') ?>" style="color: #391214; font-weight: 700; text-decoration: underline; margin-left: 3px;">
-                    Online Detox &amp; Yoga Kampı Sayfası &rarr;
-                </a>
-            </div>
         </div>
 
         <!-- 2. Üyelik Planı Seçimi: Aylık vs Yıllık -->
-        <div class="plan-billing-switcher-wrap">
+        <div class="plan-billing-switcher-wrap" style="margin: 1.25rem 0 1.8rem;">
             <div class="plan-billing-switcher" role="tablist" aria-label="Üyelik Süresi Seçimi">
                 <button type="button" class="billing-switch-btn active" id="btnMonthlyPlan" data-plan="monthly">
                     Aylık Üyelik
@@ -84,179 +56,223 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                 </button>
             </div>
             
-            <p class="billing-tier-desc" id="billingTierDesc">
+            <p class="billing-tier-desc" id="billingTierDesc" style="margin-top: 0.5rem;">
                 <strong>Aylık Üyelik Modeli:</strong> Seçtiğiniz eğitim paketi ve Fizyobar Kitchen tariflerine 30 gün boyunca erişim sağlar.
             </p>
         </div>
 
-        <!-- 3. Satılacak Eğitim Paketleri Grid (Kompakt, Dengeli & Minimal) -->
+        <!-- 3. Satılacak Eğitim Paketleri Grid (Kompakt & Video Önizlemeli) -->
         <div class="programs-clean-grid" id="programsGrid">
             
-            <!-- Eğitim 1: 4 Haftalık Online Detox & Yoga Kampı (Ana Paket) -->
+            <!-- Eğitim 1: 4 Haftalık Online Detox & Yoga Kampı -->
             <article class="clean-plan-card is-featured" id="detox-camp">
                 <div class="featured-badge-pill">EN ÇOK TERCİH EDİLEN</div>
-                
-                <div class="plan-card-top">
-                    <div class="plan-category-tag">PAKET 01 &bull; METABOLİK &amp; YOGA</div>
-                    <h2 class="clean-plan-title">4 HAFTALIK ONLİNE<br>DETOX &amp; YOGA KAMPI</h2>
-                    <p class="clean-plan-subtitle">Bütünsel Metabolik Sıfırlama, Biyomekanik Duruş &amp; Yağ Yakımı</p>
-                    
-                    <!-- Fiyat Alanı -->
-                    <div class="clean-plan-price">
-                        <span class="price-val" data-monthly="1.850 TL" data-yearly="7.900 TL">1.850 TL</span>
-                        <span class="price-note" data-monthly="Aylık üyelik (Kendi paketi + Kitchen dahil)" data-yearly="Yıllık üyelik (Tüm paketler + Beslenme Rehberleri dahil)">Aylık üyelik (Kendi paketi + Kitchen dahil)</span>
-                    </div>
 
-                    <!-- Paket Özellikleri Hapı -->
-                    <div class="package-specs-highlight">
-                        <span class="spec-pill"><strong>+12</strong> antrenman</span>
-                        <span class="spec-pill"><strong>+28</strong> gün</span>
-                        <span class="spec-pill"><strong>%100</strong> ekipmansız</span>
+                <!-- Video Önizleme Alanı -->
+                <div class="plan-card-video-wrap">
+                    <video class="plan-preview-video" poster="<?= asset('assets/images/hero-poster.jpg') ?>" autoplay muted loop playsinline preload="metadata">
+                        <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
+                    </video>
+                    <div class="plan-video-overlay">
+                        <span class="plan-video-badge"><span class="video-pulse-dot"></span> EĞİTİM ÖNİZLEME</span>
+                        <button type="button" class="plan-video-play-toggle" aria-label="Önizlemeyi Oynat / Durdur">
+                            <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                            <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Kapsam & Özellikler Listesi (Kompakt Tek Liste) -->
-                <div class="clean-features-list">
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Rafine şekersiz glisemik denge &amp; ödem atımı</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Servikal &amp; torakal omurga dekompresyonu</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Haftada 3 gün modüler akış (Pzt - Çar - Cum)</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Fizyobar Kitchen bütünsel tarif kütüphanesi</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Fizyoterapist birebir WhatsApp takibi &amp; kontrolü</span>
-                    </div>
-                    <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
-                        <span class="betella-check" style="color: #391214;">★</span>
-                        <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
-                    </div>
-                </div>
+                <div class="plan-card-body">
+                    <div class="plan-card-top">
+                        <div class="plan-category-tag">PAKET 01 &bull; METABOLİK &amp; YOGA</div>
+                        <h2 class="clean-plan-title">4 HAFTALIK DETOX &amp; YOGA KAMPI</h2>
+                        <p class="clean-plan-subtitle">Bütünsel Sıfırlama, Biyomekanik Duruş &amp; Yağ Yakımı</p>
+                        
+                        <!-- Fiyat Alanı -->
+                        <div class="clean-plan-price">
+                            <span class="price-val" data-monthly="1.850 TL" data-yearly="7.900 TL">1.850 TL</span>
+                            <span class="price-note" data-monthly="Aylık üyelik (Kendi paketi + Kitchen dahil)" data-yearly="Yıllık üyelik (Tüm paketler + Beslenme Rehberleri dahil)">Aylık üyelik (Kendi paketi + Kitchen dahil)</span>
+                        </div>
 
-                <div class="plan-card-bottom">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-clean-plan btn-featured btn-checkout-link" data-base-url="<?= url('/checkout/1') ?>">
-                        PROGRAMA KATIL &rarr;
-                    </a>
+                        <!-- Paket Özellikleri Hapı -->
+                        <div class="package-specs-highlight">
+                            <span class="spec-pill"><strong>+12</strong> antrenman</span>
+                            <span class="spec-pill"><strong>+28</strong> gün</span>
+                            <span class="spec-pill"><strong>%100</strong> ekipmansız</span>
+                        </div>
+                    </div>
+
+                    <!-- Kapsam & Özellikler Listesi -->
+                    <div class="clean-features-list">
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Rafine şekersiz glisemik denge &amp; ödem atımı</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Servikal &amp; torakal omurga dekompresyonu</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Haftada 3 gün modüler video akışlar</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Fizyobar Kitchen bütünsel tarif kütüphanesi</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Fizyoterapist birebir WhatsApp takibi &amp; kontrolü</span>
+                        </div>
+                        <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
+                            <span class="betella-check" style="color: #391214;">★</span>
+                            <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="plan-card-bottom">
+                        <a href="<?= url('/checkout/1') ?>" class="btn-clean-plan btn-featured btn-checkout-link" data-base-url="<?= url('/checkout/1') ?>">
+                            PROGRAMA KATIL &rarr;
+                        </a>
+                    </div>
                 </div>
             </article>
 
             <!-- Eğitim 2: Warrior Yoga Planı -->
             <article class="clean-plan-card" id="warrior">
-                <div class="plan-card-top">
-                    <div class="plan-category-tag">PAKET 02 &bull; GÜÇ &amp; DİNAMİZM</div>
-                    <h2 class="clean-plan-title">WARRIOR YOGA<br>PLANI</h2>
-                    <p class="clean-plan-subtitle">Dinamik Akış, Calisthenics Kuvvet &amp; Omurga Stabilitesi</p>
-                    
-                    <div class="clean-plan-price">
-                        <span class="price-val" data-monthly="1.250 TL" data-yearly="7.900 TL">1.250 TL</span>
-                        <span class="price-note" data-monthly="Aylık üyelik (Kendi paketi + Kitchen dahil)" data-yearly="Yıllık üyelik (Tüm paketler + Beslenme Rehberleri dahil)">Aylık üyelik (Kendi paketi + Kitchen dahil)</span>
-                    </div>
-
-                    <!-- Paket Özellikleri Hapı -->
-                    <div class="package-specs-highlight">
-                        <span class="spec-pill"><strong>+12</strong> antrenman</span>
-                        <span class="spec-pill"><strong>+28</strong> gün</span>
-                        <span class="spec-pill"><strong>%100</strong> ekipmansız</span>
+                <!-- Video Önizleme Alanı -->
+                <div class="plan-card-video-wrap">
+                    <video class="plan-preview-video" poster="<?= asset('assets/images/betina-outdoor-inversion.jpg') ?>" autoplay muted loop playsinline preload="metadata">
+                        <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
+                    </video>
+                    <div class="plan-video-overlay">
+                        <span class="plan-video-badge"><span class="video-pulse-dot"></span> EĞİTİM ÖNİZLEME</span>
+                        <button type="button" class="plan-video-play-toggle" aria-label="Önizlemeyi Oynat / Durdur">
+                            <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                            <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Kapsam & Özellikler Listesi (Kompakt Tek Liste) -->
-                <div class="clean-features-list">
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Calisthenics eklem dostu vücut ağırlığı gücü</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Kalça ve omuz kuşağı dinamik mobilitesi</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Pelvik taban ve core stabilitesi akışları</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Haftada 3 gün fonksiyonel modüler seanslar</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Fizyobar Kitchen tarif kütüphanesi erişimi</span>
-                    </div>
-                    <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
-                        <span class="betella-check" style="color: #391214;">★</span>
-                        <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
-                    </div>
-                </div>
+                <div class="plan-card-body">
+                    <div class="plan-card-top">
+                        <div class="plan-category-tag">PAKET 02 &bull; GÜÇ &amp; DİNAMİZM</div>
+                        <h2 class="clean-plan-title">WARRIOR YOGA PLANI</h2>
+                        <p class="clean-plan-subtitle">Dinamik Akış, Calisthenics Kuvvet &amp; Mobilite</p>
+                        
+                        <div class="clean-plan-price">
+                            <span class="price-val" data-monthly="1.250 TL" data-yearly="7.900 TL">1.250 TL</span>
+                            <span class="price-note" data-monthly="Aylık üyelik (Kendi paketi + Kitchen dahil)" data-yearly="Yıllık üyelik (Tüm paketler + Beslenme Rehberleri dahil)">Aylık üyelik (Kendi paketi + Kitchen dahil)</span>
+                        </div>
 
-                <div class="plan-card-bottom">
-                    <a href="<?= url('/checkout/2') ?>" class="btn-clean-plan btn-checkout-link" data-base-url="<?= url('/checkout/2') ?>">
-                        PROGRAMA KATIL &rarr;
-                    </a>
+                        <div class="package-specs-highlight">
+                            <span class="spec-pill"><strong>+12</strong> antrenman</span>
+                            <span class="spec-pill"><strong>+28</strong> gün</span>
+                            <span class="spec-pill"><strong>%100</strong> ekipmansız</span>
+                        </div>
+                    </div>
+
+                    <div class="clean-features-list">
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Calisthenics eklem dostu vücut ağırlığı gücü</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Kalça ve omuz kuşağı dinamik mobilitesi</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Pelvik taban ve core stabilitesi akışları</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Haftada 3 gün fonksiyonel modüler seanslar</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Fizyobar Kitchen tarif kütüphanesi erişimi</span>
+                        </div>
+                        <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
+                            <span class="betella-check" style="color: #391214;">★</span>
+                            <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="plan-card-bottom">
+                        <a href="<?= url('/checkout/2') ?>" class="btn-clean-plan btn-checkout-link" data-base-url="<?= url('/checkout/2') ?>">
+                            PROGRAMA KATIL &rarr;
+                        </a>
+                    </div>
                 </div>
             </article>
 
             <!-- Eğitim 3: Omurga & Postür Biyomekaniği -->
             <article class="clean-plan-card" id="posture">
-                <div class="plan-card-top">
-                    <div class="plan-category-tag">PAKET 03 &bull; KLİNİK HİZALANMA</div>
-                    <h2 class="clean-plan-title">OMURGA &amp; POSTÜR<br>BİYOMEKANİĞİ</h2>
-                    <p class="clean-plan-subtitle">Klinik Duruş, Boyun-Bel Dekompresyonu &amp; Fasya</p>
-                    
-                    <div class="clean-plan-price">
-                        <span class="price-val" data-monthly="1.850 TL" data-yearly="7.900 TL">1.850 TL</span>
-                        <span class="price-note" data-monthly="Aylık üyelik (Kendi paketi + Kitchen dahil)" data-yearly="Yıllık üyelik (Tüm paketler + Beslenme Rehberleri dahil)">Aylık üyelik (Kendi paketi + Kitchen dahil)</span>
-                    </div>
-
-                    <!-- Paket Özellikleri Hapı -->
-                    <div class="package-specs-highlight">
-                        <span class="spec-pill"><strong>+12</strong> antrenman</span>
-                        <span class="spec-pill"><strong>+28</strong> gün</span>
-                        <span class="spec-pill"><strong>%100</strong> ekipmansız</span>
+                <!-- Video Önizleme Alanı -->
+                <div class="plan-card-video-wrap">
+                    <video class="plan-preview-video" poster="<?= asset('assets/images/betina-studio-forward-fold.jpg') ?>" autoplay muted loop playsinline preload="metadata">
+                        <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
+                    </video>
+                    <div class="plan-video-overlay">
+                        <span class="plan-video-badge"><span class="video-pulse-dot"></span> EĞİTİM ÖNİZLEME</span>
+                        <button type="button" class="plan-video-play-toggle" aria-label="Önizlemeyi Oynat / Durdur">
+                            <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                            <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                        </button>
                     </div>
                 </div>
 
-                <!-- Kapsam & Özellikler Listesi (Kompakt Tek Liste) -->
-                <div class="clean-features-list">
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">İleri baş ve kifoz (kamburluk) eliminasyonu</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Servikal &amp; torakal omurga dekompresyonu</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Kürek kemiği ve omuz eklemi stabilizasyonu</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Masa başı çalışanlar için günlük mikro seanslar</span>
-                    </div>
-                    <div class="clean-feature-item">
-                        <span class="betella-check">✓</span>
-                        <span class="feature-text">Fizyobar Kitchen tarif kütüphanesi erişimi</span>
-                    </div>
-                    <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
-                        <span class="betella-check" style="color: #391214;">★</span>
-                        <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
-                    </div>
-                </div>
+                <div class="plan-card-body">
+                    <div class="plan-card-top">
+                        <div class="plan-category-tag">PAKET 03 &bull; KLİNİK HİZALANMA</div>
+                        <h2 class="clean-plan-title">OMURGA &amp; POSTÜR BİYOMEKANİĞİ</h2>
+                        <p class="clean-plan-subtitle">Klinik Duruş, Boyun-Bel Dekompresyonu &amp; Fasya</p>
+                        
+                        <div class="clean-plan-price">
+                            <span class="price-val" data-monthly="1.850 TL" data-yearly="7.900 TL">1.850 TL</span>
+                            <span class="price-note" data-monthly="Aylık üyelik (Kendi paketi + Kitchen dahil)" data-yearly="Yıllık üyelik (Tüm paketler + Beslenme Rehberleri dahil)">Aylık üyelik (Kendi paketi + Kitchen dahil)</span>
+                        </div>
 
-                <div class="plan-card-bottom">
-                    <a href="<?= url('/checkout/3') ?>" class="btn-clean-plan btn-checkout-link" data-base-url="<?= url('/checkout/3') ?>">
-                        PROGRAMA KATIL &rarr;
-                    </a>
+                        <div class="package-specs-highlight">
+                            <span class="spec-pill"><strong>+12</strong> antrenman</span>
+                            <span class="spec-pill"><strong>+28</strong> gün</span>
+                            <span class="spec-pill"><strong>%100</strong> ekipmansız</span>
+                        </div>
+                    </div>
+
+                    <div class="clean-features-list">
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">İleri baş ve kifoz (kamburluk) eliminasyonu</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Servikal &amp; torakal omurga dekompresyonu</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Kürek kemiği ve omuz eklemi stabilizasyonu</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Masa başı çalışanlar için günlük mikro seanslar</span>
+                        </div>
+                        <div class="clean-feature-item">
+                            <span class="betella-check">✓</span>
+                            <span class="feature-text">Fizyobar Kitchen tarif kütüphanesi erişimi</span>
+                        </div>
+                        <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
+                            <span class="betella-check" style="color: #391214;">★</span>
+                            <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="plan-card-bottom">
+                        <a href="<?= url('/checkout/3') ?>" class="btn-clean-plan btn-checkout-link" data-base-url="<?= url('/checkout/3') ?>">
+                            PROGRAMA KATIL &rarr;
+                        </a>
+                    </div>
                 </div>
             </article>
 
@@ -294,9 +310,10 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                         </div>
                     </div>
 
-                    <div style="margin-top: 0.8rem;">
+                    <div style="margin-top: 0.9rem;">
                         <span class="lock-status-badge">
-                            🔒 Sayfada Kilitli &bull; Programa Katılan Tüm Üyelerimize Otomatik Olarak Açılır
+                            <span class="badge-pulse-dot" aria-hidden="true"></span>
+                            <span>🔒 Sayfada Kilitli &bull; Programa Katılan Tüm Üyelerimize Otomatik Olarak Açılır</span>
                         </span>
                     </div>
                 </div>
@@ -307,158 +324,155 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
         <section class="how-membership-works-section">
             <div class="section-title-wrap text-center">
                 <span class="section-kicker">ŞEFFAF &amp; KOLAY SÜREÇ</span>
-                <h2 class="section-heading-lg" style="margin-bottom: 0.6rem;">Üyelik Nasıl İşler?</h2>
-                <p class="section-lead-muted" style="max-width: 640px; margin: 0 auto;">
+                <h2 class="section-heading-lg" style="margin-bottom: 0.5rem;">Üyelik Nasıl İşler?</h2>
+                <p class="section-lead-muted" style="max-width: 620px; margin: 0 auto 1.75rem;">
                     Fizyobar ile iyi yaşam yolculuğunuza başlamak ve bedeninizi dönüştürmek son derece pratiktir:
                 </p>
             </div>
 
             <div class="membership-steps-grid">
                 <div class="membership-step-card">
-                    <span class="step-badge">ADIM 01</span>
+                    <div class="step-card-header">
+                        <span class="step-num-pill">01</span>
+                        <span class="step-tag-label">ADIM</span>
+                    </div>
                     <h3 class="step-title">Paketini &amp; Planını Seç</h3>
                     <p class="step-desc">
-                        İhtiyacınıza en uygun eğitimi belirleyin. Aylık standart plan (paket + Kitchen) veya Yıllık All-Access (tüm eğitimler + beslenme rehberleri) modelini seçin.
+                        İhtiyacınıza en uygun eğitimi belirleyin. Aylık standart plan (paket + Kitchen) veya Yıllık All-Access modelini seçin.
                     </p>
                 </div>
 
                 <div class="membership-step-card">
-                    <span class="step-badge">ADIM 02</span>
+                    <div class="step-card-header">
+                        <span class="step-num-pill">02</span>
+                        <span class="step-tag-label">ADIM</span>
+                    </div>
                     <h3 class="step-title">Hareket Alanına Giriş Yap</h3>
                     <p class="step-desc">
-                        Ödemeniz onaylandığı anda kişisel öğrenci paneliniz açılır. 28 günlük antrenman takviminize, video kütüphanenize ve hediye meditasyon paketinize hemen erişin.
+                        Ödemeniz onaylandığı anda kişisel öğrenci paneliniz açılır. 28 günlük antrenman takviminize ve video kütüphanenize hemen erişin.
                     </p>
                 </div>
 
                 <div class="membership-step-card">
-                    <span class="step-badge">ADIM 03</span>
+                    <div class="step-card-header">
+                        <span class="step-num-pill">03</span>
+                        <span class="step-tag-label">ADIM</span>
+                    </div>
                     <h3 class="step-title">12 Antrenman &amp; Kitchen</h3>
                     <p class="step-desc">
-                        Haftada 3 gün, %100 ekipmansız seansları evinizde uygulayın. Fizyobar Kitchen'daki fonksiyonel tariflerle kan şekerinizi ve metabolizmanızı dengede tutun.
+                        Haftada 3 gün, %100 ekipmansız seansları evinizde uygulayın. Fizyobar Kitchen'daki fonksiyonel tariflerle dengede kalın.
                     </p>
                 </div>
 
                 <div class="membership-step-card">
-                    <span class="step-badge">ADIM 04</span>
+                    <div class="step-card-header">
+                        <span class="step-num-pill">04</span>
+                        <span class="step-tag-label">ADIM</span>
+                    </div>
                     <h3 class="step-title">Kalıcı Güç &amp; Longevity</h3>
                     <p class="step-desc">
-                        İlerleme çubuğunuzu doldurun, omurga mobilitenizi ve kas dayanıklılığınızı artırarak ömür boyu sürecek kalıcı bir yaşam alışkanlığı kazanın.
+                        İlerleme çubuğunuzu doldurun, omurga mobilitenizi ve kas gücünüzü artırarak ömür boyu sürecek bir alışkanlık kazanın.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 6. 2 Kategoride Before / After Bölümü (Güç Dönüşümleri / İncelme Dönüşümleri) -->
-        <section class="programs-transformations-section" style="margin: 4.5rem 0 2rem;">
+        <!-- 6. 2 Kategoride Minimal Before / After Dönüşüm Bölümü -->
+        <?php
+        $progTransStories = [
+            [
+                'category' => 'power',
+                'title' => 'GÜÇ & OMURGA',
+                'before_img' => asset('assets/images/trans-1-before.webp'),
+                'after_img'  => asset('assets/images/trans-1-after.webp'),
+            ],
+            [
+                'category' => 'power',
+                'title' => 'CORE & KALİSTHENİCS',
+                'before_img' => asset('assets/images/trans-2-before.webp'),
+                'after_img'  => asset('assets/images/trans-2-after.webp'),
+            ],
+            [
+                'category' => 'power',
+                'title' => 'POSTÜR HİZALANMASI',
+                'before_img' => asset('assets/images/trans-3-before.webp'),
+                'after_img'  => asset('assets/images/trans-3-after.webp'),
+            ],
+            [
+                'category' => 'slim',
+                'title' => 'İNCELME & BEL',
+                'before_img' => asset('assets/images/transformation-before.webp'),
+                'after_img'  => asset('assets/images/transformation-after.webp'),
+            ],
+            [
+                'category' => 'slim',
+                'title' => 'ÖDEM & METABOLİK DETOKS',
+                'before_img' => asset('assets/images/trans-2-before.webp'),
+                'after_img'  => asset('assets/images/trans-2-after.webp'),
+            ],
+            [
+                'category' => 'slim',
+                'title' => 'SIKILAŞMA & GLİSEMİK DENGE',
+                'before_img' => asset('assets/images/trans-1-before.webp'),
+                'after_img'  => asset('assets/images/trans-1-after.webp'),
+            ],
+        ];
+        ?>
+        <section class="programs-transformations-section" style="margin: 3.5rem 0 2rem;">
             <div class="section-title-wrap text-center">
                 <span class="section-kicker">KANITLANMIŞ SONUÇLAR</span>
-                <h2 class="section-heading-lg" style="margin-bottom: 0.6rem;">Dönüşüm Hikayeleri</h2>
-                <p class="section-lead-muted" style="max-width: 680px; margin: 0 auto;">
-                    Fizyobar katılımcılarımızın 28 günde elde ettiği somut biyomekanik ve metabolik sonuçlar. Kategoriye göre filtreleyebilir veya karta tıklayarak Öncesi/Sonrası arasında geçiş yapabilirsiniz:
+                <h2 class="section-heading-lg" style="margin-bottom: 0.5rem;">Dönüşüm Hikayeleri</h2>
+                <p class="section-lead-muted" style="max-width: 640px; margin: 0 auto;">
+                    28 günde elde edilen anatomik güç ve estetik incelme sonuçları. Kartlara tıklayarak Öncesi/Sonrası arasında geçiş yapabilirsiniz:
                 </p>
 
-                <!-- Kategori Filtresi -->
+                <!-- Kategori Filtresi (Sade Düz Metin & Dikey Çizgiler) -->
                 <div class="trans-cat-filter-tabs">
                     <button type="button" class="trans-tab-btn active" data-filter="all">TÜMÜ (6)</button>
-                    <button type="button" class="trans-tab-btn" data-filter="power">⚡ GÜÇ DÖNÜŞÜMLERİ (3)</button>
-                    <button type="button" class="trans-tab-btn" data-filter="slim">✨ İNCELME DÖNÜŞÜMLERİ (3)</button>
+                    <span class="trans-tab-divider">|</span>
+                    <button type="button" class="trans-tab-btn" data-filter="power">GÜÇ DÖNÜŞÜMLERİ (3)</button>
+                    <span class="trans-tab-divider">|</span>
+                    <button type="button" class="trans-tab-btn" data-filter="slim">İNCELME DÖNÜŞÜMLERİ (3)</button>
                 </div>
             </div>
 
-            <div class="transformation-slider-viewport" style="margin-top: 1.5rem;">
-                <div class="transformation-track" id="programsTransTrack" style="justify-content: center; flex-wrap: wrap; gap: 1.5rem;">
-                    
-                    <!-- Vaka 1 (Güç) -->
-                    <div class="trans-card is-active" data-category="power" style="cursor: pointer;">
-                        <span class="trans-category-tag">⚡ GÜÇ &amp; OMURGA</span>
-                        <div class="card-inner">
-                            <div class="card-face card-front">
-                                <img src="<?= e($trans1Before) ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-before">ÖNCESİ</span>
+            <!-- Minimal 3 Kolonlu Dönüşüm Kartları Izgarası -->
+            <div class="prog-trans-minimal-grid" id="programsTransGrid">
+                <?php foreach ($progTransStories as $story): ?>
+                    <div class="prog-trans-item" data-category="<?= e($story['category']) ?>" role="button" tabindex="0" title="Öncesi / Sonrası Görmek İçin Tıklayın">
+                        <div class="prog-trans-flipper">
+                            
+                            <!-- ÖN YÜZ (ÖNCESİ) -->
+                            <div class="prog-trans-face prog-face-before">
+                                <img src="<?= e($story['before_img']) ?>" alt="<?= e($story['title']) ?> Öncesi" class="prog-trans-img" loading="lazy">
+                                <div class="prog-trans-overlay">
+                                    <div class="prog-trans-top-row">
+                                        <span class="prog-cat-pill"><?= e($story['title']) ?></span>
+                                        <span class="prog-state-pill pill-before">ÖNCESİ</span>
+                                    </div>
+                                    <div class="prog-trans-bottom-row">
+                                        <span class="prog-flip-hint">↻ Tıkla: Sonrası</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-face card-back">
-                                <img src="<?= e($trans1After) ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-after">SONRASI</span>
+
+                            <!-- ARKA YÜZ (SONRASI) -->
+                            <div class="prog-trans-face prog-face-after">
+                                <img src="<?= e($story['after_img']) ?>" alt="<?= e($story['title']) ?> Sonrası" class="prog-trans-img" loading="lazy">
+                                <div class="prog-trans-overlay">
+                                    <div class="prog-trans-top-row">
+                                        <span class="prog-cat-pill"><?= e($story['title']) ?></span>
+                                        <span class="prog-state-pill pill-after">SONRASI</span>
+                                    </div>
+                                    <div class="prog-trans-bottom-row">
+                                        <span class="prog-flip-hint">↻ Tıkla: Öncesi</span>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
-
-                    <!-- Vaka 2 (Güç) -->
-                    <div class="trans-card" data-category="power" style="cursor: pointer;">
-                        <span class="trans-category-tag">⚡ CORE &amp; KALİSTHENİCS</span>
-                        <div class="card-inner">
-                            <div class="card-face card-front">
-                                <img src="<?= e($trans2Before) ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-before">ÖNCESİ</span>
-                            </div>
-                            <div class="card-face card-back">
-                                <img src="<?= e($trans2After) ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-after">SONRASI</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Vaka 3 (Güç) -->
-                    <div class="trans-card" data-category="power" style="cursor: pointer;">
-                        <span class="trans-category-tag">⚡ POSTÜR HİZALANMASI</span>
-                        <div class="card-inner">
-                            <div class="card-face card-front">
-                                <img src="<?= e($trans3Before) ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-before">ÖNCESİ</span>
-                            </div>
-                            <div class="card-face card-back">
-                                <img src="<?= e($trans3After) ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-after">SONRASI</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Vaka 4 (İncelme) -->
-                    <div class="trans-card" data-category="slim" style="cursor: pointer;">
-                        <span class="trans-category-tag">✨ İNCELME &amp; BEL</span>
-                        <div class="card-inner">
-                            <div class="card-face card-front">
-                                <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-before">ÖNCESİ</span>
-                            </div>
-                            <div class="card-face card-back">
-                                <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-after">SONRASI</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Vaka 5 (İncelme) -->
-                    <div class="trans-card" data-category="slim" style="cursor: pointer;">
-                        <span class="trans-category-tag">✨ ÖDEM &amp; METABOLİK DETOKS</span>
-                        <div class="card-inner">
-                            <div class="card-face card-front">
-                                <img src="<?= asset('assets/images/trans-2-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-before">ÖNCESİ</span>
-                            </div>
-                            <div class="card-face card-back">
-                                <img src="<?= asset('assets/images/trans-2-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-after">SONRASI</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Vaka 6 (İncelme) -->
-                    <div class="trans-card" data-category="slim" style="cursor: pointer;">
-                        <span class="trans-category-tag">✨ SIKILAŞMA &amp; GLİSEMİK DENGE</span>
-                        <div class="card-inner">
-                            <div class="card-face card-front">
-                                <img src="<?= asset('assets/images/trans-1-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-before">ÖNCESİ</span>
-                            </div>
-                            <div class="card-face card-back">
-                                <img src="<?= asset('assets/images/trans-1-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
-                                <span class="card-status-badge badge-after">SONRASI</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <?php endforeach; ?>
             </div>
         </section>
 
@@ -534,9 +548,9 @@ document.addEventListener('DOMContentLoaded', function() {
         btnYearly.addEventListener('click', function() { setBillingPlan('yearly'); });
     }
 
-    // 2. Before / After Kategori Filtresi (Güç vs İncelme)
+    // 2. Before / After Kategori Filtresi & Kart Çevirme (Minimal Izgara)
     const filterTabs = document.querySelectorAll('.trans-tab-btn');
-    const transCards = document.querySelectorAll('#programsTransTrack .trans-card');
+    const progTransItems = document.querySelectorAll('.prog-trans-item');
 
     filterTabs.forEach(function(tab) {
         tab.addEventListener('click', function() {
@@ -544,21 +558,58 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
             const targetFilter = this.getAttribute('data-filter');
 
-            transCards.forEach(function(card) {
-                const cardCat = card.getAttribute('data-category');
-                if (targetFilter === 'all' || cardCat === targetFilter) {
-                    card.style.display = 'block';
+            progTransItems.forEach(function(item) {
+                const itemCat = item.getAttribute('data-category');
+                if (targetFilter === 'all' || itemCat === targetFilter) {
+                    item.style.display = 'block';
                 } else {
-                    card.style.display = 'none';
+                    item.style.display = 'none';
                 }
             });
         });
     });
 
-    // 3. Kart Tıklamalarında Öncesi/Sonrası Çevirme Efekti
-    transCards.forEach(function(card) {
-        card.addEventListener('click', function() {
+    progTransItems.forEach(function(item) {
+        item.addEventListener('click', function() {
             this.classList.toggle('is-flipped');
+        });
+        item.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.classList.toggle('is-flipped');
+            }
+        });
+    });
+
+    // 3. Video Önizleme Oynat/Durdur Kontrolü
+    document.querySelectorAll('.plan-card-video-wrap').forEach(function(wrap) {
+        const video = wrap.querySelector('video');
+        const playBtn = wrap.querySelector('.plan-video-play-toggle');
+        const iconPlay = wrap.querySelector('.icon-play');
+        const iconPause = wrap.querySelector('.icon-pause');
+
+        function toggleVideo() {
+            if (!video) return;
+            if (video.paused) {
+                video.play();
+                if (iconPlay) iconPlay.style.display = 'none';
+                if (iconPause) iconPause.style.display = 'block';
+            } else {
+                video.pause();
+                if (iconPlay) iconPlay.style.display = 'block';
+                if (iconPause) iconPause.style.display = 'none';
+            }
+        }
+
+        if (playBtn) {
+            playBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleVideo();
+            });
+        }
+        wrap.addEventListener('click', function(e) {
+            if (e.target.closest('.plan-video-play-toggle')) return;
+            toggleVideo();
         });
     });
 });

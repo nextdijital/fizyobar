@@ -940,15 +940,6 @@ const FinderApp = (function() {
             });
         }
 
-        const headerBackBtn = document.querySelector('.finder-header-back-btn');
-        if (headerBackBtn) {
-            headerBackBtn.addEventListener('click', function(e) {
-                if (currentStep > 1) {
-                    e.preventDefault();
-                    prevStep();
-                }
-            });
-        }
     });
 
     return {

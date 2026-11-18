@@ -101,15 +101,31 @@ class EventController extends Controller
     public function announcements(): void
     {
         $dbRows = \Core\Database::query("SELECT * FROM site_announcements WHERE is_active = 1 ORDER BY sort_order ASC, id DESC");
+        $defaultImages = [
+            'assets/images/betina-outdoor-stretch.jpg',
+            'assets/images/betina-studio-forward-fold.jpg',
+            'assets/images/kitchen-hero-plate.webp',
+            'assets/images/betina-user-photo1.jpg',
+            'assets/images/betina-outdoor-inversion.jpg',
+        ];
         if (!empty($dbRows)) {
+            $cleanShortTitles = [
+                1 => '4 HAFTALIK DETOKS & YOGA',
+                2 => 'KLİNİK ANATOMİ & FASYA',
+                3 => 'BAR KITCHEN KIŞ DETOKSU',
+                4 => 'REFORMER PİLATES & POSTÜR',
+                5 => 'GÖL KENARI SOUND HEALING',
+            ];
             $announcements = [];
             foreach ($dbRows as $idx => $row) {
                 $num = str_pad((string)($idx + 1), 2, '0', STR_PAD_LEFT);
+                $rowId = (int)$row['id'];
+                $short = $cleanShortTitles[$rowId] ?? $row['title'];
                 $announcements[] = [
-                    'id' => (int)$row['id'],
+                    'id' => $rowId,
                     'number' => $num,
                     'title' => $row['title'],
-                    'short_title' => mb_substr($row['title'], 0, 24),
+                    'short_title' => $short,
                     'category' => $row['badge'] ?: 'Genel Bildiri',
                     'badge' => $row['badge'] ?: 'Aktif',
                     'date' => $row['date_text'] ?: date('d.m.Y'),
@@ -117,6 +133,7 @@ class EventController extends Controller
                     'location' => $row['location'] ?: 'Fizyobar Online / Stüdyo',
                     'summary' => $row['spot'] ?: '',
                     'content' => $row['content'] ?: '',
+                    'image' => $defaultImages[$idx % count($defaultImages)],
                     'details' => [
                         'Tarih: ' . ($row['date_text'] ?: '-'),
                         'Lokasyon: ' . ($row['location'] ?: 'Stüdyo & Online'),
@@ -140,6 +157,7 @@ class EventController extends Controller
                 'ref_code' => 'FZB-DOC.01',
                 'location' => 'Canlı Zoom & WhatsApp Takip Grubu',
                 'summary' => 'Metabolik yenilenme, GLP-1 dengeleyici fonksiyonel beslenme rehberi ve haftada 3 gün canlı yoga seansları.',
+                'image' => 'assets/images/betina-outdoor-stretch.jpg',
                 'content' => 'Yeni dönem online detoks kampımızda Betina Tansuğ rehberliğinde hücresel temizlenme, insülin dengesi ve omurga sağlığı için bir araya geliyoruz. Program kapsamında canlı pratikler, kişiye özel beslenme takibi, haftalık glisemik menü planları ve sürekli eğitmen desteği sunulmaktadır. Kontenjanlarımız birebir takip kalitesini korumak için sınırlıdır.',
                 'details' => [
                     'Süre: 4 Hafta (12 Canlı Seans)',
@@ -161,6 +179,7 @@ class EventController extends Controller
                 'ref_code' => 'FZB-DOC.02',
                 'location' => 'Adana Stüdyo • Gülek Plaza',
                 'summary' => 'Miyofasyal tetik nokta gevşetme ve derin doku hidrasyon teknikleri ile kronik tutulmalara son verin.',
+                'image' => 'assets/images/betina-studio-forward-fold.jpg',
                 'content' => 'Masa başı çalışanlar, sporcular ve kronik sırt/boyun gerginliği yaşayanlar için özel olarak kurgulanan 2 saatlik yoğun uygulamalı fasya çalıştayı. Bedeninizin bağ doku katmanlarını nasıl serbest bırakacağınızı, dolaşımı nasıl hızlandıracağınızı ve postüral ağrılardan nasıl kurtulacağınızı öğreneceksiniz. Tüm ekipmanlar stüdyomuz tarafından sağlanacaktır.',
                 'details' => [
                     'Saat: Cumartesi 14:00 - 16:30',
@@ -182,6 +201,7 @@ class EventController extends Controller
                 'ref_code' => 'FZB-DOC.03',
                 'location' => 'Fizyobar Dijital Tarif Kütüphanesi',
                 'summary' => 'Bağışıklık güçlendirici sıcak kaseler, kış smoothie’leri ve rafine şekersiz fonksiyonel tarifler.',
+                'image' => 'assets/images/kitchen-hero-plate.webp',
                 'content' => 'Kış aylarında metabolizmayı canlı tutan, rafine şekersiz ve bağırsak mikrobiyomunu destekleyen 12 yeni kış tarifi ve GLP-1 glisemik rehberi Bar Kitchen sayfamızda erişime açıldı. Zerdeçallı altın ezmelerden probiyotik tohum karışımlarına kadar bedeninizin mevsim geçişinde ihtiyaç duyduğu her şey burada.',
                 'details' => [
                     'Erişim: Tüm Ziyaretçilere Açık',
@@ -203,6 +223,7 @@ class EventController extends Controller
                 'ref_code' => 'FZB-DOC.04',
                 'location' => 'Fizyobar Stüdyo • Özel Seans Alanı',
                 'summary' => 'Uzman fizyoterapist eşliğinde skolyoz, kifoz ve postüral asimetri değerlendirmesi.',
+                'image' => 'assets/images/betina-user-photo1.jpg',
                 'content' => 'Bedeninizin mekanik dengesini ve kas zincirlerini profesyonel postür analizimizle keşfedin. 30 dakikalık birebir postür taraması, eklem hareket açıklığı ölçümü ve ardından size özel kurgulanacak Reformer Pilates çalışma protokolü için randevu takvimi açıldı.',
                 'details' => [
                     'Format: 30 Dakika Birebir Seans',
@@ -224,6 +245,7 @@ class EventController extends Controller
                 'ref_code' => 'FZB-DOC.05',
                 'location' => 'Seyhan Baraj Gölü Kıyısı • Adana',
                 'summary' => 'Tibet ses çanakları meditasyonu, nefes çalışmaları ve açık havada gün batımı akışı.',
+                'image' => 'assets/images/betina-outdoor-inversion.jpg',
                 'content' => 'Şehrin gürültüsünden ve günlük stresinden uzaklaşarak suyun dinginliğinde buluşuyoruz. Tibet çanaklarının derin titreşimleri eşliğinde nefes farkındalığı ve yumuşak vinyasa akışı ile zihinsel ve bedensel reset deneyimi. Matınızı alıp gelin, pratik sonrası Bar Kitchen sıcak bitki çayları ikramımız olacaktır.',
                 'details' => [
                     'Saat: Pazar 16:30 - 18:30',

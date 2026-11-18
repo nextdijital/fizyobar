@@ -90,58 +90,65 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 3. BAR System'i Keşfet (Videonun & İkonların Hemen Altında) -->
-<section class="editorial-pillars-section" id="bar-system" style="padding: 3.5rem 0;">
-    <div class="container">
-        <div class="section-title-wrap text-center" style="margin-bottom: 2.2rem;">
-            <span class="section-kicker">FİZYOBAR METODOLOJİSİ</span>
-            <h2 class="section-heading-lg" style="margin-bottom: 0.6rem;">Bar System’i Keşfet</h2>
-            <p class="section-lead-muted" style="max-width: 680px; margin: 0 auto;">
-                Fizyoterapi temelli hareket bilimi ve yoga disiplinini birleştiren, omurga sağlığını ve longevity odaklı kalıcı bir yaşam disiplinini koruyan patentli metodumuz.
-            </p>
+<!-- 3. Hedefine Uygun Programını Seç (Bar System Alanı) -->
+<section class="three-programs-section" id="bar-system">
+    <div style="width: 100%; max-width: 95%; margin: 0 auto; padding: 0 0.5rem;">
+        <div class="three-programs-header text-center" style="text-align: center; margin: 0 auto 1.5rem;">
+            <span class="three-programs-kicker">P R O G R A M L A R</span>
+            <h2 class="three-programs-title">Hedefine Uygun Programını Seç</h2>
+            <p class="three-programs-subtitle">Bütünsel, sürdürülebilir ve güçlü bir beden için tasarlandı.</p>
         </div>
 
-        <div class="bar-compact-grid">
-            <!-- 01 / Biyomekanik Denge -->
-            <article class="bar-compact-card">
-                <div>
-                    <span class="bar-compact-num">01 /</span>
-                    <h3 class="bar-compact-title">Biyomekanik Denge</h3>
-                    <p class="bar-compact-desc">
-                        Klinik anatomi ve eklem mobilitesini koruyarak omurgayı anatomik ekseninde yeniden hizalayan, sakatlık riskini sıfırlayan akışlar.
-                    </p>
+        <div class="three-programs-grid">
+            <!-- Program 1: Calisthenics Yoga -->
+            <a href="<?= url('/programs#calisthenics-yoga') ?>" class="three-program-card">
+                <img src="<?= asset('assets/images/betina-studio-forward-fold.jpg') ?>" alt="Calisthenics Yoga" class="three-program-card-img" loading="lazy">
+                <div class="three-program-card-overlay"></div>
+                <div class="three-program-card-content">
+                    <div class="three-program-card-head">
+                        <h3 class="three-program-card-title">Calisthenics<br>Yoga</h3>
+                        <p class="three-program-card-desc">Güç, esneklik ve kontrolü bir arada geliştir.</p>
+                    </div>
+                    <div class="three-program-card-action">
+                        <div class="three-program-arrow-btn">
+                            <span>&rarr;</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="bar-compact-tag">KLİNİK ANATOMİ</span>
-            </article>
+            </a>
 
-            <!-- 02 / Nöro-Biyolojik Regülasyon -->
-            <article class="bar-compact-card">
-                <div>
-                    <span class="bar-compact-num">02 /</span>
-                    <h3 class="bar-compact-title">Nöro-Biyolojik Regülasyon</h3>
-                    <p class="bar-compact-desc">
-                        Diyafram nefesi ve vagus sinir uyarımı ile stres hormonlarını dengeleyen, sempatik alarm halini dindiren sinir sistemi onarımı.
-                    </p>
+            <!-- Program 2: Lean Body -->
+            <a href="<?= url('/programs#lean-body') ?>" class="three-program-card">
+                <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Lean Body" class="three-program-card-img" loading="lazy">
+                <div class="three-program-card-overlay"></div>
+                <div class="three-program-card-content">
+                    <div class="three-program-card-head">
+                        <h3 class="three-program-card-title">Lean<br>Body</h3>
+                        <p class="three-program-card-desc">Daha fit, güçlü ve tanımlı bir beden inşa et.</p>
+                    </div>
+                    <div class="three-program-card-action">
+                        <div class="three-program-arrow-btn">
+                            <span>&rarr;</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="bar-compact-tag">VAGUS &amp; SİNİR SİSTEMİ</span>
-            </article>
+            </a>
 
-            <!-- 03 / Sürdürülebilir Longevity -->
-            <article class="bar-compact-card">
-                <div>
-                    <span class="bar-compact-num">03 /</span>
-                    <h3 class="bar-compact-title">Sürdürülebilir Longevity</h3>
-                    <p class="bar-compact-desc">
-                        Hücresel canlılığı, mitokondriyal kapasiteyi ve fonksiyonel esnekliği destekleyen, ömür boyu kalıcı sağlıklı yaşam disiplini.
-                    </p>
+            <!-- Program 3: BAR Mobility -->
+            <a href="<?= url('/programs#bar-mobility') ?>" class="three-program-card">
+                <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" alt="BAR Mobility" class="three-program-card-img" loading="lazy">
+                <div class="three-program-card-overlay"></div>
+                <div class="three-program-card-content">
+                    <div class="three-program-card-head">
+                        <h3 class="three-program-card-title">BAR<br>Mobility</h3>
+                        <p class="three-program-card-desc">Hareket açıklığını artır, daha özgür ve dengeli hisset.</p>
+                    </div>
+                    <div class="three-program-card-action">
+                        <div class="three-program-arrow-btn">
+                            <span>&rarr;</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="bar-compact-tag">HÜCRESEL SAĞLIK</span>
-            </article>
-        </div>
-
-        <div class="text-center" style="margin-top: 2.2rem;">
-            <a href="<?= url('/betina-tansug#bar-system') ?>" class="btn-pill-solid">
-                BAR SYSTEM'İ KEŞFET &rarr;
             </a>
         </div>
     </div>
@@ -270,150 +277,133 @@ declare(strict_types=1);
     </section>
 </div>
 
-<!-- 6. Bölüm III: ÖNE ÇIKAN DİJİTAL PROGRAM (SİNEMATİK KAMP VİDEOSU, KONTENJAN BARI & PAKET İÇERİĞİ) -->
-<section class="featured-offer-section" id="featured-program">
-    <div class="container">
-        
-        <!-- Canlı Kontenjan Doluluk Barı -->
-        <div class="quota-occupancy-card" style="max-width: 900px; margin: 0 auto 2rem;">
-            <div class="quota-header">
-                <span class="quota-badge">
-                    <span class="quota-pulse-dot"></span> CANLI DÖNEM KONTENJAN DURUMU
-                </span>
-                <span class="quota-count">Son <strong>8</strong> Kişilik Yer Kaldı</span>
-            </div>
-            <div class="quota-bar-track">
-                <div class="quota-bar-fill" style="width: 87%;">
-                    <span class="quota-percent-label">%87 DOLU</span>
-                </div>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.85rem; flex-wrap: wrap; gap: 0.8rem;">
-                <p class="quota-subtext" style="margin: 0;">Kontenjan dolduğunda kayıtlar otomatik olarak kapanacaktır.</p>
-                <a href="<?= url('/checkout/1') ?>" class="btn-yogi-cta" style="padding: 0.75rem 1.4rem !important; font-size: 0.8rem !important;">
-                    <span class="btn-yogi-icon">⚡</span> 500+ KALİSTHENİCS YOGİ ARASINA KATIL &rarr;
-                </a>
-            </div>
-        </div>
+<!-- 6. Bölüm III: ÖNE ÇIKAN DİJİTAL PROGRAM (2 KOLONLU MODERN SİNEMATİK KART) -->
+<div class="camp-fullscreen-sticky-wrap" id="campStickyWrap">
+    <section class="featured-offer-section" id="featured-program">
+        <div class="container">
+            
+            <!-- Sinematik İki Kolonlu Kart (Sol: Video, Kavis & Butonlar / Sağ: Müfredat & Bilgiler) -->
+            <div class="camp-cinema-card">
+                
+                <!-- SOL KOLON: Sinematik Video, İkonik Kavis ve Alt Fiyat & Dönüşüm Butonları -->
+                <div class="camp-split-media">
+                    <div class="camp-video-viewport" title="Videoyu Oynat / Durdur">
+                        <video id="campHeroVideo" class="camp-video-element" autoplay loop muted playsinline preload="auto">
+                            <source src="<?= asset('assets/videos/hero.webm') ?>" type="video/webm">
+                            <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
+                        </video>
+                        <div class="camp-video-overlay"></div>
+                    </div>
 
-        <!-- Sinematik Dikdörtgen Kart (Kompakt Mimari) -->
-        <div class="camp-cinema-card">
-            <!-- A. Üst Video Alanı -->
-            <div class="camp-video-viewport" title="Videoyu Oynat / Durdur">
-                <video id="campHeroVideo" class="camp-video-element" autoplay loop muted playsinline preload="auto">
-                    <source src="<?= asset('assets/videos/hero.webm') ?>" type="video/webm">
-                    <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
-                </video>
-                <div class="camp-video-overlay"></div>
-            </div>
-
-            <!-- B. İçe Doğru Oyulmuş Kavisli Geçiş ve Ortadaki Play Butonu -->
-            <div class="camp-scoop-transition">
-                <div class="scoop-shoulder scoop-left"></div>
-                <div class="scoop-notch-wrap">
-                    <svg class="scoop-notch-svg" viewBox="0 0 240 76" preserveAspectRatio="none">
-                        <path d="M 0,0 L 20,0 C 45,0 72,12 80,30 C 80,52 98,70 120,70 C 142,70 160,52 160,30 C 168,12 195,0 220,0 L 240,0 L 240,76 L 0,76 Z" fill="#ffffff"/>
-                    </svg>
-                    <button type="button" class="camp-play-center-btn" id="campPlayBtn" aria-label="Kamp Videosunu Oynat/Durdur" title="Videoyu Duraklat">
-                        <svg class="play-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="#111111">
-                            <rect x="6" y="4" width="4" height="16" rx="1"></rect>
-                            <rect x="14" y="4" width="4" height="16" rx="1"></rect>
-                        </svg>
-                    </button>
-                </div>
-                <div class="scoop-shoulder scoop-right"></div>
-            </div>
-
-            <!-- C. Alt Beyaz İçerik Alanı -->
-            <div class="camp-bottom-content">
-                <div class="camp-content-grid">
-                    <!-- Sol Kolon: Başlık, Paket İçeriği, Hedefler ve Aksiyon -->
-                    <div class="camp-col-left">
-                        <span class="camp-kicker-tag">MÜFREDAT &bull; 4 HAFTALIK DÖNÜŞÜM</span>
-                        <h3 class="camp-main-heading">4 HAFTALIK ONLİNE DETOX &amp; YOGA KAMPI</h3>
-                        
-                        <!-- Paket İçeriği Rozetleri -->
-                        <div class="package-specs-highlight">
-                            <span class="spec-pill"><span class="spec-icon">⚡</span> <strong>+12</strong> antrenman</span>
-                            <span class="spec-pill"><span class="spec-icon">📅</span> <strong>+28</strong> gün</span>
-                            <span class="spec-pill"><span class="spec-icon">🏡</span> <strong>+%100</strong> ekipmansız</span>
+                    <!-- İçe Doğru Oyulmuş Kavisli Geçiş ve Ortadaki Play Butonu -->
+                    <div class="camp-scoop-transition">
+                        <div class="scoop-shoulder scoop-left"></div>
+                        <div class="scoop-notch-wrap">
+                            <svg class="scoop-notch-svg" viewBox="0 0 240 76" preserveAspectRatio="none">
+                                <path d="M 0,0 L 20,0 C 45,0 72,12 80,30 C 80,52 98,70 120,70 C 142,70 160,52 160,30 C 168,12 195,0 220,0 L 240,0 L 240,76 L 0,76 Z" fill="#ffffff"/>
+                            </svg>
+                            <button type="button" class="camp-play-center-btn" id="campPlayBtn" aria-label="Kamp Videosunu Oynat/Durdur" title="Videoyu Duraklat">
+                                <svg class="play-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="#111111">
+                                    <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                                    <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+                                </svg>
+                            </button>
                         </div>
+                        <div class="scoop-shoulder scoop-right"></div>
+                    </div>
 
-                        <!-- Program Hedefleri -->
-                        <div class="package-goals-box" style="margin: 0.9rem 0 1.2rem;">
-                            <h4 class="goals-title">🎯 Program Hedefleri:</h4>
-                            <ul class="goals-list">
-                                <li><strong>Biyomekanik Postür:</strong> Omurgayı anatomik ekseninde yeniden hizalama ve dekompresyon.</li>
-                                <li><strong>Glisemik Denge &amp; İncelme:</strong> Rafine şekersiz beslenmeyle ödem atımı ve kalıcı yağ yakımı.</li>
-                                <li><strong>Kalisthenics Güç:</strong> Sıfır ekipmanla derin core ve vücut ağırlığı kas dayanıklılığı.</li>
-                                <li><strong>Vagus Sinir Regülasyonu:</strong> Diyafram nefesiyle kronik stresi yatıştırma ve derin uyku.</li>
-                            </ul>
-                        </div>
-
-                        <!-- Hediye Meditasyon Paketi Bilgisi -->
-                        <div style="background: #fffdf5; border: 1px dashed #c5a059; border-radius: 10px; padding: 0.65rem 0.9rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 1.2rem;">🎁</span>
-                            <div style="font-size: 0.78rem; line-height: 1.35; color: #78350f;">
-                                <strong>Hediye Bonus:</strong> Normalde ₺750 değerindeki 3'lü Meditasyon Paketi kilitleri bu programa katıldığınızda hesabınıza ücretsiz açılır!
+                    <!-- Video Altı: Fiyatlandırma & Aksiyon Paneli (Fiyat Solda, Katıl Butonu Sağda, Link Ortada) -->
+                    <div class="camp-left-action-panel">
+                        <div class="camp-price-cta-row">
+                            <div class="camp-left-price-wrap">
+                                <span class="price-kicker">TOPLAM YATIRIM</span>
+                                <span class="price-amount" id="campPriceTypewriter" data-price="₺1.850">₺1.850</span>
                             </div>
-                        </div>
-
-                        <!-- Üyelik Planı Bilgilendirmesi -->
-                        <div style="font-size: 0.78rem; color: #52525b; line-height: 1.45; margin-bottom: 1.2rem; padding: 0.6rem 0.8rem; background: #f8fafc; border-radius: 8px; border-left: 3px solid #391214;">
-                            <strong>Üyelik Seçenekleri:</strong> Aylık planda kendi paketiniz ve Fizyobar Kitchen açılır. Yıllık All-Access planda ise tüm eğitimler, beslenme rehberleri ve kütüphaneler sınırsız açılır.
-                        </div>
-
-                        <!-- Aksiyon Butonları (WhatsApp danış butonu kaldırıldı, 500+ Yogi CTA öne çıkarıldı) -->
-                        <div class="camp-action-row" style="gap: 0.8rem; align-items: center;">
-                            <div class="camp-price-chip">
-                                <span class="chip-label">Toplam Yatırım</span>
-                                <span class="chip-val">₺1.850</span>
-                            </div>
-                            <a href="<?= url('/checkout/1') ?>" class="btn-yogi-cta">
-                                <span class="btn-yogi-icon">🔥</span> 500+ KALİSTHENİCS YOGİ ARASINA KATIL &rarr;
+                            <a href="<?= url('/checkout/1') ?>" class="btn-camp-cta-left">
+                                500+ YOGİ ARASINA KATIL &rarr;
                             </a>
-                            <a href="<?= url('/programs') ?>" class="btn-camp-primary" style="background: transparent; color: #391214; border: 1px solid #391214;">
-                                TÜM PAKETLERİ İNCELE &rarr;
-                            </a>
+                        </div>
+                        <a href="<?= url('/programs') ?>" class="link-all-packages-centered">
+                            Tüm Paketleri ve Planları İncele &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SAĞ KOLON: Canlı Kontenjan Barı, Müfredat Başlığı, Rozetler, Açıklama ve 2 Ayrı Bilgi Kutusu -->
+                <div class="camp-split-info">
+                    <!-- Kart İçi Entegre Canlı Kontenjan Barı (Bordo Arka Plan) -->
+                    <div class="camp-inner-quota-bar">
+                        <div class="camp-inner-quota-header">
+                            <span class="quota-count">
+                                <span class="quota-pulse-dot"></span>
+                                Son <strong>8</strong> Kişilik Yer Kaldı &bull; <strong>%87 Dolu</strong>
+                            </span>
+                        </div>
+                        <div class="quota-bar-track">
+                            <div class="quota-bar-fill" style="width: 87%;"></div>
                         </div>
                     </div>
 
-                    <!-- Sağ Kolon: Açıklama ve 2 Kompakt Önizleme Kartı -->
-                    <div class="camp-col-right">
-                        <p class="camp-editorial-paragraph">
-                            Fizyoterapist gözetiminde bedeni biyomekanik ve metabolik açıdan sıfırlayan kanıta dayalı bütünsel yaşam rutini.
-                        </p>
+                    <!-- Ana Başlık (Tek Satırda) -->
+                    <h3 class="camp-main-heading">4 HAFTALIK ONLİNE DETOX &amp; YOGA KAMPI</h3>
+                    
+                    <!-- Paket İçeriği (Tik İkonlu Sade Düz Metin) -->
+                    <div class="camp-specs-check-row">
+                        <span class="camp-spec-check-item">
+                            <svg class="spec-check-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#391214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span><strong>12</strong> Antrenman</span>
+                        </span>
+                        <span class="camp-spec-check-divider">•</span>
+                        <span class="camp-spec-check-item">
+                            <svg class="spec-check-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#391214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span><strong>28 Gün</strong> Program</span>
+                        </span>
+                        <span class="camp-spec-check-divider">•</span>
+                        <span class="camp-spec-check-item">
+                            <svg class="spec-check-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#391214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span><strong>%100</strong> Ekipmansız</span>
+                        </span>
+                    </div>
 
-                        <div class="camp-preview-cards-row">
-                            <!-- Kart 1: Canlı Seanslar -->
-                            <div class="camp-mini-feature-card">
-                                <div class="mini-card-top">
-                                    <span class="mini-card-index">01 / SEANSLAR</span>
-                                    <h4 class="mini-card-title">12 Antrenman</h4>
-                                    <p class="mini-card-desc">Omurga mobilizasyonu ve postür akışları.</p>
-                                </div>
-                                <div class="mini-card-bottom">
-                                    <span class="mini-card-badge">KLİNİK YOGA</span>
-                                </div>
-                            </div>
+                    <!-- Açıklama Metni -->
+                    <p class="camp-editorial-paragraph">
+                        Fizyoterapist gözetiminde bedeni biyomekanik ve metabolik açıdan sıfırlayan, kanıta dayalı bütünsel hareket ve tokluk rutini.
+                    </p>
 
-                            <!-- Kart 2: Birebir Takip -->
-                            <div class="camp-mini-feature-card">
-                                <div class="mini-card-top">
-                                    <span class="mini-card-index">02 / TAKİP</span>
-                                    <h4 class="mini-card-title">Birebir Takip</h4>
-                                    <p class="mini-card-desc">Günlük WhatsApp kontrolü ve tokluk yönetimi.</p>
-                                </div>
-                                <div class="mini-card-bottom">
-                                    <span class="mini-card-badge">DETOX &amp; VAGUS</span>
-                                </div>
+                    <!-- Hediye Bonus & Üyelik Modeli (İki Ayrı Kutu: Bordo ve Gri) -->
+                    <div class="camp-split-benefit-boxes">
+                        <!-- Kutu 1: Hediye Bonus (Bordo Arka Plan) -->
+                        <div class="camp-benefit-box box-bordo">
+                            <div class="benefit-box-header">
+                                <span class="benefit-box-pill pill-light">HEDİYE BONUS</span>
                             </div>
+                            <p class="benefit-box-desc">
+                                Normalde ₺750 değerindeki <strong>3'lü Meditasyon Paketi</strong> üyeliğinizle birlikte hesabınıza ücretsiz açılır.
+                            </p>
+                        </div>
+
+                        <!-- Kutu 2: Üyelik Modeli (Gri Arka Plan) -->
+                        <div class="camp-benefit-box box-gray">
+                            <div class="benefit-box-header">
+                                <span class="benefit-box-pill pill-dark">ÜYELİK MODELİ</span>
+                            </div>
+                            <p class="benefit-box-desc">
+                                Aylık planda kendi paketiniz &amp; Kitchen; Yıllık All-Access planda tüm eğitimler sınırsız açılır.
+                            </p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <!-- 7. Bölüm IV: ÜYELİK NASIL İŞLER? (BİLGİLENDİRME BÖLÜMÜ) -->
 <section class="how-membership-works-section" style="margin: 4rem 0 1rem;">
@@ -472,11 +462,13 @@ declare(strict_types=1);
                 28 günde elde edilen anatomik güç ve estetik incelme sonuçları. Kartlara tıklayarak Öncesi/Sonrası arasında geçiş yapabilirsiniz.
             </p>
 
-            <!-- 2 Kategori Filtresi -->
+            <!-- 2 Kategori Filtresi (Sade Düz Metin & Dikey Çizgiler) -->
             <div class="trans-cat-filter-tabs">
                 <button type="button" class="trans-tab-btn active" data-home-filter="all">TÜMÜ (6)</button>
-                <button type="button" class="trans-tab-btn" data-home-filter="power">⚡ GÜÇ DÖNÜŞÜMLERİ (3)</button>
-                <button type="button" class="trans-tab-btn" data-home-filter="slim">✨ İNCELME DÖNÜŞÜMLERİ (3)</button>
+                <span class="trans-tab-divider">|</span>
+                <button type="button" class="trans-tab-btn" data-home-filter="power">GÜÇ DÖNÜŞÜMLERİ (3)</button>
+                <span class="trans-tab-divider">|</span>
+                <button type="button" class="trans-tab-btn" data-home-filter="slim">İNCELME DÖNÜŞÜMLERİ (3)</button>
             </div>
         </div>
     </div>
@@ -488,13 +480,14 @@ declare(strict_types=1);
         <div class="transformation-track" id="transTrack">
             <!-- Kart 1 (Güç) -->
             <div class="trans-card is-active" data-home-cat="power" data-index="0">
-                <span class="trans-category-tag">⚡ GÜÇ &amp; OMURGA</span>
                 <div class="card-inner">
                     <div class="card-face card-front">
+                        <span class="card-cat-title">GÜÇ &amp; OMURGA</span>
                         <img src="<?= asset('assets/images/trans-1-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
+                        <span class="card-cat-title">GÜÇ &amp; OMURGA</span>
                         <img src="<?= asset('assets/images/trans-1-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
@@ -503,13 +496,14 @@ declare(strict_types=1);
 
             <!-- Kart 2 (Güç) -->
             <div class="trans-card" data-home-cat="power" data-index="1">
-                <span class="trans-category-tag">⚡ CORE &amp; KALİSTHENİCS</span>
                 <div class="card-inner">
                     <div class="card-face card-front">
+                        <span class="card-cat-title">CORE &amp; KALİSTHENİCS</span>
                         <img src="<?= asset('assets/images/trans-2-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
+                        <span class="card-cat-title">CORE &amp; KALİSTHENİCS</span>
                         <img src="<?= asset('assets/images/trans-2-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
@@ -518,13 +512,14 @@ declare(strict_types=1);
 
             <!-- Kart 3 (Güç) -->
             <div class="trans-card" data-home-cat="power" data-index="2">
-                <span class="trans-category-tag">⚡ POSTÜR HİZALANMASI</span>
                 <div class="card-inner">
                     <div class="card-face card-front">
+                        <span class="card-cat-title">POSTÜR HİZALANMASI</span>
                         <img src="<?= asset('assets/images/trans-3-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
+                        <span class="card-cat-title">POSTÜR HİZALANMASI</span>
                         <img src="<?= asset('assets/images/trans-3-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
@@ -533,13 +528,14 @@ declare(strict_types=1);
 
             <!-- Kart 4 (İncelme) -->
             <div class="trans-card" data-home-cat="slim" data-index="3">
-                <span class="trans-category-tag">✨ İNCELME &amp; BEL</span>
                 <div class="card-inner">
                     <div class="card-face card-front">
+                        <span class="card-cat-title">İNCELME &amp; BEL</span>
                         <img src="<?= asset('assets/images/transformation-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
+                        <span class="card-cat-title">İNCELME &amp; BEL</span>
                         <img src="<?= asset('assets/images/transformation-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
@@ -548,13 +544,14 @@ declare(strict_types=1);
 
             <!-- Kart 5 (İncelme) -->
             <div class="trans-card" data-home-cat="slim" data-index="4">
-                <span class="trans-category-tag">✨ ÖDEM &amp; METABOLİK DETOKS</span>
                 <div class="card-inner">
                     <div class="card-face card-front">
+                        <span class="card-cat-title">ÖDEM &amp; METABOLİK DETOKS</span>
                         <img src="<?= asset('assets/images/trans-2-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
+                        <span class="card-cat-title">ÖDEM &amp; METABOLİK DETOKS</span>
                         <img src="<?= asset('assets/images/trans-2-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
@@ -563,13 +560,14 @@ declare(strict_types=1);
 
             <!-- Kart 6 (İncelme) -->
             <div class="trans-card" data-home-cat="slim" data-index="5">
-                <span class="trans-category-tag">✨ SIKILAŞMA &amp; GLİSEMİK DENGE</span>
                 <div class="card-inner">
                     <div class="card-face card-front">
+                        <span class="card-cat-title">SIKILAŞMA &amp; GLİSEMİK DENGE</span>
                         <img src="<?= asset('assets/images/trans-1-before.webp') ?>" alt="Öncesi" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-before">ÖNCESİ</span>
                     </div>
                     <div class="card-face card-back">
+                        <span class="card-cat-title">SIKILAŞMA &amp; GLİSEMİK DENGE</span>
                         <img src="<?= asset('assets/images/trans-1-after.webp') ?>" alt="Sonrası" class="card-full-img" loading="lazy">
                         <span class="card-status-badge badge-after">SONRASI</span>
                     </div>
@@ -777,33 +775,95 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // 2. Before / After Kategori Filtresi (Güç vs İncelme)
+    // 2. Before / After Kategori Filtresi & Slider Gezinimi (Döngüyü bozmadan akıcı yönlendirme)
     const homeFilterTabs = document.querySelectorAll('[data-home-filter]');
-    const homeTransCards = document.querySelectorAll('#transTrack .trans-card');
+    const transDots = document.querySelectorAll('#transDots .trans-dot');
 
     homeFilterTabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
+        tab.addEventListener('click', function(e) {
+            e.preventDefault();
             homeFilterTabs.forEach(function(t) { t.classList.remove('active'); });
             this.classList.add('active');
             const targetFilter = this.getAttribute('data-home-filter');
 
-            homeTransCards.forEach(function(card) {
-                const cardCat = card.getAttribute('data-home-cat');
-                if (targetFilter === 'all' || cardCat === targetFilter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            let targetDot = 0;
+            if (targetFilter === 'slim') {
+                targetDot = 3;
+            } else if (targetFilter === 'power') {
+                targetDot = 0;
+            }
+
+            if (transDots && transDots[targetDot]) {
+                transDots[targetDot].click();
+            }
         });
     });
 
-    // 3. Before / After Kart Tıklamalarında Çevirme
-    homeTransCards.forEach(function(card) {
-        card.addEventListener('click', function() {
-            this.classList.toggle('is-flipped');
-        });
-    });
+    // 3. Kamp Alanı Tam Ekran Odaklanma & Header Gizleme + Daktilo Fiyat Efekti
+    (function() {
+        const campWrap = document.getElementById('campStickyWrap') || document.getElementById('featured-program');
+        const campSec = document.getElementById('featured-program');
+        const header = document.querySelector('.site-header');
+        const priceEl = document.getElementById('campPriceTypewriter');
+        if (!campSec) return;
+
+        let hasTyped = false;
+        const targetPrice = '₺1.850';
+
+        function typePrice() {
+            if (!priceEl) return;
+            priceEl.innerHTML = '';
+            priceEl.classList.remove('price-blinking');
+            let i = 0;
+            const cursor = document.createElement('span');
+            cursor.className = 'typewriter-cursor';
+            cursor.textContent = '|';
+            priceEl.appendChild(cursor);
+
+            const timer = setInterval(function() {
+                if (i < targetPrice.length) {
+                    const char = targetPrice.charAt(i);
+                    cursor.insertAdjacentText('beforebegin', char);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                    setTimeout(function() {
+                        priceEl.classList.add('price-blinking');
+                    }, 350);
+                }
+            }, 85);
+        }
+
+        function checkFocus() {
+            const isDesktop = window.innerWidth >= 992;
+            const rectWrap = (campWrap || campSec).getBoundingClientRect();
+            const rectSec = campSec.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            if (isDesktop && header) {
+                // Sticky wrap içindeyken (üst kenar 0'a ulaştığında ve wrap bitene kadar) header gizli kalsın
+                const inFocus = (rectWrap.top <= 80 && rectWrap.bottom >= windowHeight * 0.35);
+                if (inFocus) {
+                    header.classList.add('header-hidden-focus');
+                } else {
+                    header.classList.remove('header-hidden-focus');
+                }
+            } else if (header) {
+                header.classList.remove('header-hidden-focus');
+            }
+
+            // Daktilo efekti tetikleme
+            const inView = (rectSec.top <= windowHeight * 0.85 && rectSec.bottom >= windowHeight * 0.15);
+            if (inView && !hasTyped) {
+                hasTyped = true;
+                typePrice();
+            }
+        }
+
+        window.addEventListener('scroll', checkFocus, { passive: true });
+        window.addEventListener('resize', checkFocus, { passive: true });
+        checkFocus();
+    })();
 });
 
 // Testimonial Otomatik Döngü
