@@ -3,16 +3,26 @@
 
     <?php 
     $uriPath = trim($currentUri ?? '', '/');
+    $isPortalPage = str_contains($uriPath, 'dashboard')
+        || str_contains($uriPath, 'movement-space')
+        || str_contains($uriPath, 'lesson');
     $hideFooter = ($hideFooter ?? false) 
         || str_ends_with($uriPath, 'login') 
         || str_ends_with($uriPath, 'register')
         || str_contains($uriPath, 'programini-bul')
-        || str_contains($uriPath, 'find-program');
+        || str_contains($uriPath, 'find-program')
+        || $isPortalPage;
+    $isFooterGray = ($isGrayPage ?? false)
+        || str_contains($uriPath, 'corporate')
+        || str_contains($uriPath, 'betina-tansug')
+        || str_contains($uriPath, 'about')
+        || str_contains($uriPath, 'hakkimizda')
+        || str_contains($uriPath, 'detox');
     ?>
 
     <?php if (!$hideFooter): ?>
     <!-- Global Footer (Brutalist Editorial & Yan Yana Menü Sütunları) -->
-    <footer class="site-footer">
+    <footer class="site-footer <?= $isFooterGray ? 'footer-gray-theme' : '' ?>">
         <div class="footer-editorial-container">
             <!-- 1. Üst Alan: Sliced / %75'i Görünen Dev Tipografik Marka & Çizgi & Sağ Slogan -->
             <div class="footer-sliced-brand-wrap">

@@ -185,7 +185,7 @@
                 if (typingIndicator) {
                     typingIndicator.style.display = 'none';
                 }
-                appendBotMessage('Bağlantı kurulurken bir sorun oluştu. Dilerseniz sorularınızı doğrudan WhatsApp üzerinden Betina Hoca\'ya iletebilirsiniz: <br><a href="https://wa.me/905321234567" target="_blank" style="color:#391214;font-weight:700;">WhatsApp Hattı &rarr;</a>');
+                appendBotMessage('Bağlantı kurulurken bir sorun oluştu. Dilerseniz sorularınızı doğrudan WhatsApp üzerinden Betina Hoca\'ya iletebilirsiniz: <br><a href="https://wa.me/905321234567" target="_blank" style="color:#4a1421;font-weight:700;">WhatsApp Hattı &rarr;</a>');
             }
         }
 

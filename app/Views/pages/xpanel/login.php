@@ -62,9 +62,9 @@
         }
         .xpanel-badge {
             display: inline-block;
-            background: rgba(57, 18, 20, 0.08);
-            border: 1px solid rgba(57, 18, 20, 0.2);
-            color: #391214;
+            background: rgba(74, 20, 33, 0.08);
+            border: 1px solid rgba(74, 20, 33, 0.2);
+            color: #4a1421;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 0.72rem;
             font-weight: 700;
@@ -136,13 +136,13 @@
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         .xpanel-input:focus {
-            border-color: #391214;
-            box-shadow: 0 0 0 3px rgba(57, 18, 20, 0.08);
+            border-color: #4a1421;
+            box-shadow: 0 0 0 3px rgba(74, 20, 33, 0.08);
         }
         .xpanel-btn-submit {
             margin-top: 0.5rem;
             height: 46px;
-            background-color: #391214;
+            background-color: #4a1421;
             color: #ffffff;
             border: none;
             border-radius: 999px;

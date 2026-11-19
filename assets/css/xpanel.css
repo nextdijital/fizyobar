@@ -18,7 +18,7 @@
     --xp-text-muted: #64748b;
     --xp-text-dim: #94a3b8;
     
-    --xp-primary: #391214;
+    --xp-primary: #4a1421;
     --xp-primary-light: #5b1e22;
     --xp-gold: #c59b6c;
     
@@ -203,7 +203,7 @@ body.xp-body {
 
 .xp-nav-link.active {
     color: #ffffff;
-    background: linear-gradient(135deg, rgba(197, 155, 108, 0.25), rgba(57, 18, 20, 0.4));
+    background: linear-gradient(135deg, rgba(197, 155, 108, 0.25), rgba(74, 20, 33, 0.4));
     border: 1px solid rgba(197, 155, 108, 0.35);
     font-weight: 700;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
@@ -317,7 +317,7 @@ body.xp-body {
 
 .xp-nav-sub-link.active {
     color: #ffffff;
-    background: linear-gradient(135deg, rgba(197, 155, 108, 0.25), rgba(57, 18, 20, 0.45));
+    background: linear-gradient(135deg, rgba(197, 155, 108, 0.25), rgba(74, 20, 33, 0.45));
     border: 1px solid rgba(197, 155, 108, 0.35);
     font-weight: 700;
 }
@@ -852,7 +852,7 @@ body.xp-body {
 }
 
 .xp-avatar-circle.avatar-brand {
-    background: linear-gradient(135deg, #391214, #5b1e22);
+    background: linear-gradient(135deg, #4a1421, #5b1e22);
     color: #ffffff;
 }
 
@@ -1418,8 +1418,8 @@ body.xp-body {
 }
 
 .xp-link-quick-select:focus {
-    border-color: #391214;
-    box-shadow: 0 0 0 3px rgba(57, 18, 20, 0.08);
+    border-color: #4a1421;
+    box-shadow: 0 0 0 3px rgba(74, 20, 33, 0.08);
 }
 
 .xp-editor-card {
@@ -1450,8 +1450,8 @@ body.xp-body {
 .xp-badge-section {
     display: inline-flex;
     align-items: center;
-    background: rgba(57, 18, 20, 0.07);
-    color: #391214;
+    background: rgba(74, 20, 33, 0.07);
+    color: #4a1421;
     font-size: 0.68rem;
     font-weight: 800;
     letter-spacing: 0.1em;
@@ -1548,7 +1548,7 @@ body.xp-body {
 }
 
 .xp-btn-save-primary {
-    background: #391214;
+    background: #4a1421;
     color: #ffffff;
     border: none;
     border-radius: 9999px;
@@ -1566,7 +1566,7 @@ body.xp-body {
 .xp-btn-save-primary:hover {
     background: #250b0c;
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(57, 18, 20, 0.25);
+    box-shadow: 0 4px 15px rgba(74, 20, 33, 0.25);
 }
 
 /* ==============================================================================

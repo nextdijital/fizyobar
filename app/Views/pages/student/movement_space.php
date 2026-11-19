@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 /**
- * FİZYOBAR ÖĞRENCİ PORTALİ & HAREKET ALANI (LIGHT LUXURY)
- * 
+ * FİZYOBAR ÖĞRENCİ PORTALİ & KİŞİSEL HAREKET ALANI
+ * Saf Beyaz Arkaplan, Coral Accent, Net Görsel Hiyerarşi
+ * Kullanıcının sağladığı tam ekran tasarımı prototipine birebir uygun.
+ *
  * @var array $user
  * @var array $course
  * @var array $enrollment
@@ -11,39 +13,17 @@ declare(strict_types=1);
  * @var int $completedCount
  * @var int $totalWorkouts
  * @var int $progressPercent
- * @var array $progressBlocks
  * @var int $currentProgramDay
  * @var int $currentWeekNumber
- * @var array $thisWeekWorkouts
  * @var array $calendarWeeks
- * @var bool $unlockAll
- * @var string $monthTitle
  * @var array $recipes
  * @var array $tips
  * @var array $routines
- * @var array $badges
  * @var array $loyalty
- * @var array $tasks
  * @var array $giftEnrollments
  * @var string|null $successMsg
  * @var string|null $errorMsg
  */
-
-// 12 Seans Görselleri
-$workoutThumbnails = [
-    1 => asset('assets/images/betina-outdoor-stretch.jpg'),
-    2 => asset('assets/images/betina-studio-forward-fold.jpg'),
-    3 => asset('assets/images/betina-outdoor-inversion.jpg'),
-    4 => asset('assets/images/Gemini_Generated_Image_87r04087r04087r0.jpg'),
-    5 => asset('assets/images/Gemini_Generated_Image_8n74ah8n74ah8n74.jpg'),
-    6 => asset('assets/images/Gemini_Generated_Image_a776k4a776k4a776.jpg'),
-    7 => asset('assets/images/Gemini_Generated_Image_dp2ahzdp2ahzdp2a.jpg'),
-    8 => asset('assets/images/Gemini_Generated_Image_rj4gf2rj4gf2rj4g.jpg'),
-    9 => asset('assets/images/Gemini_Generated_Image_zcs2kozcs2kozcs2.jpg'),
-    10 => asset('assets/images/hero-poster.jpg'),
-    11 => asset('assets/images/betina-outdoor-stretch.jpg'),
-    12 => asset('assets/images/betina-outdoor-inversion.jpg'),
-];
 
 // Sıradaki / Güncel Seansı Bul
 $spotlightLesson = null;
@@ -64,822 +44,676 @@ if (!$spotlightLesson && !empty($lessons)) {
         $spotlightLesson = $lessons[0];
     }
 }
+
+$spotYtId = trim((string)($spotlightLesson['youtube_video_id'] ?? 'sTANio_2E0Q'));
+$spotThumb = !empty($spotYtId) ? "https://img.youtube.com/vi/{$spotYtId}/hqdefault.jpg" : asset('assets/images/betina-outdoor-stretch.jpg');
+$spotTitle = preg_replace('/^(Ders|Seans)\s*\d+\s*:\s*/ui', '', (string)($spotlightLesson['title'] ?? 'Fascial Flow: Bütünsel Fasya Esnekliği'));
+$spotDuration = (int)($spotlightLesson['duration_minutes'] ?? 40);
+$spotWorkoutNum = (string)($spotlightLesson['workout_number'] ?? '01');
+
+// Bugün antrenman günü mü dinlenme günü mü?
+$isTodayWorkoutDay = isset($lessonsByDay[$currentProgramDay]);
+
+// Hediye Paketi
+$primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
 ?>
 
 <link rel="stylesheet" href="<?= asset('assets/css/student-portal.css') ?>?v=<?= time() ?>">
 
-<div class="portal-light-wrapper">
+<div class="portal-wrap">
 
-    <!-- =========================================================================
-         1. ÜST HOŞ GELDİN & KULLANICI ŞERİDİ + ENTEGRE SEKMELER (SUB-HEADER)
-         ========================================================================= -->
-    <div class="portal-top-banner">
-        <div class="portal-container">
-            <div class="portal-top-banner-inner">
-                
-                <!-- Sol: Profil Karşılama & Program Künyesi -->
-                <div class="portal-user-welcome">
-                    <div class="portal-avatar-circle">
-                        <?= mb_strtoupper(mb_substr($user['full_name'] ?? 'Ö', 0, 1, 'UTF-8'), 'UTF-8') ?>
-                    </div>
-                    <div class="portal-user-headings">
-                        <h1 class="portal-user-name">
-                            Hoş geldin, <?= e($user['full_name'] ?? 'Öğrenci') ?>
-                        </h1>
-                        <div class="portal-program-tag">
-                            <span><?= e($course['title'] ?? '4 Haftalık Metabolik Detoks &amp; Yoga Kampı') ?></span>
-                            <span>&bull;</span>
-                            <span class="portal-program-day-badge"><?= $currentProgramDay ?>. GÜN</span>
-                        </div>
-                    </div>
-                </div>
+  <!-- =========================================================================
+       1. MASAÜSTÜ (PC) GÖRÜNÜMÜ (.pc)
+       ========================================================================= -->
+  <div class="pc">
+    <!-- Sol Sabit Menü (.side) -->
+    <aside class="side">
+      <div class="side-logo-wrap">
+        <a href="<?= url('/') ?>" class="portal-site-logo-link" aria-label="FİZYOBAR">
+          <span class="logo-text-main">FİZYOBAR</span>
+          <span class="logo-text-sub">BODY • ADAPT • REFRAME</span>
+        </a>
+      </div>
+      <nav class="nav">
+        <a class="nav-link on" data-tab="tab-today">🏠 Bugün</a>
+        <a class="nav-link" data-tab="tab-program">🗓️ Programım</a>
+        <a class="nav-link" data-tab="tab-nutrition">🥑 Beslenme</a>
+        <a class="nav-link" data-tab="tab-profile">👤 Profil</a>
+      </nav>
 
-                <!-- Sağ: Canlı Sayaç Hapları -->
-                <div class="portal-top-metrics">
-                    <div class="portal-metric-pill pill-loyalty" title="Mevcut Sadakat Bakiyesi">
-                        <span>★</span>
-                        <span><?= (int)($loyalty['points'] ?? 100) ?> Puan</span>
-                        <span style="font-size: 0.72rem; text-transform: uppercase; opacity: 0.8;">(<?= e($loyalty['tier'] ?? 'bronze') ?>)</span>
-                    </div>
+      <?php if ($primaryGift || true): ?>
+      <div class="gift-side">
+        <div class="label">🎁 Hediyen açıldı</div>
+        <div class="title"><?= htmlspecialchars($primaryGift['course_title'] ?? '3\'lü Meditasyon Paketi', ENT_QUOTES, 'UTF-8') ?></div>
+        <div class="muted" style="margin-bottom:12px"><?= htmlspecialchars($primaryGift['gift_message'] ?? 'Vagus sinir regülasyonu', ENT_QUOTES, 'UTF-8') ?></div>
+        <a href="<?= url('/course/' . ($primaryGift['slug'] ?? '3lu-meditasyon-serisi')) ?>" class="btn" style="padding:10px; text-decoration:none;">Hediyeyi aç</a>
+      </div>
+      <?php endif; ?>
+    </aside>
 
-                    <div class="portal-metric-pill pill-streak" title="Kesintisiz Günlük Egzersiz Serisi">
-                        <span>🔥</span>
-                        <span><?= (int)($loyalty['streak_days'] ?? 3) ?> Günlük Seri</span>
-                    </div>
+    <!-- Ana İçerik Alanı (.main) -->
+    <div class="main">
 
-                    <div class="portal-metric-pill pill-progress" title="Müfredat Tamamlanma Oranı">
-                        <span>✓</span>
-                        <span>%<?= $progressPercent ?> Tamamlandı (<?= $completedCount ?>/<?= $totalWorkouts ?>)</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ENTEGRE YATAY SEKMELER -->
-            <div class="portal-tabs-track-wrap" style="margin-top: 1.25rem; margin-bottom: 0; padding-bottom: 0; border-bottom: none;">
-                <nav class="portal-tabs-track" role="tablist" aria-label="Portal Gezintisi">
-                    <button type="button" class="portal-tab-pill-btn active" data-tab="sp-tab-overview" role="tab" aria-selected="true">
-                        <span>✦</span>
-                        <span>Genel Bakış</span>
-                    </button>
-
-                    <button type="button" class="portal-tab-pill-btn" data-tab="sp-tab-workouts" role="tab" aria-selected="false">
-                        <span>🎬</span>
-                        <span>Antrenmanlar</span>
-                        <span class="tab-badge-num"><?= $totalWorkouts ?></span>
-                    </button>
-
-                    <button type="button" class="portal-tab-pill-btn" data-tab="sp-tab-calendar" role="tab" aria-selected="false">
-                        <span>📅</span>
-                        <span>28 Günlük Takvim</span>
-                    </button>
-
-                    <button type="button" class="portal-tab-pill-btn" data-tab="sp-tab-tasks" role="tab" aria-selected="false">
-                        <span>✓</span>
-                        <span>Görevlerim &amp; Sadakat</span>
-                        <?php if (!empty($tasks)): ?>
-                            <span class="tab-badge-num"><?= count($tasks) ?></span>
-                        <?php endif; ?>
-                    </button>
-
-                    <button type="button" class="portal-tab-pill-btn" data-tab="sp-tab-nutrition" role="tab" aria-selected="false">
-                        <span>🥗</span>
-                        <span>Beslenme Köşesi</span>
-                    </button>
-
-                    <button type="button" class="portal-tab-pill-btn" data-tab="sp-tab-profile" role="tab" aria-selected="false">
-                        <span>⚙️</span>
-                        <span>Profil &amp; Ayarlar</span>
-                    </button>
-                </nav>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="portal-container" style="padding-top: 1.5rem;">
-
-        <!-- Başarı / Bilgi Mesajı -->
-        <?php if (!empty($successMsg)): ?>
-            <div style="background-color: var(--sp-green-light); border: 1px solid var(--sp-green-border); color: var(--sp-green); padding: 0.9rem 1.4rem; border-radius: var(--sp-radius-md); margin-bottom: 1.5rem; font-size: 0.88rem; font-weight: 700; display: flex; align-items: center; gap: 0.6rem;">
-                <span style="font-size: 1.1rem;">✓</span>
-                <span><?= e($successMsg) ?></span>
-            </div>
-        <?php endif; ?>
-
-        <!-- Eğitmen Hediye Paket Bildirimi (Varsa) -->
-        <?php if (!empty($giftEnrollments)): ?>
-            <?php foreach ($giftEnrollments as $gift): ?>
-                <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1.5px solid #fde68a; border-radius: var(--sp-radius-md); padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 0.85rem;">
-                        <span style="font-size: 1.6rem;">🎁</span>
-                        <div>
-                            <span style="font-size: 0.72rem; font-weight: 800; color: #92400e; letter-spacing: 0.1em; text-transform: uppercase;">EĞİTMEN HEDİYESİ TANIMLANDI</span>
-                            <h3 style="font-size: 1.05rem; font-weight: 800; color: #78350f; margin: 0.2rem 0;"><?= e($gift['course_title']) ?></h3>
-                            <?php if (!empty($gift['gift_message'])): ?>
-                                <p style="font-size: 0.84rem; color: #92400e; margin: 0; font-style: italic;">"<?= e($gift['gift_message']) ?>"</p>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <a href="<?= url('/course/' . ($gift['slug'] ?? 'detoks')) ?>" class="btn-sp-primary" style="padding: 0.5rem 1.2rem; font-size: 0.82rem;">
-                        Hediyeyi Aç &rarr;
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-
-        <!-- =========================================================================
-             SEKME 1: GENEL BAKIŞ (OVERVIEW)
-             ========================================================================= -->
-        <div class="portal-tab-pane active" id="sp-tab-overview">
-            
-            <!-- A. Günün Antrenmanı Spotlight Kartı -->
-            <?php if ($spotlightLesson): ?>
-                <?php 
-                    $thumbImg = $workoutThumbnails[(int)$spotlightLesson['workout_number']] ?? $workoutThumbnails[1];
-                ?>
-                <div class="sp-spotlight-card">
-                    <div class="sp-spotlight-media">
-                        <img src="<?= $thumbImg ?>" alt="<?= e($spotlightLesson['title']) ?>" class="sp-spotlight-img">
-                        <span class="sp-spotlight-badge">GÜNÜN ANTRENMANI &bull; GÜN <?= $spotlightLesson['day_number'] ?></span>
-                    </div>
-
-                    <div class="sp-spotlight-body">
-                        <div>
-                            <span class="sp-card-kicker">BUGÜNÜN HAREKET PRATİĞİ</span>
-                            <h2 class="sp-spotlight-title" style="margin-bottom: 0.35rem;">
-                                <?= $spotlightLesson['workout_number'] ?>. Seans: <?= e($spotlightLesson['title']) ?>
-                            </h2>
-                            <p class="sp-spotlight-desc">
-                                <?= e($spotlightLesson['focus_area'] ?? 'Omurga mobilizasyonu, diyafram solunumu ve derin fasya rahatlaması.') ?>
-                            </p>
-                            
-                            <div class="sp-spotlight-meta-row">
-                                <span>⏱ <strong><?= (int)$spotlightLesson['duration_minutes'] ?> Dakika</strong></span>
-                                <span>&bull;</span>
-                                <span>🔥 <strong>280 Cal</strong></span>
-                                <span>&bull;</span>
-                                <span>🎯 <strong>Orta Seviye</strong></span>
-                            </div>
-                        </div>
-
-                        <div class="sp-spotlight-action-row">
-                            <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="btn-sp-primary">
-                                <span>▶</span>
-                                <span>Antrenmana Başla</span>
-                            </a>
-                            <button type="button" class="btn-sp-outline js-switch-tab" data-target="sp-tab-workouts">
-                                <span>Tüm Seansları Gör &rarr;</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-
-            <!-- B. Canlı İlerleme Sayaçları (3 Sayaç Kartı) -->
-            <div class="sp-metrics-grid">
-                <!-- 1. Aktif Kalori -->
-                <div class="sp-metric-card">
-                    <div class="sp-metric-card-top">
-                        <span class="sp-metric-label">Aktif Kalori</span>
-                        <span class="sp-metric-icon">🔥</span>
-                    </div>
-                    <div>
-                        <div class="sp-metric-val">745 <span style="font-size: 1.1rem; font-weight: 600; color: var(--sp-text-muted);">Cal</span></div>
-                        <div class="sp-metric-sub">Haftalık hedef: 1.200 Cal</div>
-                    </div>
-                    <div class="sp-metric-bar-wrap">
-                        <div class="sp-metric-bar-fill" style="width: 62%; background: #ea580c;"></div>
-                    </div>
-                </div>
-
-                <!-- 2. Pratik Süresi -->
-                <div class="sp-metric-card">
-                    <div class="sp-metric-card-top">
-                        <span class="sp-metric-label">Haftalık Pratik</span>
-                        <span class="sp-metric-icon">⏱</span>
-                    </div>
-                    <div>
-                        <div class="sp-metric-val">45 <span style="font-size: 1.1rem; font-weight: 600; color: var(--sp-text-muted);">Dk</span></div>
-                        <div class="sp-metric-sub">Bu hafta tamamlanan mat süresi</div>
-                    </div>
-                    <div class="sp-metric-bar-wrap">
-                        <div class="sp-metric-bar-fill" style="width: 75%; background: var(--sp-bordo);"></div>
-                    </div>
-                </div>
-
-                <!-- 3. Seans İlerlemesi -->
-                <div class="sp-metric-card">
-                    <div class="sp-metric-card-top">
-                        <span class="sp-metric-label">Kamp Tamamlanma</span>
-                        <span class="sp-metric-icon">🏆</span>
-                    </div>
-                    <div>
-                        <div class="sp-metric-val">%<?= $progressPercent ?> <span style="font-size: 1.1rem; font-weight: 600; color: var(--sp-text-muted);">(<?= $completedCount ?>/<?= $totalWorkouts ?>)</span></div>
-                        <div class="sp-metric-sub">12 Seanslık Bütünsel Dönüşüm</div>
-                    </div>
-                    <div class="sp-metric-bar-wrap">
-                        <div class="sp-metric-bar-fill" style="width: <?= $progressPercent ?>%; background: var(--sp-green);"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- C. İki Kolonlu Alt Panel: Günün Görevleri + Hidrasyon Takibi -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-                
-                <!-- Sol: Bugünün Görevleri -->
-                <div class="sp-card" style="margin-bottom: 0;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                        <div>
-                            <span class="sp-card-kicker">ÖDEVLER &amp; CHECKLIST</span>
-                            <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--sp-text); margin: 0;">Günün Görevleri</h3>
-                        </div>
-                        <button type="button" class="btn-sp-outline js-switch-tab" data-target="sp-tab-tasks" style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">
-                            Tümü &rarr;
-                        </button>
-                    </div>
-
-                    <?php if (empty($tasks)): ?>
-                        <p style="color: var(--sp-text-muted); font-size: 0.88rem; padding: 1rem 0;">Bugün için bekleyen yeni bir görev bulunmuyor.</p>
-                    <?php else: ?>
-                        <div class="sp-tasks-list">
-                            <?php foreach (array_slice($tasks, 0, 2) as $t): ?>
-                                <div class="sp-task-card <?= $t['status'] === 'completed' ? 'is-completed' : '' ?>">
-                                    <div class="sp-task-info">
-                                        <h4 class="sp-task-title"><?= e($t['title']) ?></h4>
-                                        <p class="sp-task-desc"><?= e($t['description']) ?></p>
-                                        <span class="sp-task-reward">+<?= (int)$t['points'] ?> Puan</span>
-                                    </div>
-
-                                    <?php if ($t['status'] !== 'completed'): ?>
-                                        <form action="<?= url('/student/task/complete') ?>" method="POST" class="task-complete-form" style="margin: 0;">
-                                            <?= csrf_field() ?>
-                                            <input type="hidden" name="task_id" value="<?= $t['id'] ?>">
-                                            <button type="submit" class="btn-sp-primary" style="padding: 0.45rem 1rem; font-size: 0.78rem;">
-                                                ✓ Tamamla
-                                            </button>
-                                        </form>
-                                    <?php else: ?>
-                                        <span style="color: var(--sp-green); font-size: 0.82rem; font-weight: 700;">✓ Yapıldı</span>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    <?php endif; ?>
-                </div>
-
-                <!-- Sağ: Su & Hidrasyon Takibi -->
-                <div class="sp-card" style="margin-bottom: 0;">
-                    <span class="sp-card-kicker">HİDRASYON PROTOKOLÜ</span>
-                    <h3 style="font-size: 1.15rem; font-weight: 800; color: var(--sp-text); margin: 0 0 0.5rem 0;">Günlük Su Takibi (2.4L / 3.0L)</h3>
-                    <p style="font-size: 0.85rem; color: var(--sp-text-muted); margin-bottom: 1.25rem;">
-                        Her bardak için dokunarak hidrasyon hedefinizi doldurun.
-                    </p>
-
-                    <div id="hydrationGlasses" style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
-                        <?php for ($g = 1; $g <= 8; $g++): ?>
-                            <?php $isFilled = ($g <= 6); ?>
-                            <div class="glass-item" data-index="<?= $g ?>" style="flex: 1; min-width: 32px; height: 50px; border: 1.5px solid <?= $isFilled ? '#0284c7' : '#cbd5e1' ?>; background: <?= $isFilled ? '#e0f2fe' : '#ffffff' ?>; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;">
-                                <span style="font-size: 1rem; color: <?= $isFilled ? '#0284c7' : '#94a3b8' ?>;">💧</span>
-                            </div>
-                        <?php endfor; ?>
-                    </div>
-                </div>
-
-            </div>
-
+      <!-- ==========================================
+           PC SEKME 1: BUGÜN
+           ========================================== -->
+      <div class="portal-tab-content active" id="tab-today">
+        <div class="topbar">
+          <div class="hello">
+            <div class="label"><?= $currentProgramDay ?>. Gün · <?= htmlspecialchars($course['title'] ?? '4 Haftalık Detox & Yoga Kampı', ENT_QUOTES, 'UTF-8') ?></div>
+            <h2>Günaydın, <?= htmlspecialchars(explode(' ', trim($user['full_name'] ?? 'Öğrenci'))[0], ENT_QUOTES, 'UTF-8') ?> ✨</h2>
+          </div>
+          <div class="stats">
+            <span class="pill gold">🔥 <?= (int)($loyalty['streak_days'] ?? 3) ?> gün</span>
+            <span class="pill">⭐ <?= (int)($loyalty['points'] ?? 100) ?> puan</span>
+          </div>
         </div>
 
-        <!-- =========================================================================
-             SEKME 2: ANTRENMANLAR (12 SEANS LİSTESİ)
-             ========================================================================= -->
-        <div class="portal-tab-pane" id="sp-tab-workouts" style="display: none;">
-            
-            <div class="sp-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-                    <div>
-                        <span class="sp-card-kicker">MÜFREDAT &amp; ARŞİV</span>
-                        <h2 class="sp-card-title">12 Antrenman Kütüphanesi</h2>
-                        <p style="font-size: 0.88rem; color: var(--sp-text-muted); margin: 0;">
-                            Haftada 3 gün klinik anatomi temelli video pratikleri.
-                        </p>
-                    </div>
+        <div class="bar" style="height:10px; margin-top:14px;"><i style="width:<?= $progressPercent ?>%"></i></div>
+        <div class="muted" style="margin-top:-12px; margin-bottom:10px;">Kamp ilerlemesi · <?= $completedCount ?> / <?= $totalWorkouts ?> seans tamamlandı (%<?= $progressPercent ?>)</div>
 
-                    <!-- Filtre Butonları -->
-                    <div class="sp-workouts-filter-bar" style="margin-bottom: 0;">
-                        <button type="button" class="sp-filter-chip active" data-filter="all">Tümü (<?= $totalWorkouts ?>)</button>
-                        <button type="button" class="sp-filter-chip" data-filter="week">Bu Hafta</button>
-                        <button type="button" class="sp-filter-chip" data-filter="completed">Tamamlananlar (<?= $completedCount ?>)</button>
-                        <button type="button" class="sp-filter-chip" data-filter="ready">Açık Seanslar</button>
-                    </div>
-                </div>
-
-                <div class="sp-workouts-grid">
-                    <?php foreach ($lessons as $les): ?>
-                        <?php 
-                            $num = (int)$les['workout_number'];
-                            $thumb = $workoutThumbnails[$num] ?? $workoutThumbnails[1];
-                            $isComp = !empty($les['is_completed']);
-                            $isLock = !empty($les['is_locked']);
-                            $lesWeek = (int)ceil((int)$les['day_number'] / 7);
-                            $isThisW = ($lesWeek === $currentWeekNumber);
-                        ?>
-                        <div class="sp-workout-card js-workout-card" 
-                             data-completed="<?= $isComp ? '1' : '0' ?>"
-                             data-locked="<?= $isLock ? '1' : '0' ?>"
-                             data-thisweek="<?= $isThisW ? '1' : '0' ?>">
-                            
-                            <div class="sp-workout-thumb-wrap">
-                                <img src="<?= $thumb ?>" alt="<?= e($les['title']) ?>" class="sp-workout-thumb">
-                                <span class="sp-workout-day-tag">GÜN <?= $les['day_number'] ?></span>
-
-                                <?php if ($isComp): ?>
-                                    <span class="sp-workout-status-badge status-completed">✓ TAMAMLANDI</span>
-                                <?php elseif ($isLock): ?>
-                                    <span class="sp-workout-status-badge status-locked">🔒 KİLİTLİ</span>
-                                <?php else: ?>
-                                    <span class="sp-workout-status-badge status-ready">▶ ŞİMDİ İZLE</span>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="sp-workout-content">
-                                <div>
-                                    <h3 class="sp-workout-title"><?= $les['workout_number'] ?> — <?= e($les['title']) ?></h3>
-                                    <p class="sp-workout-focus"><?= e($les['focus_area'] ?? 'Klinik Hizalanma & Fasya') ?></p>
-                                    
-                                    <div class="sp-workout-info-row">
-                                        <span>⏱ <?= (int)$les['duration_minutes'] ?> Dk</span>
-                                        <span>&bull;</span>
-                                        <span>🔥 260 Cal</span>
-                                        <span>&bull;</span>
-                                        <span>🎯 Orta</span>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <?php if ($isComp): ?>
-                                        <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $les['id']) ?>" class="sp-workout-btn btn-completed">
-                                            ✓ Tekrar İzle
-                                        </a>
-                                    <?php elseif (!$isLock): ?>
-                                        <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $les['id']) ?>" class="sp-workout-btn btn-play">
-                                            ▶ Antrenmana Başla &rarr;
-                                        </a>
-                                    <?php else: ?>
-                                        <span class="sp-workout-btn btn-locked">
-                                            🔒 <?= $les['day_number'] ?>. Günde Açılır
-                                        </span>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-
+        <div class="grid">
+          <!-- Hero Workout Card -->
+          <div class="card hero">
+            <div class="meta">
+              <span class="pill accent">● Bugünün seansı · <?= $spotWorkoutNum ?></span>
+              <span class="pill">⏱ <?= $spotDuration ?> dk</span>
             </div>
-
-        </div>
-
-        <!-- =========================================================================
-             SEKME 3: 28 GÜNLÜK İNTERAKTİF TAKVİM
-             ========================================================================= -->
-        <div class="portal-tab-pane" id="sp-tab-calendar" style="display: none;">
-            
-            <div class="sp-calendar-wrap">
-                <div class="sp-calendar-header">
-                    <div>
-                        <span class="sp-card-kicker">4 HAFTALIK DÖNGÜ</span>
-                        <h2 class="sp-calendar-month-title"><?= e($monthTitle) ?></h2>
-                    </div>
-
-                    <div style="display: flex; gap: 0.75rem; font-size: 0.78rem; font-weight: 700;">
-                        <span style="display: inline-flex; align-items: center; gap: 0.35rem;">
-                            <span style="width: 10px; height: 10px; border-radius: 2px; background: #f0fdf4; border: 1px solid #bbf7d0;"></span> Tamamlandı
-                        </span>
-                        <span style="display: inline-flex; align-items: center; gap: 0.35rem;">
-                            <span style="width: 10px; height: 10px; border-radius: 2px; border: 2px solid var(--sp-bordo);"></span> Bugün
-                        </span>
-                    </div>
-                </div>
-
-                <table class="sp-calendar-table">
-                    <thead>
-                        <tr>
-                            <th class="sp-calendar-th">Pzt</th>
-                            <th class="sp-calendar-th">Sal</th>
-                            <th class="sp-calendar-th">Çar</th>
-                            <th class="sp-calendar-th">Per</th>
-                            <th class="sp-calendar-th">Cum</th>
-                            <th class="sp-calendar-th">Cts</th>
-                            <th class="sp-calendar-th">Paz</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($calendarWeeks as $week): ?>
-                            <tr>
-                                <?php foreach ($week['days'] as $day): ?>
-                                    <?php 
-                                        $classes = ['sp-cal-day-cell'];
-                                        if ($day['has_workout']) $classes[] = 'has-workout';
-                                        if ($day['is_completed']) $classes[] = 'is-completed';
-                                        if ($day['is_current_day']) $classes[] = 'is-current';
-                                        if ($day['is_rest']) $classes[] = 'is-rest';
-                                    ?>
-                                    <td class="<?= implode(' ', $classes) ?>">
-                                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span class="sp-cal-day-num"><?= $day['day_number'] ?></span>
-                                            <?php if ($day['is_completed']): ?>
-                                                <span style="color: var(--sp-green); font-size: 0.75rem; font-weight: 800;">✓</span>
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <?php if ($day['has_workout'] && !empty($day['workout'])): ?>
-                                            <span class="sp-cal-day-label">
-                                                <?= $day['workout']['workout_number'] ?>. Seans
-                                            </span>
-                                        <?php else: ?>
-                                            <span class="sp-cal-day-label">Dinlenme</span>
-                                        <?php endif; ?>
-                                    </td>
-                                <?php endforeach; ?>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="thumb" style="text-decoration:none;">
+              <img src="<?= $spotThumb ?>" alt="<?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?>">
+              <div class="play">▶</div>
+            </a>
+            <div class="info">
+              <div>
+                <div class="title" style="font-size:19px"><?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?></div>
+                <div class="muted" style="margin-top:4px">Ekipmansız · <?= htmlspecialchars($spotlightLesson['focus_area'] ?? 'Miyofasyal ağ ve elastik yaylanma', ENT_QUOTES, 'UTF-8') ?></div>
+              </div>
+              <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="btn">▶ Seansı başlat</a>
             </div>
+          </div>
 
-        </div>
-
-        <!-- =========================================================================
-             SEKME 4: GÖREVLERİM & SADAKAT
-             ========================================================================= -->
-        <div class="portal-tab-pane" id="sp-tab-tasks" style="display: none;">
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem; margin-bottom: 2rem;">
-                <!-- Sadakat Durumu -->
-                <div class="sp-card" style="margin-bottom: 0;">
-                    <span class="sp-card-kicker">KİŞİSEL KADEME &amp; PUAN</span>
-                    <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--sp-bordo); margin: 0 0 0.5rem 0;">
-                        ★ <?= (int)($loyalty['points'] ?? 100) ?> Sadakat Puanı
-                    </h3>
-                    <p style="font-size: 0.88rem; color: var(--sp-text-muted); margin-bottom: 1.25rem;">
-                        Tamamladığınız her pratik ve ödev puan kazandırır.
-                    </p>
-
-                    <div style="background: var(--sp-surface-subtle); border: 1px solid var(--sp-border); border-radius: var(--sp-radius-md); padding: 1rem;">
-                        <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 0.4rem;">
-                            <span>Mevcut Kademe: <strong><?= strtoupper(e($loyalty['tier'] ?? 'bronze')) ?></strong></span>
-                            <span>Hedef: 250 Puan (Silver)</span>
-                        </div>
-                        <div class="sp-metric-bar-wrap" style="margin: 0;">
-                            <div class="sp-metric-bar-fill" style="width: <?= min(100, (int)round((($loyalty['points'] ?? 100) / 250) * 100)) ?>%; background: var(--sp-gold);"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Seri Kartı -->
-                <div class="sp-card" style="margin-bottom: 0;">
-                    <span class="sp-card-kicker">DİSİPLİN &amp; STREAK</span>
-                    <h3 style="font-size: 1.4rem; font-weight: 800; color: #ea580c; margin: 0 0 0.5rem 0;">
-                        🔥 <?= (int)($loyalty['streak_days'] ?? 3) ?> Günlük Seri
-                    </h3>
-                    <p style="font-size: 0.88rem; color: var(--sp-text-muted); margin: 0;">
-                        Her gün matın üzerine çıkarak serinizi koruyun ve ekstra bonus sadakat puanı kazanın.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Görevler Listesi -->
-            <div class="sp-card">
-                <span class="sp-card-kicker">EĞİTMENDEN ÖZEL GÖREVLER</span>
-                <h2 class="sp-card-title">Aktif Görev Listesi</h2>
-                <p style="font-size: 0.88rem; color: var(--sp-text-muted); margin-bottom: 1.5rem;">
-                    Görevleri tamamlayarak bir tıkla puanınızı artırın.
-                </p>
-
-                <?php if (empty($tasks)): ?>
-                    <p style="color: var(--sp-text-muted); padding: 2rem 0; text-align: center;">Henüz tanımlanmış bir görev bulunmuyor.</p>
+          <!-- Roadmap Card (Kamp Yolculuğu) -->
+          <div class="card roadmap">
+            <div class="label" style="margin-bottom:6px">Kamp yolculuğu</div>
+            <?php 
+            $shownSteps = 0;
+            foreach ($lessons as $idx => $les):
+              if ($shownSteps >= 6) break;
+              $lesDay = (int)($les['day_number'] ?? ($idx + 1));
+              $lesTitle = preg_replace('/^(Ders|Seans)\s*\d+\s*:\s*/ui', '', $les['title']);
+              $isDone = !empty($les['is_completed']);
+              $isNow = ($spotlightLesson && $spotlightLesson['id'] == $les['id']);
+              $isLocked = !empty($les['is_locked']);
+              $shownSteps++;
+            ?>
+              <div class="step <?= $isLocked ? 'locked' : '' ?>">
+                <?php if ($isDone): ?>
+                  <span class="dot done">✓</span>
+                  <div><b><?= $lesDay ?>. Gün</b> · <?= htmlspecialchars($lesTitle, ENT_QUOTES, 'UTF-8') ?></div>
+                <?php elseif ($isNow): ?>
+                  <span class="dot now"><?= $lesDay ?></span>
+                  <div><b>Bugün</b> · <?= $les['workout_number'] ?>. Seans <span style="font-size:13px; color:var(--text);">(<?= htmlspecialchars($lesTitle, ENT_QUOTES, 'UTF-8') ?>)</span></div>
+                <?php elseif ($isLocked): ?>
+                  <span class="dot">🔒</span>
+                  <div>
+                    <?= $lesDay ?>. Gün · <?= htmlspecialchars($lesTitle, ENT_QUOTES, 'UTF-8') ?><br>
+                    <small class="muted"><?= max(1, $lesDay - $currentProgramDay) ?> gün sonra açılacak</small>
+                  </div>
                 <?php else: ?>
-                    <div class="sp-tasks-list">
-                        <?php foreach ($tasks as $t): ?>
-                            <div class="sp-task-card <?= $t['status'] === 'completed' ? 'is-completed' : '' ?>">
-                                <div class="sp-task-info">
-                                    <h4 class="sp-task-title"><?= e($t['title']) ?></h4>
-                                    <p class="sp-task-desc"><?= e($t['description']) ?></p>
-                                    <span class="sp-task-reward">+<?= (int)$t['points'] ?> Puan</span>
-                                </div>
-
-                                <div>
-                                    <?php if ($t['status'] !== 'completed'): ?>
-                                        <form action="<?= url('/student/task/complete') ?>" method="POST" class="task-complete-form" style="margin: 0;">
-                                            <?= csrf_field() ?>
-                                            <input type="hidden" name="task_id" value="<?= $t['id'] ?>">
-                                            <button type="submit" class="btn-sp-primary" style="padding: 0.5rem 1.25rem; font-size: 0.82rem;">
-                                                ✓ Tamamladım &rarr;
-                                            </button>
-                                        </form>
-                                    <?php else: ?>
-                                        <span style="color: var(--sp-green); font-size: 0.84rem; font-weight: 700;">✓ Tamamlandı</span>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+                  <span class="dot">🌿</span>
+                  <div><?= $lesDay ?>. Gün · Dinlenme</div>
                 <?php endif; ?>
-            </div>
-
+              </div>
+            <?php endforeach; ?>
+          </div>
         </div>
 
-        <!-- =========================================================================
-             SEKME 5: BESLENME KÖŞESİ & STUDIO
-             ========================================================================= -->
-        <div class="portal-tab-pane" id="sp-tab-nutrition" style="display: none;">
-            
-            <div class="sp-card">
-                <span class="sp-card-kicker">GLİSEMİK DENGE &amp; ARINMA</span>
-                <h2 class="sp-card-title">Metabolik Detoks Beslenme Rehberi</h2>
-                <p style="font-size: 0.88rem; color: var(--sp-text-muted); margin-bottom: 2rem;">
-                    Fasya ağını besleyen, kan şekerini dengeleyen ve hücresel arınmayı destekleyen özel tarifler.
-                </p>
+        <!-- Row 3 (3'lü Alt Kart Grubu) -->
+        <div class="row3">
+          <!-- 1. Su Takibi -->
+          <div class="card">
+            <div class="label">💧 Günlük su</div>
+            <div class="big" id="waterTxt">1.0 / 3.0 L</div>
+            <div class="drops" id="drops"></div>
+          </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-                    <?php if (!empty($recipes)): ?>
-                        <?php foreach ($recipes as $rec): ?>
-                            <div style="background: var(--sp-surface-subtle); border: 1px solid var(--sp-border); border-radius: var(--sp-radius-md); padding: 1.5rem;">
-                                <span style="background: var(--sp-bordo-light); color: var(--sp-bordo); font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 99px; text-transform: uppercase;">
-                                    <?= e($rec['badge'] ?? 'TARİF') ?>
-                                </span>
-                                <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--sp-text); margin: 0.6rem 0 0.35rem 0;"><?= e($rec['title']) ?></h3>
-                                <p style="font-size: 0.84rem; color: var(--sp-text-muted); line-height: 1.5; margin-bottom: 1rem;"><?= e($rec['subtitle']) ?></p>
-                                <div style="font-size: 0.82rem; color: var(--sp-text); background: #ffffff; padding: 0.85rem; border-radius: 8px; border: 1px solid #ede8e3;">
-                                    <?= nl2br(e($rec['content'])) ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <div style="background: var(--sp-surface-subtle); border: 1px solid var(--sp-border); border-radius: var(--sp-radius-md); padding: 1.5rem;">
-                            <span style="background: var(--sp-bordo-light); color: var(--sp-bordo); font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 99px; text-transform: uppercase;">DETOKS İKSİRİ</span>
-                            <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--sp-text); margin: 0.6rem 0 0.35rem 0;">Yeşil Alkali Smoothie</h3>
-                            <p style="font-size: 0.84rem; color: var(--sp-text-muted); line-height: 1.5; margin-bottom: 1rem;">Ispanak, yeşil elma, salatalık, taze zencefil ve limon ile vagus siniri regülasyonu.</p>
-                            <div style="font-size: 0.82rem; color: var(--sp-text); background: #ffffff; padding: 0.85rem; border-radius: 8px; border: 1px solid #ede8e3;">
-                                Sabah mat seansından hemen önce veya sonra 300ml soğuk sıkım olarak tüketin.
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
+          <!-- 2. Günün Tarifi -->
+          <div class="card">
+            <div class="label">🍵 Günün tarifi</div>
+            <div class="recipe-img" style="margin-top:12px; background-image: url('<?= asset('assets/images/kitchen-hero-plate.webp') ?>');"></div>
+            <div class="title"><?= htmlspecialchars($recipes[0]['title'] ?? 'Sabah altın iksiri', ENT_QUOTES, 'UTF-8') ?></div>
+            <div class="muted" style="margin:4px 0 14px"><?= htmlspecialchars($recipes[0]['subtitle'] ?? 'Zerdeçal, zencefil, badem sütü · 5 dk', ENT_QUOTES, 'UTF-8') ?></div>
+            <button type="button" class="btn soft js-open-recipe" data-recipe-idx="0">Tarifi gör →</button>
+          </div>
 
+          <!-- 3. Bu Hafta İlerlemesi -->
+          <div class="card">
+            <div class="label">📈 Bu hafta</div>
+            <div class="big"><?= min(5, max(1, $completedCount)) ?> / 5</div>
+            <div class="muted" style="margin-bottom:14px">Seans hedefi tamamlandı</div>
+            <div class="bar"><i style="width:<?= min(100, (int)round((min(5, max(1, $completedCount)) / 5) * 100)) ?>%"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           PC SEKME 2: PROGRAMIM (12 SEANS & TAKVİM)
+           ========================================== -->
+      <div class="portal-tab-content" id="tab-program">
+        <div class="topbar">
+          <div class="hello">
+            <div class="label">4 Haftalık Program Akışı</div>
+            <h2>Tüm Seanslar &amp; Günlük Plan</h2>
+          </div>
+          <span class="pill accent"><?= $totalWorkouts ?> Seans</span>
         </div>
 
-        <!-- =========================================================================
-             SEKME 6: PROFİL & AYARLAR
-             ========================================================================= -->
-        <div class="portal-tab-pane" id="sp-tab-profile" style="display: none;">
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
-                
-                <!-- Sol: Üyelik Bilgileri -->
-                <div class="sp-card">
-                    <span class="sp-card-kicker">HESAP DETAYLARI</span>
-                    <h2 class="sp-card-title">Kişisel Bilgiler</h2>
-
-                    <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.25rem;">
-                        <div>
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--sp-text-muted); text-transform: uppercase;">Ad Soyad</span>
-                            <div style="font-size: 1rem; font-weight: 700; color: var(--sp-text);"><?= e($user['full_name']) ?></div>
-                        </div>
-
-                        <div>
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--sp-text-muted); text-transform: uppercase;">E-Posta</span>
-                            <div style="font-size: 1rem; font-weight: 700; color: var(--sp-text);"><?= e($user['email']) ?></div>
-                        </div>
-
-                        <div>
-                            <span style="font-size: 0.78rem; font-weight: 700; color: var(--sp-text-muted); text-transform: uppercase;">Telefon</span>
-                            <div style="font-size: 1rem; font-weight: 700; color: var(--sp-text);"><?= e($user['phone'] ?? 'Belirtilmedi') ?></div>
-                        </div>
-
-                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--sp-border);">
-                            <a href="<?= url('/logout') ?>" class="btn-sp-outline" style="width: 100%; text-align: center; justify-content: center;">
-                                Güvenli Çıkış Yap
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sağ: Eğitmen & WhatsApp İletişim -->
-                <div class="sp-card">
-                    <span class="sp-card-kicker">EĞİTMENE DANIŞ</span>
-                    <h2 class="sp-card-title">Klinik Destek &amp; Sorular</h2>
-                    <p style="font-size: 0.88rem; color: var(--sp-text-muted); line-height: 1.6; margin-bottom: 1.5rem;">
-                        Antrenman pratiğiniz veya beslenme planınızla ilgili aklınıza takılan her şeyi Betina Tansuğ ve ekibine doğrudan iletebilirsiniz.
-                    </p>
-
-                    <a href="<?= __('brand.whatsapp_url') ?>" target="_blank" rel="noopener noreferrer" class="btn-sp-primary" style="width: 100%; text-align: center; justify-content: center;">
-                        <span>💬</span>
-                        <span>WhatsApp ile Eğitmene Yaz &rarr;</span>
-                    </a>
-                </div>
-
-            </div>
-
+        <div class="seg" id="pcWeekSeg">
+          <button type="button" class="week-tab-btn on" data-week="1">1. Hafta</button>
+          <button type="button" class="week-tab-btn" data-week="2">2. Hafta</button>
+          <button type="button" class="week-tab-btn" data-week="3">3. Hafta</button>
+          <button type="button" class="week-tab-btn" data-week="4">4. Hafta</button>
         </div>
+
+        <?php foreach ($calendarWeeks as $w): ?>
+          <div class="card week-pane" id="pc-week-pane-<?= $w['week_number'] ?>" style="<?= $w['week_number'] === 1 ? '' : 'display:none;' ?> padding: 14px 20px;">
+            <?php foreach ($w['days'] as $day): ?>
+              <?php 
+                $wo = $day['workout'];
+                $isLocked = !empty($day['is_locked']);
+                $isComp = !empty($day['is_completed']);
+                $isToday = !empty($day['is_current_day']);
+                $isRest = !empty($day['is_rest']);
+              ?>
+              <div class="day-row <?= $isLocked ? 'locked' : '' ?>">
+                <?php if ($isComp): ?>
+                  <span class="dot done">✓</span>
+                  <div>
+                    <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                    <small><?= $wo['workout_number'] ?>. Seans · <?= htmlspecialchars($wo['title'] ?? '', ENT_QUOTES, 'UTF-8') ?> · <?= (int)($wo['duration_minutes'] ?? 35) ?> dk</small>
+                  </div>
+                  <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $wo['id']) ?>" class="btn soft btn-sm">Tekrar İzle</a>
+                <?php elseif ($isToday && $wo): ?>
+                  <span class="dot now"><?= $day['day_number'] ?></span>
+                  <div>
+                    <b>Bugün (<?= $day['day_number'] ?>. Gün)</b><br>
+                    <span style="color:var(--accent); font-weight:700"><?= $wo['workout_number'] ?>. Seans · <?= htmlspecialchars($wo['title'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+                  </div>
+                  <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $wo['id']) ?>" class="btn btn-sm">▶ Şimdi başla</a>
+                <?php elseif ($isRest): ?>
+                  <span class="dot">🌿</span>
+                  <div>
+                    <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                    <small>Dinlenme &amp; Fasya Toparlanma · Su &amp; Nefes Hedefi</small>
+                  </div>
+                <?php elseif ($isLocked): ?>
+                  <span class="dot">🔒</span>
+                  <div>
+                    <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                    <small><?= $wo ? $wo['workout_number'] . '. Seans · ' : '' ?><?= max(1, $day['day_number'] - $currentProgramDay) ?> gün sonra açılacak</small>
+                  </div>
+                <?php else: ?>
+                  <span class="dot"><?= $day['day_number'] ?></span>
+                  <div>
+                    <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                    <small><?= $wo ? $wo['workout_number'] . '. Seans · ' . htmlspecialchars($wo['title'] ?? '', ENT_QUOTES, 'UTF-8') : '' ?></small>
+                  </div>
+                  <?php if ($wo): ?>
+                    <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $wo['id']) ?>" class="btn soft btn-sm">Başla</a>
+                  <?php endif; ?>
+                <?php endif; ?>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+      <!-- ==========================================
+           PC SEKME 3: BESLENME
+           ========================================== -->
+      <div class="portal-tab-content" id="tab-nutrition">
+        <div class="topbar">
+          <div class="hello">
+            <div class="label">Bar Kitchen &amp; Metabolik Detoks</div>
+            <h2>Beslenme Rehberi &amp; Tarifler</h2>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span class="pill accent">Tümü</span>
+          <span class="pill">Sabah</span>
+          <span class="pill">Öğle</span>
+          <span class="pill">Akşam</span>
+        </div>
+
+        <div class="rec-grid">
+          <?php foreach ($recipes as $rIdx => $rec): ?>
+            <div class="rec-item js-open-recipe" data-recipe-idx="<?= $rIdx ?>">
+              <div class="rec-thumb" style="background-image: url('<?= asset('assets/images/kitchen-hero-plate.webp') ?>');"></div>
+              <div>
+                <div class="label"><?= htmlspecialchars($rec['badge'] ?? 'Beslenme', ENT_QUOTES, 'UTF-8') ?> · <?= htmlspecialchars($rec['time_needed'] ?? '5 dk', ENT_QUOTES, 'UTF-8') ?></div>
+                <div class="title" style="margin-top:2px"><?= htmlspecialchars($rec['title'], ENT_QUOTES, 'UTF-8') ?></div>
+                <div class="muted" style="margin-top:4px"><?= htmlspecialchars($rec['subtitle'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           PC SEKME 4: PROFİL
+           ========================================== -->
+      <div class="portal-tab-content" id="tab-profile">
+        <div class="topbar">
+          <div class="hello">
+            <div class="label">Kişisel Bilgiler &amp; Destek</div>
+            <h2>Öğrenci Profilim</h2>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="profile-grid">
+            <div class="profile-field">
+              <span class="label">AD SOYAD</span>
+              <div class="profile-field-val"><?= htmlspecialchars($user['full_name'] ?? 'Öğrenci', ENT_QUOTES, 'UTF-8') ?></div>
+            </div>
+            <div class="profile-field">
+              <span class="label">E-POSTA</span>
+              <div class="profile-field-val"><?= htmlspecialchars($user['email'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
+            </div>
+            <div class="profile-field">
+              <span class="label">AKTİF PROGRAM</span>
+              <div class="profile-field-val"><?= htmlspecialchars($course['title'] ?? '4 Haftalık Detoks & Yoga Kampı', ENT_QUOTES, 'UTF-8') ?></div>
+            </div>
+            <div class="profile-field">
+              <span class="label">İLERLEME DURUMU</span>
+              <div class="profile-field-val"><?= $currentProgramDay ?>. Gün · %<?= $progressPercent ?> Tamamlandı</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://wa.me/905357056828?text=<?= urlencode('Merhaba Betina Hocam, Fizyobar platformu üzerinden ulaşıyorum.') ?>" target="_blank" rel="noopener" class="btn" style="width:auto; padding:12px 24px; background:#25d366; text-decoration:none;">
+              💬 Eğitmen WhatsApp Destek
+            </a>
+            <a href="<?= url('/logout') ?>" class="btn soft" style="width:auto; padding:12px 24px; text-decoration:none;">
+              Çıkış Yap
+            </a>
+          </div>
+        </div>
+      </div>
 
     </div>
+  </div>
 
-    <!-- =========================================================================
-         8. MOBİL ALT SABİT APP NAVİGASYONU (STICKY BOTTOM APP BAR)
-         ========================================================================= -->
-    <nav class="portal-mobile-app-bar" aria-label="Mobil Uygulama Gezintisi">
-        <button type="button" class="sp-mob-nav-btn active" data-tab="sp-tab-overview">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-            <span>Alanım</span>
-        </button>
+  <!-- =========================================================================
+       2. MOBİL UYGULAMA GÖRÜNÜMÜ (.mobile-app-container)
+       ========================================================================= -->
+  <div class="mobile-app-container">
 
-        <button type="button" class="sp-mob-nav-btn" data-tab="sp-tab-workouts">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polygon points="10 8 16 12 10 16 10 8"></polygon>
-            </svg>
-            <span>Seanslar</span>
-        </button>
+    <!-- Mobil Üst Başlık (.mhead) -->
+    <div class="mhead">
+      <a href="<?= url('/') ?>" class="portal-site-logo-link" aria-label="FİZYOBAR" style="align-items:flex-start;">
+        <span class="logo-text-main" style="font-size:22px;">FİZYOBAR</span>
+        <span class="logo-text-sub" style="font-size:8px;">BODY • ADAPT • REFRAME</span>
+      </a>
+      <div style="display:flex; gap:6px">
+        <span class="pill gold">🔥 <?= (int)($loyalty['streak_days'] ?? 3) ?></span>
+        <span class="pill">⭐ <?= (int)($loyalty['points'] ?? 100) ?></span>
+      </div>
+    </div>
 
-        <button type="button" class="sp-mob-nav-btn" data-tab="sp-tab-calendar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
-            <span>Takvim</span>
-        </button>
+    <!-- MOBİL SEKME 1: BUGÜN -->
+    <div class="portal-m-tab-content active" id="m-tab-today">
+      <div>
+        <div class="label">Günaydın · sabah iksirin hazır mı?</div>
+        <div class="greet" style="margin-top:4px"><?= $currentProgramDay ?>. Gün 🌤️</div>
+        <div class="bar" style="margin-top:12px"><i style="width:<?= $progressPercent ?>%"></i></div>
+        <div class="muted" style="margin-top:6px; font-size:12px"><?= $completedCount ?> / <?= $totalWorkouts ?> seans · %<?= $progressPercent ?></div>
+      </div>
 
-        <button type="button" class="sp-mob-nav-btn" data-tab="sp-tab-tasks">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 11l3 3L22 4"></path>
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-            </svg>
-            <span>Görevler</span>
-        </button>
+      <!-- Dolu Gün: Antrenman Kartı -->
+      <div class="card" style="padding:12px; margin-top:14px;">
+        <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="thumb" style="text-decoration:none;">
+          <img src="<?= $spotThumb ?>" alt="<?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?>">
+          <div class="play" style="width:46px; height:46px">▶</div>
+        </a>
+        <div style="margin:12px 2px 0">
+          <span class="pill accent"><?= $spotWorkoutNum ?>. Seans</span>
+          <span class="muted" style="margin-left:6px"><?= $spotDuration ?> dk · Ekipmansız</span>
+        </div>
+        <div class="title" style="margin:8px 2px 12px; font-size:16px;"><?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?></div>
+        <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="btn">▶ Seansı başlat</a>
+      </div>
 
-        <button type="button" class="sp-mob-nav-btn" data-tab="sp-tab-profile">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            <span>Profil</span>
-        </button>
+      <!-- Dinlenme Günü Kartı (Eğer Bugün Dinlenme İse veya Bilgilendirme Amaçlı) -->
+      <?php if (!$isTodayWorkoutDay): ?>
+      <div class="empty-card" style="margin-top:14px;">
+        <div style="font-size:36px">🌿</div>
+        <div class="title" style="margin-top:8px">Dinlenme &amp; toparlanma günü</div>
+        <p class="muted" style="margin-top:6px">Dünkü seansın kaslarında ve fasyanda sindiriliyor. Yarın bir sonraki seans açılacak.</p>
+        <div class="label" style="margin-top:14px">Sonraki seansa kalan</div>
+        <div class="countdown" id="cd">14 sa 22 dk</div>
+        <button type="button" class="btn">🎧 5 dk vagus nefesi · +10 ⭐</button>
+      </div>
+      <?php endif; ?>
+
+      <!-- Mini 2-Kolon Kart Grubu (Su & Tarif) -->
+      <div class="mini" style="margin-top:14px;">
+        <div class="card">
+          <div class="label">💧 Su</div>
+          <div class="title" style="margin-top:6px; font-size:14px;" id="mWaterTxt">1.0 / 3.0 L</div>
+          <div class="mwater" id="mDrops"></div>
+        </div>
+        <div class="card js-open-recipe" data-recipe-idx="0" style="cursor:pointer;">
+          <div class="label">🍵 Tarif</div>
+          <div class="recipe-img" style="aspect-ratio:auto; height:44px; margin:10px 0 8px; background-image: url('<?= asset('assets/images/kitchen-hero-plate.webp') ?>');"></div>
+          <div class="title" style="font-size:13px"><?= htmlspecialchars($recipes[0]['title'] ?? 'Altın iksir', ENT_QUOTES, 'UTF-8') ?></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOBİL SEKME 2: PROGRAMIM -->
+    <div class="portal-m-tab-content" id="m-tab-program" style="display:none;">
+      <div class="mhead" style="padding:0 0 10px;">
+        <div class="logo">Programım</div>
+        <span class="pill"><?= $totalWorkouts ?> Seans</span>
+      </div>
+
+      <div class="seg" id="mWeekSeg" style="margin-bottom:12px;">
+        <button type="button" class="m-week-tab-btn on" data-week="1">1. Hafta</button>
+        <button type="button" class="m-week-tab-btn" data-week="2">2. Hafta</button>
+        <button type="button" class="m-week-tab-btn" data-week="3">3. Hafta</button>
+        <button type="button" class="m-week-tab-btn" data-week="4">4. Hafta</button>
+      </div>
+
+      <?php foreach ($calendarWeeks as $w): ?>
+        <div class="card m-week-pane" id="m-week-pane-<?= $w['week_number'] ?>" style="<?= $w['week_number'] === 1 ? '' : 'display:none;' ?> padding: 12px 14px;">
+          <?php foreach ($w['days'] as $day): ?>
+            <?php 
+              $wo = $day['workout'];
+              $isLocked = !empty($day['is_locked']);
+              $isComp = !empty($day['is_completed']);
+              $isToday = !empty($day['is_current_day']);
+              $isRest = !empty($day['is_rest']);
+            ?>
+            <div class="day-row <?= $isLocked ? 'locked' : '' ?>">
+              <?php if ($isComp): ?>
+                <span class="dot done">✓</span>
+                <div>
+                  <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                  <small><?= $wo['workout_number'] ?>. Seans · <?= htmlspecialchars($wo['title'] ?? '', ENT_QUOTES, 'UTF-8') ?></small>
+                </div>
+              <?php elseif ($isToday && $wo): ?>
+                <span class="dot now"><?= $day['day_number'] ?></span>
+                <div>
+                  <b>Bugün (<?= $day['day_number'] ?>. Gün)</b><br>
+                  <span style="color:var(--accent); font-weight:700"><?= $wo['workout_number'] ?>. Seans · <?= htmlspecialchars($wo['title'] ?? '', ENT_QUOTES, 'UTF-8') ?></span><br>
+                  <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $wo['id']) ?>" class="pill accent" style="margin-top:6px; text-decoration:none;">▶ Şimdi başla</a>
+                </div>
+              <?php elseif ($isRest): ?>
+                <span class="dot">🌿</span>
+                <div>
+                  <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                  <small>Dinlenme · su hedefi</small>
+                </div>
+              <?php elseif ($isLocked): ?>
+                <span class="dot">🔒</span>
+                <div>
+                  <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                  <small><?= $wo ? $wo['workout_number'] . '. Seans · ' : '' ?><?= max(1, $day['day_number'] - $currentProgramDay) ?> gün sonra açılacak</small>
+                </div>
+              <?php else: ?>
+                <span class="dot"><?= $day['day_number'] ?></span>
+                <div>
+                  <b><?= $day['day_number'] ?>. Gün (<?= $day['day_label'] ?>)</b><br>
+                  <small><?= $wo ? $wo['workout_number'] . '. Seans · ' . htmlspecialchars($wo['title'] ?? '', ENT_QUOTES, 'UTF-8') : '' ?></small><br>
+                  <?php if ($wo): ?>
+                    <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $wo['id']) ?>" class="pill accent" style="margin-top:6px; text-decoration:none;">Başla</a>
+                  <?php endif; ?>
+                </div>
+              <?php endif; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- MOBİL SEKME 3: BESLENME -->
+    <div class="portal-m-tab-content" id="m-tab-nutrition" style="display:none;">
+      <div class="mhead" style="padding:0 0 10px;">
+        <div class="logo">Beslenme &amp; Tarifler</div>
+      </div>
+
+      <div class="chips" style="margin-bottom:12px;">
+        <span class="pill accent">Tümü</span>
+        <span class="pill">Sabah</span>
+        <span class="pill">Öğle</span>
+        <span class="pill">Akşam</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <?php foreach ($recipes as $rIdx => $rec): ?>
+          <div class="rec-item js-open-recipe" data-recipe-idx="<?= $rIdx ?>">
+            <div class="rec-thumb" style="background-image: url('<?= asset('assets/images/kitchen-hero-plate.webp') ?>');"></div>
+            <div>
+              <div class="label"><?= htmlspecialchars($rec['badge'] ?? 'Tarif', ENT_QUOTES, 'UTF-8') ?> · <?= htmlspecialchars($rec['time_needed'] ?? '5 dk', ENT_QUOTES, 'UTF-8') ?></div>
+              <div class="title" style="font-size:14px; margin-top:2px;"><?= htmlspecialchars($rec['title'], ENT_QUOTES, 'UTF-8') ?></div>
+              <div class="muted" style="font-size:12px; margin-top:2px;"><?= htmlspecialchars($rec['subtitle'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- MOBİL SEKME 4: PROFİL -->
+    <div class="portal-m-tab-content" id="m-tab-profile" style="display:none;">
+      <div class="mhead" style="padding:0 0 10px;">
+        <div class="logo">Profilim</div>
+      </div>
+
+      <div class="card" style="padding:16px;">
+        <div class="profile-field">
+          <span class="label">AD SOYAD</span>
+          <div class="profile-field-val"><?= htmlspecialchars($user['full_name'] ?? 'Öğrenci', ENT_QUOTES, 'UTF-8') ?></div>
+        </div>
+        <div class="profile-field">
+          <span class="label">E-POSTA</span>
+          <div class="profile-field-val"><?= htmlspecialchars($user['email'] ?? '', ENT_QUOTES, 'UTF-8') ?></div>
+        </div>
+        <div class="profile-field">
+          <span class="label">KAMP İLERLEMESİ</span>
+          <div class="profile-field-val"><?= $currentProgramDay ?>. Gün · %<?= $progressPercent ?> Tamamlandı</div>
+        </div>
+
+        <div style="margin-top:16px; display:flex; flex-direction:column; gap:10px;">
+          <a href="https://wa.me/905357056828?text=<?= urlencode('Merhaba Betina Hocam, Fizyobar platformu üzerinden ulaşıyorum.') ?>" target="_blank" rel="noopener" class="btn" style="background:#25d366; text-decoration:none;">
+            💬 Eğitmen WhatsApp Destek
+          </a>
+          <a href="<?= url('/logout') ?>" class="btn soft" style="text-decoration:none;">
+            Çıkış Yap
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alt Sabit Menü (.mnav) -->
+    <nav class="mnav">
+      <div class="m-nav-item on" data-tab="tab-today"><i>🏠</i>Bugün</div>
+      <div class="m-nav-item" data-tab="tab-program"><i>🗓️</i>Program</div>
+      <div class="m-nav-item" data-tab="tab-nutrition"><i>🥑</i>Beslenme</div>
+      <div class="m-nav-item" data-tab="tab-profile"><i>👤</i>Profil</div>
     </nav>
+  </div>
 
 </div>
 
-<!-- İNTERAKTİF İSTEMCİ SCRİPTİ -->
+<!-- =========================================================================
+     3. TARİF DETAY BOTTOM SHEET / MODAL
+     ========================================================================= -->
+<div class="sheet-backdrop" id="recipeSheetModal">
+  <div class="sheet-modal">
+    <div class="grab" id="closeRecipeGrab"></div>
+    <div class="label" id="sheetCategory">🌅 Sabah · 5 dk</div>
+    <div class="title" style="font-size:18px" id="sheetTitle">Anti-enflamatuar altın iksir</div>
+    <div class="label" style="margin-top:4px">Malzemeler</div>
+    <ul class="check" id="sheetIngredients" style="margin-top:0">
+      <li class="ok"><b>✓</b>Zerdeçal · 1 tk</li>
+      <li><b></b>Zencefil · 2 cm</li>
+      <li><b></b>Badem sütü · 250 ml</li>
+    </ul>
+    <div class="label" style="margin-top:6px">Neden bu öğün?</div>
+    <div class="muted" id="sheetDesc">Sabah saatinde anti-enflamatuar bileşenler, gün boyu toparlanma ritmini destekler.</div>
+    <button type="button" class="btn" style="margin-top:auto" id="closeRecipeBtn">Kapat</button>
+  </div>
+</div>
+
+<!-- =========================================================================
+     4. JAVASCRIPT ETKİLEŞİMİ (SU DAMLALARI, SEKME DEĞİŞTİRME, MODAL)
+     ========================================================================= -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Sekme Değiştirme Fonksiyonu
-    const tabButtons = document.querySelectorAll('.portal-tab-pill-btn, .sp-mob-nav-btn');
-    const tabPanes = document.querySelectorAll('.portal-tab-pane');
+  // 1. Su Damlaları
+  let n = 2;
+  const TOTAL = 6, GOAL = 3.0;
 
-    function switchSpTab(targetId) {
-        tabButtons.forEach(btn => {
-            if (btn.getAttribute('data-tab') === targetId) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
+  function renderDrops(el) {
+    if (!el) return;
+    el.innerHTML = '';
+    for (let i = 0; i < TOTAL; i++) {
+      const d = document.createElement('div');
+      d.className = 'drop' + (i < n ? ' on' : '');
+      d.onclick = () => { n = i + 1; updateAllDrops(); };
+      el.appendChild(d);
+    }
+  }
+
+  function updateAllDrops() {
+    renderDrops(document.getElementById('drops'));
+    renderDrops(document.getElementById('mDrops'));
+    const l = (n * GOAL / TOTAL).toFixed(1);
+    const txt = document.getElementById('waterTxt');
+    const mTxt = document.getElementById('mWaterTxt');
+    if (txt) txt.textContent = l + ' / 3.0 L';
+    if (mTxt) mTxt.textContent = l + ' / 3.0 L';
+  }
+  updateAllDrops();
+
+  // 2. Geri Sayım Sayacı (Dinlenme Günü)
+  let s = 14 * 3600 + 22 * 60;
+  setInterval(() => {
+    s = Math.max(0, s - 1);
+    const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
+    const cdEl = document.getElementById('cd');
+    if (cdEl) {
+      cdEl.textContent = `${h} sa ${String(m).padStart(2, '0')} dk ${String(x).padStart(2, '0')} sn`;
+    }
+  }, 1000);
+
+  // 3. Sekme Yönetimi (PC & Mobil Senkronize)
+  function switchTab(tabId) {
+    // PC Yan Menü
+    document.querySelectorAll('.pc .nav-link').forEach(a => {
+      a.classList.toggle('on', a.getAttribute('data-tab') === tabId);
+    });
+    // PC İçerik Panelleri
+    document.querySelectorAll('.pc .portal-tab-content').forEach(pane => {
+      pane.classList.toggle('active', pane.id === tabId);
+    });
+
+    // Mobil Alt Menü
+    document.querySelectorAll('.mnav .m-nav-item').forEach(item => {
+      item.classList.toggle('on', item.getAttribute('data-tab') === tabId);
+    });
+    // Mobil İçerik Panelleri
+    const mTargetId = 'm-' + tabId;
+    document.querySelectorAll('.mobile-app-container .portal-m-tab-content').forEach(pane => {
+      if (pane.id === mTargetId) {
+        pane.style.display = 'block';
+        pane.classList.add('active');
+      } else {
+        pane.style.display = 'none';
+        pane.classList.remove('active');
+      }
+    });
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.pc .nav-link').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchTab(this.getAttribute('data-tab'));
+    });
+  });
+
+  document.querySelectorAll('.mnav .m-nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchTab(this.getAttribute('data-tab'));
+    });
+  });
+
+  // 4. Hafta Değiştirici (PC & Mobil)
+  function setupWeekSwitch(btnSelector, panePrefix) {
+    document.querySelectorAll(btnSelector).forEach(btn => {
+      btn.addEventListener('click', function() {
+        const week = this.getAttribute('data-week');
+        document.querySelectorAll(btnSelector).forEach(b => b.classList.remove('on'));
+        this.classList.add('on');
+        document.querySelectorAll('.' + panePrefix).forEach(pane => {
+          pane.style.display = 'none';
         });
+        const target = document.getElementById(panePrefix + '-' + week);
+        if (target) target.style.display = 'block';
+      });
+    });
+  }
+  setupWeekSwitch('#pcWeekSeg .week-tab-btn', 'pc-week-pane');
+  setupWeekSwitch('#mWeekSeg .m-week-tab-btn', 'm-week-pane');
 
-        tabPanes.forEach(pane => {
-            if (pane.id === targetId) {
-                pane.style.display = 'block';
-                pane.classList.add('active');
-            } else {
-                pane.style.display = 'none';
-                pane.classList.remove('active');
-            }
-        });
+  // 5. Tarif Modal Sheet
+  const recipesData = <?= json_encode($recipes, JSON_UNESCAPED_UNICODE) ?> || [];
+  const modal = document.getElementById('recipeSheetModal');
 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+  function openRecipe(idx) {
+    const r = recipesData[idx];
+    if (!r) return;
+
+    document.getElementById('sheetCategory').textContent = (r.badge || 'Tarif') + ' · ' + (r.time_needed || '5 dk');
+    document.getElementById('sheetTitle').textContent = r.title || '';
+    document.getElementById('sheetDesc').textContent = r.content || r.subtitle || '';
+
+    // Malzemeleri parse et
+    const ingList = document.getElementById('sheetIngredients');
+    ingList.innerHTML = '';
+    const lines = (r.ingredients || '').split('\n').filter(l => l.trim().length > 0);
+    if (lines.length > 0) {
+      lines.forEach((line, i) => {
+        const clean = line.replace(/^[•\-\*]\s*/, '').trim();
+        const li = document.createElement('li');
+        if (i === 0) li.className = 'ok';
+        li.innerHTML = `<b>${i === 0 ? '✓' : ''}</b>${clean}`;
+        ingList.appendChild(li);
+      });
+    } else {
+      ingList.innerHTML = '<li class="ok"><b>✓</b>Organik taze malzemeler</li>';
     }
 
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = this.getAttribute('data-tab');
-            switchSpTab(target);
-        });
+    modal.classList.add('active');
+  }
+
+  document.querySelectorAll('.js-open-recipe').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.preventDefault();
+      const idx = parseInt(this.getAttribute('data-recipe-idx') || '0', 10);
+      openRecipe(idx);
     });
+  });
 
-    // Butonlardan başka sekmeye yönlendirme
-    document.querySelectorAll('.js-switch-tab').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const target = this.getAttribute('data-target');
-            if (target) switchSpTab(target);
-        });
-    });
-
-    // 2. URL Parametresi veya Hash ile Sekme Başlatma (?tab=workouts veya #sp-tab-tasks)
-    const urlParams = new URLSearchParams(window.location.search);
-    let initialTab = urlParams.get('tab');
-    if (!initialTab && window.location.hash) {
-        initialTab = window.location.hash.replace('#', '');
-    }
-    if (initialTab) {
-        if (!initialTab.startsWith('sp-tab-')) {
-            initialTab = 'sp-tab-' + initialTab;
-        }
-        if (document.getElementById(initialTab)) {
-            switchSpTab(initialTab);
-        }
-    }
-
-    // 3. Antrenman Filtreleme
-    const filterChips = document.querySelectorAll('.sp-filter-chip');
-    const workoutCards = document.querySelectorAll('.js-workout-card');
-
-    filterChips.forEach(chip => {
-        chip.addEventListener('click', function() {
-            filterChips.forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-
-            const filter = this.getAttribute('data-filter');
-
-            workoutCards.forEach(card => {
-                const isCompleted = card.getAttribute('data-completed') === '1';
-                const isLocked = card.getAttribute('data-locked') === '1';
-                const isThisWeek = card.getAttribute('data-thisweek') === '1';
-
-                let show = false;
-                if (filter === 'all') {
-                    show = true;
-                } else if (filter === 'week') {
-                    show = isThisWeek;
-                } else if (filter === 'completed') {
-                    show = isCompleted;
-                } else if (filter === 'ready') {
-                    show = !isLocked && !isCompleted;
-                }
-
-                card.style.display = show ? 'flex' : 'none';
-            });
-        });
-    });
-
-    // 4. Su / Hidrasyon Takibi Tıklanabilir Bardaklar
-    const glassItems = document.querySelectorAll('#hydrationGlasses .glass-item');
-    glassItems.forEach((glass, idx) => {
-        glass.addEventListener('click', function() {
-            glassItems.forEach((g, i) => {
-                if (i <= idx) {
-                    g.style.backgroundColor = '#e0f2fe';
-                    g.style.borderColor = '#0284c7';
-                    const icon = g.querySelector('span');
-                    if (icon) icon.style.color = '#0284c7';
-                } else {
-                    g.style.backgroundColor = '#ffffff';
-                    g.style.borderColor = '#cbd5e1';
-                    const icon = g.querySelector('span');
-                    if (icon) icon.style.color = '#94a3b8';
-                }
-            });
-        });
-    });
-
-    // 5. AJAX Görev Tamamlama
-    const taskForms = document.querySelectorAll('.task-complete-form');
-    taskForms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            if (btn) {
-                btn.disabled = true;
-                btn.textContent = 'İşleniyor...';
-            }
-
-            const formData = new FormData(this);
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    const parent = form.parentElement;
-                    parent.innerHTML = '<span style="color: var(--sp-green); font-size: 0.84rem; font-weight: 700;">✓ Tamamlandı! +' + (data.points_awarded || 50) + ' Puan</span>';
-                } else {
-                    form.submit();
-                }
-            })
-            .catch(() => {
-                form.submit();
-            });
-        });
-    });
+  document.getElementById('closeRecipeGrab')?.addEventListener('click', () => modal.classList.remove('active'));
+  document.getElementById('closeRecipeBtn')?.addEventListener('click', () => modal.classList.remove('active'));
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  });
 });
 </script>

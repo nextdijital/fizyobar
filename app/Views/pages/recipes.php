@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const ings = JSON.parse(data.ingredients || '[]');
             ings.forEach(item => {
                 const li = document.createElement('li');
-                li.innerHTML = '<span class="notebook-bullet-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#391214"/><path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>' + item + '</span>';
+                li.innerHTML = '<span class="notebook-bullet-icon" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="#4a1421"/><path d="M6 10.2L8.8 13L14 7.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>' + item + '</span>';
                 mIng.appendChild(li);
             });
         } catch(err) {}

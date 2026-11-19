@@ -125,7 +125,7 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                             <span class="feature-text">Fizyoterapist birebir WhatsApp takibi &amp; kontrolü</span>
                         </div>
                         <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
-                            <span class="betella-check" style="color: #391214;">★</span>
+                            <span class="betella-check" style="color: #4a1421;">★</span>
                             <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
                         </div>
                     </div>
@@ -194,7 +194,7 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                             <span class="feature-text">Fizyobar Kitchen tarif kütüphanesi erişimi</span>
                         </div>
                         <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
-                            <span class="betella-check" style="color: #391214;">★</span>
+                            <span class="betella-check" style="color: #4a1421;">★</span>
                             <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
                         </div>
                     </div>
@@ -263,7 +263,7 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                             <span class="feature-text">Fizyobar Kitchen tarif kütüphanesi erişimi</span>
                         </div>
                         <div class="clean-feature-item yearly-only-feature" style="display: none; background: #faf5f5; border: 1px solid #ebd4d4; padding: 4px 8px; border-radius: 6px;">
-                            <span class="betella-check" style="color: #391214;">★</span>
+                            <span class="betella-check" style="color: #4a1421;">★</span>
                             <span class="feature-text"><strong>Tüm Beslenme Rehberleri &amp; E-Kitaplar Dahil</strong></span>
                         </div>
                     </div>
@@ -394,7 +394,7 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
         <div class="programs-minimal-footer text-center" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e5e5;">
             <p style="font-size: 0.92rem; color: #666666;">
                 Hangi eğitimin bedeninize en uygun olduğu konusunda emin değil misiniz?
-                <a href="<?= url('/programini-bul') ?>" class="footer-finder-link" style="color: #391214; font-weight: 700; text-decoration: underline;">
+                <a href="<?= url('/programini-bul') ?>" class="footer-finder-link" style="color: #4a1421; font-weight: 700; text-decoration: underline;">
                     Yapay Zeka ile Beden Analizinizi Yapın &rarr;
                 </a>
             </p>

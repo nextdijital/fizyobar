@@ -30,61 +30,25 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 2. Minimalist İkon Alanı (Çerçevesiz, Geniş Boşluklu & Kalın İkonlar) -->
-<section class="physio-pillars-section" aria-label="Fizyobar İkonlar">
+<!-- 2. Bar System'i Keşfet Alanı (Mürdüm & Koyu Gri Arka Plan) -->
+<section class="bar-system-discover-section" aria-label="BAR System'i Keşfet">
     <div class="container">
-        <div class="physio-icons-grid">
-            <!-- 1. Açık Kitap (Open Book) -->
-            <div class="physio-icon-item" title="Kitap">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M8 20c7-3.5 16-3 24 2v24c-8-4.5-17-5-24-2V20z"/>
-                    <path d="M56 20c-7-3.5-16-3-24 2v24c8-4.5 17-5 24-2V20z"/>
-                </svg>
+        <div class="bar-system-discover-inner">
+            <div class="bar-system-discover-content">
+                <span class="bar-system-discover-kicker">BAR SYSTEM METODOLOJİSİ</span>
+                <h2 class="bar-system-discover-title">BAR SYSTEM'İ KEŞFET</h2>
+                <p class="bar-system-discover-lead">
+                    Klinik fizyoterapi ilkeleri ve yoga disipliniyle bedeni zorlamadan, anatomik sınırlarını koruyarak güçlendiren ve longevity odaklı kalıcı bir yaşam disiplini sunan patentli yaklaşımımız.
+                </p>
             </div>
-
-            <!-- 2. Topluluk (Community / 3 Kişi) -->
-            <div class="physio-icon-item" title="Topluluk">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="32" cy="19" r="6.5"/>
-                    <path d="M19 46c0-7 5.8-12 13-12s13 5 13 12"/>
-                    <circle cx="17" cy="24" r="5"/>
-                    <path d="M9 46c0-5 3.5-8.5 7.5-9.5"/>
-                    <circle cx="47" cy="24" r="5"/>
-                    <path d="M47.5 36.5c4 1 7.5 4.5 7.5 9.5"/>
-                </svg>
-            </div>
-
-            <!-- 3. Havan ve Tokmak (Mortar and Pestle) -->
-            <div class="physio-icon-item" title="Havan ve Tokmak">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M47 16l-13 16"/>
-                    <path d="M44 13l5 5"/>
-                    <path d="M13 28h38"/>
-                    <path d="M15 28c0 12 7.5 19 17 19s17-7 17-19"/>
-                    <path d="M25 47h14"/>
-                </svg>
-            </div>
-
-            <!-- 4. Lotus Çiçeği (Lotus Flower) -->
-            <div class="physio-icon-item" title="Lotus Çiçeği">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M32 15c-5 9-5 22 0 31c5-9 5-22 0-31z"/>
-                    <path d="M32 46c-9-3-17-12-16-22c6 2 13 10 16 22z"/>
-                    <path d="M32 46c9-3 17-12 16-22c-6 2-13 10-16 22z"/>
-                    <path d="M23 44c-7 1-13-4-14-10c5 0 11 4 14 10z"/>
-                    <path d="M41 44c7 1 13-4 14-10c-5 0-11 4-14 10z"/>
-                </svg>
-            </div>
-
-            <!-- 5. El Yayı (Hand Gripper) -->
-            <div class="physio-icon-item" title="El Yayı">
-                <svg class="physio-icon-svg" viewBox="0 0 64 64" fill="none" stroke="#000000" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M26 23a6.5 6.5 0 1 1 12 0"/>
-                    <path d="M27 23L19 49"/>
-                    <path d="M37 23L45 49"/>
-                    <line x1="23.5" y1="33" x2="19" y2="48" stroke-width="8" stroke-linecap="round"/>
-                    <line x1="40.5" y1="33" x2="45" y2="48" stroke-width="8" stroke-linecap="round"/>
-                </svg>
+            <div class="bar-system-discover-action">
+                <a href="<?= url('/metod') ?>" class="bar-system-discover-btn">
+                    <span>BAR SYSTEM'İ KEŞFET</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
@@ -192,7 +156,7 @@ declare(strict_types=1);
                     <defs>
                         <!-- İnce Bordo Parıltı Gölgesi -->
                         <filter id="organicGlow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#391214" flood-opacity="0.22"/>
+                            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#4a1421" flood-opacity="0.22"/>
                         </filter>
                         <filter id="nodeHalo" x="-50%" y="-50%" width="200%" height="200%">
                             <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
@@ -211,15 +175,15 @@ declare(strict_types=1);
                     <!-- 3. Başlangıç Dairesi (Konsantrik Çift Halka) -->
                     <g class="organic-node start-node is-active" id="organicNodeStart" data-threshold="0.05">
                         <circle cx="80" cy="130" r="16" fill="none" stroke="#d5d5d5" stroke-width="2"/>
-                        <circle cx="80" cy="130" r="9" fill="#ffffff" stroke="#391214" stroke-width="2"/>
-                        <circle cx="80" cy="130" r="4" fill="#391214"/>
+                        <circle cx="80" cy="130" r="9" fill="#ffffff" stroke="#4a1421" stroke-width="2"/>
+                        <circle cx="80" cy="130" r="4" fill="#4a1421"/>
                         <text x="80" y="96" text-anchor="middle" class="organic-node-kicker">BAŞLANGIÇ</text>
                     </g>
 
                     <!-- 4. Adım 01 (Kayıt & Beden Analizi) -->
                     <g class="organic-node" id="organicNode1" data-threshold="0.18">
-                        <circle class="node-halo" cx="180" cy="230" r="14" fill="none" stroke="#391214" stroke-width="1.5"/>
-                        <circle class="node-dot" cx="180" cy="230" r="6" fill="#ffffff" stroke="#391214" stroke-width="3" filter="url(#nodeHalo)"/>
+                        <circle class="node-halo" cx="180" cy="230" r="14" fill="none" stroke="#4a1421" stroke-width="1.5"/>
+                        <circle class="node-dot" cx="180" cy="230" r="6" fill="#ffffff" stroke="#4a1421" stroke-width="3" filter="url(#nodeHalo)"/>
                         <text x="180" y="276" text-anchor="middle" class="organic-node-num">01</text>
                         <text x="180" y="300" text-anchor="middle" class="organic-node-title">Kayıt &amp; Beden Analizi</text>
                         <text x="180" y="320" text-anchor="middle" class="organic-node-desc">Profil &amp; Postür Haritası</text>
@@ -227,8 +191,8 @@ declare(strict_types=1);
 
                     <!-- 5. Adım 02 (Canlı Seanslar & BAR System) -->
                     <g class="organic-node is-highlight" id="organicNode2" data-threshold="0.46">
-                        <circle class="node-halo" cx="420" cy="320" r="16" fill="none" stroke="#391214" stroke-width="1.5"/>
-                        <circle class="node-dot" cx="420" cy="320" r="7" fill="#391214" stroke="#ffffff" stroke-width="2.5" filter="url(#nodeHalo)"/>
+                        <circle class="node-halo" cx="420" cy="320" r="16" fill="none" stroke="#4a1421" stroke-width="1.5"/>
+                        <circle class="node-dot" cx="420" cy="320" r="7" fill="#4a1421" stroke="#ffffff" stroke-width="2.5" filter="url(#nodeHalo)"/>
                         <text x="455" y="354" text-anchor="start" class="organic-node-num">02</text>
                         <text x="455" y="378" text-anchor="start" class="organic-node-title">Canlı Seanslar &amp; BAR System</text>
                         <text x="455" y="398" text-anchor="start" class="organic-node-desc">Diyafram, Vagus &amp; Mobilite Akışları</text>
@@ -236,8 +200,8 @@ declare(strict_types=1);
 
                     <!-- 6. Adım 03 (Sürdürülebilir Longevity) -->
                     <g class="organic-node" id="organicNode3" data-threshold="0.72">
-                        <circle class="node-halo" cx="830" cy="200" r="14" fill="none" stroke="#391214" stroke-width="1.5"/>
-                        <circle class="node-dot" cx="830" cy="200" r="6" fill="#ffffff" stroke="#391214" stroke-width="3" filter="url(#nodeHalo)"/>
+                        <circle class="node-halo" cx="830" cy="200" r="14" fill="none" stroke="#4a1421" stroke-width="1.5"/>
+                        <circle class="node-dot" cx="830" cy="200" r="6" fill="#ffffff" stroke="#4a1421" stroke-width="3" filter="url(#nodeHalo)"/>
                         <text x="830" y="136" text-anchor="middle" class="organic-node-num">03</text>
                         <text x="830" y="160" text-anchor="middle" class="organic-node-title">Sürdürülebilir Longevity</text>
                         <text x="830" y="180" text-anchor="middle" class="organic-node-desc">Kalıcı İyi Yaşam &amp; Hücresel Canlılık</text>
@@ -246,19 +210,19 @@ declare(strict_types=1);
                     <!-- 7. Bitiş / Hedef Dairesi -->
                     <g class="organic-node end-node" id="organicNodeEnd" data-threshold="0.88">
                         <circle cx="1030" cy="260" r="15" fill="none" stroke="#d5d5d5" stroke-width="2"/>
-                        <circle cx="1030" cy="260" r="8" fill="#ffffff" stroke="#391214" stroke-width="2"/>
-                        <circle cx="1030" cy="260" r="4" fill="#391214"/>
+                        <circle cx="1030" cy="260" r="8" fill="#ffffff" stroke="#4a1421" stroke-width="2"/>
+                        <circle cx="1030" cy="260" r="4" fill="#4a1421"/>
                         <text x="1030" y="232" text-anchor="middle" class="organic-node-kicker">DÖNÜŞÜM</text>
                     </g>
 
                     <!-- 8. Sağ Boşluktaki Programa Katıl Butonu (Rotanın Hedef Noktası) -->
                     <a href="<?= url('/programs') ?>" class="organic-svg-cta-link" id="flowCtaLink" target="_self" aria-label="Programa Katıl">
                         <g class="flow-cta-group" id="flowCtaGroup">
-                            <line x1="1045" y1="260" x2="1078" y2="260" stroke="#391214" stroke-width="2" stroke-dasharray="4,3" class="cta-connector-line"/>
-                            <polygon points="1077,256 1084,260 1077,264" fill="#391214" class="cta-connector-arrow"/>
+                            <line x1="1045" y1="260" x2="1078" y2="260" stroke="#4a1421" stroke-width="2" stroke-dasharray="4,3" class="cta-connector-line"/>
+                            <polygon points="1077,256 1084,260 1077,264" fill="#4a1421" class="cta-connector-arrow"/>
 
                             <text class="flow-cta-kicker" x="1205" y="218" text-anchor="middle">HAZIR MISIN?</text>
-                            <rect class="flow-cta-btn-bg" x="1085" y="234" width="240" height="52" rx="26" fill="#391214" filter="url(#organicGlow)"/>
+                            <rect class="flow-cta-btn-bg" x="1085" y="234" width="240" height="52" rx="26" fill="#4a1421" filter="url(#organicGlow)"/>
                             <text class="flow-cta-btn-text" x="1195" y="266" text-anchor="middle">PROGRAMA KATIL</text>
                             <path class="flow-cta-btn-arrow" d="M 1272 260 L 1284 260 M 1279 255 L 1284 260 L 1279 265" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                             <text class="flow-cta-sub" x="1205" y="308" text-anchor="middle">Tüm Programları İncele &rarr;</text>
@@ -351,21 +315,21 @@ declare(strict_types=1);
                     <div class="camp-specs-check-row">
                         <span class="camp-spec-check-item">
                             <svg class="spec-check-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#391214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#4a1421" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <span><strong>12</strong> Antrenman</span>
                         </span>
                         <span class="camp-spec-check-divider">•</span>
                         <span class="camp-spec-check-item">
                             <svg class="spec-check-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#391214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#4a1421" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <span><strong>28 Gün</strong> Program</span>
                         </span>
                         <span class="camp-spec-check-divider">•</span>
                         <span class="camp-spec-check-item">
                             <svg class="spec-check-icon" width="14" height="14" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#391214" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M4 10.5L8 14.5L16 6.5" stroke="#4a1421" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <span><strong>%100</strong> Ekipmansız</span>
                         </span>
@@ -404,53 +368,6 @@ declare(strict_types=1);
         </div>
     </section>
 </div>
-
-<!-- 7. Bölüm IV: ÜYELİK NASIL İŞLER? (BİLGİLENDİRME BÖLÜMÜ) -->
-<section class="how-membership-works-section" style="margin: 4rem 0 1rem;">
-    <div class="container">
-        <div class="section-title-wrap text-center">
-            <span class="section-kicker">ADIM ADIM BİLGİLENDİRME</span>
-            <h2 class="section-heading-lg" style="margin-bottom: 0.6rem;">Üyelik Nasıl İşler?</h2>
-            <p class="section-lead-muted" style="max-width: 640px; margin: 0 auto;">
-                Fizyobar platformunda eğitime katılmak, antrenmanları takip etmek ve bedeninizi dönüştürmek son derece kolaydır:
-            </p>
-        </div>
-
-        <div class="membership-steps-grid">
-            <div class="membership-step-card">
-                <span class="step-badge">ADIM 01</span>
-                <h3 class="step-title">Paketini &amp; Planını Seç</h3>
-                <p class="step-desc">
-                    İhtiyacınıza uygun programı seçin. Aylık (seçilen paket + Kitchen) ya da Yıllık (tüm paketler + beslenme rehberleri) planı belirleyin.
-                </p>
-            </div>
-
-            <div class="membership-step-card">
-                <span class="step-badge">ADIM 02</span>
-                <h3 class="step-title">Kişisel Hareket Alanına Gir</h3>
-                <p class="step-desc">
-                    Kayıt sonrası öğrenci paneliniz anında açılır. 28 günlük antrenman takviminize, video kütüphanenize ve hediye meditasyon paketinize erişin.
-                </p>
-            </div>
-
-            <div class="membership-step-card">
-                <span class="step-badge">ADIM 03</span>
-                <h3 class="step-title">12 Antrenman &amp; Kitchen</h3>
-                <p class="step-desc">
-                    Haftada 3 gün, %100 ekipmansız seansları evinizde uygulayın. Fizyobar Kitchen'daki tariflerle glisemik dengenizi koruyun.
-                </p>
-            </div>
-
-            <div class="membership-step-card">
-                <span class="step-badge">ADIM 04</span>
-                <h3 class="step-title">Kalıcı Güç &amp; Longevity</h3>
-                <p class="step-desc">
-                    Rozetlerinizi kazanın, omurga mobilitesi ve kas gücündeki ilerlemeyi hissedin, sürdürülebilir sağlıklı yaşam disiplini kazanın.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- 8. Bölüm V: GERÇEK DÖNÜŞÜMLER (2 KATEGORİ: GÜÇ DÖNÜŞÜMLERİ / İNCELME DÖNÜŞÜMLERİ) -->
 <section class="transformation-horizontal-section" id="donusum">
@@ -667,7 +584,7 @@ declare(strict_types=1);
         <div class="mentor-frame-grid">
             <!-- Sol: İkonik Portre & Bilgi -->
             <div class="mentor-portrait-col">
-                <div class="mentor-avatar-box" style="overflow: hidden; border: 2px solid #391214;">
+                <div class="mentor-avatar-box" style="overflow: hidden; border: 2px solid #4a1421;">
                     <img src="<?= asset('assets/images/betina-user-photo1.jpg') ?>" alt="Betina Tansuğ" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <div class="mentor-meta">
@@ -688,15 +605,15 @@ declare(strict_types=1);
 
                 <div class="mentor-credentials-list">
                     <div class="cred-item">
-                        <span class="cred-check" style="color: #391214; font-weight: bold;">✓</span>
+                        <span class="cred-check" style="color: #4a1421; font-weight: bold;">✓</span>
                         <span>Fizyoterapi ve Biyomekanik Bilimsel Temeli</span>
                     </div>
                     <div class="cred-item">
-                        <span class="cred-check" style="color: #391214; font-weight: bold;">✓</span>
+                        <span class="cred-check" style="color: #4a1421; font-weight: bold;">✓</span>
                         <span>BAR System Metodolojisi &amp; Longevity Eğitmeni</span>
                     </div>
                     <div class="cred-item">
-                        <span class="cred-check" style="color: #391214; font-weight: bold;">✓</span>
+                        <span class="cred-check" style="color: #4a1421; font-weight: bold;">✓</span>
                         <span>17+ Dönem Online Kamp &amp; Yüzlerce Kanıtlanmış Dönüşüm</span>
                     </div>
                 </div>

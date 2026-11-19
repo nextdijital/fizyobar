@@ -159,7 +159,7 @@ if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_s
 </section>
 
 <!-- BAR SYSTEM METODOLOJİSİ & BİLİMSEL DERİNLİK (BAŞLIKLAR BEYAZ & DÜZELTİLMİŞ EDİTORYAL METİNLER) -->
-<section class="betina-barsystem-section" id="bar-system" style="background: #111111; color: #ffffff; padding: clamp(4.5rem, 6vw, 6.5rem) 0; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+<section class="betina-barsystem-section" id="bar-system" style="background: #373536; color: #ffffff; padding: clamp(4.5rem, 6vw, 6.5rem) 0; border-top: 1px solid rgba(255, 255, 255, 0.08);">
     <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 1.5rem;">
         
         <!-- Üst Başlık & Kicker (Saf Beyaz Renk) -->
@@ -179,7 +179,7 @@ if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_s
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3.5rem;">
             
             <!-- Blok 1: Body (Biyomekanik Temel) -->
-            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="background: #252324; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);">
                 <div>
                     <span style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #ffffff; opacity: 0.9; display: block; margin-bottom: 0.75rem;">
                         01 / BODY &bull; KLİNİK ANATOMİ
@@ -187,17 +187,17 @@ if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_s
                     <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem; line-height: 1.3; letter-spacing: 0.02em;">
                         Biyomekanik Denge &amp; Omurga Dekompresyonu
                     </h3>
-                    <p style="font-size: 0.94rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.82); margin: 0 0 1rem;">
+                    <p style="font-size: 0.94rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.85); margin: 0 0 1rem;">
                         Fizyoterapist kimliğimle geliştirdiğim bu aşamada, beden anatomik ve biyomekanik prensipler doğrultusunda ele alınır. Eklem mobilitesi korunarak omurga anatomik ekseninde yeniden hizalanır ve günlük yaşamın yarattığı baskı ve kompresyon hafifletilir.
                     </p>
                 </div>
-                <p style="font-size: 0.88rem; font-weight: 400; line-height: 1.7; color: rgba(255, 255, 255, 0.65); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                <p style="font-size: 0.88rem; font-weight: 400; line-height: 1.7; color: rgba(255, 255, 255, 0.75); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
                     Sakatlık riskini sıfırlayan kontrollü akışlar sayesinde hareketler, bedeni yıpratmadan derin bir stabilite ve omurga gücü kazandırır.
                 </p>
             </div>
 
             <!-- Blok 2: Adapt (Sinir Sistemi & Vagus) -->
-            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="background: #252324; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);">
                 <div>
                     <span style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #ffffff; opacity: 0.9; display: block; margin-bottom: 0.75rem;">
                         02 / ADAPT &bull; SİNİR SİSTEMİ ONARIMI
@@ -205,17 +205,17 @@ if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_s
                     <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem; line-height: 1.3; letter-spacing: 0.02em;">
                         Nöro-Biyolojik Regülasyon &amp; Diyafram
                     </h3>
-                    <p style="font-size: 0.94rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.82); margin: 0 0 1rem;">
+                    <p style="font-size: 0.94rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.85); margin: 0 0 1rem;">
                         Fiziksel güç kadar sinir sisteminin regülasyonu da esastır. Diyafram nefesi ve vagus siniri uyarımı aracılığıyla, bedenin sürekli alarmda olan sempatik stres hali yatıştırılır ve beden onarıcı parasempatik moda geçirilir.
                     </p>
                 </div>
-                <p style="font-size: 0.88rem; font-weight: 400; line-height: 1.7; color: rgba(255, 255, 255, 0.65); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                <p style="font-size: 0.88rem; font-weight: 400; line-height: 1.7; color: rgba(255, 255, 255, 0.75); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
                     Kortizol dengelenir, uyku kalitesi artar ve hücresel düzeyde derin bir yenilenme sağlanır.
                 </p>
             </div>
 
             <!-- Blok 3: Reframe (Kalıcı Yaşam Disiplini) -->
-            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="background: #252324; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 16px; padding: 2.2rem 2rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);">
                 <div>
                     <span style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #ffffff; opacity: 0.9; display: block; margin-bottom: 0.75rem;">
                         03 / REFRAME &bull; YAŞAM DİSİPLİNİ
@@ -223,11 +223,11 @@ if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_s
                     <h3 style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; color: #ffffff; text-transform: uppercase; margin: 0 0 1rem; line-height: 1.3; letter-spacing: 0.02em;">
                         Sürdürülebilir Longevity &amp; Hücresel Canlılık
                     </h3>
-                    <p style="font-size: 0.94rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.82); margin: 0 0 1rem;">
+                    <p style="font-size: 0.94rem; font-weight: 300; line-height: 1.75; color: rgba(255, 255, 255, 0.85); margin: 0 0 1rem;">
                         Hareketi dönemsel bir heves veya zorlayıcı bir ceza olmaktan çıkarıp, uzun ve ağrısız bir ömür için kalıcı bir yaşam disiplinine dönüştürüyoruz. Mitokondriyal kapasite ve fonksiyonel esneklik desteklenir.
                     </p>
                 </div>
-                <p style="font-size: 0.88rem; font-weight: 400; line-height: 1.7; color: rgba(255, 255, 255, 0.65); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                <p style="font-size: 0.88rem; font-weight: 400; line-height: 1.7; color: rgba(255, 255, 255, 0.75); margin: 0; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
                     Yaşsız bir beden ve berrak bir zihin için sürdürülebilir, kanıta dayalı bilimsel bir yaşam pratiği inşa edilir.
                 </p>
             </div>
@@ -235,7 +235,7 @@ if (!empty($actionBtnLink) && !str_starts_with($actionBtnLink, 'http') && !str_s
         </div>
 
         <!-- Alt Manifesto & Programlara Yönlendirme -->
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 20px; padding: 2.5rem clamp(1.5rem, 4vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem;">
+        <div style="background: #252324; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px; padding: 2.5rem clamp(1.5rem, 4vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);">
             <div style="max-width: 680px;">
                 <h4 style="font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: #ffffff; margin: 0 0 0.6rem; text-transform: uppercase;">
                     "BEDENİNLE YENİDEN BAĞ KURMAYA HAZIR MISIN?"

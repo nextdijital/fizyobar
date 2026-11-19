@@ -18,8 +18,8 @@ class EventController extends Controller
                 'location' => 'ADANA',
                 'description' => 'Enerjisi yüksek topluluk dersleri, modern ritimler ve fonksiyonel akışların buluştuğu hafta sonu buluşmaları.',
                 'image' => asset('assets/images/betina-outdoor-stretch.jpg'),
-                'color' => '#ffffff',
-                'text_color' => '#111111',
+                'color' => '#4a1421',
+                'text_color' => '#ffffff',
             ],
             [
                 'id' => 2,
@@ -40,8 +40,8 @@ class EventController extends Controller
                 'location' => 'MERKEZ PARK',
                 'description' => 'Şehirle iç içe, yüzlerce kişinin aynı nefes ve ritimde buluştuğu ilham verici devasa açık hava pratikleri.',
                 'image' => asset('assets/images/hero-poster.jpg'),
-                'color' => '#ffffff',
-                'text_color' => '#111111',
+                'color' => '#4a1421',
+                'text_color' => '#ffffff',
             ],
             [
                 'id' => 4,
@@ -62,8 +62,8 @@ class EventController extends Controller
                 'location' => 'BACKYARD',
                 'description' => 'Deniz havasında, açık hava ritminde nefes açıcı ve canlandırıcı fonksiyonel outdoor akışlar.',
                 'image' => asset('assets/images/betina-user-photo2.jpg'),
-                'color' => '#ffffff',
-                'text_color' => '#111111',
+                'color' => '#4a1421',
+                'text_color' => '#ffffff',
             ],
             [
                 'id' => 6,
@@ -84,8 +84,8 @@ class EventController extends Controller
                 'location' => 'MÜZE BAHÇESİ',
                 'description' => 'Tarihin ve mitolojinin sessiz tanıklığında, bin yıllık eserler arasında zihni ve bedeni köklendiren özel seans.',
                 'image' => asset('assets/images/betina-outdoor-stretch.jpg'),
-                'color' => '#ffffff',
-                'text_color' => '#111111',
+                'color' => '#4a1421',
+                'text_color' => '#ffffff',
             ]
         ];
 

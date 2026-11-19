@@ -13,6 +13,8 @@ declare(strict_types=1);
  */
 ?>
 
+<link rel="stylesheet" href="<?= asset('assets/css/student-portal.css') ?>?v=<?= time() ?>">
+
 <!-- ==============================================================================
      FİZYOBAR WORKOUT PLAYER (KİŞİSEL ANTRENMAN VE VİDEO ODASI)
      ============================================================================== -->

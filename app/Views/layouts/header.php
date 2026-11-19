@@ -29,6 +29,28 @@
     <!-- CSS Stilleri (Cache-busting ile) -->
     <link rel="stylesheet" href="<?= asset('assets/css/style.css') ?>">
     <link rel="stylesheet" href="<?= asset('assets/css/cookie-consent.css') ?>">
+    <?php
+    $cleanUri = trim($currentUri ?? '', '/');
+    $isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
+    $isKitchenPage = (str_contains($cleanUri, 'recipes') || str_contains($cleanUri, 'tarifler') || str_contains($cleanUri, 'bar-kitchen') || str_contains($cleanUri, 'kitchen'));
+    $isDarkPage = ($isDarkPage ?? false)
+        || str_contains($cleanUri, 'articles')
+        || str_contains($cleanUri, 'makaleler');
+    $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($cleanUri, 'find-program');
+    $isPortalPage = str_contains($cleanUri, 'dashboard')
+        || str_contains($cleanUri, 'movement-space')
+        || str_contains($cleanUri, 'lesson');
+    $isGrayPage = !$isPortalPage && (
+        str_contains($cleanUri, 'corporate')
+        || str_contains($cleanUri, 'betina-tansug')
+        || str_contains($cleanUri, 'about')
+        || str_contains($cleanUri, 'hakkimizda')
+        || str_contains($cleanUri, 'detox')
+    );
+    ?>
+    <?php if ($isPortalPage): ?>
+        <link rel="stylesheet" href="<?= asset('assets/css/student-portal.css') ?>">
+    <?php endif; ?>
 
     <!-- Global Hidden Scrollbars (Scrollbarlar Her Yerde Gizli, Akıcı Kaydırma Aktif) -->
     <style>
@@ -45,14 +67,6 @@
     </style>
 </head>
 <?php
-$cleanUri = trim($currentUri ?? '', '/');
-$isHomePage = in_array($cleanUri, ['', 'tr', 'en', 'fizyobar', 'fizyobar/tr', 'fizyobar/en'], true);
-$isKitchenPage = (str_contains($cleanUri, 'recipes') || str_contains($cleanUri, 'tarifler') || str_contains($cleanUri, 'bar-kitchen') || str_contains($cleanUri, 'kitchen'));
-$isDarkPage = ($isDarkPage ?? false)
-    || str_contains($cleanUri, 'articles')
-    || str_contains($cleanUri, 'makaleler');
-$isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($cleanUri, 'find-program');
-
 // Dinamik Header & Nav Verileri (xPanel Yönetiminden)
 $headerNavData = function_exists('page_data') ? page_data('header_nav') : [];
 $topAnnouncementText = !empty($headerNavData['top_announcement_text']) ? $headerNavData['top_announcement_text'] : 'WELLNESS EXPERIENCES BY BETINA TANSUĞ • 4 HAFTALIK ONLINE DETOX & YOGA KAMPI YENİ DÖNEMİ BAŞLIYOR';
@@ -71,7 +85,7 @@ if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_
     $navBtnLink = url($navBtnLink);
 }
 ?>
-<body class="<?= $isFinderPage ? 'body-finder-pure-white' : ($isKitchenPage ? 'body-kitchen-dark' : '') ?>">
+<body class="<?= $isFinderPage ? 'body-finder-pure-white' : ($isKitchenPage ? 'body-kitchen-dark' : ($isGrayPage ? 'body-gray-page' : '')) ?><?= $isPortalPage ? ' body-portal-page' : '' ?>">
 <?php if ($isFinderPage): ?>
     <!-- PROGRAMINI BUL: SADECE BEYAZ SAYFA, SOLDA GERİ DÖN, ORTADA FİZYOBAR LOGOSU -->
     <header class="finder-clean-header" id="finderHeader">
@@ -94,8 +108,35 @@ if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_
             <div class="finder-header-right-ghost" aria-hidden="true"></div>
         </div>
     </header>
+<?php elseif ($isPortalPage): ?>
+    <!-- ÖĞRENCİ KİŞİSEL ALANI: SADE, DİKKAT DAĞITMAYAN, MOTİVE EDİCİ HEADER -->
+    <header class="portal-clean-header" id="portalCleanHeader">
+        <div class="portal-clean-header-inner">
+            <div class="portal-header-left">
+                <a href="<?= url('/') ?>" class="portal-back-to-site-btn" aria-label="Ana Sayfaya Dön">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>ANA SAYFA</span>
+                </a>
+            </div>
+
+            <div class="portal-header-center">
+                <a href="<?= url('/dashboard') ?>" class="brand-logo-link brand-logo-type portal-site-logo-link" aria-label="FİZYOBAR">
+                    <span class="logo-text-main">FİZYOBAR</span>
+                    <span class="logo-text-sub">BODY • ADAPT • REFRAME</span>
+                </a>
+            </div>
+
+            <div class="portal-header-right">
+                <span class="portal-header-user-badge"><?= htmlspecialchars(auth_user()['full_name'] ?? 'Öğrenci', ENT_QUOTES, 'UTF-8') ?></span>
+                <a href="<?= url('/logout') ?>" class="portal-header-exit-btn">ÇIKIŞ YAP</a>
+            </div>
+        </div>
+    </header>
 <?php else: ?>
-    <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #391214 - Kenarlara Yaslı) -->
+    <!-- Üst Duyuru Bandı (Announcement Top Bar - Dark Sienna #4a1421 - Kenarlara Yaslı) -->
     <div class="top-announcement-bar">
         <div class="announcement-inner">
             <span><?= e($topAnnouncementText) ?></span>
@@ -106,18 +147,20 @@ if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_
     </div>
 
     <!-- Gezinme Çubuğu (Editorial Mimarisi: Sol Menü • Orta Logo • Sağ Aksiyon) -->
-    <header class="site-header <?= $isKitchenPage ? 'header-kitchen-dark' : ($isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : '')) ?>" id="siteHeader">
+    <header class="site-header <?= $isKitchenPage ? 'header-kitchen-dark' : ($isHomePage ? 'header-hero-transparent' : ($isDarkPage ? 'header-dark-theme' : ($isGrayPage ? 'header-gray-theme' : ''))) ?>" id="siteHeader">
         <div class="header-container">
             <!-- 1. Sol Menü (Betella Mimarisi: STUDIO • BAR KITCHEN • PROGRAMLAR • ETKİNLİKLER • KURUMSAL) -->
             <nav class="header-nav-left" id="navMenu">
                 <ul class="nav-list">
                     <!-- STUDIO Dropdown: Tıklanınca Ana Sayfaya Gider -->
                     <li class="nav-item-dropdown">
-                        <a href="<?= url('/') ?>" class="nav-link <?= ($isHomePage || str_contains($currentUri, '/makaleler') || str_contains($currentUri, '/articles') || str_contains($currentUri, '/blog')) ? 'active' : '' ?>">
+                        <a href="<?= url('/') ?>" class="nav-link <?= ($isHomePage || str_contains($currentUri, '/makaleler') || str_contains($currentUri, '/articles') || str_contains($currentUri, '/blog') || str_contains($currentUri, '/beslenme-rehberi') || str_contains($currentUri, '/yasam-rehberi')) ? 'active' : '' ?>">
                             STUDIO <span class="nav-chevron">▸</span>
                         </a>
                         <div class="dropdown-menu">
                             <a href="<?= url('/') ?>" class="dropdown-link">Studio Ana Sayfa <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/beslenme-rehberi') ?>" class="dropdown-link">Beslenme Rehberi <span class="dropdown-chevron">▸</span></a>
+                            <a href="<?= url('/yasam-rehberi') ?>" class="dropdown-link">Yaşam Rehberi <span class="dropdown-chevron">▸</span></a>
                             <a href="<?= url('/makaleler') ?>" class="dropdown-link">Makaleler <span class="dropdown-chevron">▸</span></a>
                             <a href="<?= url('/blog') ?>" class="dropdown-link">Blog <span class="dropdown-chevron">▸</span></a>
                         </div>

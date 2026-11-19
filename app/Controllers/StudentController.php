@@ -38,15 +38,27 @@ class StudentController extends Controller
         }
 
         if (empty($course)) {
-            $latestEnrollment = Database::fetch(
+            // Öncelikli olarak hediye olmayan ana programı (Detoks Kampı vb.) bul
+            $mainEnrollment = Database::fetch(
                 "SELECT e.course_id 
                  FROM enrollments e
-                 WHERE e.user_id = ? AND e.payment_status = 'approved'
+                 WHERE e.user_id = ? AND e.payment_status = 'approved' AND (e.is_gift = 0 OR e.is_gift IS NULL)
                  ORDER BY e.id DESC LIMIT 1",
                 [$userId]
             );
-            if ($latestEnrollment) {
-                $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [(int)$latestEnrollment['course_id']]);
+            if ($mainEnrollment) {
+                $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [(int)$mainEnrollment['course_id']]);
+            } else {
+                $latestEnrollment = Database::fetch(
+                    "SELECT e.course_id 
+                     FROM enrollments e
+                     WHERE e.user_id = ? AND e.payment_status = 'approved'
+                     ORDER BY e.id DESC LIMIT 1",
+                    [$userId]
+                );
+                if ($latestEnrollment) {
+                    $course = Database::fetch("SELECT * FROM courses WHERE id = ?", [(int)$latestEnrollment['course_id']]);
+                }
             }
         }
 
@@ -162,7 +174,8 @@ class StudentController extends Controller
 
             $prevCompleted = ($i === 0) || !empty($lessons[$i - 1]['is_completed']);
             $calendarUnlocked = ($dayNum <= $currentProgramDay);
-            $lesson['is_locked'] = !$unlockAll && !$calendarUnlocked && !$prevCompleted;
+            // Gün gün açılma sistemi: Bugün ve geçmiş günler açık, gelecek günler kilitli
+            $lesson['is_locked'] = ($dayNum > $currentProgramDay) && empty($lesson['is_completed']);
 
             $lessonsByDay[$dayNum] = $lesson;
         }
@@ -192,6 +205,7 @@ class StudentController extends Controller
                 $workoutData = $hasWorkout ? $lessonsByDay[$programDay] : null;
 
                 $dayCalDate = date('d M', strtotime("+".($programDay - 1)." days", $startTime));
+                $isLockedDay = ($programDay > $currentProgramDay) && (!$workoutData || empty($workoutData['is_completed']));
 
                 $weekDays[] = [
                     'day_number' => $programDay,
@@ -203,7 +217,7 @@ class StudentController extends Controller
                     'is_current_day' => ($programDay === $currentProgramDay),
                     'is_past' => ($programDay < $currentProgramDay),
                     'is_completed' => ($workoutData && !empty($workoutData['is_completed'])),
-                    'is_locked' => ($workoutData && !empty($workoutData['is_locked'])),
+                    'is_locked' => $isLockedDay,
                     'is_rest' => !$hasWorkout
                 ];
             }
@@ -230,9 +244,9 @@ class StudentController extends Controller
         $nutritionItems = Database::query(
             "SELECT * FROM movement_nutrition ORDER BY sort_order ASC"
         );
-        $recipes = array_filter($nutritionItems, fn($n) => $n['category'] === 'recipe');
-        $tips = array_filter($nutritionItems, fn($n) => $n['category'] === 'tip');
-        $routines = array_filter($nutritionItems, fn($n) => $n['category'] === 'routine');
+        $recipes = array_values(array_filter($nutritionItems, fn($n) => $n['category'] === 'recipe'));
+        $tips = array_values(array_filter($nutritionItems, fn($n) => $n['category'] === 'tip'));
+        $routines = array_values(array_filter($nutritionItems, fn($n) => $n['category'] === 'routine'));
 
         // 7. Rozetler & İstatistikler
         $badges = Database::query(
@@ -375,7 +389,8 @@ class StudentController extends Controller
 
             $prevCompleted = ($i === 0) || !empty($lessons[$i - 1]['is_completed']);
             $calendarUnlocked = ($dayNum <= $currentProgramDay);
-            $les['is_locked'] = !$unlockAll && !$calendarUnlocked && !$prevCompleted;
+            // Gün gün açılma sistemi
+            $les['is_locked'] = ($dayNum > $currentProgramDay) && empty($les['is_completed']);
 
             if ($les['id'] === $lessonId) {
                 $currentLesson = $les;
@@ -396,9 +411,9 @@ class StudentController extends Controller
             $nextLesson = $lessons[$matchedIdx + 1];
         }
 
-        // Kilit kontrolü: Satın alan / onaylı öğrenciler kilitlenmez
+        // Kilit kontrolü: Gelecek günlerin seansları kilitlidir
         if (!empty($currentLesson['is_locked'])) {
-            Session::setFlash('profile_error', 'Bu antrenmana erişebilmek için lütfen programa kayıt olunuz.');
+            Session::setFlash('profile_error', 'Bu antrenman ' . (int)$currentLesson['day_number'] . '. günde açılacaktır. Takviminiz gün gün ilerlemektedir.');
             $this->redirect(url('/movement-space'));
         }
 
