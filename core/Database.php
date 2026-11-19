@@ -51,6 +51,22 @@ class Database
             self::$instance = new PDO($dsn, $username, $password, $options);
             return self::$instance;
         } catch (PDOException $e) {
+            // Canlı sunucu alternatif PROD_DB_* yapılandırma kontrolü
+            $prodHost = Env::get('PROD_DB_HOST');
+            $prodDb = Env::get('PROD_DB_DATABASE');
+            $prodUser = Env::get('PROD_DB_USERNAME');
+            $prodPass = Env::get('PROD_DB_PASSWORD');
+
+            if ($prodHost && $prodDb && $prodUser) {
+                try {
+                    $prodDsn = "mysql:host={$prodHost};port={$port};dbname={$prodDb};charset={$charset}";
+                    self::$instance = new PDO($prodDsn, (string)$prodUser, (string)$prodPass, $options);
+                    return self::$instance;
+                } catch (PDOException $pe) {
+                    // fall through to primary error
+                }
+            }
+
             self::$connectionFailed = true;
             self::$lastError = $e->getMessage();
             error_log('[Fizyobar DB Error] ' . $e->getMessage());

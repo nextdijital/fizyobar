@@ -41,7 +41,8 @@ declare(strict_types=1);
                                id="email" 
                                name="email" 
                                class="split-pill-input" 
-                               placeholder="E-posta adresinizi girin" 
+                               value="ogrenci@fizyobar.com"
+                               placeholder="ogrenci@fizyobar.com" 
                                required 
                                autocomplete="email">
                     </div>
@@ -57,7 +58,8 @@ declare(strict_types=1);
                                    id="password" 
                                    name="password" 
                                    class="split-pill-input split-input-password" 
-                                   placeholder="Şifrenizi girin" 
+                                   value="123456"
+                                   placeholder="123456" 
                                    required 
                                    autocomplete="current-password">
                             <button type="button" class="split-pwd-toggle" id="pwdToggleBtn" aria-label="Şifreyi Göster/Gizle" title="Şifreyi Göster">
@@ -71,7 +73,11 @@ declare(strict_types=1);
 
                     <!-- Giriş Butonu (Siyah Oval Buton) -->
                     <button type="submit" class="split-submit-btn">
-                        Giriş Yap
+                        Giriş Yap &rarr;
+                    </button>
+
+                    <button type="submit" name="quick_student" value="1" class="split-submit-btn" style="margin-top: 0.65rem; background: #f4f4f5; color: #18181b; border: 1px solid #d4d4d8;">
+                        ⚡ TEK TIKLA ÖĞRENCİ GİRİŞİ (ÖRNEK ÖĞRENCİ)
                     </button>
 
                     <!-- Alt Kayıt Ol Linki -->

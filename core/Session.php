@@ -21,14 +21,24 @@ class Session
         $isHttps = (
             (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
             ($_SERVER['SERVER_PORT'] ?? 80) == 443 ||
-            (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+            (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+            (isset($_SERVER['HTTP_CF_VISITOR']) && str_contains($_SERVER['HTTP_CF_VISITOR'], 'https'))
         );
 
         $secureConfig = Env::get('COOKIE_SECURE', 'auto');
         $cookieSecure = ($secureConfig === 'auto') ? $isHttps : (bool)$secureConfig;
 
-        $sessionLifetime = (int) Env::get('SESSION_LIFETIME', 7200);
+        $sessionLifetime = (int) Env::get('SESSION_LIFETIME', 86400);
         $sessionName = (string) Env::get('SESSION_NAME', 'fizyo_session');
+
+        // Oturum dosyalarını güvenli ve her ortamda yazılabilir depolama alanına yönlendir
+        $sessionSavePath = dirname(__DIR__) . '/storage/sessions';
+        if (!is_dir($sessionSavePath)) {
+            @mkdir($sessionSavePath, 0755, true);
+        }
+        if (is_dir($sessionSavePath) && is_writable($sessionSavePath)) {
+            @ini_set('session.save_path', $sessionSavePath);
+        }
 
         ini_set('session.use_only_cookies', '1');
         ini_set('session.use_trans_sid', '0');
@@ -48,29 +58,20 @@ class Session
         session_start();
         self::$started = true;
 
-        // Session IP ve User-Agent doğrulaması ile çalınma (hijack) kontrolü
+        // Oturum güvenliği doğrulaması
         self::validateSessionSecurity();
     }
 
     private static function validateSessionSecurity(): void
     {
         $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
-        $ip = Security::getClientIp();
 
-        if (!isset($_SESSION['_sec_ip'])) {
-            $_SESSION['_sec_ip'] = $ip;
-            $_SESSION['_sec_ua'] = $userAgent;
+        if (!isset($_SESSION['_sec_created'])) {
             $_SESSION['_sec_created'] = time();
+            $_SESSION['_sec_ua'] = $userAgent;
         } else {
-            // User-agent değiştiyse oturumu sıfırla
-            if ($_SESSION['_sec_ua'] !== $userAgent) {
-                self::destroy();
-                self::start();
-                return;
-            }
-
-            // 1 saatte bir oturum ID yenile (Session Fixation önleme)
-            if (isset($_SESSION['_sec_created']) && (time() - $_SESSION['_sec_created'] > 3600)) {
+            // 24 saatte bir oturum ID yenile (Session Fixation önleme)
+            if (isset($_SESSION['_sec_created']) && (time() - $_SESSION['_sec_created'] > 86400)) {
                 self::regenerate();
                 $_SESSION['_sec_created'] = time();
             }

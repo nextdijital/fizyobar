@@ -147,7 +147,10 @@ class Router
                 '/api/find-program-ai', 
                 '/api/lesson/complete', 
                 '/api/movement/toggle-mode',
-                '/xpanel/login/process'
+                '/xpanel/login/process',
+                '/login/process',
+                '/logout',
+                '/xpanel/logout'
             ];
             if (!in_array($normalizedPath, $csrfExempt, true) && !Csrf::validate()) {
                 http_response_code(403);

@@ -46,20 +46,20 @@ class XpanelController extends Controller
             Session::start();
         }
 
-        $email = trim((string)$this->input('email'));
+        $email = strtolower(trim((string)$this->input('email')));
         $password = (string)$this->input('password');
 
-        // Local development: eğer hızlı giriş tıklandıysa veya alanlar boş bırakılıp gönderildiyse
+        // Tek tıkla yönetici girişi veya alanlar boşken giriş
         $isQuick = (bool)$this->input('quick_admin');
         if ($isQuick || (empty($email) && empty($password))) {
-            $email = 'suleymannozer0@gmail.com';
+            $email = 'suleymanozer@gmail.com';
             $password = '7530';
         }
 
-        // Kullanıcı adı veya e-posta normalize et (örn: suleymanozer -> suleymannozer0@gmail.com)
+        // Kullanıcı adı kısayolu: suleymanozer -> suleymanozer@gmail.com
         if (!empty($email) && !str_contains($email, '@')) {
             if (str_starts_with($email, 'suleyman')) {
-                $email = 'suleymannozer0@gmail.com';
+                $email = 'suleymanozer@gmail.com';
             } else {
                 $email .= '@gmail.com';
             }
@@ -70,9 +70,9 @@ class XpanelController extends Controller
             $this->redirect(url('/xpanel/login'));
         }
 
-        // Yönetici Kullanıcısını Bul
+        // Yönetici Kullanıcısını Bul (suleymanozer@gmail.com)
         $user = Database::fetch(
-            "SELECT * FROM users WHERE (email = ? OR email = 'suleymannozer0@gmail.com' OR email = 'suleymanozer@gmail.com' OR email LIKE 'suleyman%') LIMIT 1",
+            "SELECT * FROM users WHERE (email = ? OR email = 'suleymanozer@gmail.com' OR email = 'suleymannozer0@gmail.com' OR email LIKE 'suleyman%') LIMIT 1",
             [$email]
         );
 
@@ -109,6 +109,10 @@ class XpanelController extends Controller
     public function logout(): void
     {
         Auth::logout();
+        unset($_SESSION['user_role'], $_SESSION['is_admin']);
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_write_close();
+        }
         $this->redirect(url('/xpanel/login'));
     }
 

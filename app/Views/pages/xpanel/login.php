@@ -221,7 +221,7 @@
 
                 <div class="xpanel-form-group">
                     <label class="xpanel-label" for="admin_email">YÖNETİCİ E-POSTA ADRESİ</label>
-                    <input type="text" id="admin_email" name="email" class="xpanel-input" value="suleymannozer0@gmail.com" required autocomplete="email" placeholder="suleymannozer0@gmail.com">
+                    <input type="text" id="admin_email" name="email" class="xpanel-input" value="suleymanozer@gmail.com" required autocomplete="email" placeholder="suleymanozer@gmail.com">
                 </div>
 
                 <div class="xpanel-form-group">
@@ -236,10 +236,6 @@
                 <button type="submit" name="quick_admin" value="1" class="xpanel-btn-quick">
                     ⚡ TEK TIKLA YÖNETİCİ GİRİŞİ (SÜLEYMAN ÖZER)
                 </button>
-
-                <div class="xpanel-security-note">
-                    🔒 Bu alan yalnızca yetkili Fizyobar yöneticilerine tahsis edilmiştir. Tüm erişim denemeleri IP ve oturum bazlı kayıt altına alınır.
-                </div>
             </form>
         </div>
     </div>
