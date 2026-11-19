@@ -52,11 +52,33 @@ class AuthController extends Controller
             $this->redirect(url('/login'));
         }
 
+        // Veritabanı bağlantı kontrolü
+        if (!Database::isConnected()) {
+            Session::setFlash('login_error', 'Veritabanına bağlanılamadı: ' . (Database::getLastError() ?? 'Bilinmeyen hata') . ' Lütfen .env dosyasındaki DB bilgilerini kontrol ediniz.');
+            $this->redirect(url('/login'));
+        }
+
         $user = Database::fetch("SELECT * FROM users WHERE email = ? LIMIT 1", [$email]);
 
         // Eğer doğrudan bulunamadıysa student rolündeki ilk öğrenciyi al
         if (!$user && ($email === 'ogrenci@fizyobar.com' || str_starts_with($email, 'ogren'))) {
             $user = Database::fetch("SELECT * FROM users WHERE role = 'student' ORDER BY id ASC LIMIT 1");
+            // Veritabanında öğrenci yoksa otomatik oluştur
+            if (!$user && ($password === '123456' || $password === '7530')) {
+                Database::execute(
+                    "INSERT INTO users (full_name, email, phone, password_hash, role, status, created_at, updated_at)
+                     VALUES ('Örnek Öğrenci', 'ogrenci@fizyobar.com', '05321112233', ?, 'student', 'active', NOW(), NOW())",
+                    [password_hash('123456', PASSWORD_BCRYPT)]
+                );
+                $user = Database::fetch("SELECT * FROM users WHERE email = 'ogrenci@fizyobar.com' LIMIT 1");
+                if ($user) {
+                    Database::execute(
+                        "INSERT INTO enrollments (user_id, course_id, payment_method, payment_status, amount, approved_at, start_date, expires_at, created_at)
+                         VALUES (?, 1, 'card', 'approved', 0.00, NOW(), CURDATE(), DATE_ADD(NOW(), INTERVAL 90 DAY), NOW())",
+                        [$user['id']]
+                    );
+                }
+            }
         }
 
         // Şifre kontrolü: Veritabanındaki hash veya standart şifre doğrulaması

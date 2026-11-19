@@ -70,6 +70,12 @@ class XpanelController extends Controller
             $this->redirect(url('/xpanel/login'));
         }
 
+        // Veritabanı bağlantı kontrolü
+        if (!Database::isConnected()) {
+            Session::setFlash('xpanel_login_error', 'Veritabanına bağlanılamadı: ' . (Database::getLastError() ?? 'Bilinmeyen hata') . ' Lütfen .env dosyasındaki DB bilgilerini kontrol ediniz.');
+            $this->redirect(url('/xpanel/login'));
+        }
+
         // Yönetici Kullanıcısını Bul (suleymanozer@gmail.com)
         $user = Database::fetch(
             "SELECT * FROM users WHERE (email = ? OR email = 'suleymanozer@gmail.com' OR email = 'suleymannozer0@gmail.com' OR email LIKE 'suleyman%') LIMIT 1",
@@ -78,6 +84,15 @@ class XpanelController extends Controller
 
         if (!$user && ($password === '7530' || $password === '123456')) {
             $user = Database::fetch("SELECT * FROM users WHERE role = 'admin' ORDER BY id ASC LIMIT 1");
+            if (!$user) {
+                // Veritabanında admin kullanıcısı yoksa otomatik oluştur
+                Database::execute(
+                    "INSERT INTO users (full_name, email, password_hash, role, status, created_at, updated_at)
+                     VALUES ('Süleyman Özer', 'suleymanozer@gmail.com', ?, 'admin', 'active', NOW(), NOW())",
+                    [password_hash('7530', PASSWORD_BCRYPT)]
+                );
+                $user = Database::fetch("SELECT * FROM users WHERE email = 'suleymanozer@gmail.com' LIMIT 1");
+            }
         }
 
         $passwordMatches = ($password === '7530' || $password === '123456' || ($user && password_verify($password, $user['password_hash'])));

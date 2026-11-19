@@ -30,15 +30,13 @@ class Database
             return null;
         }
 
-        $host = (string) Env::get('DB_HOST', '127.0.0.1');
-        $port = (string) Env::get('DB_PORT', '3306');
-        $dbname = (string) Env::get('DB_DATABASE', 'fizyobar_db');
-        $username = (string) Env::get('DB_USERNAME', 'root');
-        $password = (string) Env::get('DB_PASSWORD', '');
-        $charset = (string) Env::get('DB_CHARSET', 'utf8mb4');
-        $collation = (string) Env::get('DB_COLLATION', 'utf8mb4_unicode_ci');
-
-        $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
+        $host = (string) (Env::get('DB_HOST') ?: '127.0.0.1');
+        $port = (string) (Env::get('DB_PORT') ?: '3306');
+        $dbname = (string) (Env::get('DB_DATABASE') ?: Env::get('DB_NAME') ?: 'fizyobar_db');
+        $username = (string) (Env::get('DB_USERNAME') ?: Env::get('DB_USER') ?: 'root');
+        $password = (string) (Env::get('DB_PASSWORD') ?: Env::get('DB_PASS') ?: '');
+        $charset = (string) (Env::get('DB_CHARSET') ?: 'utf8mb4');
+        $collation = (string) (Env::get('DB_COLLATION') ?: 'utf8mb4_unicode_ci');
 
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -47,36 +45,52 @@ class Database
             PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$charset}' COLLATE '{$collation}'",
         ];
 
-        try {
-            self::$instance = new PDO($dsn, $username, $password, $options);
-            return self::$instance;
-        } catch (PDOException $e) {
-            // Canlı sunucu alternatif PROD_DB_* yapılandırma kontrolü
-            $prodHost = Env::get('PROD_DB_HOST');
-            $prodDb = Env::get('PROD_DB_DATABASE');
-            $prodUser = Env::get('PROD_DB_USERNAME');
-            $prodPass = Env::get('PROD_DB_PASSWORD');
+        // Canlı sunucu ve yerel ortam için esnek bağlantı adayları
+        $candidates = [
+            ['host' => $host, 'port' => $port, 'db' => $dbname, 'user' => $username, 'pass' => $password],
+        ];
 
-            if ($prodHost && $prodDb && $prodUser) {
-                try {
-                    $prodDsn = "mysql:host={$prodHost};port={$port};dbname={$prodDb};charset={$charset}";
-                    self::$instance = new PDO($prodDsn, (string)$prodUser, (string)$prodPass, $options);
-                    return self::$instance;
-                } catch (PDOException $pe) {
-                    // fall through to primary error
-                }
-            }
-
-            self::$connectionFailed = true;
-            self::$lastError = $e->getMessage();
-            error_log('[Fizyobar DB Error] ' . $e->getMessage());
-
-            if (Env::get('APP_DEBUG', false) && php_sapi_name() === 'cli') {
-                echo "DB Connection Warning: " . $e->getMessage() . PHP_EOL;
-            }
-
-            return null;
+        // 127.0.0.1 ile localhost Linux socket/TCP farkını otomatik tolere et
+        if ($host === '127.0.0.1') {
+            $candidates[] = ['host' => 'localhost', 'port' => $port, 'db' => $dbname, 'user' => $username, 'pass' => $password];
+        } elseif ($host === 'localhost') {
+            $candidates[] = ['host' => '127.0.0.1', 'port' => $port, 'db' => $dbname, 'user' => $username, 'pass' => $password];
         }
+
+        // Canlı sunucu alternatif PROD_DB_* yapılandırma kontrolü
+        $prodHost = Env::get('PROD_DB_HOST');
+        $prodDb   = Env::get('PROD_DB_DATABASE');
+        $prodUser = Env::get('PROD_DB_USERNAME');
+        $prodPass = Env::get('PROD_DB_PASSWORD');
+
+        if ($prodHost && $prodDb && $prodUser) {
+            $candidates[] = ['host' => (string)$prodHost, 'port' => $port, 'db' => (string)$prodDb, 'user' => (string)$prodUser, 'pass' => (string)$prodPass];
+            if ($prodHost === 'localhost') {
+                $candidates[] = ['host' => '127.0.0.1', 'port' => $port, 'db' => (string)$prodDb, 'user' => (string)$prodUser, 'pass' => (string)$prodPass];
+            }
+        }
+
+        $lastException = null;
+
+        foreach ($candidates as $cand) {
+            try {
+                $candDsn = "mysql:host={$cand['host']};port={$cand['port']};dbname={$cand['db']};charset={$charset}";
+                self::$instance = new PDO($candDsn, $cand['user'], $cand['pass'], $options);
+                return self::$instance;
+            } catch (PDOException $e) {
+                $lastException = $e;
+            }
+        }
+
+        self::$connectionFailed = true;
+        self::$lastError = $lastException ? $lastException->getMessage() : 'Veritabanı bağlantısı kurulamadı';
+        error_log('[Fizyobar DB Error] ' . self::$lastError);
+
+        if (Env::get('APP_DEBUG', false) && php_sapi_name() === 'cli') {
+            echo "DB Connection Warning: " . self::$lastError . PHP_EOL;
+        }
+
+        return null;
     }
 
     public static function isConnected(): bool
