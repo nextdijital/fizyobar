@@ -3743,6 +3743,118 @@ button, input, textarea, select {
     transform: scale(1.1);
 }
 
+/* Video Lightbox Modal */
+.fizyobar-video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+}
+
+.fizyobar-video-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.video-modal-dialog {
+    position: relative;
+    z-index: 2;
+    width: 92%;
+    max-width: 900px;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 18px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    transform: translateY(24px) scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fizyobar-video-modal.is-open .video-modal-dialog {
+    transform: translateY(0) scale(1);
+}
+
+.video-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.6rem;
+    background: #1c1c1c;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.video-modal-kicker {
+    display: block;
+    font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #d4a373;
+    margin-bottom: 2px;
+}
+
+.video-modal-title {
+    font-family: var(--font-display, 'Barlow Condensed', sans-serif);
+    font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.15;
+}
+
+.video-modal-close {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    font-size: 1.7rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.video-modal-close:hover {
+    background: #ffffff;
+    color: #111111;
+    transform: scale(1.08);
+}
+
+.video-modal-player-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000000;
+}
+
+.video-modal-player-wrap video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    outline: none;
+}
+
 /* Kart Gövdesi */
 .plan-card-body {
     padding: 1.25rem 1.35rem 1.35rem;

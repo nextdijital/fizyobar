@@ -69,13 +69,13 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                 <div class="featured-badge-pill">EN ÇOK TERCİH EDİLEN</div>
 
                 <!-- Video Önizleme Alanı -->
-                <div class="plan-card-video-wrap">
+                <div class="plan-card-video-wrap" data-video-src="<?= asset('assets/videos/hero.mp4') ?>" data-video-title="4 HAFTALIK DETOX &amp; YOGA KAMPI" role="button" tabindex="0" title="Eğitim Tanıtım Videosunu Aç">
                     <video class="plan-preview-video" poster="<?= asset('assets/images/hero-poster.jpg') ?>" autoplay muted loop playsinline preload="metadata">
                         <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
                     </video>
                     <div class="plan-video-overlay">
                         <span class="plan-video-badge"><span class="video-pulse-dot"></span> EĞİTİM ÖNİZLEME</span>
-                        <button type="button" class="plan-video-play-toggle" aria-label="Önizlemeyi Oynat / Durdur">
+                        <button type="button" class="plan-video-play-toggle" aria-label="Eğitim Videosunu Aç">
                             <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
                             <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
                         </button>
@@ -141,13 +141,13 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
             <!-- Eğitim 2: Warrior Yoga Planı -->
             <article class="clean-plan-card" id="warrior">
                 <!-- Video Önizleme Alanı -->
-                <div class="plan-card-video-wrap">
+                <div class="plan-card-video-wrap" data-video-src="<?= asset('assets/videos/hero.mp4') ?>" data-video-title="WARRIOR YOGA PLANI" role="button" tabindex="0" title="Eğitim Tanıtım Videosunu Aç">
                     <video class="plan-preview-video" poster="<?= asset('assets/images/betina-outdoor-inversion.jpg') ?>" autoplay muted loop playsinline preload="metadata">
                         <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
                     </video>
                     <div class="plan-video-overlay">
                         <span class="plan-video-badge"><span class="video-pulse-dot"></span> EĞİTİM ÖNİZLEME</span>
-                        <button type="button" class="plan-video-play-toggle" aria-label="Önizlemeyi Oynat / Durdur">
+                        <button type="button" class="plan-video-play-toggle" aria-label="Eğitim Videosunu Aç">
                             <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
                             <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
                         </button>
@@ -210,13 +210,13 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
             <!-- Eğitim 3: Omurga & Postür Biyomekaniği -->
             <article class="clean-plan-card" id="posture">
                 <!-- Video Önizleme Alanı -->
-                <div class="plan-card-video-wrap">
+                <div class="plan-card-video-wrap" data-video-src="<?= asset('assets/videos/hero.mp4') ?>" data-video-title="OMURGA &amp; POSTÜR BİYOMEKANİĞİ" role="button" tabindex="0" title="Eğitim Tanıtım Videosunu Aç">
                     <video class="plan-preview-video" poster="<?= asset('assets/images/betina-studio-forward-fold.jpg') ?>" autoplay muted loop playsinline preload="metadata">
                         <source src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
                     </video>
                     <div class="plan-video-overlay">
                         <span class="plan-video-badge"><span class="video-pulse-dot"></span> EĞİTİM ÖNİZLEME</span>
-                        <button type="button" class="plan-video-play-toggle" aria-label="Önizlemeyi Oynat / Durdur">
+                        <button type="button" class="plan-video-play-toggle" aria-label="Eğitim Videosunu Aç">
                             <svg class="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
                             <svg class="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
                         </button>
@@ -309,13 +309,6 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
                             <span class="lesson-name">Kortizol Düşürücü Akşam Sıfırlaması (20 Dk)</span>
                         </div>
                     </div>
-
-                    <div style="margin-top: 0.9rem;">
-                        <span class="lock-status-badge">
-                            <span class="badge-pulse-dot" aria-hidden="true"></span>
-                            <span>🔒 Sayfada Kilitli &bull; Programa Katılan Tüm Üyelerimize Otomatik Olarak Açılır</span>
-                        </span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -377,106 +370,27 @@ if (!str_starts_with($trans3After, 'http') && !str_starts_with($trans3After, '/f
             </div>
         </section>
 
-        <!-- 6. 2 Kategoride Minimal Before / After Dönüşüm Bölümü -->
-        <?php
-        $progTransStories = [
-            [
-                'category' => 'power',
-                'title' => 'GÜÇ & OMURGA',
-                'before_img' => asset('assets/images/trans-1-before.webp'),
-                'after_img'  => asset('assets/images/trans-1-after.webp'),
-            ],
-            [
-                'category' => 'power',
-                'title' => 'CORE & KALİSTHENİCS',
-                'before_img' => asset('assets/images/trans-2-before.webp'),
-                'after_img'  => asset('assets/images/trans-2-after.webp'),
-            ],
-            [
-                'category' => 'power',
-                'title' => 'POSTÜR HİZALANMASI',
-                'before_img' => asset('assets/images/trans-3-before.webp'),
-                'after_img'  => asset('assets/images/trans-3-after.webp'),
-            ],
-            [
-                'category' => 'slim',
-                'title' => 'İNCELME & BEL',
-                'before_img' => asset('assets/images/transformation-before.webp'),
-                'after_img'  => asset('assets/images/transformation-after.webp'),
-            ],
-            [
-                'category' => 'slim',
-                'title' => 'ÖDEM & METABOLİK DETOKS',
-                'before_img' => asset('assets/images/trans-2-before.webp'),
-                'after_img'  => asset('assets/images/trans-2-after.webp'),
-            ],
-            [
-                'category' => 'slim',
-                'title' => 'SIKILAŞMA & GLİSEMİK DENGE',
-                'before_img' => asset('assets/images/trans-1-before.webp'),
-                'after_img'  => asset('assets/images/trans-1-after.webp'),
-            ],
-        ];
-        ?>
-        <section class="programs-transformations-section" style="margin: 3.5rem 0 2rem;">
-            <div class="section-title-wrap text-center">
-                <span class="section-kicker">KANITLANMIŞ SONUÇLAR</span>
-                <h2 class="section-heading-lg" style="margin-bottom: 0.5rem;">Dönüşüm Hikayeleri</h2>
-                <p class="section-lead-muted" style="max-width: 640px; margin: 0 auto;">
-                    28 günde elde edilen anatomik güç ve estetik incelme sonuçları. Kartlara tıklayarak Öncesi/Sonrası arasında geçiş yapabilirsiniz:
-                </p>
-
-                <!-- Kategori Filtresi (Sade Düz Metin & Dikey Çizgiler) -->
-                <div class="trans-cat-filter-tabs">
-                    <button type="button" class="trans-tab-btn active" data-filter="all">TÜMÜ (6)</button>
-                    <span class="trans-tab-divider">|</span>
-                    <button type="button" class="trans-tab-btn" data-filter="power">GÜÇ DÖNÜŞÜMLERİ (3)</button>
-                    <span class="trans-tab-divider">|</span>
-                    <button type="button" class="trans-tab-btn" data-filter="slim">İNCELME DÖNÜŞÜMLERİ (3)</button>
+        <!-- Video Önizleme Modalı (Lightbox) -->
+        <div class="fizyobar-video-modal" id="programVideoModal" aria-hidden="true" role="dialog" aria-labelledby="programVideoTitle">
+            <div class="video-modal-backdrop" id="programVideoBackdrop"></div>
+            <div class="video-modal-dialog">
+                <div class="video-modal-header">
+                    <div class="video-modal-title-wrap">
+                        <span class="video-modal-kicker">FİZYOBAR ONLINE AKADEMİ &bull; EĞİTİM ÖNİZLEME</span>
+                        <h3 class="video-modal-title" id="programVideoTitle">4 HAFTALIK DETOX &amp; YOGA KAMPI</h3>
+                    </div>
+                    <button type="button" class="video-modal-close" id="programVideoClose" aria-label="Kapat">&times;</button>
+                </div>
+                <div class="video-modal-player-wrap">
+                    <video id="programModalPlayer" controls playsinline preload="auto">
+                        <source id="programModalVideoSource" src="<?= asset('assets/videos/hero.mp4') ?>" type="video/mp4">
+                        Tarayıcınız video etiketini desteklemiyor.
+                    </video>
                 </div>
             </div>
+        </div>
 
-            <!-- Minimal 3 Kolonlu Dönüşüm Kartları Izgarası -->
-            <div class="prog-trans-minimal-grid" id="programsTransGrid">
-                <?php foreach ($progTransStories as $story): ?>
-                    <div class="prog-trans-item" data-category="<?= e($story['category']) ?>" role="button" tabindex="0" title="Öncesi / Sonrası Görmek İçin Tıklayın">
-                        <div class="prog-trans-flipper">
-                            
-                            <!-- ÖN YÜZ (ÖNCESİ) -->
-                            <div class="prog-trans-face prog-face-before">
-                                <img src="<?= e($story['before_img']) ?>" alt="<?= e($story['title']) ?> Öncesi" class="prog-trans-img" loading="lazy">
-                                <div class="prog-trans-overlay">
-                                    <div class="prog-trans-top-row">
-                                        <span class="prog-cat-pill"><?= e($story['title']) ?></span>
-                                        <span class="prog-state-pill pill-before">ÖNCESİ</span>
-                                    </div>
-                                    <div class="prog-trans-bottom-row">
-                                        <span class="prog-flip-hint">↻ Tıkla: Sonrası</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- ARKA YÜZ (SONRASI) -->
-                            <div class="prog-trans-face prog-face-after">
-                                <img src="<?= e($story['after_img']) ?>" alt="<?= e($story['title']) ?> Sonrası" class="prog-trans-img" loading="lazy">
-                                <div class="prog-trans-overlay">
-                                    <div class="prog-trans-top-row">
-                                        <span class="prog-cat-pill"><?= e($story['title']) ?></span>
-                                        <span class="prog-state-pill pill-after">SONRASI</span>
-                                    </div>
-                                    <div class="prog-trans-bottom-row">
-                                        <span class="prog-flip-hint">↻ Tıkla: Öncesi</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-
-        <!-- 7. Alt Destek ve Kararsız Olanlar İçin Yönlendirme -->
+        <!-- 6. Alt Destek ve Kararsız Olanlar İçin Yönlendirme -->
         <div class="programs-minimal-footer text-center" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e5e5;">
             <p style="font-size: 0.92rem; color: #666666;">
                 Hangi eğitimin bedeninize en uygun olduğu konusunda emin değil misiniz?
@@ -548,69 +462,86 @@ document.addEventListener('DOMContentLoaded', function() {
         btnYearly.addEventListener('click', function() { setBillingPlan('yearly'); });
     }
 
-    // 2. Before / After Kategori Filtresi & Kart Çevirme (Minimal Izgara)
-    const filterTabs = document.querySelectorAll('.trans-tab-btn');
-    const progTransItems = document.querySelectorAll('.prog-trans-item');
+    // 2. Video Tanıtım Önizleme Modalı (Lightbox Player)
+    const videoModal = document.getElementById('programVideoModal');
+    const modalBackdrop = document.getElementById('programVideoBackdrop');
+    const modalCloseBtn = document.getElementById('programVideoClose');
+    const modalPlayer = document.getElementById('programModalPlayer');
+    const modalSource = document.getElementById('programModalVideoSource');
+    const modalTitle = document.getElementById('programVideoTitle');
+    const videoWraps = document.querySelectorAll('.plan-card-video-wrap');
 
-    filterTabs.forEach(function(tab) {
-        tab.addEventListener('click', function() {
-            filterTabs.forEach(function(t) { t.classList.remove('active'); });
-            this.classList.add('active');
-            const targetFilter = this.getAttribute('data-filter');
+    function openVideoModal(wrap) {
+        if (!videoModal || !modalPlayer) return;
 
-            progTransItems.forEach(function(item) {
-                const itemCat = item.getAttribute('data-category');
-                if (targetFilter === 'all' || itemCat === targetFilter) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
+        const title = wrap.getAttribute('data-video-title') || 'EĞİTİM ÖNİZLEME';
+        const src = wrap.getAttribute('data-video-src') || '';
+
+        if (modalTitle) {
+            modalTitle.textContent = title;
+        }
+
+        if (modalSource && src && modalSource.getAttribute('src') !== src) {
+            modalSource.setAttribute('src', src);
+            modalPlayer.load();
+        }
+
+        videoModal.classList.add('is-open');
+        videoModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        // Videoyu sesli olarak başlat
+        modalPlayer.muted = false;
+        const playPromise = modalPlayer.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(err) {
+                console.log('Video autoplay blocked or pending:', err);
             });
-        });
-    });
+        }
+    }
 
-    progTransItems.forEach(function(item) {
-        item.addEventListener('click', function() {
-            this.classList.toggle('is-flipped');
+    function closeVideoModal() {
+        if (!videoModal || !modalPlayer) return;
+
+        videoModal.classList.remove('is-open');
+        videoModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+
+        modalPlayer.pause();
+    }
+
+    videoWraps.forEach(function(wrap) {
+        wrap.addEventListener('click', function(e) {
+            e.preventDefault();
+            openVideoModal(this);
         });
-        item.addEventListener('keydown', function(e) {
+
+        wrap.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                this.classList.toggle('is-flipped');
+                openVideoModal(this);
             }
         });
     });
 
-    // 3. Video Önizleme Oynat/Durdur Kontrolü
-    document.querySelectorAll('.plan-card-video-wrap').forEach(function(wrap) {
-        const video = wrap.querySelector('video');
-        const playBtn = wrap.querySelector('.plan-video-play-toggle');
-        const iconPlay = wrap.querySelector('.icon-play');
-        const iconPause = wrap.querySelector('.icon-pause');
-
-        function toggleVideo() {
-            if (!video) return;
-            if (video.paused) {
-                video.play();
-                if (iconPlay) iconPlay.style.display = 'none';
-                if (iconPause) iconPause.style.display = 'block';
-            } else {
-                video.pause();
-                if (iconPlay) iconPlay.style.display = 'block';
-                if (iconPause) iconPause.style.display = 'none';
-            }
-        }
-
-        if (playBtn) {
-            playBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleVideo();
-            });
-        }
-        wrap.addEventListener('click', function(e) {
-            if (e.target.closest('.plan-video-play-toggle')) return;
-            toggleVideo();
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeVideoModal();
         });
+    }
+
+    if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeVideoModal();
+        });
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && videoModal && videoModal.classList.contains('is-open')) {
+            closeVideoModal();
+        }
     });
 });
 </script>
