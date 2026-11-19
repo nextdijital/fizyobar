@@ -57,13 +57,13 @@ class Database
             $candidates[] = ['host' => '127.0.0.1', 'port' => $port, 'db' => $dbname, 'user' => $username, 'pass' => $password];
         }
 
-        // Canlı sunucu alternatif PROD_DB_* yapılandırma kontrolü
+        // Canlı sunucu alternatif PROD_DB_* yapılandırma kontrolü (varsa ve dummy değilse)
         $prodHost = Env::get('PROD_DB_HOST');
         $prodDb   = Env::get('PROD_DB_DATABASE');
         $prodUser = Env::get('PROD_DB_USERNAME');
         $prodPass = Env::get('PROD_DB_PASSWORD');
 
-        if ($prodHost && $prodDb && $prodUser) {
+        if ($prodHost && $prodDb && $prodUser && $prodPass && $prodPass !== 'YourStrongPasswordHere') {
             $candidates[] = ['host' => (string)$prodHost, 'port' => $port, 'db' => (string)$prodDb, 'user' => (string)$prodUser, 'pass' => (string)$prodPass];
             if ($prodHost === 'localhost') {
                 $candidates[] = ['host' => '127.0.0.1', 'port' => $port, 'db' => (string)$prodDb, 'user' => (string)$prodUser, 'pass' => (string)$prodPass];
