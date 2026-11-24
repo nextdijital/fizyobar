@@ -240,13 +240,13 @@ class AiChatController extends Controller
             ]
         ];
 
-        // WhatsApp Hazır Mesajı
-        $waSummary = "Merhaba Betina Hocam! Fizyobar Yapay Zeka Testini tamamladım.\n\n"
-            . "🎯 Hedefim: " . $this->getGoalLabel($goal) . "\n"
-            . "⏳ Yaşam Tarzım: " . $this->getLifestyleLabel($lifestyle) . "\n"
-            . "💡 Bana Önerilen Program: " . $programTitle . " (Uyumluluk: %" . $matchScore . ")\n"
-            . ($notes !== '' ? "📝 Notum: " . $notes . "\n" : "")
-            . "\nDetayları konuşmak ve kampa/seansa katılım için danışmak istiyorum.";
+        // WhatsApp Hazır Mesajı (Temiz, profesyonel ve WhatsApp uyumlu format)
+        $waSummary = "Merhaba Betina Hocam, Fizyobar Yapay Zeka Testimi tamamladım:\n\n"
+            . "*Hedefim:* " . $this->getGoalLabel($goal) . "\n"
+            . "*Yaşam Tarzım:* " . $this->getLifestyleLabel($lifestyle) . "\n"
+            . "*Önerilen Program:* " . $programTitle . " (%{$matchScore} Uyumluluk)\n"
+            . ($notes !== '' ? "*Kişisel Notum:* " . $notes . "\n" : "")
+            . "\nDetaylar ve başlangıç süreci hakkında bilgi alabilir miyim?";
 
         $waUrl = __('brand.whatsapp_url') . '?text=' . rawurlencode($waSummary);
 

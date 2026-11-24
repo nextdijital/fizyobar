@@ -114,6 +114,16 @@ ServerSignature Off
     ExpiresByType text/javascript "access plus 1 month"
 </IfModule>
 
+# Statik Dosyalar İçin Yüksek Hızlı Cache-Control Başlıkları
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpe?g|png|gif|webp|svg|woff2?|ttf|eot)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+</IfModule>
+
 # 6. URL YÖNLENDİRME & ROUTING (MOD_REWRITE)
 # ------------------------------------------------------------------------------
 <IfModule mod_rewrite.c>

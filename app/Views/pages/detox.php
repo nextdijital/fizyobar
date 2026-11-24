@@ -6,314 +6,240 @@ declare(strict_types=1);
 ?>
 
 <!-- ==============================================================================
-     FİZYOBAR: 4 HAFTALIK ONLİNE DETOX & YOGA KAMPI ÖZEL AÇILIŞ SAYFASI
+     FİZYOBAR: 4 HAFTALIK ONLINE DETOX & YOGA KAMPI (TEK RENK GRİ ZEMİN & AZALTILMIŞ SADE MİMARİ)
      ============================================================================== -->
-<div class="detox-landing-wrapper">
-    <!-- 1. Hero Başlık & Tanıtım -->
-    <header class="detox-hero-section">
-        <div class="container">
-            <div class="detox-hero-inner text-center">
-                <span class="detox-kicker-pill">🌿 WELLNESS EXPERIENCES • YENİ DÖNEM KAYITLARI AÇILDI</span>
-                <h1 class="detox-hero-title">
-                    4 HAFTALIK ONLINE<br>DETOX &amp; YOGA KAMPI
-                </h1>
-                <p class="detox-hero-desc">
-                    Fizyoterapist <strong>Betina Tansuğ</strong> rehberliğinde klinik biyomekanik, metabolik farkındalık ve günlük birebir WhatsApp desteğiyle evinizin konforunda baştan sona yenilenin.
-                </p>
+<div class="detox-unified-page">
 
-                <!-- Öne Çıkan Hızlı Metrikler -->
-                <div class="detox-metrics-grid">
-                    <div class="detox-metric-box">
-                        <span class="metric-val">⚡ +12</span>
-                        <span class="metric-lbl">Antrenman &amp; Seans</span>
+    <!-- 1. HERO BÖLÜMÜ: BAŞLIK, BİLGİLER VE HIZLI KAYIT -->
+    <section class="detox-uni-hero">
+        <div class="container">
+            <div class="detox-uni-grid">
+                
+                <!-- Sol: Metinler, 4'lü Hızlı Bilgi ve Butonlar -->
+                <div class="detox-uni-content">
+                    
+                    <div class="detox-uni-pill">
+                        <span class="uni-live-dot"></span>
+                        <span>18. DÖNEM &bull; ONLINE DÖNÜŞÜM KAMPI</span>
                     </div>
-                    <div class="detox-metric-box">
-                        <span class="metric-val">📅 +28</span>
-                        <span class="metric-lbl">Gün Dönüşüm Takvimi</span>
+
+                    <h1 class="detox-uni-title">
+                        4 HAFTALIK ONLINE<br>
+                        <span class="detox-uni-serif">Detox &amp; Yoga Kampı</span>
+                    </h1>
+
+                    <p class="detox-uni-lead">
+                        Fizyoterapist <strong>Betina Tansuğ</strong> rehberliğinde; canlı Zoom seansları, klinik omurga dekompresyonu ve rafinesiz glisemik beslenmeyle evinizden hafifleyin, dikleşin ve kalıcı bir yaşam disiplini kazanın.
+                    </p>
+
+                    <!-- 4 Temel Bilgi Kartı -->
+                    <div class="detox-uni-facts">
+                        <div class="uni-fact">
+                            <span class="uni-fact-val">4 Hafta</span>
+                            <span class="uni-fact-lbl">28 Günlük Program</span>
+                        </div>
+                        <div class="uni-fact">
+                            <span class="uni-fact-val">16 Canlı Seans</span>
+                            <span class="uni-fact-lbl">7/24 HD Kayıt Arşivi</span>
+                        </div>
+                        <div class="uni-fact">
+                            <span class="uni-fact-val">Glisemik Menü</span>
+                            <span class="uni-fact-lbl">Aç Kalmadan Şekersiz</span>
+                        </div>
+                        <div class="uni-fact">
+                            <span class="uni-fact-val">Birebir Takip</span>
+                            <span class="uni-fact-lbl">Betina Tansuğ WhatsApp</span>
+                        </div>
                     </div>
-                    <div class="detox-metric-box">
-                        <span class="metric-val">🏡 +%100</span>
-                        <span class="metric-lbl">Ekipmansız Ev Pratiği</span>
+
+                    <!-- Aksiyon Butonları & Kontenjan -->
+                    <div class="detox-uni-actions">
+                        <div class="detox-uni-btns">
+                            <a href="<?= url('/checkout/1') ?>" class="btn-uni-primary">
+                                <span>KAMPA KATIL &bull; ₺1.850</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </a>
+                            <a href="https://wa.me/905357056828?text=Merhaba%20Betina%20Hocam,%204%20Haftal%C4%B1k%20Online%20Detox%20ve%20Yoga%20Kamp%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="btn-uni-secondary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                <span>WhatsApp ile Danış</span>
+                            </a>
+                        </div>
+                        <div class="detox-uni-seat">
+                            <span class="uni-seat-dot"></span>
+                            <span>Canlı Kontenjan: <strong>Son 6 Kişilik Yer</strong> &bull; Grup 15 kişiyle sınırlıdır</span>
+                        </div>
                     </div>
-                    <div class="detox-metric-box">
-                        <span class="metric-val">🎁 3'lü</span>
-                        <span class="metric-lbl">Meditasyon Paketi Hediye</span>
-                    </div>
+
                 </div>
 
-                <!-- Kontenjan Doluluk Barı -->
-                <div class="quota-occupancy-card" style="max-width: 620px; margin: 1.8rem auto 1.5rem; text-align: left;">
-                    <div class="quota-header">
-                        <span class="quota-badge">
-                            <span class="quota-pulse-dot"></span> CANLI DÖNEM KONTENJANI
-                        </span>
-                        <span class="quota-count">Son <strong>8</strong> Kişilik Yer Kaldı</span>
-                    </div>
-                    <div class="quota-bar-track">
-                        <div class="quota-bar-fill" style="width: 87%;">
-                            <span class="quota-percent-label">%87 DOLU</span>
+                <!-- Sağ: Fotoğraf -->
+                <div class="detox-uni-photo-wrap">
+                    <div class="detox-uni-photo">
+                        <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" 
+                             alt="Betina Tansuğ Online Detox ve Yoga Kampı" 
+                             class="uni-img"
+                             loading="eager">
+                        <div class="uni-photo-caption">
+                            <span class="uni-caption-name">Fizyoterapist Betina Tansuğ</span>
+                            <span class="uni-caption-role">Klinik Omurga Biyomekaniği &bull; 17+ Dönem Tecrübesi</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- CTA Aksiyon Butonları -->
-                <div class="detox-hero-actions" style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-yogi-cta">
-                        <span class="btn-yogi-icon">⚡</span> 500+ KALİSTHENİCS YOGİ ARASINA KATIL &rarr;
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- 2. Kampa Neler Dahil? (5 Bütüncül Sütun) -->
-    <section class="detox-pillars-section">
-        <div class="container">
-            <div class="section-title-wrap text-center">
-                <span class="sub-kicker">BÜTÜNCÜL REHBERLİK</span>
-                <h2 class="section-heading">Kampa Neler Dahil?</h2>
-                <p class="section-sub-desc">Klasik diyet ya da yüzeysel egzersiz programları yerine bedenin kök nedenlerine odaklanan 5 temel destek:</p>
-            </div>
-
-            <div class="detox-pillars-grid">
-                <!-- Sütun 1 -->
-                <div class="pillar-card">
-                    <div class="pillar-icon-wrap">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
-                    </div>
-                    <h3 class="pillar-title">16+ Canlı Seans &amp; Özel Atölyeler</h3>
-                    <p class="pillar-desc">
-                        Haftada 3-4 gün canlı Zoom seansları. Kaçırsanız veya saat uymasa dahi aynı gün içinde kişisel panelinize HD kayıt olarak eklenir.
-                    </p>
-                </div>
-
-                <!-- Sütun 2 -->
-                <div class="pillar-card">
-                    <div class="pillar-icon-wrap">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="pillar-title">Birebir WhatsApp Takibi</h3>
-                    <p class="pillar-desc">
-                        Fizyoterapist Betina Tansuğ ile özel WhatsApp grubu ve birebir iletişim. Duruş kontrolleri, ağrı yönetimi ve motivasyon.
-                    </p>
-                </div>
-
-                <!-- Sütun 3 -->
-                <div class="pillar-card">
-                    <div class="pillar-icon-wrap">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V17a1 1 0 0 1-2 0v-.07A7.003 7.003 0 0 1 5.07 11H5a1 1 0 0 1 0-2h.07A7.003 7.003 0 0 1 11 5.07V5a1 1 0 0 1 2 0v.07A7.003 7.003 0 0 1 18.93 11H19a1 1 0 0 1 0 2h-.07A7.003 7.003 0 0 1 13 16.93z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="pillar-title">Rafine Şekersiz Glisemik Kılavuz</h3>
-                    <p class="pillar-desc">
-                        Aç kalmadan, kan şekeri dalgalanmalarını durduran ve doğal GLP-1 doygunluğunu uyaran haftalık leziz mutfak tarifleri.
-                    </p>
-                </div>
-
-                <!-- Sütun 4 -->
-                <div class="pillar-card">
-                    <div class="pillar-icon-wrap">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0"></path>
-                        </svg>
-                    </div>
-                    <h3 class="pillar-title">Vagus &amp; Diyafram Nefes Reset</h3>
-                    <p class="pillar-desc">
-                        Otonom sinir sisteminizi sempatik (stres-kaç) moddan çıkarıp parasempatik dinlenme, sindirim ve hücresel onarım moduna geçiren pratikler.
-                    </p>
-                </div>
-
-                <!-- Sütun 5 -->
-                <div class="pillar-card">
-                    <div class="pillar-icon-wrap">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
-                    </div>
-                    <h3 class="pillar-title">Kişisel Hareket Alanı (Movement Space)</h3>
-                    <p class="pillar-desc">
-                        Kamp boyunca tamamladığınız seansları takip edeceğiniz, interaktif takvim ve ömür boyu erişebileceğiniz video kütüphanesi.
-                    </p>
-                </div>
-
-                <!-- Sütun 6 -->
-                <div class="pillar-card">
-                    <div class="pillar-icon-wrap">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                        </svg>
-                    </div>
-                    <h3 class="pillar-title">Klinik Omurga &amp; Postür Düzeltme</h3>
-                    <p class="pillar-desc">
-                        Boyun düzleşmesi, kamburluk ve bel sıkışmalarını nötrleyen, eklemleri rahatlatan anatomik hareket dizilimleri.
-                    </p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. 4 Haftalık Yol Haritası (Fazlar) -->
-    <section class="detox-curriculum-section">
+
+    <!-- 2. KAMPA NELER DAHİL VE 4 HAFTALIK AKIŞ (TEK BİR DERLİ TOPLU ALAN) -->
+    <section class="detox-uni-section">
         <div class="container">
-            <div class="section-title-wrap text-center">
-                <span class="sub-kicker">ADIM ADIM DEĞİŞİM</span>
-                <h2 class="section-heading">4 Haftalık Kamp Yol Haritası</h2>
+            
+            <div class="detox-uni-section-head">
+                <span class="detox-uni-kicker">EKSİKSİZ PROGRAM İÇERİĞİ</span>
+                <h2 class="detox-uni-heading">Kampa Neler Dahil?</h2>
+                <p class="detox-uni-sub">Kayıt olduğunuzda 28 gün boyunca erişeceğiniz tüm rehberlik ve materyaller:</p>
             </div>
 
-            <div class="curriculum-timeline">
-                <!-- Hafta 1 -->
-                <div class="curriculum-item">
-                    <div class="curriculum-num">01</div>
-                    <div class="curriculum-body">
-                        <span class="curriculum-tag">1. HAFTA</span>
-                        <h4 class="curriculum-title">Beden Farkındalığı &amp; Temel Arınma</h4>
-                        <p class="curriculum-desc">
-                            Rafine şekeri kesme semptomlarını yönetme, bol hidrasyon, eklemleri zorlamayan temel kinestetik yoga seansları ve diyafram solunumu.
-                        </p>
+            <div class="detox-uni-features-grid">
+                
+                <div class="uni-feature-item">
+                    <span class="uni-check-icon">✓</span>
+                    <div>
+                        <h3 class="uni-item-title">16 Canlı Seans &amp; Sınırsız HD Kayıt</h3>
+                        <p class="uni-item-desc">Haftada 4 gün canlı Zoom seansları. Kaçırsanız dahi aynı gün öğrenci panelinize eklenir, dilediğiniz zaman tekrar edebilirsiniz.</p>
                     </div>
                 </div>
 
-                <!-- Hafta 2 -->
-                <div class="curriculum-item">
-                    <div class="curriculum-num">02</div>
-                    <div class="curriculum-body">
-                        <span class="curriculum-tag">2. HAFTA</span>
-                        <h4 class="curriculum-title">Vagus Siniri, Sindirim &amp; Mobilite</h4>
-                        <p class="curriculum-desc">
-                            Karın içi organ dolaşımını artıran torsiyonel omurga akışları, bağırsak-beyin aksını rahatlatan vagal stimülasyon teknikleri.
-                        </p>
+                <div class="uni-feature-item">
+                    <span class="uni-check-icon">✓</span>
+                    <div>
+                        <h3 class="uni-item-title">Rafinesiz Şekersiz Glisemik Menü</h3>
+                        <p class="uni-item-desc">Aç kalmadan kan şekerini dengeleyen, tatlı krizlerini kesen ve ödem attıran haftalık leziz tarifler ve mutfak kılavuzu.</p>
                     </div>
                 </div>
 
-                <!-- Hafta 3 -->
-                <div class="curriculum-item">
-                    <div class="curriculum-num">03</div>
-                    <div class="curriculum-body">
-                        <span class="curriculum-tag">3. HAFTA</span>
-                        <h4 class="curriculum-title">Miyofasyal Ağ &amp; Dinamik Kuvvet</h4>
-                        <p class="curriculum-desc">
-                            Tüm vücudu saran elastik fasya ağının hidrasyonu, kalça ve omuz açıklığı, dayanıklılığı artıran ritmik güç serileri.
-                        </p>
+                <div class="uni-feature-item">
+                    <span class="uni-check-icon">✓</span>
+                    <div>
+                        <h3 class="uni-item-title">Betina Tansuğ ile Birebir WhatsApp Hattı</h3>
+                        <p class="uni-item-desc">Duruş kontrolü, kişiselleştirilmiş sorular ve günlük motivasyon için uzman fizyoterapist ile doğrudan iletişim.</p>
                     </div>
                 </div>
 
-                <!-- Hafta 4 -->
-                <div class="curriculum-item">
-                    <div class="curriculum-num">04</div>
-                    <div class="curriculum-body">
-                        <span class="curriculum-tag">4. HAFTA</span>
-                        <h4 class="curriculum-title">Metabolik Entegrasyon &amp; Kalıcı Alışkanlık</h4>
-                        <p class="curriculum-desc">
-                            Kamp sonrasında da sürdürülebilir beslenme ve hareket ritminin kurulması, kişiselleştirilmiş longevity rehberi ve mezuniyet.
-                        </p>
+                <div class="uni-feature-item">
+                    <span class="uni-check-icon">✓</span>
+                    <div>
+                        <h3 class="uni-item-title">Kişisel Hareket Alanı (Öğrenci Portalı)</h3>
+                        <p class="uni-item-desc">Tüm ders kayıtlarını, ödevlerinizi ve takvimi ömür boyu izleyebileceğiniz size özel panel erişimi.</p>
                     </div>
+                </div>
+
+                <div class="uni-feature-item">
+                    <span class="uni-check-icon">✓</span>
+                    <div>
+                        <h3 class="uni-item-title">Klinik Omurga &amp; Vagus Nefes Reset</h3>
+                        <p class="uni-item-desc">Boyun düzleşmesi ve sırt tutukluklarını açan dekompresyon akışları ile stres regülasyonu sağlayan diyafram nefesleri.</p>
+                    </div>
+                </div>
+
+                <div class="uni-feature-item">
+                    <span class="uni-check-icon">★</span>
+                    <div>
+                        <h3 class="uni-item-title">ÖZEL HEDİYE: 3'lü Ses Çanağı &amp; Vagus Paketi</h3>
+                        <p class="uni-item-desc">Kaliteli gece uykusu ve derin zihinsel dinlenme için özel frekanslı ses meditasyonları (Ücretsiz dahil).</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 4 Haftalık Faz Çizelgesi (Kompakt Şerit) -->
+            <div class="detox-uni-phases-strip">
+                <div class="uni-phase-step">
+                    <span class="step-num">01</span>
+                    <strong class="step-title">1. Hafta: Temel Arınma</strong>
+                    <span class="step-desc">Şekersiz adaptasyon, ödem atımı ve omurgayı ısıtan akışlar.</span>
+                </div>
+                <div class="uni-phase-step">
+                    <span class="step-num">02</span>
+                    <strong class="step-title">2. Hafta: Vagus &amp; Sindirim</strong>
+                    <span class="step-desc">Torsiyonel omurga hareketleri, vagal regülasyon ve derin uyku.</span>
+                </div>
+                <div class="uni-phase-step">
+                    <span class="step-num">03</span>
+                    <strong class="step-title">3. Hafta: Fasya &amp; Güç</strong>
+                    <span class="step-desc">Tüm vücut elastik fasya açılışı, core stabilitesi ve dik duruş.</span>
+                </div>
+                <div class="uni-phase-step">
+                    <span class="step-num">04</span>
+                    <strong class="step-title">4. Hafta: Kalıcı Ritim</strong>
+                    <span class="step-desc">Ömür boyu sürecek sürdürülebilir beslenme ve longevity disiplini.</span>
                 </div>
             </div>
+
         </div>
     </section>
 
-    <!-- 4. Fiyatlandırma & Kayıt Kartı -->
-    <section class="detox-pricing-section" id="kayit">
+
+    <!-- 3. FİYAT, KAYIT VE SSS (TEK MERKEZİ ALAN) -->
+    <section class="detox-uni-section" id="kayit">
         <div class="container">
-            <div class="detox-pricing-box">
-                <div class="pricing-badge">TAM KAPSAMLI CANLI DÖNEM</div>
-                <h3 class="pricing-title">4 Haftalık Online Detox &amp; Yoga Kampı</h3>
-                <p class="pricing-subtitle">Kontenjan kalitesi için katılımcı sayısı sınırlı tutulmaktadır.</p>
+            
+            <div class="detox-uni-checkout-card">
+                
+                <span class="uni-pill-badge">18. DÖNEM CANLI DÖNÜŞÜM GRUBU</span>
+                <h3 class="uni-checkout-title">4 Haftalık Online Detox &amp; Yoga Kampı</h3>
+                <p class="uni-checkout-desc">16 Canlı Seans &bull; Birebir WhatsApp Takibi &bull; Glisemik Beslenme &bull; Ömür Boyu Arşiv</p>
 
-                <div class="pricing-amount">
-                    <span class="price-val">1.850 ₺</span>
-                    <span class="price-term">/ 4 haftalık program, 12 antrenman ve arşiv dahil</span>
+                <div class="uni-price-box">
+                    <span class="uni-curr">₺</span>
+                    <span class="uni-amount">1.850</span>
+                    <span class="uni-period">Tek Seferlik Ödeme &bull; Her Şey Dahil</span>
                 </div>
 
-                <!-- Paket İçeriği -->
-                <div class="package-specs-highlight" style="justify-content: center; margin: 1.2rem 0;">
-                    <span class="spec-pill"><span class="spec-icon">⚡</span> <strong>+12</strong> antrenman</span>
-                    <span class="spec-pill"><span class="spec-icon">📅</span> <strong>+28</strong> gün</span>
-                    <span class="spec-pill"><span class="spec-icon">🏡</span> <strong>+%100</strong> ekipmansız</span>
-                </div>
-
-                <!-- Program Hedefleri -->
-                <div class="package-goals-box" style="margin: 1.2rem auto; max-width: 580px;">
-                    <h4 class="goals-title">🎯 Program Hedefleri:</h4>
-                    <ul class="goals-list">
-                        <li><strong>Metabolik Sıfırlama:</strong> Şekersiz beslenmeyle ödem atımı ve kalıcı yağ yakımı.</li>
-                        <li><strong>Biyomekanik Postür:</strong> Omurga ve eklem dekompresyonuyla dik duruş.</li>
-                        <li><strong>Kalisthenics Güç:</strong> %100 vücut ağırlığıyla derin kas dayanıklılığı.</li>
-                        <li><strong>Sinir Sistemi:</strong> Vagus nefesiyle kortizolü düşürme ve derin uyku.</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-checks-list">
-                    <div class="check-row">
-                        <span class="check-icon">✓</span>
-                        <span>12 Modüler Antrenman &amp; Canlı Atölyeler</span>
-                    </div>
-                    <div class="check-row">
-                        <span class="check-icon">✓</span>
-                        <span>Fizyobar Kitchen (Rafine Şekersiz Bütünsel Tarifler)</span>
-                    </div>
-                    <div class="check-row">
-                        <span class="check-icon">✓</span>
-                        <span>Fizyoterapist ile Birebir WhatsApp İletişimi &amp; Takip</span>
-                    </div>
-                    <div class="check-row">
-                        <span class="check-icon">🎁</span>
-                        <span style="font-weight: 700; color: #b8860b;">HEDİYE: 3'lü Meditasyon &amp; Vagus Sinir Paketi (Ücretsiz Dahil)</span>
-                    </div>
-                    <div class="check-row">
-                        <span class="check-icon">✓</span>
-                        <span>Kişisel Movement Space Öğrenci Paneli Erişimi</span>
-                    </div>
-                </div>
-
-                <div class="pricing-action-wrap" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-top: 1.5rem;">
-                    <a href="<?= url('/checkout/1') ?>" class="btn-yogi-cta" style="padding: 1rem 2rem !important;">
-                        <span class="btn-yogi-icon">🔥</span> 500+ KALİSTHENİCS YOGİ ARASINA KATIL &rarr;
+                <div class="uni-actions-row">
+                    <a href="<?= url('/checkout/1') ?>" class="btn-uni-primary btn-uni-large">
+                        <span>KAMPA KATIL VE YERİNİ AYIR</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </a>
+                    <a href="https://wa.me/905357056828?text=Merhaba%20Betina%20Hocam,%204%20Haftal%C4%B1k%20Online%20Detox%20ve%20Yoga%20Kamp%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum." 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="btn-uni-secondary btn-uni-large">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        <span>WhatsApp'tan Soru Sor</span>
                     </a>
                 </div>
 
-                <p class="pricing-guarantee-note">
-                    🔒 Güvenli Havale / EFT &amp; Kredi Kartı ile Ödeme İmkanı
+                <p class="uni-security-note">
+                    🔒 3D Secure Kredi Kartı ve Havale / EFT ile Güvenli Ödeme &bull; Kontenjan 15 kişiyle sınırlıdır
                 </p>
+
             </div>
+
+            <!-- Kompakt Sıkça Sorulan Sorular -->
+            <div class="detox-uni-faq-wrap">
+                <h4 class="uni-faq-header">Merak Edilenler</h4>
+                <div class="uni-faq-row">
+                    <div class="uni-faq-item">
+                        <strong>Daha önce yoga yapmadım, katılabilir miyim?</strong>
+                        <p>Evet, seanslar başlangıçtan itibaren kademeli ve klinik güvenlikle anlatılır. Zorlama hareketler yoktur.</p>
+                    </div>
+                    <div class="uni-faq-item">
+                        <strong>Canlı ders saatini kaçırırsam ne olur?</strong>
+                        <p>Tüm seanslar HD olarak kaydedilip aynı gün öğrenci panelinize eklenir, istediğiniz zaman izleyebilirsiniz.</p>
+                    </div>
+                    <div class="uni-faq-item">
+                        <strong>Bu aç bırakan bir sıvı detoksu mu?</strong>
+                        <p>Kesinlikle hayır. Kan şekerini dengeleyen, doyurucu ve lezzetli glisemik tabaklardan oluşur.</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- 5. Sıkça Sorulan Sorular -->
-    <section class="detox-faq-section">
-        <div class="container">
-            <div class="section-title-wrap text-center">
-                <span class="sub-kicker">MERAK EDİLENLER</span>
-                <h2 class="section-heading">Sıkça Sorulan Sorular</h2>
-            </div>
-
-            <div class="detox-faq-grid">
-                <div class="faq-card">
-                    <h4 class="faq-q">Daha önce hiç yoga yapmadım, katılabilir miyim?</h4>
-                    <p class="faq-a">Kesinlikle evet. Kamp fizyoterapi temelli tasarlandığı için her egzersizin başlangıç ve ileri varyasyonları sunulur. Amacımız zor hareketler değil, omurganın doğru hizalanmasıdır.</p>
-                </div>
-                <div class="faq-card">
-                    <h4 class="faq-q">Canlı ders saatlerine katılamazsam ne olur?</h4>
-                    <p class="faq-a">Hiç sorun değil. Tüm seanslar kaydedilir ve aynı gün kişisel öğrenci alanınıza (Movement Space) yüklenir. Dersleri günün istediğiniz saatinde sınırsız tekrar edebilirsiniz.</p>
-                </div>
-                <div class="faq-card">
-                    <h4 class="faq-q">Beslenme programı aç bırakan bir diyet mi?</h4>
-                    <p class="faq-a">Hayır, sıvı detoksu veya kalori kısıtlaması kesinlikle içermez. Doğal lif, sağlıklı yağlar ve proteinlerle kan şekerini dengeleyen, tatlı krizlerini kesen doyurucu tabaklardan oluşur.</p>
-                </div>
-                <div class="faq-card">
-                    <h4 class="faq-q">WhatsApp takibi nasıl işliyor?</h4>
-                    <p class="faq-a">Kayıt sonrasında gruba ve Betina Tansuğ'un özel iletişim hattına dahil edilirsiniz. Günlük sorularınızı sorabilir, duruşunuzu video ile danışabilir ve anında geri bildirim alırsınız.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 </div>
-

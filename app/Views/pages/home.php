@@ -30,9 +30,9 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 2. Bar System'i Keşfet Alanı (Mürdüm & Koyu Gri Arka Plan) -->
+<!-- 2. Bar System'i Keşfet Alanı (Yüzen Ada Kartı) -->
 <section class="bar-system-discover-section" aria-label="BAR System'i Keşfet">
-    <div class="container">
+    <div class="container discover-main-container">
         <div class="bar-system-discover-inner">
             <div class="bar-system-discover-content">
                 <span class="bar-system-discover-kicker">BAR SYSTEM METODOLOJİSİ</span>
@@ -56,8 +56,8 @@ declare(strict_types=1);
 
 <!-- 3. Hedefine Uygun Programını Seç (Bar System Alanı) -->
 <section class="three-programs-section" id="bar-system">
-    <div style="width: 100%; max-width: 95%; margin: 0 auto; padding: 0 0.5rem;">
-        <div class="three-programs-header text-center" style="text-align: center; margin: 0 auto 1.5rem;">
+    <div class="container three-programs-container">
+        <div class="three-programs-header text-center">
             <span class="three-programs-kicker">P R O G R A M L A R</span>
             <h2 class="three-programs-title">Hedefine Uygun Programını Seç</h2>
             <p class="three-programs-subtitle">Bütünsel, sürdürülebilir ve güçlü bir beden için tasarlandı.</p>
@@ -578,53 +578,82 @@ declare(strict_types=1);
     </div>
 </section>
 
-<!-- 10. Bölüm VII: EĞİTMENLE TANIŞIN (EN ALTTA: “MEET YOUR GUIDE” BETINA İLE TANIŞ) -->
-<section class="editorial-mentor-section" id="meet-your-guide">
-    <div class="container">
-        <div class="mentor-frame-grid">
-            <!-- Sol: İkonik Portre & Bilgi -->
-            <div class="mentor-portrait-col">
-                <div class="mentor-avatar-box" style="overflow: hidden; border: 2px solid #4a1421;">
-                    <img src="<?= asset('assets/images/betina-user-photo1.jpg') ?>" alt="Betina Tansuğ" style="width: 100%; height: 100%; object-fit: cover;">
+<!-- 10. Bölüm VII: EĞİTMENLE TANIŞIN (EDİTORYAL DAĞINIK BORDO DAİRE & KOLAJ TASARIMI) -->
+<section class="editorial-mentor-section" id="meet-your-guide" aria-label="Betina ile Tanışın">
+    <div class="container mentor-scatter-container">
+        
+        <!-- Dağınık Kolaj Sahnesi (Bordo Daireler, Profil Fotoğrafı ve Yazı Kutusu) -->
+        <div class="mentor-scatter-stage">
+
+            <!-- 1. Bordo Daireler Grubu (Arka Plan ve Kolaj Katmanları) -->
+            <div class="m-circle m-circle-bg-primary" aria-hidden="true"></div>
+            <div class="m-circle m-circle-accent" aria-hidden="true"></div>
+            <div class="m-circle m-circle-ring" aria-hidden="true"></div>
+            <div class="m-circle m-circle-mini" aria-hidden="true"></div>
+
+            <!-- 2. Sol Taraf: Profil Fotoğrafı ve Dağınık Görsel Kolajı -->
+            <div class="mentor-scatter-visuals-col">
+                <!-- Ana Profil Fotoğrafı Dairesi -->
+                <div class="mentor-profile-circle-wrap">
+                    <div class="mentor-profile-circle-frame">
+                        <img src="<?= asset('assets/images/betina-user-photo1.jpg') ?>" 
+                             alt="Betina Tansuğ - Uzman Fizyoterapist &amp; BAR System Kurucusu" 
+                             class="mentor-profile-circle-img" 
+                             loading="lazy">
+                    </div>
+                    
+                    <!-- Daire Üzerinde Yüzen Rozet -->
+                    <div class="mentor-floating-tag tag-role">
+                        <span class="tag-dot"></span>
+                        <span>KURUCU &amp; UZMAN FİZYOTERAPİST</span>
+                    </div>
+                    
+                    <!-- Tecrübe Mührü Dairesi -->
+                    <div class="mentor-experience-stamp">
+                        <span class="stamp-num">17+</span>
+                        <span class="stamp-label">Dönem Kamp</span>
+                    </div>
                 </div>
-                <div class="mentor-meta">
-                    <h3 class="mentor-name">Betina Tansuğ</h3>
-                    <p class="mentor-role">Fizyoterapist &bull; BAR System Kurucusu</p>
+
+                <!-- İkincil Küçük Fotoğraf Dairesi (Dağınık Katman) -->
+                <div class="mentor-secondary-circle-wrap">
+                    <div class="mentor-secondary-circle-frame">
+                        <img src="<?= asset('assets/images/betina-outdoor-stretch.jpg') ?>" 
+                             alt="Betina Tansuğ Yoga &amp; Biyomekanik" 
+                             class="mentor-secondary-circle-img" 
+                             loading="lazy">
+                    </div>
                 </div>
             </div>
 
-            <!-- Sağ: Manifesto & Biyografi -->
-            <div class="mentor-bio-col">
-                <span class="section-kicker">MEET YOUR GUIDE</span>
-                <h2 class="mentor-quote">
-                    "Hareketi yalnızca fiziksel bir pratik değil, beden ve zihin arasında kurulan <em>en güçlü iletişim</em> olarak görüyorum."
-                </h2>
-                <p class="mentor-text">
-                    Klinik fizyoterapist kimliğim sayesinde insan bedenini anatomik, biyomekanik ve fonksiyonel açıdan ele alıyor; yoga ve mobilite pratiğini kanıta dayalı bilimsel bir temele oturtuyorum. Amacım, omurga sağlığını ve sinir sistemi dengesini koruyan kalıcı bir yaşam disiplini inşa etmektir.
-                </p>
-
-                <div class="mentor-credentials-list">
-                    <div class="cred-item">
-                        <span class="cred-check" style="color: #4a1421; font-weight: bold;">✓</span>
-                        <span>Fizyoterapi ve Biyomekanik Bilimsel Temeli</span>
-                    </div>
-                    <div class="cred-item">
-                        <span class="cred-check" style="color: #4a1421; font-weight: bold;">✓</span>
-                        <span>BAR System Metodolojisi &amp; Longevity Eğitmeni</span>
-                    </div>
-                    <div class="cred-item">
-                        <span class="cred-check" style="color: #4a1421; font-weight: bold;">✓</span>
-                        <span>17+ Dönem Online Kamp &amp; Yüzlerce Kanıtlanmış Dönüşüm</span>
-                    </div>
+            <!-- 3. Sağ Taraf: Ana Yazı Alanı Kutusu (Bordo Dairelerin Üzerine Dağınık Örtüşen Editoryal Kart) -->
+            <div class="mentor-scatter-text-box">
+                <div class="mentor-box-kicker">
+                    <span class="box-kicker-dot"></span>
+                    <span>EĞİTMENİNLE TANIŞ &bull; BETİNA TANSUĞ</span>
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <a href="<?= url('/betina-tansug') ?>" class="btn-pill-solid">
-                        BETİNA İLE TANIŞ &rarr;
+                <h3 class="mentor-box-quote">
+                    "Hareketi bir heves değil, beden ve zihin arasında kurulan <em>en kalıcı yaşam disiplini</em> olarak görüyorum."
+                </h3>
+
+                <!-- Butonlar -->
+                <div class="mentor-box-actions">
+                    <a href="<?= url('/betina-tansug') ?>" class="btn-mentor-cta">
+                        <span>BETİNA İLE TANIŞ</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="<?= url('/metod') ?>" class="btn-mentor-link">
+                        BAR System Metodolojisi &rarr;
                     </a>
                 </div>
             </div>
+
         </div>
+
     </div>
 </section>
 

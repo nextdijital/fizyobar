@@ -330,33 +330,59 @@ class StudioController extends Controller
             [
                 'id' => 1,
                 'badge' => 'EN ÇOK TERCİH EDİLEN',
-                'title' => 'METABOLİK RESET & DETOX PLANI',
-                'duration' => '4 HAFTALIK PROTOKOL',
+                'badge_class' => 'badge-featured',
+                'title' => 'Metabolik Reset & Detox Kampı',
+                'duration' => '4 HAFTALIK İNTERAKTİF PROTOKOL',
+                'image' => asset('assets/images/guides/guide-01.jpg'),
                 'description' => 'Rafine şekeri, enflamatuar yağları ve işlenmiş gıdaları sistemden temizleyerek insülin hassasiyetini ve sindirim dengesini yeniden kuran bütünsel plan.',
                 'features' => [
                     'Glisemik Dengeli Haftalık Alışveriş Listeleri',
                     '30+ Rafine Şekersiz & Anti-Enflamatuar Pratik Tarif',
                     'Diyafram Nefesi ile Sindirim Sistemi (Agni) Uyarımı',
                     'Fizyoterapist Eşliğinde Günlük WhatsApp Takip & Soru-Cevap',
-                    'Ömür Boyu Saklanabilir Dijital E-Kitap Rehberi'
+                    'Ömür Boyu Saklanabilir Dijital E-Kitap & Kılavuz'
                 ],
                 'cta' => 'KAMPA KATIL & PLANI AL',
-                'url' => url('/checkout/1')
+                'url' => url('/detox'),
+                'is_featured' => true
             ],
             [
                 'id' => 2,
                 'badge' => 'SÜRDÜRÜLEBİLİR YAŞAM',
-                'title' => 'GLUTENSİZ & BİTKİSEL AĞIRLIKLI BESLENME',
-                'duration' => 'ÖMÜR BOYU RUTİN',
+                'badge_class' => 'badge-routine',
+                'title' => 'Glutensiz & Anti-Enflamatuar Yaşam',
+                'duration' => 'ÖMÜR BOYU YAŞAM BİÇİMİ',
+                'image' => asset('assets/images/guides/guide-03.jpg'),
                 'description' => 'Mide-bağırsak şişkinliklerini gideren, eklem yangısını azaltan ve hücresel enerjiyi tavan yaptıran temiz ve dengeli beslenme şablonu.',
                 'features' => [
                     'Bağırsak Mikrobiyomunu Besleyen Prebiyotik Menüler',
                     'Glutensiz Ekmek & Pratik Atıştırmalık Alternatifleri',
                     'Hücresel Longevity ve Mitokondri Destekleyici İpuçları',
-                    'Restoran ve Sosyal Yaşamda Kolay Uygulama Stratejileri'
+                    'Restoran ve Sosyal Yaşamda Kolay Uygulama Stratejileri',
+                    'Mevsimsel Sebze & Sağlıklı Yağ Dengesi Rehberi'
                 ],
                 'cta' => 'WHATSAPP İLE BİLGİ AL',
-                'url' => 'https://wa.me/905357056828?text=Beslenme%20planlar%C4%B1%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.'
+                'url' => 'https://wa.me/905357056828?text=' . rawurlencode('Merhaba Betina Hocam, Glutensiz & Anti-Enflamatuar Beslenme Planı hakkında bilgi almak istiyorum.'),
+                'is_featured' => false
+            ],
+            [
+                'id' => 3,
+                'badge' => 'BİREBİR ÖZEL',
+                'badge_class' => 'badge-custom',
+                'title' => 'Bireysel Beslenme & Anamnez Danışmanlığı',
+                'duration' => 'KİŞİYE ÖZEL PROGRAMLAMA',
+                'image' => asset('assets/images/guides/guide-04.jpg'),
+                'description' => 'Kan tahlilleriniz, yaşam temponuz, stres düzeyiniz ve omurga sağlığınız analiz edilerek tamamen size özel kurgulanan birebir beslenme seansı.',
+                'features' => [
+                    'Kapsamlı Fonksiyonel Anamnez & Alışkanlık Analizi',
+                    'Günlük Rutininize Uyumlu Bireysel Öğün Planlaması',
+                    'Vagus Siniri & Duygusal Yeme Regülasyon Desteği',
+                    'Birebir İlerleme Takibi & 2 Haftalık Revizyon',
+                    'Doğrudan Betina Tansuğ ile Birebir İletişim'
+                ],
+                'cta' => 'DANIŞMANLIK İÇİN YAZIN',
+                'url' => 'https://wa.me/905357056828?text=' . rawurlencode('Merhaba Betina Hocam, Bireysel Fonksiyonel Beslenme Danışmanlığı hakkında bilgi almak ve randevu planlamak istiyorum.'),
+                'is_featured' => false
             ]
         ];
 

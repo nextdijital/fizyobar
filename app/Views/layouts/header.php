@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    
+    <!-- DNS & Preconnect Hızlandırma -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     
     <!-- Sayfa Başlığı ve Açıklaması -->
     <title><?= e($metaTitle ?? __('brand.name') . ' | ' . __('brand.subtitle')) ?></title>
@@ -37,6 +41,7 @@
         || str_contains($cleanUri, 'articles')
         || str_contains($cleanUri, 'makaleler');
     $isFinderPage = str_contains($cleanUri, 'programini-bul') || str_contains($cleanUri, 'find-program');
+    $isGuidePage = str_contains($cleanUri, 'yasam-rehberi');
     $isPortalPage = str_contains($cleanUri, 'dashboard')
         || str_contains($cleanUri, 'movement-space')
         || str_contains($cleanUri, 'lesson');
@@ -46,6 +51,12 @@
         || str_contains($cleanUri, 'about')
         || str_contains($cleanUri, 'hakkimizda')
         || str_contains($cleanUri, 'detox')
+        || str_contains($cleanUri, 'blog')
+        || str_contains($cleanUri, 'articles')
+        || str_contains($cleanUri, 'makaleler')
+        || str_contains($cleanUri, 'events')
+        || str_contains($cleanUri, 'etkinlik')
+        || str_contains($cleanUri, 'checkout')
     );
     ?>
     <?php if ($isPortalPage): ?>
@@ -85,7 +96,7 @@ if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_
     $navBtnLink = url($navBtnLink);
 }
 ?>
-<body class="<?= $isFinderPage ? 'body-finder-pure-white' : ($isKitchenPage ? 'body-kitchen-dark' : ($isGrayPage ? 'body-gray-page' : '')) ?><?= $isPortalPage ? ' body-portal-page' : '' ?>">
+<body class="<?= $isFinderPage ? 'body-finder-pure-white' : ($isKitchenPage ? 'body-kitchen-dark' : ($isGrayPage ? 'body-gray-page' : '')) ?><?= $isPortalPage ? ' body-portal-page' : '' ?><?= $isGuidePage ? ' body-guide-page' : '' ?>">
 <?php if ($isFinderPage): ?>
     <!-- PROGRAMINI BUL: SADECE BEYAZ SAYFA, SOLDA GERİ DÖN, ORTADA FİZYOBAR LOGOSU -->
     <header class="finder-clean-header" id="finderHeader">
@@ -96,6 +107,28 @@ if (!empty($navBtnLink) && !str_starts_with($navBtnLink, 'http') && !str_starts_
                     <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
                 <span>GERİ DÖN</span>
+            </a>
+
+            <div class="finder-header-logo-wrap">
+                <a href="<?= url('/') ?>" class="brand-logo-link brand-logo-type" aria-label="FİZYOBAR Ana Sayfa">
+                    <span class="logo-text-main">FİZYOBAR</span>
+                    <span class="logo-text-sub">BODY • ADAPT • REFRAME</span>
+                </a>
+            </div>
+
+            <div class="finder-header-right-ghost" aria-hidden="true"></div>
+        </div>
+    </header>
+<?php elseif ($isGuidePage): ?>
+    <!-- YAŞAM REHBERİ: SADE HEADER, SOLDA ANASAYFA, ORTADA FİZYOBAR LOGOSU -->
+    <header class="finder-clean-header" id="guideCleanHeader">
+        <div class="finder-clean-header-inner">
+            <a href="<?= url('/') ?>" class="finder-header-back-btn" id="guideHeaderBackBtn" aria-label="Ana Sayfaya Dön">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>ANASAYFA</span>
             </a>
 
             <div class="finder-header-logo-wrap">

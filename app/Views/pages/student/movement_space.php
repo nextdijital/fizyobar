@@ -27,23 +27,44 @@ declare(strict_types=1);
 
 // Sıradaki / Güncel Seansı Bul
 $spotlightLesson = null;
-foreach ($lessons as $l) {
-    if (empty($l['is_completed']) && empty($l['is_locked'])) {
-        $spotlightLesson = $l;
-        break;
-    }
-}
-if (!$spotlightLesson && !empty($lessons)) {
+if (!empty($lessons) && is_array($lessons)) {
     foreach ($lessons as $l) {
-        if (empty($l['is_completed'])) {
+        if (empty($l['is_completed']) && empty($l['is_locked'])) {
             $spotlightLesson = $l;
             break;
         }
     }
     if (!$spotlightLesson) {
-        $spotlightLesson = $lessons[0];
+        foreach ($lessons as $l) {
+            if (empty($l['is_completed'])) {
+                $spotlightLesson = $l;
+                break;
+            }
+        }
+    }
+    if (!$spotlightLesson) {
+        $spotlightLesson = $lessons[0] ?? null;
     }
 }
+
+// ASLA NULL KALMAYACAK ŞEKİLDE DEFAULT GARANTİSİ
+if (!$spotlightLesson || !is_array($spotlightLesson)) {
+    $spotlightLesson = [
+        'id' => 1,
+        'day_number' => 1,
+        'title' => 'Fascial Flow: Bütünsel Fasya Esnekliği',
+        'focus_area' => 'Miyofasyal ağ ve elastik yaylanma',
+        'youtube_video_id' => 'sTANio_2E0Q',
+        'duration_minutes' => 40,
+        'workout_number' => '01',
+        'is_completed' => 0,
+        'is_locked' => 0,
+    ];
+}
+
+$spotCourseSlug = (string)($course['slug'] ?? 'online-detox-yoga-kampi');
+$spotlightId = (int)($spotlightLesson['id'] ?? 1);
+$spotlightUrl = url('/course/' . $spotCourseSlug . '/lesson/' . $spotlightId);
 
 $spotYtId = trim((string)($spotlightLesson['youtube_video_id'] ?? 'sTANio_2E0Q'));
 $spotThumb = !empty($spotYtId) ? "https://img.youtube.com/vi/{$spotYtId}/hqdefault.jpg" : asset('assets/images/betina-outdoor-stretch.jpg');
@@ -119,7 +140,7 @@ $primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
               <span class="pill accent">● Bugünün seansı · <?= $spotWorkoutNum ?></span>
               <span class="pill">⏱ <?= $spotDuration ?> dk</span>
             </div>
-            <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="thumb" style="text-decoration:none;">
+            <a href="<?= $spotlightUrl ?>" class="thumb" style="text-decoration:none;">
               <img src="<?= $spotThumb ?>" alt="<?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?>">
               <div class="play">▶</div>
             </a>
@@ -128,7 +149,7 @@ $primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
                 <div class="title" style="font-size:19px"><?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?></div>
                 <div class="muted" style="margin-top:4px">Ekipmansız · <?= htmlspecialchars($spotlightLesson['focus_area'] ?? 'Miyofasyal ağ ve elastik yaylanma', ENT_QUOTES, 'UTF-8') ?></div>
               </div>
-              <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="btn">▶ Seansı başlat</a>
+              <a href="<?= $spotlightUrl ?>" class="btn">▶ Seansı başlat</a>
             </div>
           </div>
 
@@ -136,13 +157,21 @@ $primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
           <div class="card roadmap">
             <div class="label" style="margin-bottom:6px">Kamp yolculuğu</div>
             <?php 
+            $roadmapList = !empty($lessons) ? $lessons : [
+              ['id' => 1, 'day_number' => 1, 'workout_number' => '01', 'title' => 'Foundation: Hizalanma & Kuvvet', 'is_completed' => 0, 'is_locked' => 0],
+              ['id' => 2, 'day_number' => 3, 'workout_number' => '02', 'title' => 'Mobility Reset: Kalça Açıcı', 'is_completed' => 0, 'is_locked' => 1],
+              ['id' => 3, 'day_number' => 5, 'workout_number' => '03', 'title' => 'Core Control: Derin Merkez', 'is_completed' => 0, 'is_locked' => 1],
+              ['id' => 4, 'day_number' => 8, 'workout_number' => '04', 'title' => 'Fascial Flow: Bütünsel Fasya', 'is_completed' => 0, 'is_locked' => 1],
+              ['id' => 5, 'day_number' => 10, 'workout_number' => '05', 'title' => 'Spine Alignment: Torakal Açılım', 'is_completed' => 0, 'is_locked' => 1],
+              ['id' => 6, 'day_number' => 12, 'workout_number' => '06', 'title' => 'Lower Body Power: Glute Aktivasyonu', 'is_completed' => 0, 'is_locked' => 1],
+            ];
             $shownSteps = 0;
-            foreach ($lessons as $idx => $les):
+            foreach ($roadmapList as $idx => $les):
               if ($shownSteps >= 6) break;
               $lesDay = (int)($les['day_number'] ?? ($idx + 1));
-              $lesTitle = preg_replace('/^(Ders|Seans)\s*\d+\s*:\s*/ui', '', $les['title']);
+              $lesTitle = preg_replace('/^(Ders|Seans)\s*\d+\s*:\s*/ui', '', (string)($les['title'] ?? 'Seans'));
               $isDone = !empty($les['is_completed']);
-              $isNow = ($spotlightLesson && $spotlightLesson['id'] == $les['id']);
+              $isNow = ((int)($spotlightLesson['id'] ?? 0) === (int)($les['id'] ?? -1));
               $isLocked = !empty($les['is_locked']);
               $shownSteps++;
             ?>
@@ -152,7 +181,7 @@ $primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
                   <div><b><?= $lesDay ?>. Gün</b> · <?= htmlspecialchars($lesTitle, ENT_QUOTES, 'UTF-8') ?></div>
                 <?php elseif ($isNow): ?>
                   <span class="dot now"><?= $lesDay ?></span>
-                  <div><b>Bugün</b> · <?= $les['workout_number'] ?>. Seans <span style="font-size:13px; color:var(--text);">(<?= htmlspecialchars($lesTitle, ENT_QUOTES, 'UTF-8') ?>)</span></div>
+                  <div><b>Bugün</b> · <?= $les['workout_number'] ?? '01' ?>. Seans <span style="font-size:13px; color:var(--text);">(<?= htmlspecialchars($lesTitle, ENT_QUOTES, 'UTF-8') ?>)</span></div>
                 <?php elseif ($isLocked): ?>
                   <span class="dot">🔒</span>
                   <div>
@@ -373,7 +402,7 @@ $primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
 
       <!-- Dolu Gün: Antrenman Kartı -->
       <div class="card" style="padding:12px; margin-top:14px;">
-        <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="thumb" style="text-decoration:none;">
+        <a href="<?= $spotlightUrl ?>" class="thumb" style="text-decoration:none;">
           <img src="<?= $spotThumb ?>" alt="<?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?>">
           <div class="play" style="width:46px; height:46px">▶</div>
         </a>
@@ -382,7 +411,7 @@ $primaryGift = !empty($giftEnrollments) ? $giftEnrollments[0] : null;
           <span class="muted" style="margin-left:6px"><?= $spotDuration ?> dk · Ekipmansız</span>
         </div>
         <div class="title" style="margin:8px 2px 12px; font-size:16px;"><?= htmlspecialchars($spotTitle, ENT_QUOTES, 'UTF-8') ?></div>
-        <a href="<?= url('/course/' . ($course['slug'] ?? 'detoks') . '/lesson/' . $spotlightLesson['id']) ?>" class="btn">▶ Seansı başlat</a>
+        <a href="<?= $spotlightUrl ?>" class="btn">▶ Seansı başlat</a>
       </div>
 
       <!-- Dinlenme Günü Kartı (Eğer Bugün Dinlenme İse veya Bilgilendirme Amaçlı) -->

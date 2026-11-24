@@ -9,6 +9,16 @@ declare(strict_types=1);
      FİZYOBAR "PROGRAMINI BUL" - SADE BEYAZ GEÇİŞLİ EKRAN & YAPAY ZEKA SİHİRBAZI
      ============================================================================== -->
 <section class="find-program-clean-stage">
+    <!-- Dönen Buğulu Arka Plan (Mürdüm, Beyaz ve Gri Tonlar) -->
+    <div class="finder-ambient-canvas" aria-hidden="true">
+        <div class="ambient-orb orb-plum-1"></div>
+        <div class="ambient-orb orb-white-1"></div>
+        <div class="ambient-orb orb-gray-1"></div>
+        <div class="ambient-orb orb-plum-2"></div>
+        <div class="ambient-orb orb-white-2"></div>
+        <div class="ambient-orb orb-plum-center"></div>
+    </div>
+
     <div class="finder-wizard-container">
 
         <!-- 1. Segmentli İlerleme Çubuğu & Adım Sayacı (Referans Görsel Birebir Uyumu) -->
@@ -519,7 +529,10 @@ declare(strict_types=1);
                             <span class="finder-dot is-active"></span>
                         </div>
                         <button type="button" class="btn-finder-launch-ai" onclick="FinderApp.submitAnalysis()">
-                            <span>✨ ANALİZİ BAŞLAT</span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6l2.1-2.1"></path>
+                            </svg>
+                            <span>ANALİZİ BAŞLAT</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -537,7 +550,7 @@ declare(strict_types=1);
                     <div class="ai-pulsar-circle circle-2"></div>
                     <div class="ai-pulsar-circle circle-3"></div>
                     <div class="ai-pulsar-core-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#4a1421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
                             <path d="M12 12L2.5 7.5"></path>
                             <path d="M12 12v10"></path>
@@ -585,7 +598,7 @@ declare(strict_types=1);
                 <!-- Biyomekanik Değerlendirme & Klinik Analiz -->
                 <div class="results-detail-panel">
                     <h4 class="results-panel-heading">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a1421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
                         <span>BİYOMEKANİK &amp; KLİNİK ANALİZ RAPORUNUZ</span>
@@ -598,7 +611,7 @@ declare(strict_types=1);
                 <!-- Mikro Rutinler -->
                 <div class="results-detail-panel">
                     <h4 class="results-panel-heading">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4a1421" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 14 14"></polyline>
                         </svg>
@@ -612,10 +625,17 @@ declare(strict_types=1);
                 <!-- Alt Aksiyon -->
                 <div class="results-footer-actions">
                     <button type="button" class="btn-clean-outline" onclick="FinderApp.openAiDrawer()">
-                        🤖 AI ASİSTAN İLE SOHBET ET
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        </svg>
+                        <span>AI ASİSTAN İLE SOHBET ET</span>
                     </button>
                     <button type="button" class="btn-clean-outline" onclick="FinderApp.restart()">
-                        🔄 TESTİ YENİDEN BAŞLAT
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                        <span>TESTİ YENİDEN BAŞLAT</span>
                     </button>
                 </div>
             </div>
@@ -890,7 +910,7 @@ const FinderApp = (function() {
                 { title: 'Masa Başı Derin Diyafram Nefesi', desc: 'Her 90 dakikada göğüs kafesini açan 3 diyafram nefesi alın.' },
                 { title: 'Akşam Tokluk Çayı', desc: 'Akşam tatlı isteğinde ılık seylan tarçını suyuyla kan şekerini sabitleyin.' }
             ],
-            whatsapp_url: '<?= __('brand.whatsapp_url') ?>?text=' + encodeURIComponent('Merhaba Betina Hocam, Fizyobar Yapay Zeka Testini tamamladım. 4 Haftalık Online Kamp için bilgi almak istiyorum.')
+            whatsapp_url: '<?= __('brand.whatsapp_url') ?>?text=' + encodeURIComponent("Merhaba Betina Hocam, Fizyobar Yapay Zeka Testimi tamamladım.\n\n*Önerilen Program:* 4 Haftalık Online Detox & Yoga Kampı (%98 Uyumluluk)\n\nDetaylar ve başlangıç süreci hakkında bilgi alabilir miyim?")
         });
     }
 

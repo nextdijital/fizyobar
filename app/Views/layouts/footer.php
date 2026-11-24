@@ -11,6 +11,10 @@
         || str_ends_with($uriPath, 'register')
         || str_contains($uriPath, 'programini-bul')
         || str_contains($uriPath, 'find-program')
+        || str_contains($uriPath, 'yasam-rehberi')
+        || str_contains($uriPath, 'beslenme-rehberi')
+        || str_contains($uriPath, 'beslenme-planlari')
+        || str_contains($uriPath, 'plans')
         || $isPortalPage;
     $isFooterGray = ($isGrayPage ?? false)
         || str_contains($uriPath, 'corporate')

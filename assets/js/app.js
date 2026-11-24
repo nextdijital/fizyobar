@@ -415,5 +415,70 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // ==============================================================================
+    // CANLI YAYIN: KOPYALAMA, SAĞ TIK & MOBİL ZOOM ENGELLEME KORUMASI
+    // ==============================================================================
+    (function () {
+        // 1. Sağ Tık Menüsünü Engelle (Form alanları hariç)
+        document.addEventListener('contextmenu', function (e) {
+            var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+                e.preventDefault();
+                return false;
+            }
+        }, { passive: false });
+
+        // 2. Metin Kopyalama (Ctrl+C / Copy) ve Kesme (Cut) Engelleme
+        document.addEventListener('copy', function (e) {
+            var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        document.addEventListener('cut', function (e) {
+            var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+            if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 3. Görsel ve Metin Sürüklemeyi Engelle
+        document.addEventListener('dragstart', function (e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // 4. Kısayol Tuşları (Ctrl+C, Ctrl+U, Ctrl+S) Koruması
+        document.addEventListener('keydown', function (e) {
+            var tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+            var isInput = (tag === 'INPUT' || tag === 'TEXTAREA');
+
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+                if (!isInput) {
+                    e.preventDefault();
+                }
+            }
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+            }
+        });
+
+        // 5. iOS / Safari Pinch-to-zoom ve Çift Tıklama Zoom Engelleme
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+    })();
 });
 

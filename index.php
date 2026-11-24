@@ -8,9 +8,15 @@ declare(strict_types=1);
  * ==============================================================================
  */
 
-// 1. Karakter Kodlaması ve Zaman Dilimi Ayarları
+// 1. Karakter Kodlaması ve Sıkıştırma (Hızlı Yükleme)
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');
+if (!ob_get_level() && !ini_get('zlib.output_compression')) {
+    if (extension_loaded('zlib') && !headers_sent()) {
+        @ini_set('zlib.output_compression', 'On');
+        @ini_set('zlib.output_compression_level', '6');
+    }
+}
 
 // 2. Sınıf Otomatik Yükleyicisi (PSR-4 Uyumlu Autoloader)
 spl_autoload_register(function (string $class): void {
